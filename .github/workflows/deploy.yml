@@ -23,23 +23,12 @@ jobs:
       - name: Build
         run: npm run build
 
-      - name: Debug workspace
-        run: |
-          echo "PWD:"
-          pwd
-          echo "Conteúdo da raiz:"
-          ls -la
-          echo "Tentando listar dist:"
-          ls -la dist || true
-          echo "Buscando dist no projeto:"
-          find . -type d -name dist
-          
-      # - name: Deploy to VPS
-      #   uses: appleboy/scp-action@v0.1.7
-      #   with:
-      #     host: 72.60.14.61
-      #     username: root
-      #     key: ${{ secrets.VPS_SSH_KEY }}
-      #     source: "portfolio/dist"
-      #     target: "/var/www/portfolio"
-      #     strip_components: 1
+      - name: Deploy to VPS
+        uses: appleboy/scp-action@v0.1.7
+        with:
+          host: 72.60.14.61
+          username: root
+          key: ${{ secrets.VPS_SSH_KEY }}
+          source: "dist/**"
+          target: "/var/www/portfolio"
+          rm: true
