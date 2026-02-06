@@ -41,7 +41,7 @@ export function Component() {
           <HStack className="gap-2 items-center">
             <Icon icon={Code2} className="size-8 text-brand-600 dark:text-brand-400" />
             <Title size="xl" className="font-heading font-bold">
-              React Skeleton
+              Gabriel.Dev
             </Title>
           </HStack>
 
