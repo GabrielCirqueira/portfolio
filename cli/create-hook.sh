@@ -9,14 +9,12 @@
 
 set -e
 
-# Cores para output
 RED='\033[0;31m'
 GREEN='\033[0;32m'
 YELLOW='\033[1;33m'
 BLUE='\033[0;34m'
-NC='\033[0m' # No Color
+NC='\033[0m'
 
-# Função de ajuda
 show_help() {
   echo -e "${BLUE}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}"
   echo -e "${BLUE}  🪝 Criador de Custom Hooks React${NC}"
@@ -35,7 +33,6 @@ show_help() {
   echo ""
 }
 
-# Validar argumentos
 if [ $# -eq 0 ] || [ "$1" = "-h" ] || [ "$1" = "--help" ]; then
   show_help
   exit 0
@@ -45,23 +42,19 @@ HOOK_NAME=$1
 HOOKS_DIR="src/hooks"
 HOOK_FILE="$HOOKS_DIR/$HOOK_NAME.ts"
 
-# Validar nome do hook (deve começar com 'use')
 if [[ ! $HOOK_NAME =~ ^use[A-Z][a-zA-Z0-9]*$ ]]; then
   echo -e "${RED}❌ Erro: Nome do hook deve começar com 'use' seguido de PascalCase (ex: useMyHook)${NC}"
   exit 1
 fi
 
-# Verificar se o hook já existe
 if [ -f "$HOOK_FILE" ]; then
   echo -e "${RED}❌ Erro: Hook '$HOOK_NAME' já existe em $HOOK_FILE${NC}"
   exit 1
 fi
 
-# Criar diretório se não existir
 echo -e "${BLUE}📁 Garantindo diretório: $HOOKS_DIR${NC}"
 mkdir -p "$HOOKS_DIR"
 
-# Criar arquivo do hook
 echo -e "${BLUE}📝 Criando $HOOK_NAME.ts${NC}"
 cat > "$HOOK_FILE" << EOF
 import { useState, useEffect } from 'react';
@@ -86,7 +79,6 @@ export function ${HOOK_NAME}() {
 }
 EOF
 
-# Criar arquivo de testes
 echo -e "${BLUE}🧪 Criando ${HOOK_NAME}.test.ts${NC}"
 cat > "$HOOKS_DIR/${HOOK_NAME}.test.ts" << EOF
 import { describe, it, expect } from 'vitest';
@@ -111,7 +103,6 @@ describe('${HOOK_NAME}', () => {
 });
 EOF
 
-# Atualizar index.ts de hooks (ou criar se não existir)
 INDEX_FILE="$HOOKS_DIR/index.ts"
 if [ -f "$INDEX_FILE" ]; then
   echo -e "${BLUE}📝 Atualizando $INDEX_FILE${NC}"
