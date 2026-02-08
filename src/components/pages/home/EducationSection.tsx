@@ -59,7 +59,7 @@ export function EducationSection() {
   ]
 
   return (
-    <Box as="section" id="formacao" className="py-24 bg-black relative font-sans">
+    <Box id="formacao" className="py-24 bg-black relative font-sans">
       <Box className="absolute inset-0 bg-zinc-950 opacity-50" />
       <Box className="absolute inset-0 bg-[radial-gradient(#10b98140_1px,transparent_1px)] bg-[size:20px_20px]" />
 

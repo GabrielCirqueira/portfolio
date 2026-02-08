@@ -23,7 +23,7 @@ export function Footer() {
   ]
 
   return (
-    <Box as="footer" className="bg-black border-t border-brand-500/20 relative font-sans">
+    <Box className="bg-black border-t border-brand-500/20 relative font-sans">
       <Box className="absolute inset-0 bg-[radial-gradient(#10b98110_1px,transparent_1px)] bg-[size:20px_20px] pointer-events-none opacity-20" />
 
       <Container size="xl" className="py-20 relative z-10 px-4">

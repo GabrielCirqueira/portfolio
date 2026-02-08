@@ -11,7 +11,7 @@ export const MainLayout = React.forwardRef<HTMLDivElement, MainLayoutProps>(
   ({ className }, ref) => {
     return (
       <Box ref={ref} className={cn('min-h-screen', 'flex flex-col', 'antialiased', className)}>
-        <Box as="main" className="flex-1 flex flex-col">
+        <Box className="flex-1 flex flex-col">
           <Outlet />
         </Box>
       </Box>

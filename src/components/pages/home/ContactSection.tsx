@@ -56,7 +56,7 @@ export function ContactSection() {
   }
 
   return (
-    <Box as="section" id="contato" className="py-24 relative bg-black font-sans">
+    <Box id="contato" className="py-24 relative bg-black font-sans">
       <Box className="absolute inset-0 bg-dotted-pattern opacity-10 pointer-events-none" />
 
       <Container size="xl" className="relative z-10 px-4">

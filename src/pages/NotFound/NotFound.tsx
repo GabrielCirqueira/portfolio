@@ -15,10 +15,10 @@ export function Component() {
         </Box>
 
         <VStack className="gap-4">
-          <Title as="h1" size="4xl" className="text-typography-900 font-bold">
+          <Title size="4xl" className="text-typography-900 font-bold">
             404
           </Title>
-          <Title as="h2" size="xl" className="text-typography-700">
+          <Title size="xl" className="text-typography-700">
             Página não encontrada
           </Title>
           <Text className="text-typography-600 max-w-md">
