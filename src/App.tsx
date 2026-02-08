@@ -1,18 +1,18 @@
-import { MainLayout } from '@layouts'
+import { ThemeProvider } from '@app/contexts'
+import { MainLayout } from '@app/layouts'
 import {
   createBrowserRouter,
   createRoutesFromElements,
   Route,
   RouterProvider,
 } from 'react-router-dom'
-import { ThemeProvider } from '@/contexts'
 
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/">
       <Route element={<MainLayout />}>
-        <Route index lazy={() => import('@pages/Home/Home')} />
-        <Route path="*" lazy={() => import('@pages/NotFound/NotFound')} />
+        <Route index lazy={() => import('@app/pages/Home/Home')} />
+        <Route path="*" lazy={() => import('@app/pages/NotFound/NotFound')} />
       </Route>
     </Route>
   )

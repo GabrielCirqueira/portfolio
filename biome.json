@@ -70,6 +70,16 @@
       "indentWidth": 2
     }
   },
+  "css": {
+    "parser": {
+      "cssModules": false,
+      "tailwindDirectives": true
+    },
+    "formatter": {
+      "enabled": true,
+      "indentWidth": 2
+    }
+  },
   "overrides": [
     {
       "includes": ["**/*.css"],

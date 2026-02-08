@@ -1,97 +1,227 @@
-import { Briefcase, Calendar, GraduationCap, Trophy } from 'lucide-react'
+import { motion } from 'framer-motion'
+import { Award, Briefcase, CheckCircle } from 'lucide-react'
 import { Badge } from '@/shadcn/components/ui/badge'
-import { Card } from '@/shadcn/components/ui/card'
 import { Icon } from '@/shadcn/components/ui/icon'
-import { Container, Grid, HStack, VStack } from '@/shadcn/components/ui/layout'
+import { Box, Container, Grid, HStack } from '@/shadcn/components/ui/layout'
 import { Text, Title } from '@/shadcn/components/ui/typography'
 
 export function EducationSection() {
+  const container = {
+    hidden: { opacity: 0 },
+    show: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.1,
+      },
+    },
+  }
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 20 },
+    show: { opacity: 1, y: 0, transition: { duration: 0.5 } },
+  }
+
+  const formacao = [
+    {
+      titulo: 'Ensino Médio Integrado - Técnico em Internet',
+      instituicao: 'Escola Nossa Senhora de Lourdes',
+      periodo: '2022 - 2024',
+      descricao: 'Formação técnica com foco em desenvolvimento web e tecnologias de internet.',
+    },
+  ]
+
+  const conquistas = [
+    {
+      titulo: 'Etapa Nacional de Robótica',
+      descricao: 'Classificado para competir em Goiânia na etapa nacional.',
+      ano: '2024',
+    },
+    {
+      titulo: 'Olimpíadas de Programação',
+      descricao: 'Participação em diversas competições de programação.',
+      ano: '2023-2024',
+    },
+  ]
+
+  const experiencias = [
+    {
+      cargo: 'Desenvolvedor Web',
+      empresa: 'Móveis Simonetti',
+      periodo: '2025 - Atual',
+      descricao: 'Desenvolvimento com Symfony e React, trabalhando com sistemas corporativos.',
+    },
+    {
+      cargo: 'Desenvolvedor de Sistemas Escolares',
+      empresa: 'Projetos Independentes',
+      periodo: '2023 - 2024',
+      descricao: 'Criação de sistemas completos para monitoramento e gestão escolar.',
+    },
+  ]
+
   return (
-    <Container size="xl" id="formacao" className="py-24">
-      <VStack className="gap-16">
-        <VStack className="gap-4 items-center text-center">
-          <Badge className="px-4 py-2 bg-transparent border border-emerald-900 text-emerald-500 rounded-md text-xs">
+    <Box as="section" id="formacao" className="py-24 bg-black relative font-sans">
+      <Box className="absolute inset-0 bg-zinc-950 opacity-50" />
+      <Box className="absolute inset-0 bg-[radial-gradient(#10b98140_1px,transparent_1px)] bg-[size:20px_20px]" />
+
+      <Container size="xl" className="relative z-10">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
+          className="text-center mb-16"
+        >
+          <Badge
+            variant="outline"
+            className="mb-4 px-4 py-1 border-brand-500/50 bg-brand-500/10 text-brand-500 uppercase tracking-widest font-bold"
+          >
             Carreira
           </Badge>
-          <Title className="text-4xl font-bold">
-            <Text as="span" className="text-white">Formação e </Text>
-            <Text as="span" className="text-emerald-500">Experiência</Text>
+          <Title className="text-3xl md:text-4xl font-bold font-heading mb-4 uppercase tracking-wide">
+            Formação e <span className="text-brand-500">Experiência</span>
           </Title>
-          <Text className="text-zinc-400 text-sm">
+          <Text className="text-gray-400 max-w-2xl mx-auto">
             Meu percurso acadêmico e profissional na área de tecnologia.
           </Text>
-        </VStack>
+        </motion.div>
 
-        <Grid className="grid-cols-1 md:grid-cols-3 gap-8">
-          <VStack className="gap-6">
-            <HStack className="gap-3 items-center">
-              <Icon icon={GraduationCap} className="size-6 text-cyan-500" />
-              <Text className="font-bold text-white text-lg">Formação</Text>
-            </HStack>
-            <Card className="p-6 rounded-lg bg-zinc-950 border border-zinc-900">
-              <VStack className="gap-3">
-                <Text className="font-bold text-white text-sm">Ensino Médio Integrado - Técnico em Internet</Text>
-                <Text className="text-zinc-400 text-xs">Escola Nossa Senhora de Lourdes</Text>
-                <HStack className="gap-2 items-center text-zinc-500">
-                  <Icon icon={Calendar} className="size-3" />
-                  <Text className="text-xs">2022 - 2024</Text>
-                </HStack>
-                <Text className="text-zinc-400 text-xs leading-relaxed">
-                  Formação técnica com foco em desenvolvimento web e tecnologias de internet.
+        <Grid className="grid-cols-1 md:grid-cols-3 gap-10">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0 }}
+          >
+            <Box className="border border-brand-500/20 rounded-lg p-6 bg-zinc-950/40 backdrop-blur-sm h-full hover:border-brand-500/40 transition-colors">
+              <HStack className="items-center mb-6 gap-3">
+                <Icon icon={CheckCircle} className="h-6 w-6 text-brand-500" />
+                <Text className="text-xl font-bold font-heading uppercase text-white">
+                  Formação
                 </Text>
-              </VStack>
-            </Card>
-          </VStack>
+              </HStack>
 
-          <VStack className="gap-6">
-            <HStack className="gap-3 items-center">
-              <Icon icon={Trophy} className="size-6 text-yellow-500" />
-              <Text className="font-bold text-white text-lg">Conquistas</Text>
-            </HStack>
-            <VStack className="gap-4">
-              <Card className="p-6 rounded-lg bg-zinc-950 border border-zinc-900">
-                <VStack className="gap-2">
-                  <Text className="font-bold text-white text-sm">Etapa Nacional de Robótica</Text>
-                  <Text className="text-xs text-zinc-500">2024</Text>
-                  <Text className="text-zinc-400 text-xs">Classificado para competir em Goiânia.</Text>
-                </VStack>
-              </Card>
-              <Card className="p-6 rounded-lg bg-zinc-950 border border-zinc-900">
-                <VStack className="gap-2">
-                  <Text className="font-bold text-white text-sm">Olimpíadas de Programação</Text>
-                  <Text className="text-xs text-zinc-500">2023-2024</Text>
-                  <Text className="text-zinc-400 text-xs">Participação em diversas competições.</Text>
-                </VStack>
-              </Card>
-            </VStack>
-          </VStack>
+              <motion.div
+                variants={container}
+                initial="hidden"
+                whileInView="show"
+                viewport={{ once: true }}
+                className="space-y-8"
+              >
+                {formacao.map((item, index) => (
+                  <motion.div
+                    key={index}
+                    variants={itemVariants}
+                    className="relative pl-6 border-l border-brand-500/30"
+                  >
+                    <Box className="absolute top-0 left-0 w-3 h-3 -translate-x-[7px] translate-y-1 rounded-full bg-brand-500 shadow-[0_0_10px_rgba(16,185,129,0.5)]" />
+                    <Text className="font-bold text-white text-lg">{item.titulo}</Text>
+                    <Text className="text-sm text-gray-400 font-mono mt-1">{item.instituicao}</Text>
+                    <Text className="text-xs text-brand-500 font-mono mb-2 uppercase tracking-wider">
+                      {item.periodo}
+                    </Text>
+                    <Text className="text-sm text-gray-300 leading-relaxed">{item.descricao}</Text>
+                  </motion.div>
+                ))}
+              </motion.div>
+            </Box>
+          </motion.div>
 
-          <VStack className="gap-6">
-            <HStack className="gap-3 items-center">
-              <Icon icon={Briefcase} className="size-6 text-cyan-500" />
-              <Text className="font-bold text-white text-lg">Experiência</Text>
-            </HStack>
-            <VStack className="gap-4">
-              <Card className="p-6 rounded-lg bg-zinc-950 border border-zinc-900">
-                <VStack className="gap-2">
-                  <Text className="font-bold text-white text-sm">Desenvolvedor Trainee</Text>
-                  <Text className="text-zinc-400 text-xs">Móveis Simonetti</Text>
-                  <Text className="text-xs text-zinc-500">2025 - Atual</Text>
-                  <Text className="text-zinc-400 text-xs">Desenvolvimento com Symfony e React.</Text>
-                </VStack>
-              </Card>
-              <Card className="p-6 rounded-lg bg-zinc-950 border border-zinc-900">
-                <VStack className="gap-2">
-                  <Text className="font-bold text-white text-sm">Desenvolvedor de Sistemas</Text>
-                  <Text className="text-zinc-400 text-xs">Projetos Independentes</Text>
-                  <Text className="text-xs text-zinc-500">2023 - 2024</Text>
-                  <Text className="text-zinc-400 text-xs">Sistemas de monitoramento escolar.</Text>
-                </VStack>
-              </Card>
-            </VStack>
-          </VStack>
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.2 }}
+          >
+            <Box className="border border-brand-500/20 rounded-lg p-6 bg-zinc-950/40 backdrop-blur-sm h-full hover:border-brand-500/40 transition-colors">
+              <HStack className="items-center mb-6 gap-3">
+                <Icon icon={Briefcase} className="h-6 w-6 text-brand-500" />
+                <Text className="text-xl font-bold font-heading uppercase text-white">
+                  Experiência
+                </Text>
+              </HStack>
+
+              <motion.div
+                variants={container}
+                initial="hidden"
+                whileInView="show"
+                viewport={{ once: true }}
+                className="space-y-8"
+              >
+                {experiencias.map((item, index) => (
+                  <motion.div
+                    key={index}
+                    variants={itemVariants}
+                    className="relative pl-6 border-l border-brand-500/30"
+                  >
+                    <Box className="absolute top-0 left-0 w-3 h-3 -translate-x-[7px] translate-y-1 rounded-full bg-brand-500 shadow-[0_0_10px_rgba(16,185,129,0.5)]" />
+                    <Text className="font-bold text-white text-lg">{item.cargo}</Text>
+                    <Text className="text-sm text-gray-400 font-mono mt-1">{item.empresa}</Text>
+                    <Text className="text-xs text-brand-500 font-mono mb-2 uppercase tracking-wider">
+                      {item.periodo}
+                    </Text>
+                    <Text className="text-sm text-gray-300 leading-relaxed">{item.descricao}</Text>
+                  </motion.div>
+                ))}
+              </motion.div>
+            </Box>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.1 }}
+          >
+            <Box className="border border-brand-500/20 rounded-lg p-6 bg-zinc-950/40 backdrop-blur-sm h-full hover:border-brand-500/40 transition-colors">
+              <HStack className="items-center mb-6 gap-3">
+                <Icon icon={Award} className="h-6 w-6 text-brand-500" />
+                <Text className="text-xl font-bold font-heading uppercase text-white">
+                  Conquistas
+                </Text>
+              </HStack>
+
+              <motion.div
+                variants={container}
+                initial="hidden"
+                whileInView="show"
+                viewport={{ once: true }}
+                className="space-y-8"
+              >
+                {conquistas.map((item, index) => (
+                  <motion.div
+                    key={index}
+                    variants={itemVariants}
+                    className="relative pl-6 border-l border-brand-500/30"
+                  >
+                    <Box className="absolute top-0 left-0 w-3 h-3 -translate-x-[7px] translate-y-1 rounded-full bg-brand-500 shadow-[0_0_10px_rgba(16,185,129,0.5)]" />
+                    <Text className="font-bold text-white text-lg">{item.titulo}</Text>
+                    <Text className="text-xs text-brand-500 font-mono mb-2 uppercase tracking-wider mt-1">
+                      {item.ano}
+                    </Text>
+                    <Text className="text-sm text-gray-300 leading-relaxed">{item.descricao}</Text>
+                  </motion.div>
+                ))}
+              </motion.div>
+            </Box>
+          </motion.div>
         </Grid>
-      </VStack>
-    </Container>
+
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
+          className="mt-16 max-w-3xl mx-auto text-center"
+        >
+          <Badge className="mb-4 bg-brand-500/10 text-brand-500 border border-brand-500/20 uppercase tracking-widest font-bold">
+            Sempre em evolução
+          </Badge>
+          <Text className="text-gray-400">
+            Busco constantemente novas oportunidades de aprendizado para continuar evoluindo no
+            campo da tecnologia.
+          </Text>
+        </motion.div>
+      </Container>
+    </Box>
   )
 }
