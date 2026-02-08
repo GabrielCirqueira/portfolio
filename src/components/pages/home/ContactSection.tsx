@@ -16,8 +16,12 @@ export function ContactSection() {
             Fale comigo
           </Badge>
           <Title className="text-4xl font-bold">
-            <Text as="span" className="text-white">Entre em </Text>
-            <Text as="span" className="text-emerald-500">Contato</Text>
+            <Text as="span" className="text-white">
+              Entre em{' '}
+            </Text>
+            <Text as="span" className="text-emerald-500">
+              Contato
+            </Text>
           </Title>
           <Text className="text-zinc-400 text-sm">
             Estou disponível para novos projetos e oportunidades.
@@ -30,11 +34,36 @@ export function ContactSection() {
               <Text className="font-bold text-white text-lg">Informações de Contato</Text>
               <VStack className="gap-4">
                 {[
-                  { icon: Mail, label: 'E-mail', value: 'gabrielcirqueira711@gmail.com', link: 'mailto:gabrielcirqueira711@gmail.com' },
-                  { icon: Phone, label: 'WhatsApp', value: '+55 27 99612-1313', link: 'https://wa.me/5527996121313' },
-                  { icon: Instagram, label: 'Instagram', value: '@gabrielcirqueira711', link: 'https://instagram.com/gabrielcirqueira711' },
-                  { icon: Github, label: 'GitHub', value: '@GabrielCirqueira', link: 'https://github.com/GabrielCirqueira' },
-                  { icon: MapPin, label: 'Localização', value: 'Pinheiros - ES, Brasil', link: null },
+                  {
+                    icon: Mail,
+                    label: 'E-mail',
+                    value: 'gabrielcirqueira711@gmail.com',
+                    link: 'mailto:gabrielcirqueira711@gmail.com',
+                  },
+                  {
+                    icon: Phone,
+                    label: 'WhatsApp',
+                    value: '+55 27 99612-1313',
+                    link: 'https://wa.me/5527996121313',
+                  },
+                  {
+                    icon: Instagram,
+                    label: 'Instagram',
+                    value: '@gabrielcirqueira711',
+                    link: 'https://instagram.com/gabrielcirqueira711',
+                  },
+                  {
+                    icon: Github,
+                    label: 'GitHub',
+                    value: '@GabrielCirqueira',
+                    link: 'https://github.com/GabrielCirqueira',
+                  },
+                  {
+                    icon: MapPin,
+                    label: 'Localização',
+                    value: 'Pinheiros - ES, Brasil',
+                    link: null,
+                  },
                 ].map((item) => (
                   <HStack key={item.label} className="gap-4 items-start">
                     <Box className="w-10 h-10 rounded-lg bg-zinc-900 flex items-center justify-center flex-shrink-0">
@@ -43,7 +72,11 @@ export function ContactSection() {
                     <VStack className="gap-1">
                       <Text className="text-xs text-zinc-500">{item.label}</Text>
                       {item.link ? (
-                        <Link href={item.link} target="_blank" className="text-sm font-medium text-white hover:text-emerald-500 transition-colors">
+                        <Link
+                          href={item.link}
+                          target="_blank"
+                          className="text-sm font-medium text-white hover:text-emerald-500 transition-colors"
+                        >
                           {item.value}
                         </Link>
                       ) : (

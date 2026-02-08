@@ -10,7 +10,10 @@ export function Header() {
   const { theme, toggleTheme } = useTheme()
 
   return (
-    <Container size="xl" className="py-6 sticky top-0 bg-black/90 backdrop-blur-lg z-50 border-b border-zinc-900">
+    <Container
+      size="xl"
+      className="py-6 sticky top-0 bg-black/90 backdrop-blur-lg z-50 border-b border-zinc-900"
+    >
       <HStack className="justify-between items-center">
         <HStack className="gap-2 items-center">
           <Text className="text-emerald-500 font-mono text-lg">&lt;/&gt;</Text>
@@ -19,19 +22,34 @@ export function Header() {
         </HStack>
 
         <HStack className="gap-8 items-center">
-          <Link href="#sobre" className="text-sm text-zinc-400 hover:text-emerald-500 transition-colors">
+          <Link
+            href="#sobre"
+            className="text-sm text-zinc-400 hover:text-emerald-500 transition-colors"
+          >
             Sobre
           </Link>
-          <Link href="#habilidades" className="text-sm text-zinc-400 hover:text-emerald-500 transition-colors">
+          <Link
+            href="#habilidades"
+            className="text-sm text-zinc-400 hover:text-emerald-500 transition-colors"
+          >
             Habilidades
           </Link>
-          <Link href="#projetos" className="text-sm text-zinc-400 hover:text-emerald-500 transition-colors">
+          <Link
+            href="#projetos"
+            className="text-sm text-zinc-400 hover:text-emerald-500 transition-colors"
+          >
             Projetos
           </Link>
-          <Link href="#formacao" className="text-sm text-zinc-400 hover:text-emerald-500 transition-colors">
+          <Link
+            href="#formacao"
+            className="text-sm text-zinc-400 hover:text-emerald-500 transition-colors"
+          >
             Formação
           </Link>
-          <Link href="#contato" className="text-sm text-zinc-400 hover:text-emerald-500 transition-colors">
+          <Link
+            href="#contato"
+            className="text-sm text-zinc-400 hover:text-emerald-500 transition-colors"
+          >
             Contato
           </Link>
           <Button

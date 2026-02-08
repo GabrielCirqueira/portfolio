@@ -1,6 +1,6 @@
 #!/usr/bin/env node
-const fs = require('fs').promises
-const path = require('path')
+const fs = require('node:fs').promises
+const path = require('node:path')
 
 const exts = new Set(['.ts', '.tsx', '.js', '.jsx'])
 
@@ -117,7 +117,7 @@ async function processFile(file) {
         const normalized = normalizeClassString(inner)
         if (normalized !== inner) changed = true
         // write {`normalized`} or {"normalized"}
-        out.push('{' + next + normalized + next + '}')
+        out.push(`{${next}${normalized}${next}}`)
         // move i after the closing brace '}'
         const endBrace = src.indexOf('}', close + 1)
         if (endBrace === -1) {
@@ -154,7 +154,7 @@ async function main() {
     for (const f of files) {
       try {
         await processFile(f)
-      } catch (e) {
+      } catch (_e) {
         /* ignore file errors */
       }
     }

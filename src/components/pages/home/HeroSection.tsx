@@ -23,8 +23,12 @@ export function HeroSection() {
             Gabriel Cirqueira
           </Title>
           <Title className="text-3xl font-medium">
-            <Text as="span" className="text-zinc-400">Desenvolvedor </Text>
-            <Text as="span" className="text-emerald-500">React</Text>
+            <Text as="span" className="text-zinc-400">
+              Desenvolvedor{' '}
+            </Text>
+            <Text as="span" className="text-emerald-500">
+              React
+            </Text>
           </Title>
         </VStack>
 

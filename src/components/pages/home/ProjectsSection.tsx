@@ -16,8 +16,12 @@ export function ProjectsSection() {
             Meus trabalhos
           </Badge>
           <Title className="text-4xl font-bold">
-            <Text as="span" className="text-white">Projetos em </Text>
-            <Text as="span" className="text-emerald-500">destaque</Text>
+            <Text as="span" className="text-white">
+              Projetos em{' '}
+            </Text>
+            <Text as="span" className="text-emerald-500">
+              destaque
+            </Text>
           </Title>
           <Text className="text-zinc-400 text-sm">
             Conheça alguns dos principais sistemas e jogos que desenvolvi.
@@ -31,7 +35,8 @@ export function ProjectsSection() {
               {[
                 {
                   title: 'Sistema de Monitoramento Escolar',
-                  description: 'Sistema completo para monitoramento e gestão de atividades escolares.',
+                  description:
+                    'Sistema completo para monitoramento e gestão de atividades escolares.',
                   tags: ['PHP', 'MySQL', 'JavaScript', 'CSS'],
                   link: 'https://monitoramento.escolansl.com/sistema',
                 },
@@ -42,18 +47,26 @@ export function ProjectsSection() {
                   link: 'https://et.escolansl.com/sistema',
                 },
               ].map((project) => (
-                <Card key={project.title} className="p-6 rounded-lg bg-zinc-950 border border-zinc-900 hover:border-zinc-800 transition-all">
+                <Card
+                  key={project.title}
+                  className="p-6 rounded-lg bg-zinc-950 border border-zinc-900 hover:border-zinc-800 transition-all"
+                >
                   <VStack className="gap-6">
                     <Box className="w-full h-48 bg-zinc-900 rounded-lg flex items-center justify-center">
                       <Icon icon={Code2} className="size-16 text-zinc-800" />
                     </Box>
                     <VStack className="gap-3">
                       <Text className="font-bold text-white text-base">{project.title}</Text>
-                      <Text className="text-zinc-400 text-xs leading-relaxed">{project.description}</Text>
+                      <Text className="text-zinc-400 text-xs leading-relaxed">
+                        {project.description}
+                      </Text>
                     </VStack>
                     <HStack className="gap-2 flex-wrap">
                       {project.tags.map((tag) => (
-                        <Badge key={tag} className="px-3 py-1 text-xs bg-zinc-900 border border-zinc-800 text-zinc-500 rounded-md">
+                        <Badge
+                          key={tag}
+                          className="px-3 py-1 text-xs bg-zinc-900 border border-zinc-800 text-zinc-500 rounded-md"
+                        >
                           {tag}
                         </Badge>
                       ))}
@@ -78,29 +91,39 @@ export function ProjectsSection() {
               {[
                 {
                   title: 'Biome Quest',
-                  description: 'Jogo educativo onde um robô percorre diferentes biomas resolvendo problemas ambientais.',
+                  description:
+                    'Jogo educativo onde um robô percorre diferentes biomas resolvendo problemas ambientais.',
                   tags: ['JavaScript', 'GDevelop', 'Game Design'],
                   link: 'https://gd.games/oldgabriel/biome-quest',
                 },
                 {
                   title: 'Pixel World',
-                  description: 'Jogo com temática inspirada em One Piece. O jogador coleta chaves e enfrenta chefões.',
+                  description:
+                    'Jogo com temática inspirada em One Piece. O jogador coleta chaves e enfrenta chefões.',
                   tags: ['JavaScript', 'GDevelop', 'Pixel Art'],
                   link: 'https://gd.games/oldgabriel/pixel-world',
                 },
               ].map((project) => (
-                <Card key={project.title} className="p-6 rounded-lg bg-zinc-950 border border-zinc-900 hover:border-zinc-800 transition-all">
+                <Card
+                  key={project.title}
+                  className="p-6 rounded-lg bg-zinc-950 border border-zinc-900 hover:border-zinc-800 transition-all"
+                >
                   <VStack className="gap-6">
                     <Box className="w-full h-48 bg-zinc-900 rounded-lg flex items-center justify-center">
                       <Icon icon={GamepadIcon} className="size-16 text-zinc-800" />
                     </Box>
                     <VStack className="gap-3">
                       <Text className="font-bold text-white text-base">{project.title}</Text>
-                      <Text className="text-zinc-400 text-xs leading-relaxed">{project.description}</Text>
+                      <Text className="text-zinc-400 text-xs leading-relaxed">
+                        {project.description}
+                      </Text>
                     </VStack>
                     <HStack className="gap-2 flex-wrap">
                       {project.tags.map((tag) => (
-                        <Badge key={tag} className="px-3 py-1 text-xs bg-zinc-900 border border-zinc-800 text-zinc-500 rounded-md">
+                        <Badge
+                          key={tag}
+                          className="px-3 py-1 text-xs bg-zinc-900 border border-zinc-800 text-zinc-500 rounded-md"
+                        >
                           {tag}
                         </Badge>
                       ))}

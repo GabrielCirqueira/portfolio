@@ -1,13 +1,12 @@
-import { AppContainer } from '@/layouts'
-import { Header, Footer } from '@/layouts'
 import {
-  HeroSection,
   AboutSection,
-  SkillsSection,
-  ProjectsSection,
-  EducationSection,
   ContactSection,
-} from '@/components/pages/home'
+  EducationSection,
+  HeroSection,
+  ProjectsSection,
+  SkillsSection,
+} from '@app/components/pages/home'
+import { AppContainer, Footer, Header } from '@app/layouts'
 
 export function Component() {
   return (

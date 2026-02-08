@@ -3,11 +3,12 @@
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
+      "@app/*": ["src/*"],
       "@/*": ["src/*"],
-      "@pages": ["src/pages"],
       "@pages/*": ["src/pages/*"],
-      "@layouts": ["src/layouts"],
       "@layouts/*": ["src/layouts/*"],
+      "@components/*": ["src/components/*"],
+      "@contexts/*": ["src/contexts/*"],
       "@shadcn/*": ["src/shadcn/components/ui/*", "src/shadcn/*"],
       "@shadcn/lib/*": ["src/shadcn/lib/*"],
       "@shadcn/hooks/*": ["src/shadcn/hooks/*"],

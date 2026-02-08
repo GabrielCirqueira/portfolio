@@ -14,11 +14,16 @@ export function AboutSection() {
             Sobre mim
           </Badge>
           <Title className="text-4xl font-bold">
-            <Text as="span" className="text-white">Conheça </Text>
-            <Text as="span" className="text-emerald-500">minha história</Text>
+            <Text as="span" className="text-white">
+              Conheça{' '}
+            </Text>
+            <Text as="span" className="text-emerald-500">
+              minha história
+            </Text>
           </Title>
           <Text className="text-zinc-400 max-w-2xl text-sm leading-relaxed">
-            Sou desenvolvedor web apaixonado por tecnologia, com experiência em sistemas completos para gestão escolar e jogos educativos.
+            Sou desenvolvedor web apaixonado por tecnologia, com experiência em sistemas completos
+            para gestão escolar e jogos educativos.
           </Text>
         </VStack>
 
@@ -27,25 +32,32 @@ export function AboutSection() {
             {
               icon: User,
               title: 'Perfil',
-              description: '18 anos, apaixonado por tecnologia e programação. Sempre em busca de novos desafios.',
+              description:
+                '18 anos, apaixonado por tecnologia e programação. Sempre em busca de novos desafios.',
             },
             {
               icon: GraduationCap,
               title: 'Formação',
-              description: 'Ensino médio integrado com curso técnico em Internet. Início na programação em 2022.',
+              description:
+                'Ensino médio integrado com curso técnico em Internet. Início na programação em 2022.',
             },
             {
               icon: Code2,
               title: 'Projetos',
-              description: '18 repositórios públicos no GitHub. Sistemas completos para gestão escolar e jogos educativos.',
+              description:
+                '18 repositórios públicos no GitHub. Sistemas completos para gestão escolar e jogos educativos.',
             },
             {
               icon: Briefcase,
               title: 'Experiência',
-              description: 'Classificado para etapa nacional de Robótica em Goiânia. Desenvolvedor na Móveis Simonetti.',
+              description:
+                'Classificado para etapa nacional de Robótica em Goiânia. Desenvolvedor na Móveis Simonetti.',
             },
           ].map((item) => (
-            <Card key={item.title} className="p-6 rounded-lg bg-zinc-950 border border-zinc-900 hover:border-zinc-800 transition-all">
+            <Card
+              key={item.title}
+              className="p-6 rounded-lg bg-zinc-950 border border-zinc-900 hover:border-zinc-800 transition-all"
+            >
               <VStack className="gap-4">
                 <Icon icon={item.icon} className="size-8 text-cyan-500" />
                 <VStack className="gap-2">
@@ -61,7 +73,8 @@ export function AboutSection() {
           <HStack className="gap-4 items-start">
             <Icon icon={Lightbulb} className="size-6 text-cyan-500 flex-shrink-0 mt-1" />
             <Text className="text-zinc-300 italic text-sm leading-relaxed">
-              "Sou Gabriel Cirqueira, gosto por tecnologia e programação. Busco constantemente desafios e oportunidades de aprendizado para evoluir no campo da tecnologia."
+              "Sou Gabriel Cirqueira, gosto por tecnologia e programação. Busco constantemente
+              desafios e oportunidades de aprendizado para evoluir no campo da tecnologia."
             </Text>
           </HStack>
         </Card>

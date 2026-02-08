@@ -2,9 +2,8 @@ import { Code2, Database } from 'lucide-react'
 import { Badge } from '@/shadcn/components/ui/badge'
 import { Card } from '@/shadcn/components/ui/card'
 import { Icon } from '@/shadcn/components/ui/icon'
-import { Box, Container, Grid, VStack } from '@/shadcn/components/ui/layout'
+import { Box, Container, Grid, HStack, VStack } from '@/shadcn/components/ui/layout'
 import { Text, Title } from '@/shadcn/components/ui/typography'
-import { HStack } from '@/shadcn/components/ui/layout'
 
 export function SkillsSection() {
   return (
@@ -15,11 +14,16 @@ export function SkillsSection() {
             Tecnologias
           </Badge>
           <Title className="text-4xl font-bold">
-            <Text as="span" className="text-white">Minhas </Text>
-            <Text as="span" className="text-emerald-500">Habilidades</Text>
+            <Text as="span" className="text-white">
+              Minhas{' '}
+            </Text>
+            <Text as="span" className="text-emerald-500">
+              Habilidades
+            </Text>
           </Title>
           <Text className="text-zinc-400 text-sm">
-            Desenvolvo com as mais modernas tecnologias, sempre buscando aperfeiçoar meus conhecimentos.
+            Desenvolvo com as mais modernas tecnologias, sempre buscando aperfeiçoar meus
+            conhecimentos.
           </Text>
         </VStack>
 
@@ -60,7 +64,10 @@ export function SkillsSection() {
                 { label: 'DB', subtitle: 'Database', icon: Database },
                 { label: 'TS', subtitle: 'Type', icon: Code2 },
               ].map((item) => (
-                <VStack key={item.label} className="items-center gap-3 p-4 rounded-lg hover:bg-zinc-900 transition-colors">
+                <VStack
+                  key={item.label}
+                  className="items-center gap-3 p-4 rounded-lg hover:bg-zinc-900 transition-colors"
+                >
                   <Icon icon={item.icon} className="size-8 text-cyan-500" />
                   <VStack className="items-center gap-1">
                     <Text className="font-bold text-white text-sm">{item.label}</Text>

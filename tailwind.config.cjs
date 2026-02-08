@@ -176,7 +176,7 @@ module.exports = {
         'soft-2': '0px 0px 20px rgba(16, 185, 129, 0.2)',
         'soft-3': '0px 0px 30px rgba(16, 185, 129, 0.1)',
         'soft-4': '0px 0px 40px rgba(16, 185, 129, 0.1)',
-        'glow': '0 0 20px rgba(16, 185, 129, 0.5)',
+        glow: '0 0 20px rgba(16, 185, 129, 0.5)',
         'glow-lg': '0 0 30px rgba(16, 185, 129, 0.6)',
         'glow-xl': '0 0 40px rgba(16, 185, 129, 0.7)',
       },

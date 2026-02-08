@@ -14,8 +14,12 @@ export function EducationSection() {
             Carreira
           </Badge>
           <Title className="text-4xl font-bold">
-            <Text as="span" className="text-white">Formação e </Text>
-            <Text as="span" className="text-emerald-500">Experiência</Text>
+            <Text as="span" className="text-white">
+              Formação e{' '}
+            </Text>
+            <Text as="span" className="text-emerald-500">
+              Experiência
+            </Text>
           </Title>
           <Text className="text-zinc-400 text-sm">
             Meu percurso acadêmico e profissional na área de tecnologia.
@@ -30,7 +34,9 @@ export function EducationSection() {
             </HStack>
             <Card className="p-6 rounded-lg bg-zinc-950 border border-zinc-900">
               <VStack className="gap-3">
-                <Text className="font-bold text-white text-sm">Ensino Médio Integrado - Técnico em Internet</Text>
+                <Text className="font-bold text-white text-sm">
+                  Ensino Médio Integrado - Técnico em Internet
+                </Text>
                 <Text className="text-zinc-400 text-xs">Escola Nossa Senhora de Lourdes</Text>
                 <HStack className="gap-2 items-center text-zinc-500">
                   <Icon icon={Calendar} className="size-3" />
@@ -53,14 +59,18 @@ export function EducationSection() {
                 <VStack className="gap-2">
                   <Text className="font-bold text-white text-sm">Etapa Nacional de Robótica</Text>
                   <Text className="text-xs text-zinc-500">2024</Text>
-                  <Text className="text-zinc-400 text-xs">Classificado para competir em Goiânia.</Text>
+                  <Text className="text-zinc-400 text-xs">
+                    Classificado para competir em Goiânia.
+                  </Text>
                 </VStack>
               </Card>
               <Card className="p-6 rounded-lg bg-zinc-950 border border-zinc-900">
                 <VStack className="gap-2">
                   <Text className="font-bold text-white text-sm">Olimpíadas de Programação</Text>
                   <Text className="text-xs text-zinc-500">2023-2024</Text>
-                  <Text className="text-zinc-400 text-xs">Participação em diversas competições.</Text>
+                  <Text className="text-zinc-400 text-xs">
+                    Participação em diversas competições.
+                  </Text>
                 </VStack>
               </Card>
             </VStack>
@@ -77,7 +87,9 @@ export function EducationSection() {
                   <Text className="font-bold text-white text-sm">Desenvolvedor Trainee</Text>
                   <Text className="text-zinc-400 text-xs">Móveis Simonetti</Text>
                   <Text className="text-xs text-zinc-500">2025 - Atual</Text>
-                  <Text className="text-zinc-400 text-xs">Desenvolvimento com Symfony e React.</Text>
+                  <Text className="text-zinc-400 text-xs">
+                    Desenvolvimento com Symfony e React.
+                  </Text>
                 </VStack>
               </Card>
               <Card className="p-6 rounded-lg bg-zinc-950 border border-zinc-900">

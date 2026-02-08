@@ -1,4 +1,4 @@
-import { AppContainer } from '@layouts'
+import { AppContainer } from '@app/layouts'
 import { Button } from '@shadcn/button'
 import { Icon } from '@shadcn/icon'
 import { Box, VStack } from '@shadcn/layout'

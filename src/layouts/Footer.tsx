@@ -50,12 +50,8 @@ export function Footer() {
 
         <Box className="mt-12 pt-8 border-t border-zinc-900">
           <HStack className="justify-between items-center">
-            <Text className="text-zinc-500 text-xs">
-              © 2026 Gabriel Cirqueira.
-            </Text>
-            <Text className="text-zinc-600 text-xs">
-              Feito com ❤️
-            </Text>
+            <Text className="text-zinc-500 text-xs">© 2026 Gabriel Cirqueira.</Text>
+            <Text className="text-zinc-600 text-xs">Feito com ❤️</Text>
           </HStack>
         </Box>
       </Container>
