@@ -1,159 +1,202 @@
-import { Code2, ExternalLink, GamepadIcon, Github } from 'lucide-react'
+import { motion } from 'framer-motion'
+import { ExternalLink, Gamepad2, Monitor } from 'lucide-react'
 import { Badge } from '@/shadcn/components/ui/badge'
 import { Button } from '@/shadcn/components/ui/button'
-import { Card } from '@/shadcn/components/ui/card'
 import { Icon } from '@/shadcn/components/ui/icon'
 import { Box, Container, Grid, HStack, VStack } from '@/shadcn/components/ui/layout'
-import { Link } from '@/shadcn/components/ui/link'
 import { Text, Title } from '@/shadcn/components/ui/typography'
 
 export function ProjectsSection() {
+  const sistemas = [
+    {
+      title: 'Sistema de Monitoramento Escolar',
+      description: 'Sistema completo para monitoramento e gestão de atividades escolares',
+      image: 'https://monitoramento.escolansl.com/public/assents/img/sistema/painel.png',
+      link: 'https://monitoramento.escolansl.com/sistema',
+      technologies: ['PHP', 'MySQL', 'JavaScript', 'CSS'],
+    },
+    {
+      title: 'Sistema de Eletivas e Tutorias',
+      description: 'Plataforma para gerenciamento de eletivas e tutorias escolares',
+      image: 'https://et.escolansl.com/public/assets/images/sistema/painel.png',
+      link: 'https://et.escolansl.com/sistema',
+      technologies: ['PHP', 'MySQL', 'JavaScript', 'CSS'],
+    },
+  ]
+
+  const jogos = [
+    {
+      title: 'Biome Quest',
+      description:
+        'Jogo educativo onde um robô percorre diferentes biomas resolvendo problemas ambientais.',
+      image: '/images/biome-quest.png',
+      link: 'https://gd.games/oldgabriel/biome-quest',
+      technologies: ['JavaScript', 'GDevelop', 'Game Design'],
+    },
+    {
+      title: 'Pixel World',
+      description: 'Jogo com temática inspirada em One Piece. Colete chaves e enfrente chefões.',
+      image: '/images/pixel-world.png',
+      link: 'https://gd.games/oldgabriel/pixel-world',
+      technologies: ['JavaScript', 'GDevelop', 'Pixel Art'],
+    },
+  ]
+
   return (
-    <Container size="xl" id="projetos" className="py-24">
-      <VStack className="gap-16">
-        <VStack className="gap-4 items-center text-center">
-          <Badge className="px-4 py-2 bg-transparent border border-emerald-900 text-emerald-500 rounded-md text-xs">
-            Meus trabalhos
+    <Box as="section" id="projetos" className="py-24 relative bg-black font-sans">
+      <Box className="absolute inset-0 bg-dotted-pattern opacity-50 pointer-events-none" />
+
+      <Container size="xl" className="relative z-10 px-4">
+        <VStack className="items-center text-center gap-4 mb-20">
+          <Badge
+            variant="outline"
+            className="border-brand-500/50 text-brand-500 uppercase tracking-widest text-xs font-mono px-3 py-1 bg-brand-500/5"
+          >
+            Portfolio
           </Badge>
-          <Title className="text-4xl font-bold">
-            <Text as="span" className="text-white">
-              Projetos em{' '}
-            </Text>
-            <Text as="span" className="text-emerald-500">
-              destaque
-            </Text>
+          <Title className="text-4xl md:text-5xl font-bold uppercase tracking-tight font-heading">
+            Projetos <span className="text-brand-500">Em Destaque</span>
           </Title>
-          <Text className="text-zinc-400 text-sm">
-            Conheça alguns dos principais sistemas e jogos que desenvolvi.
-          </Text>
+        </VStack>
+
+        <VStack className="gap-12 mb-24">
+          <Box className="flex items-center gap-3">
+            <Box className="p-2 bg-zinc-900 border border-zinc-800 rounded-lg">
+              <Icon icon={Monitor} className="w-5 h-5 text-brand-500" />
+            </Box>
+            <Text className="text-xl font-bold uppercase tracking-wider font-heading text-white">
+              Sistemas Web
+            </Text>
+            <Box className="h-px bg-zinc-800 flex-1 ml-4" />
+          </Box>
+
+          <Grid className="grid-cols-1 lg:grid-cols-2 gap-10">
+            {sistemas.map((projeto) => (
+              <motion.div
+                key={projeto.title}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5 }}
+              >
+                <Box className="bg-zinc-950 border border-zinc-800 rounded-xl overflow-hidden hover:border-brand-500/30 transition-all duration-300 group flex flex-col h-full">
+                  <a
+                    href={projeto.link}
+                    target="_blank"
+                    className="block relative aspect-video w-full overflow-hidden border-b border-zinc-800 bg-zinc-900"
+                  >
+                    <img
+                      src={projeto.image}
+                      alt={projeto.title}
+                      className="object-cover w-full h-full transform group-hover:scale-105 transition-transform duration-500 opacity-90 group-hover:opacity-100"
+                    />
+                  </a>
+
+                  <VStack className="p-6 flex-grow justify-between gap-6">
+                    <VStack className="gap-3">
+                      <Title className="text-xl font-bold font-heading text-brand-500 uppercase tracking-wide">
+                        {projeto.title}
+                      </Title>
+                      <Text className="text-gray-400 text-sm leading-relaxed font-normal">
+                        {projeto.description}
+                      </Text>
+                    </VStack>
+
+                    <VStack className="gap-6 pt-2">
+                      <HStack className="flex-wrap gap-2">
+                        {projeto.technologies.map((tech) => (
+                          <Badge
+                            key={tech}
+                            className="bg-zinc-900/50 text-brand-500 border border-brand-500/20 px-2 py-1 text-[10px] font-mono uppercase tracking-wider rounded-sm"
+                          >
+                            {tech}
+                          </Badge>
+                        ))}
+                      </HStack>
+
+                      <a href={projeto.link} target="_blank" className="block w-full">
+                        <Button className="w-full bg-brand-500 hover:bg-brand-600 text-black font-extrabold font-mono text-xs uppercase tracking-widest h-11 transition-all rounded-md">
+                          <Icon icon={ExternalLink} className="w-4 h-4 mr-2" />
+                          Visualizar Projeto
+                        </Button>
+                      </a>
+                    </VStack>
+                  </VStack>
+                </Box>
+              </motion.div>
+            ))}
+          </Grid>
         </VStack>
 
         <VStack className="gap-12">
-          <VStack className="gap-6">
-            <Text className="text-white font-bold text-lg">Sistemas</Text>
-            <Grid className="grid-cols-1 md:grid-cols-2 gap-8">
-              {[
-                {
-                  title: 'Sistema de Monitoramento Escolar',
-                  description:
-                    'Sistema completo para monitoramento e gestão de atividades escolares.',
-                  tags: ['PHP', 'MySQL', 'JavaScript', 'CSS'],
-                  link: 'https://monitoramento.escolansl.com/sistema',
-                },
-                {
-                  title: 'Sistema de Eletivas e Tutorias',
-                  description: 'Plataforma para gerenciamento de eletivas e tutorias escolares.',
-                  tags: ['PHP', 'MySQL', 'JavaScript', 'CSS'],
-                  link: 'https://et.escolansl.com/sistema',
-                },
-              ].map((project) => (
-                <Card
-                  key={project.title}
-                  className="p-6 rounded-lg bg-zinc-950 border border-zinc-900 hover:border-zinc-800 transition-all"
-                >
-                  <VStack className="gap-6">
-                    <Box className="w-full h-48 bg-zinc-900 rounded-lg flex items-center justify-center">
-                      <Icon icon={Code2} className="size-16 text-zinc-800" />
-                    </Box>
+          <Box className="flex items-center gap-3">
+            <Box className="p-2 bg-zinc-900 border border-zinc-800 rounded-lg">
+              <Icon icon={Gamepad2} className="w-5 h-5 text-brand-500" />
+            </Box>
+            <Text className="text-xl font-bold uppercase tracking-wider font-heading text-white">
+              Jogos Desenvolvidos
+            </Text>
+            <Box className="h-px bg-zinc-800 flex-1 ml-4" />
+          </Box>
+
+          <Grid className="grid-cols-1 lg:grid-cols-2 gap-10">
+            {jogos.map((projeto) => (
+              <motion.div
+                key={projeto.title}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5 }}
+              >
+                <Box className="bg-zinc-950 border border-zinc-800 rounded-xl overflow-hidden hover:border-brand-500/30 transition-all duration-300 group flex flex-col h-full">
+                  <a
+                    href={projeto.link}
+                    target="_blank"
+                    className="block relative aspect-video w-full overflow-hidden border-b border-zinc-800 bg-zinc-900"
+                  >
+                    <img
+                      src={projeto.image}
+                      alt={projeto.title}
+                      className="object-cover w-full h-full transform group-hover:scale-105 transition-transform duration-500 opacity-90 group-hover:opacity-100"
+                    />
+                  </a>
+
+                  <VStack className="p-6 flex-grow justify-between gap-6">
                     <VStack className="gap-3">
-                      <Text className="font-bold text-white text-base">{project.title}</Text>
-                      <Text className="text-zinc-400 text-xs leading-relaxed">
-                        {project.description}
+                      <Title className="text-xl font-bold font-heading text-brand-500 uppercase tracking-wide">
+                        {projeto.title}
+                      </Title>
+                      <Text className="text-gray-400 text-sm leading-relaxed font-normal">
+                        {projeto.description}
                       </Text>
                     </VStack>
-                    <HStack className="gap-2 flex-wrap">
-                      {project.tags.map((tag) => (
-                        <Badge
-                          key={tag}
-                          className="px-3 py-1 text-xs bg-zinc-900 border border-zinc-800 text-zinc-500 rounded-md"
-                        >
-                          {tag}
-                        </Badge>
-                      ))}
-                    </HStack>
-                    <Link href={project.link} target="_blank" className="w-full">
-                      <Button className="w-full rounded-md border border-zinc-800 bg-transparent hover:bg-zinc-900 text-zinc-300 text-sm transition-colors">
-                        <HStack className="gap-2 items-center justify-center">
-                          <Icon icon={ExternalLink} className="size-4" />
-                          <Text>Visualizar</Text>
-                        </HStack>
-                      </Button>
-                    </Link>
-                  </VStack>
-                </Card>
-              ))}
-            </Grid>
-          </VStack>
 
-          <VStack className="gap-6">
-            <Text className="text-white font-bold text-lg">Jogos</Text>
-            <Grid className="grid-cols-1 md:grid-cols-2 gap-8">
-              {[
-                {
-                  title: 'Biome Quest',
-                  description:
-                    'Jogo educativo onde um robô percorre diferentes biomas resolvendo problemas ambientais.',
-                  tags: ['JavaScript', 'GDevelop', 'Game Design'],
-                  link: 'https://gd.games/oldgabriel/biome-quest',
-                },
-                {
-                  title: 'Pixel World',
-                  description:
-                    'Jogo com temática inspirada em One Piece. O jogador coleta chaves e enfrenta chefões.',
-                  tags: ['JavaScript', 'GDevelop', 'Pixel Art'],
-                  link: 'https://gd.games/oldgabriel/pixel-world',
-                },
-              ].map((project) => (
-                <Card
-                  key={project.title}
-                  className="p-6 rounded-lg bg-zinc-950 border border-zinc-900 hover:border-zinc-800 transition-all"
-                >
-                  <VStack className="gap-6">
-                    <Box className="w-full h-48 bg-zinc-900 rounded-lg flex items-center justify-center">
-                      <Icon icon={GamepadIcon} className="size-16 text-zinc-800" />
-                    </Box>
-                    <VStack className="gap-3">
-                      <Text className="font-bold text-white text-base">{project.title}</Text>
-                      <Text className="text-zinc-400 text-xs leading-relaxed">
-                        {project.description}
-                      </Text>
+                    <VStack className="gap-6 pt-2">
+                      <HStack className="flex-wrap gap-2">
+                        {projeto.technologies.map((tech) => (
+                          <Badge
+                            key={tech}
+                            className="bg-zinc-900/50 text-brand-500 border border-brand-500/20 px-2 py-1 text-[10px] font-mono uppercase tracking-wider rounded-sm"
+                          >
+                            {tech}
+                          </Badge>
+                        ))}
+                      </HStack>
+
+                      <a href={projeto.link} target="_blank" className="block w-full">
+                        <Button className="w-full bg-brand-500 hover:bg-brand-600 text-black font-extrabold font-mono text-xs uppercase tracking-widest h-11 transition-all rounded-md">
+                          <Icon icon={ExternalLink} className="w-4 h-4 mr-2" />
+                          Jogar Agora
+                        </Button>
+                      </a>
                     </VStack>
-                    <HStack className="gap-2 flex-wrap">
-                      {project.tags.map((tag) => (
-                        <Badge
-                          key={tag}
-                          className="px-3 py-1 text-xs bg-zinc-900 border border-zinc-800 text-zinc-500 rounded-md"
-                        >
-                          {tag}
-                        </Badge>
-                      ))}
-                    </HStack>
-                    <Link href={project.link} target="_blank" className="w-full">
-                      <Button className="w-full rounded-md bg-emerald-500 hover:bg-emerald-600 text-black font-semibold text-sm transition-colors">
-                        <HStack className="gap-2 items-center justify-center">
-                          <Icon icon={GamepadIcon} className="size-4" />
-                          <Text>Jogar</Text>
-                        </HStack>
-                      </Button>
-                    </Link>
                   </VStack>
-                </Card>
-              ))}
-            </Grid>
-          </VStack>
-
-          <HStack className="justify-center pt-8">
-            <Link href="https://github.com/GabrielCirqueira" target="_blank">
-              <Button className="px-8 py-3 rounded-md border border-zinc-800 bg-transparent hover:bg-zinc-900 text-zinc-300 text-sm transition-colors">
-                <HStack className="gap-2 items-center">
-                  <Icon icon={Github} className="size-4" />
-                  <Text>Ver todos os projetos no GitHub</Text>
-                </HStack>
-              </Button>
-            </Link>
-          </HStack>
+                </Box>
+              </motion.div>
+            ))}
+          </Grid>
         </VStack>
-      </VStack>
-    </Container>
+      </Container>
+    </Box>
   )
 }

@@ -4,7 +4,6 @@ import {
   EducationSection,
   HeroSection,
   ProjectsSection,
-  SkillsSection,
 } from '@app/components/pages/home'
 import { AppContainer, Footer, Header } from '@app/layouts'
 
@@ -14,7 +13,6 @@ export function Component() {
       <Header />
       <HeroSection />
       <AboutSection />
-      <SkillsSection />
       <ProjectsSection />
       <EducationSection />
       <ContactSection />

@@ -4,7 +4,7 @@
 
 @layer base {
   :root {
-    --radius: 0.25rem;
+    --radius: 0.3rem;
   }
 
   * {
@@ -12,54 +12,59 @@
   }
 
   body {
-    @apply bg-black text-zinc-100;
-    font-family: "Lato", "Poppins", system-ui, sans-serif;
+    @apply bg-black text-white;
+    scrollbar-width: thin;
+    scrollbar-color: #10b981 #000;
   }
 
   html {
     scroll-behavior: smooth;
   }
 
-  /* Scrollbar personalizada */
   ::-webkit-scrollbar {
-    width: 10px;
+    width: 8px;
   }
 
   ::-webkit-scrollbar-track {
-    @apply bg-zinc-950;
+    @apply bg-black;
   }
 
   ::-webkit-scrollbar-thumb {
-    @apply bg-brand-600 rounded;
+    @apply bg-brand-500 rounded;
   }
 
   ::-webkit-scrollbar-thumb:hover {
-    @apply bg-brand-500;
+    @apply bg-brand-400;
   }
 }
 
-@layer utilities {
-  .text-glow {
-    text-shadow: 0 0 10px rgba(16, 185, 129, 0.8);
-  }
+.text-gradient {
+  background: linear-gradient(90deg, white, theme("colors.brand.400"), white);
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  background-size: 200% 100%;
+  animation: shimmer 2s linear infinite;
+}
 
-  .text-glow-sm {
-    text-shadow: 0 0 5px rgba(16, 185, 129, 0.6);
-  }
+.hero-noise {
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+  background-size: 200px;
+  opacity: 0.05;
+}
 
-  .text-glow-lg {
-    text-shadow: 0 0 20px rgba(16, 185, 129, 0.9);
-  }
+.card-project {
+  transition: all 0.3s ease;
+  transform-style: preserve-3d;
+  perspective: 1000px;
+}
 
-  .border-glow {
-    box-shadow: 0 0 10px rgba(16, 185, 129, 0.5);
-  }
+.card-project:hover {
+  transform: scale(1.02);
+  box-shadow: 0 0 20px rgba(16, 185, 129, 0.3);
+}
 
-  .hover-glow {
-    transition: all 0.3s ease;
-  }
-
-  .hover-glow:hover {
-    box-shadow: 0 0 20px rgba(16, 185, 129, 0.7);
-  }
+.skill-bar {
+  height: 8px;
+  @apply bg-gradient-to-r from-brand-500 to-brand-300 rounded-full shadow-[0_0_8px_rgba(16,185,129,0.5)];
 }
