@@ -43,7 +43,7 @@ export function ProjectsSection() {
   ]
 
   return (
-    <Box as="section" id="projetos" className="py-24 relative bg-black font-sans">
+    <Box id="projetos" className="py-24 relative bg-black font-sans">
       <Box className="absolute inset-0 bg-dotted-pattern opacity-50 pointer-events-none" />
 
       <Container size="xl" className="relative z-10 px-4">

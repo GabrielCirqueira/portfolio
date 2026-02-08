@@ -47,7 +47,7 @@ export function AboutSection() {
   ]
 
   return (
-    <Box as="section" id="sobre" className="py-24 relative font-sans bg-zinc-950/50">
+    <Box id="sobre" className="py-24 relative font-sans bg-zinc-950/50">
       <Box className="absolute inset-0 bg-dotted-pattern opacity-10 pointer-events-none" />
 
       <Container size="xl" className="relative z-10 px-4">

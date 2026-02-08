@@ -33,7 +33,6 @@ export function Header() {
 
   return (
     <Box
-      as="header"
       className={`fixed top-0 w-full z-50 transition-all duration-300 font-sans ${
         scrolled ? 'bg-black/80 backdrop-blur-md border-b border-brand-500/20' : 'bg-transparent'
       }`}
@@ -51,7 +50,7 @@ export function Header() {
             <Text className="font-mono text-brand-500 text-xl">/&gt;</Text>
           </a>
 
-          <HStack as="nav" className="hidden md:flex items-center space-x-4">
+          <HStack className="hidden md:flex items-center space-x-4">
             {navItems.map((item) => (
               <a
                 key={item.name}
@@ -97,7 +96,7 @@ export function Header() {
             className="md:hidden bg-black/95 border-t border-brand-500/20 backdrop-blur-md overflow-hidden"
           >
             <Container size="xl" className="py-6">
-              <VStack as="nav" className="space-y-4">
+              <VStack className="space-y-4">
                 {navItems.map((item) => (
                   <a
                     key={item.name}
