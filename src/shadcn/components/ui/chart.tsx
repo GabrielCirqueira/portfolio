@@ -2,7 +2,6 @@ import { cn } from '@shadcn/lib/utils'
 import * as React from 'react'
 import * as RechartsPrimitive from 'recharts'
 
-// Format: { THEME_NAME: CSS_SELECTOR }
 const THEMES = { light: '', dark: '.dark' } as const
 
 export type ChartConfig = {
@@ -69,7 +68,7 @@ const ChartStyle = ({ id, config }: { id: string; config: ChartConfig }) => {
 
   return (
     <style
-      // biome-ignore lint/security/noDangerouslySetInnerHtml: Safe static CSS generation from config
+      // biome-ignore lint/security/noDangerouslySetInnerHtml: Used for dynamic theme injection in Charts
       dangerouslySetInnerHTML={{
         __html: Object.entries(THEMES)
           .map(
@@ -295,7 +294,6 @@ const ChartLegendContent = React.forwardRef<
 })
 ChartLegendContent.displayName = 'ChartLegend'
 
-// Helper to extract item config from a payload.
 function getPayloadConfigFromPayload(config: ChartConfig, payload: unknown, key: string) {
   if (typeof payload !== 'object' || payload === null) {
     return undefined

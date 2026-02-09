@@ -19,7 +19,7 @@ export function AboutSection() {
 
   const item = {
     hidden: { opacity: 0, y: 20 },
-    show: { opacity: 1, y: 0, transition: { duration: 0.5 } },
+    show: { opacity: 1, y: 0, transition: { duration: 0.5, ease: 'easeOut' as const } },
   }
 
   const aboutCards = [
@@ -47,17 +47,17 @@ export function AboutSection() {
   ]
 
   return (
-    <Box id="sobre" className="py-24 relative font-sans bg-zinc-950/50 overflow-hidden">
-      <Box className="absolute inset-0 bg-dotted-pattern opacity-10 pointer-events-none" />
+    <Box id="sobre" className="py-24 relative font-sans bg-zinc-950/30 overflow-hidden">
+      <Box className="absolute inset-0 bg-dotted-pattern opacity-5 pointer-events-none" />
 
-      {/* Dynamic Background Blob */}
       <motion.div
         animate={{
           scale: [1, 1.2, 1],
           opacity: [0.1, 0.2, 0.1],
+          y: [0, -30, 0],
         }}
         transition={{ duration: 10, repeat: Infinity, ease: 'easeInOut' }}
-        className="absolute top-1/2 left-0 w-[500px] h-[500px] bg-brand-500/10 rounded-full blur-[100px] -translate-y-1/2 -translate-x-1/2 pointer-events-none"
+        className="absolute top-1/2 left-0 w-[500px] h-[500px] bg-brand-500/5 rounded-full blur-[120px] -translate-y-1/2 -translate-x-1/2 pointer-events-none"
       />
 
       <Container size="xl" className="relative z-10 px-4">
@@ -70,7 +70,7 @@ export function AboutSection() {
         >
           <Badge
             variant="outline"
-            className="mb-4 px-4 py-1 border-brand-500/50 text-brand-500 uppercase tracking-widest text-xs font-bold bg-brand-500/5 backdrop-blur-md"
+            className="mb-6 px-4 py-1.5 border-brand-500/30 text-brand-500 uppercase tracking-widest text-xs font-bold bg-brand-500/5 backdrop-blur-md shadow-[0_0_15px_rgba(16,185,129,0.1)]"
           >
             Sobre Mim
           </Badge>
@@ -87,28 +87,28 @@ export function AboutSection() {
             transition={{ duration: 0.5 }}
             className="flex justify-center"
           >
-            <Box className="relative w-full max-w-sm aspect-[3/4] rounded-2xl overflow-hidden border border-zinc-800 bg-zinc-900 shadow-[0_0_40px_rgba(0,0,0,0.5)] group">
-              <div className="absolute inset-0 bg-brand-500/10 mix-blend-overlay opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-10" />
+            <Box className="relative w-full max-w-sm aspect-[3/4] rounded-2xl overflow-hidden border border-zinc-800 bg-zinc-900 shadow-2xl group">
+              <div className="absolute inset-0 bg-brand-500/10 mix-blend-overlay opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-10 pointer-events-none" />
               <img
                 src="/images/gabriel1.png"
                 alt="Gabriel Cirqueira"
-                className="object-cover w-full h-full transform transition-transform duration-700 group-hover:scale-110 opacity-90 group-hover:opacity-100"
+                className="object-cover w-full h-full transform transition-transform duration-700 group-hover:scale-105 opacity-90 group-hover:opacity-100"
               />
 
-              <Box className="absolute inset-x-0 bottom-0 h-2/3 bg-gradient-to-t from-black via-black/50 to-transparent z-10" />
+              <Box className="absolute inset-x-0 bottom-0 h-2/3 bg-gradient-to-t from-black via-black/60 to-transparent z-10" />
 
               <Box className="absolute bottom-6 left-6 right-6 p-4 rounded-xl border border-white/10 bg-white/5 backdrop-blur-md z-20 hover:bg-white/10 transition-colors duration-300">
                 <HStack className="justify-between items-center">
-                  <VStack className="gap-0">
-                    <Text className="text-xs text-brand-500 font-mono uppercase tracking-wider mb-1">
+                  <VStack className="gap-0.5">
+                    <Text className="text-xs text-brand-400 font-mono uppercase tracking-wider mb-1">
                       Fullstack Dev
                     </Text>
-                    <Text className="text-lg font-bold text-white font-heading uppercase">
+                    <Text className="text-xl font-bold text-white font-heading uppercase">
                       Gabriel Cirqueira
                     </Text>
                   </VStack>
-                  <Box className="p-2 bg-brand-500/10 rounded-full border border-brand-500/20">
-                    <Icon icon={FileCode} className="text-brand-500 h-5 w-5" />
+                  <Box className="p-2.5 bg-brand-500 text-black rounded-lg shadow-[0_0_15px_rgba(16,185,129,0.5)]">
+                    <Icon icon={FileCode} className="h-5 w-5" />
                   </Box>
                 </HStack>
               </Box>
@@ -120,24 +120,28 @@ export function AboutSection() {
             initial="hidden"
             whileInView="show"
             viewport={{ once: true }}
-            className="flex flex-col gap-8"
+            className="flex flex-col gap-10"
           >
-            <Text className="text-zinc-400 text-lg leading-relaxed mb-2 text-center lg:text-left">
-              Desenvolvedor Fullstack focado na criação de aplicações web modernas e escaláveis.
-              Combino conhecimento técnico sólido com uma visão prática para entregar software
-              robusto e de alto valor.
-            </Text>
+            <VStack className="gap-4">
+              <Text className="text-zinc-400 text-lg leading-relaxed mb-2 text-justify lg:text-left">
+                Desenvolvedor Fullstack focado na criação de aplicações web modernas e escaláveis.
+                Combino conhecimento técnico sólido com uma visão prática para entregar software
+                robusto e de alto valor. Minha paixão é transformar ideias complexas em interfaces
+                simples e funcionais.
+              </Text>
+            </VStack>
 
             <Grid className="grid-cols-1 sm:grid-cols-2 gap-5">
               {aboutCards.map((card) => (
                 <motion.div key={card.title} variants={item} className="h-full">
-                  <Card className="bg-black/40 border border-zinc-800 p-6 hover:border-brand-500/50 transition-all duration-300 group h-full hover:shadow-[0_0_20px_rgba(16,185,129,0.1)] hover:-translate-y-1 backdrop-blur-sm">
-                    <HStack className="items-start gap-4">
-                      <Box className="p-2.5 rounded-lg bg-zinc-900/80 text-brand-500 border border-brand-500/20 mt-1 shrink-0 group-hover:bg-brand-500 group-hover:text-black transition-colors duration-300">
+                  <Card className="bg-zinc-900/40 border border-zinc-800 p-6 hover:border-brand-500/30 transition-all duration-300 group h-full hover:shadow-[0_0_20px_rgba(16,185,129,0.1)] hover:-translate-y-1 backdrop-blur-sm relative overflow-hidden">
+                    <Box className="absolute inset-0 bg-gradient-to-br from-brand-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
+                    <HStack className="items-start gap-4 relative z-10">
+                      <Box className="p-3 rounded-lg bg-zinc-950 text-brand-500 border border-brand-500/10 mt-1 shrink-0 group-hover:bg-brand-500 group-hover:text-black transition-all duration-300 shadow-sm">
                         <Icon icon={card.icon} className="h-5 w-5" />
                       </Box>
                       <VStack className="gap-2">
-                        <Text className="font-bold text-white uppercase font-heading tracking-wide text-base group-hover:text-brand-500 transition-colors">
+                        <Text className="font-bold text-white uppercase font-heading tracking-wide text-sm group-hover:text-brand-400 transition-colors">
                           {card.title}
                         </Text>
                         <Text className="text-sm text-zinc-500 group-hover:text-zinc-300 transition-colors leading-relaxed">
@@ -157,10 +161,11 @@ export function AboutSection() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5, delay: 0.2 }}
-          className="mt-20 flex justify-center"
+          className="mt-24 flex justify-center"
         >
-          <Box className="max-w-2xl text-center border-t border-zinc-800 pt-10">
-            <Text className="text-zinc-500 font-medium text-sm tracking-[0.2em] uppercase">
+          <Box className="max-w-2xl text-center border-t border-white/5 pt-10 relative">
+            <Box className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 w-20 h-1 bg-brand-500 rounded-full blur-[1px]" />
+            <Text className="text-zinc-500 font-medium text-sm tracking-[0.3em] uppercase animate-pulse">
               Tecnologia é a ferramenta. Resultado é o objetivo.
             </Text>
           </Box>

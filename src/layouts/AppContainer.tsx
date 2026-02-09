@@ -3,33 +3,16 @@ import { cn } from '@shadcn/lib/utils'
 import * as React from 'react'
 
 export interface AppContainerProps extends React.HTMLAttributes<HTMLDivElement> {
-  /**
-   * Conteúdo da página
-   */
   children: React.ReactNode
-  /**
-   * Classes CSS adicionais
-   */
+
   className?: string
-  /**
-   * Largura máxima do container
-   * @default "7xl"
-   */
+
   maxWidth?: 'full' | '7xl' | '6xl' | '5xl' | '4xl' | '3xl' | '2xl' | 'xl' | 'lg'
-  /**
-   * Padding vertical
-   * @default "8"
-   */
+
   paddingY?: '0' | '4' | '6' | '8' | '12' | '16'
-  /**
-   * Padding horizontal
-   * @default "6"
-   */
+
   paddingX?: '0' | '4' | '6' | '8' | '12'
-  /**
-   * Se deve centralizar o conteúdo
-   * @default true
-   */
+
   centered?: boolean
 }
 
@@ -62,26 +45,6 @@ const paddingXClasses = {
   '12': 'px-12',
 }
 
-/**
- * AppContainer - Container padrão para conteúdo das páginas
- *
- * Define configurações consistentes de largura, padding e alinhamento
- * para todas as páginas da aplicação.
- *
- * @example
- * ```tsx
- * import { AppContainer } from "@layouts/AppContainer";
- *
- * export default function MyPage() {
- *   return (
- *     <AppContainer>
- *       <h1>Minha Página</h1>
- *       <p>Conteúdo...</p>
- *     </AppContainer>
- *   );
- * }
- * ```
- */
 export const AppContainer = React.forwardRef<HTMLDivElement, AppContainerProps>(
   (
     {

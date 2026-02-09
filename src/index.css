@@ -15,6 +15,7 @@
     @apply bg-black text-white;
     scrollbar-width: thin;
     scrollbar-color: #10b981 #000;
+    overflow-x: hidden;
   }
 
   html {
@@ -22,7 +23,7 @@
   }
 
   ::-webkit-scrollbar {
-    width: 8px;
+    width: 6px;
   }
 
   ::-webkit-scrollbar-track {
@@ -30,28 +31,53 @@
   }
 
   ::-webkit-scrollbar-thumb {
-    @apply bg-brand-500 rounded;
+    @apply bg-brand-600 rounded-full;
   }
 
   ::-webkit-scrollbar-thumb:hover {
-    @apply bg-brand-400;
+    @apply bg-brand-500;
+  }
+
+  ::selection {
+    @apply bg-brand-500/30 text-brand-300;
+  }
+}
+
+@layer utilities {
+  .text-outline {
+    -webkit-text-stroke: 1px rgba(255, 255, 255, 0.1);
+    color: transparent;
+  }
+
+  .text-outline-brand {
+    -webkit-text-stroke: 1px rgba(16, 185, 129, 0.5);
+    color: transparent;
+  }
+
+  .glass {
+    @apply bg-white/5 backdrop-blur-md border border-white/10;
+  }
+
+  .glass-dark {
+    @apply bg-black/40 backdrop-blur-md border border-white/5;
   }
 }
 
 .text-gradient {
   background: linear-gradient(
     to right,
-    #ffffff 20%,
-    theme("colors.brand.500") 40%,
-    theme("colors.brand.300") 60%,
-    #ffffff 80%
+    #ffffff 0%,
+    theme("colors.brand.400") 25%,
+    theme("colors.brand.200") 50%,
+    theme("colors.brand.400") 75%,
+    #ffffff 100%
   );
   background-size: 200% auto;
   background-clip: text;
   -webkit-background-clip: text;
   text-fill-color: transparent;
   -webkit-text-fill-color: transparent;
-  animation: shimmer 4s linear infinite;
+  animation: shimmer 6s linear infinite;
 }
 
 @keyframes shimmer {
@@ -65,8 +91,9 @@
   inset: 0;
   z-index: 0;
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
-  opacity: 0.03;
+  opacity: 0.04;
   pointer-events: none;
+  mix-blend-mode: overlay;
 }
 
 .scanline {
@@ -76,21 +103,18 @@
   background: linear-gradient(
     0deg,
     rgba(0, 0, 0, 0) 0%,
-    rgba(16, 185, 129, 0.05) 50%,
+    rgba(16, 185, 129, 0.1) 50%,
     rgba(0, 0, 0, 0) 100%
   );
   opacity: 0.1;
   position: absolute;
   bottom: 100%;
-  animation: scanline 10s linear infinite;
+  animation: scanline 8s linear infinite;
   pointer-events: none;
 }
 
 @keyframes scanline {
   0% {
-    bottom: 100%;
-  }
-  80% {
     bottom: 100%;
   }
   100% {
@@ -99,7 +123,7 @@
 }
 
 .animate-glow {
-  animation: glow 2s ease-in-out infinite alternate;
+  animation: glow 3s ease-in-out infinite alternate;
 }
 
 @keyframes glow {
@@ -107,22 +131,20 @@
     box-shadow: 0 0 10px -10px theme("colors.brand.500");
   }
   to {
-    box-shadow: 0 0 20px 0px theme("colors.brand.500");
+    box-shadow: 0 0 25px 0px theme("colors.brand.500");
   }
 }
 
 .card-project {
-  transition: all 0.3s ease;
-  transform-style: preserve-3d;
-  perspective: 1000px;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
 .card-project:hover {
-  transform: scale(1.02);
-  box-shadow: 0 0 20px rgba(16, 185, 129, 0.3);
+  transform: translateY(-5px);
+  box-shadow: 0 10px 30px -10px rgba(16, 185, 129, 0.3);
 }
 
 .skill-bar {
-  height: 8px;
-  @apply bg-gradient-to-r from-brand-500 to-brand-300 rounded-full shadow-[0_0_8px_rgba(16,185,129,0.5)];
+  height: 6px;
+  @apply bg-gradient-to-r from-brand-600 to-brand-400 rounded-full shadow-[0_0_10px_rgba(16,185,129,0.3)];
 }

@@ -63,7 +63,7 @@ export function EducationSection() {
       <Box className="absolute inset-0 bg-zinc-950 opacity-50" />
       <Box className="absolute inset-0 bg-[radial-gradient(#10b98140_1px,transparent_1px)] bg-[size:20px_20px] opacity-30" />
 
-      {/* Dynamic Glow */}
+      {}
       <Box className="absolute bottom-0 left-1/2 w-[500px] h-[300px] bg-brand-500/10 rounded-full blur-[100px] -translate-x-1/2 translate-y-1/2 pointer-events-none" />
 
       <Container size="xl" className="relative z-10 px-4">
@@ -89,7 +89,7 @@ export function EducationSection() {
         </motion.div>
 
         <Grid className="grid-cols-1 md:grid-cols-3 gap-8 items-start">
-          {/* Formação Column */}
+          {}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -140,7 +140,7 @@ export function EducationSection() {
             </Box>
           </motion.div>
 
-          {/* Experiência Column */}
+          {}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -191,7 +191,7 @@ export function EducationSection() {
             </Box>
           </motion.div>
 
-          {/* Conquistas Column */}
+          {}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}

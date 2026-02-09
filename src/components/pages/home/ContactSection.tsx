@@ -52,7 +52,7 @@ export function ContactSection() {
 
   const item = {
     hidden: { opacity: 0, y: 20 },
-    show: { opacity: 1, y: 0, transition: { duration: 0.4 } },
+    show: { opacity: 1, y: 0, transition: { duration: 0.4, ease: 'easeOut' as const } },
   }
 
   return (
@@ -113,15 +113,14 @@ export function ContactSection() {
                   href={contact.href || undefined}
                   target={contact.href ? '_blank' : undefined}
                   rel={contact.href ? 'noopener noreferrer' : undefined}
-                  className={`group flex items-center gap-5 bg-zinc-900/30 border border-zinc-800 p-6 rounded-xl transition-all duration-300 h-full backdrop-blur-sm relative overflow-hidden ${
+                  className={`group flex items-center gap-5 bg-zinc-900/40 border border-zinc-800 p-6 rounded-xl transition-all duration-300 h-full backdrop-blur-sm relative overflow-hidden ${
                     contact.highlight
-                      ? 'border-brand-500/50 bg-brand-500/5 shadow-[0_0_20px_rgba(16,185,129,0.1)]'
-                      : 'hover:border-brand-500/50 hover:bg-zinc-900/60'
+                      ? 'border-brand-500/50 bg-brand-500/10 shadow-[0_0_30px_rgba(16,185,129,0.15)]'
+                      : 'hover:border-brand-500/40 hover:bg-zinc-900/60 hover:shadow-[0_0_20px_rgba(16,185,129,0.1)]'
                   }`}
                   whileHover={{ y: -5, transition: { duration: 0.2 } }}
                 >
-                  {/* Hover Glow Effect */}
-                  <div className="absolute inset-0 bg-gradient-to-r from-brand-500/0 via-brand-500/5 to-brand-500/0 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000" />
+                  <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700 ease-in-out pointer-events-none" />
 
                   <Box
                     className={`p-3.5 rounded-xl shrink-0 ${
@@ -154,16 +153,15 @@ export function ContactSection() {
               </motion.div>
             ))}
 
-            {/* Linktree Card Compact */}
             <motion.div variants={item} className="h-full">
               <motion.a
                 href="https://linktr.ee/gabrielCirqueira"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group flex items-center justify-between gap-4 bg-zinc-900/30 border border-zinc-800 hover:border-brand-500 p-6 rounded-xl transition-all duration-300 h-full hover:bg-brand-500/5 backdrop-blur-sm relative overflow-hidden"
+                className="group flex items-center justify-between gap-4 bg-zinc-900/40 border border-zinc-800 hover:border-brand-500 p-6 rounded-xl transition-all duration-300 h-full hover:bg-brand-500/5 backdrop-blur-sm relative overflow-hidden"
                 whileHover={{ y: -5, transition: { duration: 0.2 } }}
               >
-                <div className="absolute inset-0 bg-gradient-to-r from-brand-500/0 via-brand-500/5 to-brand-500/0 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000" />
+                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700 ease-in-out pointer-events-none" />
 
                 <HStack className="items-center gap-5 relative z-10">
                   <Box className="p-3.5 rounded-xl bg-zinc-950 border border-zinc-800 text-brand-500 group-hover:bg-brand-500 group-hover:text-black transition-all duration-300 shrink-0 group-hover:shadow-[0_0_15px_rgba(16,185,129,0.4)]">

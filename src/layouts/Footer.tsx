@@ -25,7 +25,7 @@ export function Footer() {
 
   return (
     <Box className="bg-black border-t border-brand-500/10 relative font-sans overflow-hidden">
-      {/* Top Gradient Line */}
+      {}
       <Box className="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-brand-500/50 to-transparent" />
 
       <Box className="absolute inset-0 bg-[radial-gradient(#10b98110_1px,transparent_1px)] bg-[size:20px_20px] pointer-events-none opacity-20" />
