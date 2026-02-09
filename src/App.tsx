@@ -1,11 +1,17 @@
 import { ThemeProvider } from '@app/contexts'
+import { ClarityProvider } from '@app/contexts/ClarityContext'
 import { MainLayout } from '@app/layouts'
+import Clarity from '@microsoft/clarity'
 import {
   createBrowserRouter,
   createRoutesFromElements,
   Route,
   RouterProvider,
 } from 'react-router-dom'
+
+const clarityProjectId = 'SEU_PROJECT_ID_AQUI'
+
+Clarity.init(clarityProjectId)
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -20,8 +26,10 @@ const router = createBrowserRouter(
 
 export default function App() {
   return (
-    <ThemeProvider>
-      <RouterProvider router={router} />
-    </ThemeProvider>
+    <ClarityProvider>
+      <ThemeProvider>
+        <RouterProvider router={router} />
+      </ThemeProvider>
+    </ClarityProvider>
   )
 }
