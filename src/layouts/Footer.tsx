@@ -17,7 +17,6 @@ export function Footer() {
   const links = [
     { name: 'Início', href: '#inicio' },
     { name: 'Sobre', href: '#sobre' },
-    { name: 'Habilidades', href: '#habilidades' },
     { name: 'Projetos', href: '#projetos' },
     { name: 'Formação', href: '#formacao' },
     { name: 'Contato', href: '#contato' },
@@ -28,7 +27,7 @@ export function Footer() {
       {}
       <Box className="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-brand-500/50 to-transparent" />
 
-      <Box className="absolute inset-0 bg-[radial-gradient(#10b98110_1px,transparent_1px)] bg-[size:20px_20px] pointer-events-none opacity-20" />
+      <Box className="absolute inset-0 bg-[radial-gradient(currentColor_1px,transparent_1px)] bg-[size:20px_20px] pointer-events-none opacity-20 text-brand-500/10" />
 
       <Container size="xl" className="py-20 relative z-10 px-4">
         <Grid className="grid-cols-1 md:grid-cols-3 gap-16 items-start">
@@ -61,14 +60,14 @@ export function Footer() {
                   href={social.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex justify-center items-center w-10 h-10 border border-white/10 rounded-full text-gray-400"
+                  className="
+                    flex justify-center items-center w-10 h-10
+                    border border-white/10 rounded-full text-gray-400
+                    hover:bg-brand-500/10 hover:text-brand-500
+                    hover:border-brand-500/50 transition-all duration-300
+                  "
                   aria-label={social.label}
-                  whileHover={{
-                    scale: 1.1,
-                    backgroundColor: 'rgba(16, 185, 129, 0.1)',
-                    color: 'rgb(16, 185, 129)',
-                    borderColor: 'rgba(16, 185, 129, 0.5)',
-                  }}
+                  whileHover={{ scale: 1.1 }}
                   whileTap={{ scale: 0.95 }}
                 >
                   <Icon icon={social.icon} className="h-5 w-5" />
@@ -86,9 +85,20 @@ export function Footer() {
                 <a
                   key={index}
                   href={link.href}
-                  className="text-gray-400 hover:text-brand-500 hover:pl-2 transition-all duration-300 flex items-center group text-sm font-semibold uppercase tracking-wider relative overflow-hidden"
+                  className="
+                    text-gray-400 hover:text-brand-500
+                    hover:pl-2 transition-all duration-300
+                    flex items-center group text-sm font-semibold
+                    uppercase tracking-wider relative overflow-hidden
+                  "
                 >
-                  <Text className="text-brand-500 mr-2 opacity-0 group-hover:opacity-100 transition-opacity -ml-4 group-hover:ml-0 duration-300">
+                  <Text
+                    className="
+                      text-brand-500 mr-2 opacity-0
+                      group-hover:opacity-100 transition-opacity
+                      -ml-4 group-hover:ml-0 duration-300
+                    "
+                  >
                     ›
                   </Text>
                   {link.name}
@@ -113,7 +123,19 @@ export function Footer() {
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
             >
-              <Button className="w-full py-6 bg-transparent border border-brand-500 text-brand-500 hover:bg-brand-500 hover:text-black font-bold uppercase tracking-widest transition-all duration-300 shadow-[0_0_15px_rgba(16,185,129,0.1)] hover:shadow-[0_0_25px_rgba(16,185,129,0.3)]">
+              <Button
+                className="
+                  w-full py-6 bg-transparent border
+                  border-brand-500 text-brand-500
+                  hover:bg-brand-500 hover:text-black
+                  font-bold uppercase tracking-widest
+                  transition-all duration-300
+                  shadow-[0_0_15px_var(--tw-shadow-color)]
+                  shadow-brand-500/10
+                  hover:shadow-[0_0_25px_var(--tw-shadow-color)]
+                  hover:shadow-brand-500/30
+                "
+              >
                 <Icon icon={Phone} className="w-5 h-5 mr-3" />
                 WhatsApp
               </Button>

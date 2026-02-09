@@ -77,17 +77,24 @@ export function Header() {
   return (
     <>
       <Box
-        className={`fixed top-0 w-full z-50 transition-all duration-500 font-sans ${
-          scrolled
-            ? 'bg-black/80 backdrop-blur-xl border-b border-white/5 shadow-lg'
-            : 'bg-transparent border-b border-transparent py-4'
-        }`}
+        className={`
+          fixed top-0 w-full z-50 transition-all
+          duration-500 font-sans ${
+            scrolled
+              ? 'bg-black/80 backdrop-blur-xl border-b border-white/5 shadow-lg'
+              : 'bg-transparent border-b border-transparent py-4'
+          }
+        `}
       >
         <Container size="xl">
           <HStack className="justify-between items-center h-16 md:h-20">
             <motion.a
               href="#inicio"
-              className="flex items-center space-x-2 text-white hover:text-brand-400 transition-colors no-underline group relative z-50"
+              className="
+                flex items-center space-x-2 text-white
+                hover:text-brand-400 transition-colors
+                no-underline group relative z-50
+              "
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
             >
@@ -121,7 +128,17 @@ export function Header() {
                 rel="noopener noreferrer"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                className="ml-4 px-6 py-2.5 border border-brand-500/30 bg-brand-500/5 text-brand-400 font-bold uppercase tracking-widest hover:bg-brand-500 hover:text-black hover:border-brand-500 transition-all duration-300 rounded text-xs shadow-[0_0_15px_rgba(16,185,129,0.1)] hover:shadow-[0_0_25px_rgba(16,185,129,0.4)]"
+                className="
+                  ml-4 px-6 py-2.5 border border-brand-500/30
+                  bg-brand-500/5 text-brand-400 font-bold
+                  uppercase tracking-widest hover:bg-brand-500
+                  hover:text-black hover:border-brand-500
+                  transition-all duration-300 rounded text-xs
+                  shadow-[0_0_15px_var(--tw-shadow-color)]
+                  shadow-brand-500/10
+                  hover:shadow-[0_0_25px_var(--tw-shadow-color)]
+                  hover:shadow-brand-500/40
+                "
               >
                 Linktree
               </motion.a>
@@ -196,10 +213,26 @@ export function Header() {
                     onClick={() => setIsOpen(false)}
                     className="group relative block text-center"
                   >
-                    <Text className="text-4xl md:text-5xl font-black uppercase tracking-tighter text-transparent text-outline hover:text-white transition-all duration-300 font-heading">
+                    <Text
+                      className="
+                        text-4xl md:text-5xl font-black uppercase
+                        tracking-tighter text-transparent text-outline
+                        hover:text-white transition-all duration-300
+                        font-heading
+                      "
+                    >
                       {item.name}
                     </Text>
-                    <Text className="text-4xl md:text-5xl font-black uppercase tracking-tighter text-brand-500 absolute top-0 left-0 w-full h-full opacity-0 group-hover:opacity-100 group-hover:blur-[2px] transition-all duration-300 pointer-events-none transform translate-y-1 scale-105">
+                    <Text
+                      className="
+                        text-4xl md:text-5xl font-black uppercase
+                        tracking-tighter text-brand-500 absolute
+                        top-0 left-0 w-full h-full opacity-0
+                        group-hover:opacity-100 group-hover:blur-[2px]
+                        transition-all duration-300 pointer-events-none
+                        transform translate-y-1 scale-105
+                      "
+                    >
                       {item.name}
                     </Text>
                   </motion.a>
@@ -210,7 +243,13 @@ export function Header() {
                     href="https://linktr.ee/gabrielCirqueira"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="px-8 py-3 border border-brand-500 text-brand-500 font-bold uppercase tracking-widest hover:bg-brand-500 hover:text-black transition-all duration-300 rounded text-sm block"
+                    className="
+                      px-8 py-3 border border-brand-500
+                      text-brand-500 font-bold uppercase
+                      tracking-widest hover:bg-brand-500
+                      hover:text-black transition-all
+                      duration-300 rounded text-sm block
+                    "
                   >
                     Ver Tudo (Linktree)
                   </a>

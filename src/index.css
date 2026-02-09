@@ -14,7 +14,7 @@
   body {
     @apply bg-black text-white;
     scrollbar-width: thin;
-    scrollbar-color: #10b981 #000;
+    scrollbar-color: theme("colors.brand.500") #000;
     overflow-x: hidden;
   }
 
@@ -39,18 +39,18 @@
   }
 
   ::selection {
-    @apply bg-brand-500/30 text-brand-300;
+    @apply bg-brand-500/30 text-brand-100;
   }
 }
 
 @layer utilities {
   .text-outline {
-    -webkit-text-stroke: 1px rgba(255, 255, 255, 0.1);
+    -webkit-text-stroke: 1px theme("colors.white / 10%");
     color: transparent;
   }
 
   .text-outline-brand {
-    -webkit-text-stroke: 1px rgba(16, 185, 129, 0.5);
+    -webkit-text-stroke: 1px theme("colors.brand.500");
     color: transparent;
   }
 
@@ -102,9 +102,9 @@
   z-index: 10;
   background: linear-gradient(
     0deg,
-    rgba(0, 0, 0, 0) 0%,
-    rgba(16, 185, 129, 0.1) 50%,
-    rgba(0, 0, 0, 0) 100%
+    transparent 0%,
+    theme("colors.brand.500" / 10%) 50%,
+    transparent 100%
   );
   opacity: 0.1;
   position: absolute;
@@ -141,10 +141,10 @@
 
 .card-project:hover {
   transform: translateY(-5px);
-  box-shadow: 0 10px 30px -10px rgba(16, 185, 129, 0.3);
+  box-shadow: 0 10px 30px -10px theme("colors.brand.500" / 30%);
 }
 
 .skill-bar {
   height: 6px;
-  @apply bg-gradient-to-r from-brand-600 to-brand-400 rounded-full shadow-[0_0_10px_rgba(16,185,129,0.3)];
+  @apply bg-gradient-to-r from-brand-600 to-brand-400 rounded-full shadow-[0_0_10px_var(--tw-shadow-color)] shadow-brand-500/30;
 }

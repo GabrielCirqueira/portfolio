@@ -1,6 +1,6 @@
 import { motion, useScroll, useTransform } from 'framer-motion'
 import { ArrowDownCircle, Code, Terminal } from 'lucide-react'
-import { useEffect, useRef, useState } from 'react'
+import { memo, useEffect, useRef, useState } from 'react'
 import { TypeAnimation } from 'react-type-animation'
 import { Badge } from '@/shadcn/components/ui/badge'
 import { Button } from '@/shadcn/components/ui/button'
@@ -9,7 +9,7 @@ import { Box, Container, VStack } from '@/shadcn/components/ui/layout'
 import { Link } from '@/shadcn/components/ui/link'
 import { Text } from '@/shadcn/components/ui/typography'
 
-export function HeroSection() {
+export const HeroSection = memo(() => {
   const [loaded, setLoaded] = useState(false)
   const containerRef = useRef<HTMLDivElement>(null)
   const { scrollY } = useScroll()
@@ -30,7 +30,7 @@ export function HeroSection() {
       <Box className="absolute inset-0 hero-noise" />
 
       <motion.div
-        style={{ y: y1 }}
+        style={{ y: y1, willChange: 'transform' }}
         className="absolute top-0 right-0 w-full h-full overflow-hidden pointer-events-none z-0"
       >
         <motion.div
@@ -40,12 +40,15 @@ export function HeroSection() {
             rotate: [0, 45, 0],
           }}
           transition={{ duration: 15, repeat: Infinity, ease: 'easeInOut' }}
-          className="absolute top-[-10%] right-[-5%] w-[600px] h-[600px] bg-brand-500/20 rounded-full blur-[120px] mix-blend-screen"
-        />
+          style={{ willChange: 'transform, opacity' }}
+          className="absolute top-[-10%] right-[-5%] w-[600px] h-[600px]"
+        >
+          <div className="w-full h-full bg-brand-500/20 rounded-full blur-[120px]" />
+        </motion.div>
       </motion.div>
 
       <motion.div
-        style={{ y: y2 }}
+        style={{ y: y2, willChange: 'transform' }}
         className="absolute bottom-0 left-0 w-full h-full overflow-hidden pointer-events-none z-0"
       >
         <motion.div
@@ -55,11 +58,21 @@ export function HeroSection() {
             x: [0, 30, 0],
           }}
           transition={{ duration: 18, repeat: Infinity, ease: 'easeInOut', delay: 2 }}
-          className="absolute bottom-[-10%] left-[-10%] w-[500px] h-[500px] bg-brand-800/20 rounded-full blur-[100px] mix-blend-screen"
-        />
+          style={{ willChange: 'transform, opacity' }}
+          className="absolute bottom-[-10%] left-[-10%] w-[500px] h-[500px]"
+        >
+          <div className="w-full h-full bg-brand-800/20 rounded-full blur-[100px]" />
+        </motion.div>
       </motion.div>
 
-      <Box className="absolute inset-0 bg-[linear-gradient(to_right,rgba(255,255,255,0.03)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.03)_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_50%,#000_70%,transparent_100%)] pointer-events-none" />
+      <Box
+        className="
+          absolute inset-0
+          bg-[linear-gradient(to_right,#ffffff08_1px,transparent_1px),linear-gradient(to_bottom,#ffffff08_1px,transparent_1px)]
+          bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_50%,#000_70%,transparent_100%)]
+          pointer-events-none
+        "
+      />
 
       <Container size="xl" className="relative z-10">
         <VStack className="items-center justify-center text-center gap-0">
@@ -67,9 +80,20 @@ export function HeroSection() {
             initial={{ opacity: 0, scale: 0.9, y: 20 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             transition={{ duration: 0.6, ease: 'easeOut' }}
+            style={{ willChange: 'transform, opacity' }}
             className="mb-8"
           >
-            <Badge className="inline-flex items-center px-4 py-1.5 rounded-full border border-brand-500/30 bg-brand-500/10 text-brand-300 text-xs md:text-sm uppercase tracking-widest font-bold shadow-[0_0_20px_rgba(16,185,129,0.15)] backdrop-blur-md hover:bg-brand-500/20 transition-colors cursor-default">
+            <Badge
+              className="
+                inline-flex items-center px-4 py-1.5
+                rounded-full border border-brand-500/30
+                bg-brand-500/10 text-brand-300 text-xs
+                md:text-sm uppercase tracking-widest
+                font-bold shadow-[0_0_20px_var(--tw-shadow-color)]
+                shadow-brand-500/15 hover:bg-brand-500/20
+                transition-colors cursor-default
+              "
+            >
               <Icon icon={Terminal} className="w-3.5 h-3.5 mr-2 text-brand-400" />
               <Text>Dev Fullstack & Game Dev</Text>
             </Badge>
@@ -79,6 +103,7 @@ export function HeroSection() {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, ease: 'easeOut', delay: 0.2 }}
+            style={{ willChange: 'transform, opacity' }}
             className="text-5xl md:text-7xl lg:text-9xl font-bold mb-6 leading-tight tracking-tighter relative z-20"
           >
             <span className="block text-white mb-2 text-4xl md:text-6xl lg:text-7xl font-medium tracking-tight">
@@ -128,12 +153,23 @@ export function HeroSection() {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.8 }}
+            style={{ willChange: 'transform, opacity' }}
             className="flex flex-col sm:flex-row gap-6 mb-32 w-full justify-center px-4 max-w-lg mx-auto sm:max-w-none"
           >
             <Link href="#projetos" className="w-full sm:w-auto group">
               <Button
                 type="button"
-                className="w-full sm:w-auto rounded px-8 py-6 bg-brand-600 hover:bg-brand-500 text-black font-bold uppercase tracking-widest shadow-[0_0_20px_rgba(34,197,94,0.3)] hover:shadow-[0_0_40px_rgba(34,197,94,0.5)] transition-all duration-300 relative overflow-hidden transform hover:-translate-y-1"
+                className="
+                  w-full sm:w-auto rounded px-8 py-6
+                  bg-brand-600 hover:bg-brand-500 text-black
+                  font-bold uppercase tracking-widest
+                  shadow-[0_0_20px_var(--tw-shadow-color)]
+                  shadow-brand-500/30
+                  hover:shadow-[0_0_40px_var(--tw-shadow-color)]
+                  hover:shadow-brand-500/50 transition-all
+                  duration-300 relative overflow-hidden
+                  transform hover:-translate-y-1
+                "
               >
                 <div className="flex items-center justify-center relative z-10">
                   <Icon
@@ -155,7 +191,14 @@ export function HeroSection() {
               <Button
                 type="button"
                 variant="outline"
-                className="w-full sm:w-auto rounded px-8 py-6 font-bold border-2 border-zinc-700 text-zinc-300 hover:text-white hover:border-brand-500 hover:bg-brand-500/10 uppercase tracking-widest transition-all duration-300 transform hover:-translate-y-1"
+                className="
+                  w-full sm:w-auto rounded px-8 py-6
+                  font-bold border-2 border-zinc-700
+                  text-zinc-300 hover:text-white
+                  hover:border-brand-500 hover:bg-brand-500/10
+                  uppercase tracking-widest transition-all
+                  duration-300 transform hover:-translate-y-1
+                "
               >
                 GitHub Profile
               </Button>
@@ -185,4 +228,4 @@ export function HeroSection() {
       </Container>
     </Box>
   )
-}
+})

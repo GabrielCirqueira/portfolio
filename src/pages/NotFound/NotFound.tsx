@@ -9,8 +9,19 @@ import { Link } from 'react-router-dom'
 export function Component() {
   return (
     <AppContainer maxWidth="2xl" paddingY="12">
-      <VStack className="items-center text-center gap-8 animate-in fade-in-0 zoom-in-95 duration-700">
-        <Box className="w-24 h-24 rounded-full bg-error-100 border-4 border-error-300 flex items-center justify-center animate-in zoom-in-0 duration-500">
+      <VStack
+        className="
+          items-center text-center gap-8
+          animate-in fade-in-0 zoom-in-95 duration-700
+        "
+      >
+        <Box
+          className="
+            w-24 h-24 rounded-full bg-error-100
+            border-4 border-error-300 flex items-center
+            justify-center animate-in zoom-in-0 duration-500
+          "
+        >
           <Icon icon={AlertCircle} size={48} className="text-error-600" />
         </Box>
 
@@ -29,14 +40,24 @@ export function Component() {
 
         <VStack className="gap-3 w-full sm:w-auto">
           <Link to="/" className="w-full">
-            <Button className="bg-brand-500 hover:bg-brand-600 text-white shadow-soft-1 transition-all hover:scale-105 flex items-center gap-2 w-full justify-center">
+            <Button
+              className="
+                bg-brand-500 hover:bg-brand-600 text-white
+                shadow-soft-1 transition-all hover:scale-105
+                flex items-center gap-2 w-full justify-center
+              "
+            >
               <Icon icon={Home} size={18} />
               Ir para Home
             </Button>
           </Link>
           <Button
             variant="outline"
-            className="border-outline-300 text-typography-700 hover:bg-background-100 w-full flex items-center gap-2 justify-center"
+            className="
+              border-outline-300 text-typography-700
+              hover:bg-background-100 w-full flex
+              items-center gap-2 justify-center
+            "
             onClick={() => window.history.back()}
           >
             <Icon icon={ArrowLeft} size={18} />
