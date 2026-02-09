@@ -2,7 +2,7 @@ import Clarity from '@microsoft/clarity'
 import { createContext, useCallback, useContext, useEffect, useState } from 'react'
 import { useLocation } from 'react-router-dom'
 
-interface ValorContextoClarity {
+interface ClarityContextValue {
   estaInicializado: boolean
   identificarUsuario: (
     idUsuario: string,
@@ -16,7 +16,7 @@ interface ValorContextoClarity {
   priorizarSessao: (motivo: string) => void
 }
 
-const ContextoClarity = createContext<ValorContextoClarity>({
+const ClarityContext = createContext<ClarityContextValue>({
   estaInicializado: false,
   identificarUsuario: () => {
     /* sem operação */
@@ -39,7 +39,7 @@ interface PropriedadesProvedorClarity {
   children: React.ReactNode
 }
 
-export function ProvedorClarity({ children }: PropriedadesProvedorClarity) {
+export function ClarityProvider({ children }: PropriedadesProvedorClarity) {
   const [estaInicializado, setEstaInicializado] = useState(false)
   const idClarity = import.meta.env.VITE_CLARITY_ID
   const location = useLocation()
@@ -113,7 +113,7 @@ export function ProvedorClarity({ children }: PropriedadesProvedorClarity) {
   }, [estaInicializado, location.pathname])
 
   return (
-    <ContextoClarity.Provider
+    <ClarityContext.Provider
       value={{
         estaInicializado,
         identificarUsuario,
@@ -124,10 +124,10 @@ export function ProvedorClarity({ children }: PropriedadesProvedorClarity) {
       }}
     >
       {children}
-    </ContextoClarity.Provider>
+    </ClarityContext.Provider>
   )
 }
 
-export function usarClarity() {
-  return useContext(ContextoClarity)
+export function useClarity() {
+  return useContext(ClarityContext)
 }
