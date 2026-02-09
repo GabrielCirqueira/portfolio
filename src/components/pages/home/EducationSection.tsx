@@ -17,8 +17,8 @@ export function EducationSection() {
   }
 
   const itemVariants = {
-    hidden: { opacity: 0, y: 20 },
-    show: { opacity: 1, y: 0, transition: { duration: 0.5 } },
+    hidden: { opacity: 0, x: -20 },
+    show: { opacity: 1, x: 0, transition: { duration: 0.5 } },
   }
 
   const formacao = [
@@ -59,43 +59,51 @@ export function EducationSection() {
   ]
 
   return (
-    <Box id="formacao" className="py-24 bg-black relative font-sans">
+    <Box id="formacao" className="py-24 bg-black relative font-sans overflow-hidden">
       <Box className="absolute inset-0 bg-zinc-950 opacity-50" />
-      <Box className="absolute inset-0 bg-[radial-gradient(#10b98140_1px,transparent_1px)] bg-[size:20px_20px]" />
+      <Box className="absolute inset-0 bg-[radial-gradient(#10b98140_1px,transparent_1px)] bg-[size:20px_20px] opacity-30" />
 
-      <Container size="xl" className="relative z-10">
+      {/* Dynamic Glow */}
+      <Box className="absolute bottom-0 left-1/2 w-[500px] h-[300px] bg-brand-500/10 rounded-full blur-[100px] -translate-x-1/2 translate-y-1/2 pointer-events-none" />
+
+      <Container size="xl" className="relative z-10 px-4">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
-          className="text-center mb-16"
+          className="text-center mb-20"
         >
           <Badge
             variant="outline"
-            className="mb-4 px-4 py-1 border-brand-500/50 bg-brand-500/10 text-brand-500 uppercase tracking-widest font-bold"
+            className="mb-4 px-4 py-1 border-brand-500/50 bg-brand-500/10 text-brand-500 uppercase tracking-widest font-bold backdrop-blur-md"
           >
             Carreira
           </Badge>
-          <Title className="text-3xl md:text-4xl font-bold font-heading mb-4 uppercase tracking-wide">
-            Formação e <span className="text-brand-500">Experiência</span>
+          <Title className="text-3xl md:text-5xl font-bold font-heading mb-4 uppercase tracking-wide">
+            Formação e <span className="text-gradient">Experiência</span>
           </Title>
-          <Text className="text-gray-400 max-w-2xl mx-auto">
+          <Text className="text-gray-400 max-w-2xl mx-auto text-lg font-light">
             Meu percurso acadêmico e profissional na área de tecnologia.
           </Text>
         </motion.div>
 
-        <Grid className="grid-cols-1 md:grid-cols-3 gap-10">
+        <Grid className="grid-cols-1 md:grid-cols-3 gap-8 items-start">
+          {/* Formação Column */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0 }}
+            className="relative"
           >
-            <Box className="border border-brand-500/20 rounded-lg p-6 bg-zinc-950/40 backdrop-blur-sm h-full hover:border-brand-500/40 transition-colors">
-              <HStack className="items-center mb-6 gap-3">
-                <Icon icon={CheckCircle} className="h-6 w-6 text-brand-500" />
-                <Text className="text-xl font-bold font-heading uppercase text-white">
+            <Box className="absolute inset-0 bg-gradient-to-b from-brand-500/5 to-transparent rounded-xl pointer-events-none" />
+            <Box className="border border-brand-500/20 rounded-xl p-8 bg-black/40 backdrop-blur-md h-full hover:border-brand-500/40 transition-all duration-300 hover:shadow-[0_0_20px_rgba(16,185,129,0.05)]">
+              <HStack className="items-center mb-8 gap-4 border-b border-brand-500/10 pb-4">
+                <Box className="p-2 bg-brand-500/10 rounded-lg">
+                  <Icon icon={CheckCircle} className="h-6 w-6 text-brand-500" />
+                </Box>
+                <Text className="text-xl font-bold font-heading uppercase text-white tracking-widest">
                   Formação
                 </Text>
               </HStack>
@@ -105,37 +113,48 @@ export function EducationSection() {
                 initial="hidden"
                 whileInView="show"
                 viewport={{ once: true }}
-                className="space-y-8"
+                className="space-y-10"
               >
                 {formacao.map((item, index) => (
                   <motion.div
                     key={index}
                     variants={itemVariants}
-                    className="relative pl-6 border-l border-brand-500/30"
+                    className="relative pl-8 border-l-2 border-brand-500/20 group"
                   >
-                    <Box className="absolute top-0 left-0 w-3 h-3 -translate-x-[7px] translate-y-1 rounded-full bg-brand-500 shadow-[0_0_10px_rgba(16,185,129,0.5)]" />
-                    <Text className="font-bold text-white text-lg">{item.titulo}</Text>
-                    <Text className="text-sm text-gray-400 font-mono mt-1">{item.instituicao}</Text>
-                    <Text className="text-xs text-brand-500 font-mono mb-2 uppercase tracking-wider">
-                      {item.periodo}
+                    <Box className="absolute top-0 left-0 w-4 h-4 -translate-x-[9px] translate-y-1 rounded-full bg-black border-2 border-brand-500 group-hover:bg-brand-500 group-hover:shadow-[0_0_10px_rgba(16,185,129,0.8)] transition-all duration-300" />
+                    <Text className="font-bold text-white text-lg group-hover:text-brand-500 transition-colors uppercase tracking-wide leading-tight">
+                      {item.titulo}
                     </Text>
-                    <Text className="text-sm text-gray-300 leading-relaxed">{item.descricao}</Text>
+                    <Text className="text-sm text-gray-400 font-bold font-mono mt-2 mb-1">
+                      {item.instituicao}
+                    </Text>
+                    <Badge className="bg-brand-500/10 text-brand-500 border-none mb-3 text-[10px] uppercase font-bold px-2 py-0.5">
+                      {item.periodo}
+                    </Badge>
+                    <Text className="text-sm text-gray-300 leading-relaxed font-light">
+                      {item.descricao}
+                    </Text>
                   </motion.div>
                 ))}
               </motion.div>
             </Box>
           </motion.div>
 
+          {/* Experiência Column */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.2 }}
+            className="md:-mt-8 relative"
           >
-            <Box className="border border-brand-500/20 rounded-lg p-6 bg-zinc-950/40 backdrop-blur-sm h-full hover:border-brand-500/40 transition-colors">
-              <HStack className="items-center mb-6 gap-3">
-                <Icon icon={Briefcase} className="h-6 w-6 text-brand-500" />
-                <Text className="text-xl font-bold font-heading uppercase text-white">
+            <Box className="absolute inset-0 bg-gradient-to-b from-brand-500/5 to-transparent rounded-xl pointer-events-none" />
+            <Box className="border border-brand-500/20 rounded-xl p-8 bg-zinc-900/40 backdrop-blur-md h-full hover:border-brand-500/40 transition-all duration-300 hover:shadow-[0_0_25px_rgba(16,185,129,0.1)] hover:-translate-y-2 transform">
+              <HStack className="items-center mb-8 gap-4 border-b border-brand-500/10 pb-4">
+                <Box className="p-2 bg-brand-500/10 rounded-lg">
+                  <Icon icon={Briefcase} className="h-6 w-6 text-brand-500" />
+                </Box>
+                <Text className="text-xl font-bold font-heading uppercase text-white tracking-widest">
                   Experiência
                 </Text>
               </HStack>
@@ -145,37 +164,48 @@ export function EducationSection() {
                 initial="hidden"
                 whileInView="show"
                 viewport={{ once: true }}
-                className="space-y-8"
+                className="space-y-10"
               >
                 {experiencias.map((item, index) => (
                   <motion.div
                     key={index}
                     variants={itemVariants}
-                    className="relative pl-6 border-l border-brand-500/30"
+                    className="relative pl-8 border-l-2 border-brand-500/20 group"
                   >
-                    <Box className="absolute top-0 left-0 w-3 h-3 -translate-x-[7px] translate-y-1 rounded-full bg-brand-500 shadow-[0_0_10px_rgba(16,185,129,0.5)]" />
-                    <Text className="font-bold text-white text-lg">{item.cargo}</Text>
-                    <Text className="text-sm text-gray-400 font-mono mt-1">{item.empresa}</Text>
-                    <Text className="text-xs text-brand-500 font-mono mb-2 uppercase tracking-wider">
-                      {item.periodo}
+                    <Box className="absolute top-0 left-0 w-4 h-4 -translate-x-[9px] translate-y-1 rounded-full bg-black border-2 border-brand-500 group-hover:bg-brand-500 group-hover:shadow-[0_0_10px_rgba(16,185,129,0.8)] transition-all duration-300" />
+                    <Text className="font-bold text-white text-lg group-hover:text-brand-500 transition-colors uppercase tracking-wide leading-tight">
+                      {item.cargo}
                     </Text>
-                    <Text className="text-sm text-gray-300 leading-relaxed">{item.descricao}</Text>
+                    <Text className="text-sm text-gray-400 font-bold font-mono mt-2 mb-1">
+                      {item.empresa}
+                    </Text>
+                    <Badge className="bg-brand-500/10 text-brand-500 border-none mb-3 text-[10px] uppercase font-bold px-2 py-0.5">
+                      {item.periodo}
+                    </Badge>
+                    <Text className="text-sm text-gray-300 leading-relaxed font-light">
+                      {item.descricao}
+                    </Text>
                   </motion.div>
                 ))}
               </motion.div>
             </Box>
           </motion.div>
 
+          {/* Conquistas Column */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.1 }}
+            className="relative"
           >
-            <Box className="border border-brand-500/20 rounded-lg p-6 bg-zinc-950/40 backdrop-blur-sm h-full hover:border-brand-500/40 transition-colors">
-              <HStack className="items-center mb-6 gap-3">
-                <Icon icon={Award} className="h-6 w-6 text-brand-500" />
-                <Text className="text-xl font-bold font-heading uppercase text-white">
+            <Box className="absolute inset-0 bg-gradient-to-b from-brand-500/5 to-transparent rounded-xl pointer-events-none" />
+            <Box className="border border-brand-500/20 rounded-xl p-8 bg-black/40 backdrop-blur-md h-full hover:border-brand-500/40 transition-all duration-300 hover:shadow-[0_0_20px_rgba(16,185,129,0.05)]">
+              <HStack className="items-center mb-8 gap-4 border-b border-brand-500/10 pb-4">
+                <Box className="p-2 bg-brand-500/10 rounded-lg">
+                  <Icon icon={Award} className="h-6 w-6 text-brand-500" />
+                </Box>
+                <Text className="text-xl font-bold font-heading uppercase text-white tracking-widest">
                   Conquistas
                 </Text>
               </HStack>
@@ -185,20 +215,24 @@ export function EducationSection() {
                 initial="hidden"
                 whileInView="show"
                 viewport={{ once: true }}
-                className="space-y-8"
+                className="space-y-10"
               >
                 {conquistas.map((item, index) => (
                   <motion.div
                     key={index}
                     variants={itemVariants}
-                    className="relative pl-6 border-l border-brand-500/30"
+                    className="relative pl-8 border-l-2 border-brand-500/20 group"
                   >
-                    <Box className="absolute top-0 left-0 w-3 h-3 -translate-x-[7px] translate-y-1 rounded-full bg-brand-500 shadow-[0_0_10px_rgba(16,185,129,0.5)]" />
-                    <Text className="font-bold text-white text-lg">{item.titulo}</Text>
-                    <Text className="text-xs text-brand-500 font-mono mb-2 uppercase tracking-wider mt-1">
-                      {item.ano}
+                    <Box className="absolute top-0 left-0 w-4 h-4 -translate-x-[9px] translate-y-1 rounded-full bg-black border-2 border-brand-500 group-hover:bg-brand-500 group-hover:shadow-[0_0_10px_rgba(16,185,129,0.8)] transition-all duration-300" />
+                    <Text className="font-bold text-white text-lg group-hover:text-brand-500 transition-colors uppercase tracking-wide leading-tight">
+                      {item.titulo}
                     </Text>
-                    <Text className="text-sm text-gray-300 leading-relaxed">{item.descricao}</Text>
+                    <Badge className="bg-brand-500/10 text-brand-500 border-none my-2 text-[10px] uppercase font-bold px-2 py-0.5">
+                      {item.ano}
+                    </Badge>
+                    <Text className="text-sm text-gray-300 leading-relaxed font-light block">
+                      {item.descricao}
+                    </Text>
                   </motion.div>
                 ))}
               </motion.div>
@@ -211,12 +245,12 @@ export function EducationSection() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
-          className="mt-16 max-w-3xl mx-auto text-center"
+          className="mt-20 max-w-3xl mx-auto text-center"
         >
-          <Badge className="mb-4 bg-brand-500/10 text-brand-500 border border-brand-500/20 uppercase tracking-widest font-bold">
+          <Badge className="mb-6 bg-transparent text-brand-500 border border-brand-500/40 uppercase tracking-[0.2em] font-bold text-xs px-4 py-2 hover:bg-brand-500 hover:text-black transition-colors">
             Sempre em evolução
           </Badge>
-          <Text className="text-gray-400">
+          <Text className="text-gray-400 font-light text-lg">
             Busco constantemente novas oportunidades de aprendizado para continuar evoluindo no
             campo da tecnologia.
           </Text>

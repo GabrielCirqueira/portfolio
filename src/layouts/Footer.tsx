@@ -1,3 +1,4 @@
+import { motion } from 'framer-motion'
 import { AtSign, Code, Github, Instagram, Phone } from 'lucide-react'
 import { Button } from '@/shadcn/components/ui/button'
 import { Icon } from '@/shadcn/components/ui/icon'
@@ -23,26 +24,30 @@ export function Footer() {
   ]
 
   return (
-    <Box className="bg-black border-t border-brand-500/20 relative font-sans">
+    <Box className="bg-black border-t border-brand-500/10 relative font-sans overflow-hidden">
+      {/* Top Gradient Line */}
+      <Box className="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-brand-500/50 to-transparent" />
+
       <Box className="absolute inset-0 bg-[radial-gradient(#10b98110_1px,transparent_1px)] bg-[size:20px_20px] pointer-events-none opacity-20" />
 
       <Container size="xl" className="py-20 relative z-10 px-4">
         <Grid className="grid-cols-1 md:grid-cols-3 gap-16 items-start">
           <VStack className="gap-6">
-            <a
+            <motion.a
               href="#inicio"
-              className="flex items-center space-x-2 text-white hover:text-brand-500 transition-colors no-underline group"
+              className="flex items-center space-x-2 text-white hover:text-brand-500 transition-colors no-underline group w-fit"
+              whileHover={{ scale: 1.05 }}
             >
-              <Text className="font-mono text-brand-500 text-2xl group-hover:translate-x-1 transition-transform">
+              <Text className="font-mono text-brand-500 text-2xl group-hover:rotate-12 transition-transform duration-300">
                 &lt;
               </Text>
               <Text className="font-bold text-2xl tracking-wide uppercase font-heading text-white">
                 Gabriel.Dev
               </Text>
-              <Text className="font-mono text-brand-500 text-2xl group-hover:-translate-x-1 transition-transform">
+              <Text className="font-mono text-brand-500 text-2xl group-hover:-rotate-12 transition-transform duration-300">
                 /&gt;
               </Text>
-            </a>
+            </motion.a>
 
             <Text className="text-gray-400 text-sm leading-relaxed max-w-sm">
               Desenvolvedor Fullstack & Criador de Jogos. Transformando ideias complexas em soluções
@@ -51,16 +56,23 @@ export function Footer() {
 
             <HStack className="gap-4 pt-4">
               {socials.map((social, index) => (
-                <a
+                <motion.a
                   key={index}
                   href={social.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex justify-center items-center w-10 h-10 border border-white/10 rounded-full hover:bg-brand-500 hover:text-black hover:border-brand-500 transition-all duration-300 text-gray-400"
+                  className="flex justify-center items-center w-10 h-10 border border-white/10 rounded-full text-gray-400"
                   aria-label={social.label}
+                  whileHover={{
+                    scale: 1.1,
+                    backgroundColor: 'rgba(16, 185, 129, 0.1)',
+                    color: 'rgb(16, 185, 129)',
+                    borderColor: 'rgba(16, 185, 129, 0.5)',
+                  }}
+                  whileTap={{ scale: 0.95 }}
                 >
                   <Icon icon={social.icon} className="h-5 w-5" />
-                </a>
+                </motion.a>
               ))}
             </HStack>
           </VStack>
@@ -74,9 +86,9 @@ export function Footer() {
                 <a
                   key={index}
                   href={link.href}
-                  className="text-gray-400 hover:text-brand-500 hover:pl-2 transition-all duration-300 flex items-center group text-sm font-semibold uppercase tracking-wider"
+                  className="text-gray-400 hover:text-brand-500 hover:pl-2 transition-all duration-300 flex items-center group text-sm font-semibold uppercase tracking-wider relative overflow-hidden"
                 >
-                  <Text className="text-brand-500 mr-2 opacity-0 group-hover:opacity-100 transition-opacity">
+                  <Text className="text-brand-500 mr-2 opacity-0 group-hover:opacity-100 transition-opacity -ml-4 group-hover:ml-0 duration-300">
                     ›
                   </Text>
                   {link.name}
@@ -93,29 +105,36 @@ export function Footer() {
               Precisa de uma resposta rápida? Fale comigo diretamente no WhatsApp.
             </Text>
 
-            <a
+            <motion.a
               href="https://wa.me/+5527996121313"
               target="_blank"
-              className="w-full"
+              className="w-full block"
               rel="noopener noreferrer"
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
             >
-              <Button className="w-full py-6 bg-transparent border border-brand-500 text-brand-500 hover:bg-brand-500 hover:text-black font-bold uppercase tracking-widest transition-all duration-300">
+              <Button className="w-full py-6 bg-transparent border border-brand-500 text-brand-500 hover:bg-brand-500 hover:text-black font-bold uppercase tracking-widest transition-all duration-300 shadow-[0_0_15px_rgba(16,185,129,0.1)] hover:shadow-[0_0_25px_rgba(16,185,129,0.3)]">
                 <Icon icon={Phone} className="w-5 h-5 mr-3" />
                 WhatsApp
               </Button>
-            </a>
+            </motion.a>
           </VStack>
         </Grid>
 
-        <Box className="my-16 h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" />
+        <Box className="my-16 h-px bg-gradient-to-r from-transparent via-zinc-800 to-transparent" />
 
         <HStack className="flex-col sm:flex-row justify-between items-center gap-4 text-center sm:text-left">
           <Text className="text-gray-500 text-xs font-mono uppercase tracking-widest">
             © {currentYear} Gabriel Cirqueira.
           </Text>
-          <HStack className="items-center gap-2 opacity-50 hover:opacity-100 transition-opacity">
+          <HStack className="items-center gap-2 opacity-50 hover:opacity-100 transition-opacity cursor-default">
             <Text className="text-gray-500 text-xs font-mono">Code with</Text>
-            <Icon icon={Code} className="w-3 h-3 text-brand-500" />
+            <motion.div
+              animate={{ scale: [1, 1.2, 1] }}
+              transition={{ repeat: Infinity, duration: 2 }}
+            >
+              <Icon icon={Code} className="w-3 h-3 text-brand-500" />
+            </motion.div>
             <Text className="text-gray-500 text-xs font-mono">&</Text>
             <Text className="text-xs font-mono text-white">Passion</Text>
           </HStack>

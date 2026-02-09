@@ -3,7 +3,7 @@ import { ExternalLink, Gamepad2, Monitor } from 'lucide-react'
 import { Badge } from '@/shadcn/components/ui/badge'
 import { Button } from '@/shadcn/components/ui/button'
 import { Icon } from '@/shadcn/components/ui/icon'
-import { Box, Container, Grid, HStack, VStack } from '@/shadcn/components/ui/layout'
+import { Box, Container, HStack, VStack } from '@/shadcn/components/ui/layout'
 import { Text, Title } from '@/shadcn/components/ui/typography'
 
 export function ProjectsSection() {
@@ -42,159 +42,219 @@ export function ProjectsSection() {
     },
   ]
 
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.2,
+      },
+    },
+  }
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 50 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.6 },
+    },
+  }
+
   return (
-    <Box id="projetos" className="py-24 relative bg-black font-sans">
-      <Box className="absolute inset-0 bg-dotted-pattern opacity-50 pointer-events-none" />
+    <Box id="projetos" className="py-24 relative bg-black font-sans overflow-hidden">
+      {/* Background Decor */}
+      <Box className="absolute inset-0 bg-dotted-pattern opacity-10 pointer-events-none" />
+      <Box className="absolute top-0 left-0 w-full h-24 bg-gradient-to-b from-black to-transparent z-10" />
 
       <Container size="xl" className="relative z-10 px-4">
         <VStack className="items-center text-center gap-4 mb-20">
-          <Badge
-            variant="outline"
-            className="border-brand-500/50 text-brand-500 uppercase tracking-widest text-xs font-mono px-3 py-1 bg-brand-500/5"
+          <motion.div
+            initial={{ opacity: 0, scale: 0.5 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
           >
-            Portfolio
-          </Badge>
-          <Title className="text-4xl md:text-5xl font-bold uppercase tracking-tight font-heading">
-            Projetos <span className="text-brand-500">Em Destaque</span>
-          </Title>
+            <Badge
+              variant="outline"
+              className="border-brand-500/50 text-brand-500 uppercase tracking-widest text-xs font-mono px-4 py-1.5 bg-brand-500/5 backdrop-blur-md shadow-[0_0_10px_rgba(16,185,129,0.2)]"
+            >
+              Portfolio
+            </Badge>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.2 }}
+          >
+            <Title className="text-4xl md:text-5xl font-bold uppercase tracking-tight font-heading">
+              Projetos <span className="text-gradient">Em Destaque</span>
+            </Title>
+          </motion.div>
         </VStack>
 
-        <VStack className="gap-12 mb-24">
-          <Box className="flex items-center gap-3">
-            <Box className="p-2 bg-zinc-900 border border-zinc-800 rounded-lg">
-              <Icon icon={Monitor} className="w-5 h-5 text-brand-500" />
-            </Box>
-            <Text className="text-xl font-bold uppercase tracking-wider font-heading text-white">
-              Sistemas Web
-            </Text>
-            <Box className="h-px bg-zinc-800 flex-1 ml-4" />
+        <VStack className="gap-24">
+          {/* Sistemas Web Section */}
+          <Box>
+            <motion.div
+              initial={{ opacity: 0, x: -20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              className="flex items-center gap-4 mb-10"
+            >
+              <Box className="p-3 bg-zinc-900/50 border border-brand-500/20 rounded-lg shadow-[0_0_15px_rgba(16,185,129,0.1)]">
+                <Icon icon={Monitor} className="w-6 h-6 text-brand-500" />
+              </Box>
+              <Text className="text-2xl font-bold uppercase tracking-wider font-heading text-white">
+                Sistemas Web
+              </Text>
+              <Box className="h-px bg-gradient-to-r from-brand-500/50 to-transparent flex-1 ml-4" />
+            </motion.div>
+
+            <motion.div
+              variants={containerVariants}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, margin: '-100px' }}
+              className="grid grid-cols-1 lg:grid-cols-2 gap-10"
+            >
+              {sistemas.map((projeto) => (
+                <motion.div variants={itemVariants} key={projeto.title} className="h-full">
+                  <Box className="bg-zinc-950/50 border border-zinc-800 rounded-xl overflow-hidden hover:border-brand-500/50 transition-all duration-500 group flex flex-col h-full hover:shadow-[0_0_30px_rgba(16,185,129,0.15)] backdrop-blur-sm">
+                    <a
+                      href={projeto.link}
+                      target="_blank"
+                      className="block relative aspect-video w-full overflow-hidden border-b border-zinc-800"
+                    >
+                      <Box className="absolute inset-0 bg-brand-500/10 z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none mix-blend-overlay" />
+                      <img
+                        src={projeto.image}
+                        alt={projeto.title}
+                        className="object-cover w-full h-full transform group-hover:scale-110 transition-transform duration-700 ease-in-out opacity-90 group-hover:opacity-100"
+                      />
+                    </a>
+
+                    <VStack className="p-8 flex-grow justify-between gap-6 relative overflow-hidden">
+                      <Box className="absolute top-0 right-0 w-32 h-32 bg-brand-500/5 rounded-full blur-2xl -translate-y-1/2 translate-x-1/2" />
+
+                      <VStack className="gap-3 relative z-10">
+                        <Title className="text-2xl font-bold font-heading text-white group-hover:text-brand-500 transition-colors uppercase tracking-wide">
+                          {projeto.title}
+                        </Title>
+                        <Text className="text-gray-400 text-sm leading-relaxed font-normal">
+                          {projeto.description}
+                        </Text>
+                      </VStack>
+
+                      <VStack className="gap-6 pt-2 relative z-10">
+                        <HStack className="flex-wrap gap-2">
+                          {projeto.technologies.map((tech) => (
+                            <Badge
+                              key={tech}
+                              className="bg-zinc-900/80 text-brand-400 border border-brand-500/20 px-2.5 py-1 text-[10px] font-mono uppercase tracking-wider rounded transition-colors group-hover:border-brand-500/40"
+                            >
+                              {tech}
+                            </Badge>
+                          ))}
+                        </HStack>
+
+                        <a href={projeto.link} target="_blank" className="block w-full">
+                          <Button className="w-full bg-zinc-900 border border-zinc-700 hover:border-brand-500 hover:bg-brand-500 hover:text-black text-white font-bold font-mono text-xs uppercase tracking-widest h-12 transition-all duration-300 rounded overflow-hidden relative group/btn">
+                            <span className="relative z-10 flex items-center justify-center gap-2">
+                              <Icon icon={ExternalLink} className="w-4 h-4" />
+                              Visualizar Projeto
+                            </span>
+                          </Button>
+                        </a>
+                      </VStack>
+                    </VStack>
+                  </Box>
+                </motion.div>
+              ))}
+            </motion.div>
           </Box>
 
-          <Grid className="grid-cols-1 lg:grid-cols-2 gap-10">
-            {sistemas.map((projeto) => (
-              <motion.div
-                key={projeto.title}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5 }}
-              >
-                <Box className="bg-zinc-950 border border-zinc-800 rounded-xl overflow-hidden hover:border-brand-500/30 transition-all duration-300 group flex flex-col h-full">
-                  <a
-                    href={projeto.link}
-                    target="_blank"
-                    className="block relative aspect-video w-full overflow-hidden border-b border-zinc-800 bg-zinc-900"
-                  >
-                    <img
-                      src={projeto.image}
-                      alt={projeto.title}
-                      className="object-cover w-full h-full transform group-hover:scale-105 transition-transform duration-500 opacity-90 group-hover:opacity-100"
-                    />
-                  </a>
+          {/* Jogos Section */}
+          <Box>
+            <motion.div
+              initial={{ opacity: 0, x: -20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              className="flex items-center gap-4 mb-10"
+            >
+              <Box className="p-3 bg-zinc-900/50 border border-brand-500/20 rounded-lg shadow-[0_0_15px_rgba(16,185,129,0.1)]">
+                <Icon icon={Gamepad2} className="w-6 h-6 text-brand-500" />
+              </Box>
+              <Text className="text-2xl font-bold uppercase tracking-wider font-heading text-white">
+                Jogos Desenvolvidos
+              </Text>
+              <Box className="h-px bg-gradient-to-r from-brand-500/50 to-transparent flex-1 ml-4" />
+            </motion.div>
 
-                  <VStack className="p-6 flex-grow justify-between gap-6">
-                    <VStack className="gap-3">
-                      <Title className="text-xl font-bold font-heading text-brand-500 uppercase tracking-wide">
-                        {projeto.title}
-                      </Title>
-                      <Text className="text-gray-400 text-sm leading-relaxed font-normal">
-                        {projeto.description}
-                      </Text>
+            <motion.div
+              variants={containerVariants}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, margin: '-100px' }}
+              className="grid grid-cols-1 lg:grid-cols-2 gap-10"
+            >
+              {jogos.map((projeto) => (
+                <motion.div variants={itemVariants} key={projeto.title} className="h-full">
+                  <Box className="bg-zinc-950/50 border border-zinc-800 rounded-xl overflow-hidden hover:border-brand-500/50 transition-all duration-500 group flex flex-col h-full hover:shadow-[0_0_30px_rgba(16,185,129,0.15)] backdrop-blur-sm">
+                    <a
+                      href={projeto.link}
+                      target="_blank"
+                      className="block relative aspect-video w-full overflow-hidden border-b border-zinc-800"
+                    >
+                      <Box className="absolute inset-0 bg-brand-500/10 z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none mix-blend-overlay" />
+                      <img
+                        src={projeto.image}
+                        alt={projeto.title}
+                        className="object-cover w-full h-full transform group-hover:scale-110 transition-transform duration-700 ease-in-out opacity-90 group-hover:opacity-100"
+                      />
+                    </a>
+
+                    <VStack className="p-8 flex-grow justify-between gap-6 relative overflow-hidden">
+                      <Box className="absolute top-0 right-0 w-32 h-32 bg-brand-500/5 rounded-full blur-2xl -translate-y-1/2 translate-x-1/2" />
+
+                      <VStack className="gap-3 relative z-10">
+                        <Title className="text-2xl font-bold font-heading text-white group-hover:text-brand-500 transition-colors uppercase tracking-wide">
+                          {projeto.title}
+                        </Title>
+                        <Text className="text-gray-400 text-sm leading-relaxed font-normal">
+                          {projeto.description}
+                        </Text>
+                      </VStack>
+
+                      <VStack className="gap-6 pt-2 relative z-10">
+                        <HStack className="flex-wrap gap-2">
+                          {projeto.technologies.map((tech) => (
+                            <Badge
+                              key={tech}
+                              className="bg-zinc-900/80 text-brand-400 border border-brand-500/20 px-2.5 py-1 text-[10px] font-mono uppercase tracking-wider rounded transition-colors group-hover:border-brand-500/40"
+                            >
+                              {tech}
+                            </Badge>
+                          ))}
+                        </HStack>
+
+                        <a href={projeto.link} target="_blank" className="block w-full">
+                          <Button className="w-full bg-zinc-900 border border-zinc-700 hover:border-brand-500 hover:bg-brand-500 hover:text-black text-white font-bold font-mono text-xs uppercase tracking-widest h-12 transition-all duration-300 rounded overflow-hidden relative group/btn">
+                            <span className="relative z-10 flex items-center justify-center gap-2">
+                              <Icon icon={Gamepad2} className="w-4 h-4" />
+                              Jogar Agora
+                            </span>
+                          </Button>
+                        </a>
+                      </VStack>
                     </VStack>
-
-                    <VStack className="gap-6 pt-2">
-                      <HStack className="flex-wrap gap-2">
-                        {projeto.technologies.map((tech) => (
-                          <Badge
-                            key={tech}
-                            className="bg-zinc-900/50 text-brand-500 border border-brand-500/20 px-2 py-1 text-[10px] font-mono uppercase tracking-wider rounded-sm"
-                          >
-                            {tech}
-                          </Badge>
-                        ))}
-                      </HStack>
-
-                      <a href={projeto.link} target="_blank" className="block w-full">
-                        <Button className="w-full bg-brand-500 hover:bg-brand-600 text-black font-extrabold font-mono text-xs uppercase tracking-widest h-11 transition-all rounded-md">
-                          <Icon icon={ExternalLink} className="w-4 h-4 mr-2" />
-                          Visualizar Projeto
-                        </Button>
-                      </a>
-                    </VStack>
-                  </VStack>
-                </Box>
-              </motion.div>
-            ))}
-          </Grid>
-        </VStack>
-
-        <VStack className="gap-12">
-          <Box className="flex items-center gap-3">
-            <Box className="p-2 bg-zinc-900 border border-zinc-800 rounded-lg">
-              <Icon icon={Gamepad2} className="w-5 h-5 text-brand-500" />
-            </Box>
-            <Text className="text-xl font-bold uppercase tracking-wider font-heading text-white">
-              Jogos Desenvolvidos
-            </Text>
-            <Box className="h-px bg-zinc-800 flex-1 ml-4" />
+                  </Box>
+                </motion.div>
+              ))}
+            </motion.div>
           </Box>
-
-          <Grid className="grid-cols-1 lg:grid-cols-2 gap-10">
-            {jogos.map((projeto) => (
-              <motion.div
-                key={projeto.title}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5 }}
-              >
-                <Box className="bg-zinc-950 border border-zinc-800 rounded-xl overflow-hidden hover:border-brand-500/30 transition-all duration-300 group flex flex-col h-full">
-                  <a
-                    href={projeto.link}
-                    target="_blank"
-                    className="block relative aspect-video w-full overflow-hidden border-b border-zinc-800 bg-zinc-900"
-                  >
-                    <img
-                      src={projeto.image}
-                      alt={projeto.title}
-                      className="object-cover w-full h-full transform group-hover:scale-105 transition-transform duration-500 opacity-90 group-hover:opacity-100"
-                    />
-                  </a>
-
-                  <VStack className="p-6 flex-grow justify-between gap-6">
-                    <VStack className="gap-3">
-                      <Title className="text-xl font-bold font-heading text-brand-500 uppercase tracking-wide">
-                        {projeto.title}
-                      </Title>
-                      <Text className="text-gray-400 text-sm leading-relaxed font-normal">
-                        {projeto.description}
-                      </Text>
-                    </VStack>
-
-                    <VStack className="gap-6 pt-2">
-                      <HStack className="flex-wrap gap-2">
-                        {projeto.technologies.map((tech) => (
-                          <Badge
-                            key={tech}
-                            className="bg-zinc-900/50 text-brand-500 border border-brand-500/20 px-2 py-1 text-[10px] font-mono uppercase tracking-wider rounded-sm"
-                          >
-                            {tech}
-                          </Badge>
-                        ))}
-                      </HStack>
-
-                      <a href={projeto.link} target="_blank" className="block w-full">
-                        <Button className="w-full bg-brand-500 hover:bg-brand-600 text-black font-extrabold font-mono text-xs uppercase tracking-widest h-11 transition-all rounded-md">
-                          <Icon icon={ExternalLink} className="w-4 h-4 mr-2" />
-                          Jogar Agora
-                        </Button>
-                      </a>
-                    </VStack>
-                  </VStack>
-                </Box>
-              </motion.div>
-            ))}
-          </Grid>
         </VStack>
       </Container>
     </Box>

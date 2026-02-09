@@ -56,20 +56,48 @@ export function ContactSection() {
   }
 
   return (
-    <Box id="contato" className="py-24 relative bg-black font-sans">
+    <Box id="contato" className="py-24 relative bg-black font-sans overflow-hidden">
+      <Box className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_right,_var(--tw-gradient-stops))] from-brand-900/10 via-black to-black pointer-events-none" />
       <Box className="absolute inset-0 bg-dotted-pattern opacity-10 pointer-events-none" />
 
       <Container size="xl" className="relative z-10 px-4">
         <VStack className="items-center text-center gap-6 mb-16">
-          <Badge
-            variant="outline"
-            className="border-brand-500/50 text-brand-500 uppercase tracking-widest text-xs font-bold px-3 py-1 bg-brand-500/5"
+          <motion.div
+            initial={{ opacity: 0, scale: 0.5 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
           >
-            Fale Comigo
-          </Badge>
-          <Title className="text-4xl md:text-5xl font-heading font-bold uppercase tracking-wide">
-            Canais de <span className="text-brand-500">Contato</span>
-          </Title>
+            <Badge
+              variant="outline"
+              className="border-brand-500/50 text-brand-500 uppercase tracking-widest text-xs font-bold px-3 py-1 bg-brand-500/5 shadow-[0_0_10px_rgba(16,185,129,0.3)]"
+            >
+              Fale Comigo
+            </Badge>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.2 }}
+          >
+            <Title className="text-4xl md:text-5xl font-heading font-bold uppercase tracking-wide">
+              Canais de{' '}
+              <span className="text-brand-500 relative inline-block">
+                Contato
+                <svg
+                  aria-hidden="true"
+                  focusable="false"
+                  className="absolute w-full h-3 -bottom-1 left-0 text-brand-500 opacity-40"
+                  viewBox="0 0 100 10"
+                  preserveAspectRatio="none"
+                >
+                  <path d="M0 5 Q 50 10 100 5" stroke="currentColor" strokeWidth="2" fill="none" />
+                </svg>
+              </span>
+            </Title>
+          </motion.div>
         </VStack>
 
         <motion.div
@@ -78,28 +106,34 @@ export function ContactSection() {
           whileInView="show"
           viewport={{ once: true }}
         >
-          <Grid className="grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+          <Grid className="grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {contactItems.map((contact, index) => (
-              <motion.div key={index} variants={item}>
-                <a
+              <motion.div key={index} variants={item} className="h-full">
+                <motion.a
                   href={contact.href || undefined}
                   target={contact.href ? '_blank' : undefined}
                   rel={contact.href ? 'noopener noreferrer' : undefined}
-                  className={`group flex items-center gap-4 bg-zinc-900/40 border border-zinc-800 hover:border-brand-500/50 p-4 rounded-xl transition-all duration-300 hover:bg-zinc-900/80 ${
-                    contact.highlight ? 'border-brand-500/30 bg-brand-500/5' : ''
+                  className={`group flex items-center gap-5 bg-zinc-900/30 border border-zinc-800 p-6 rounded-xl transition-all duration-300 h-full backdrop-blur-sm relative overflow-hidden ${
+                    contact.highlight
+                      ? 'border-brand-500/50 bg-brand-500/5 shadow-[0_0_20px_rgba(16,185,129,0.1)]'
+                      : 'hover:border-brand-500/50 hover:bg-zinc-900/60'
                   }`}
+                  whileHover={{ y: -5, transition: { duration: 0.2 } }}
                 >
+                  {/* Hover Glow Effect */}
+                  <div className="absolute inset-0 bg-gradient-to-r from-brand-500/0 via-brand-500/5 to-brand-500/0 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000" />
+
                   <Box
-                    className={`p-3 rounded-lg shrink-0 ${
+                    className={`p-3.5 rounded-xl shrink-0 ${
                       contact.highlight
-                        ? 'bg-brand-500 text-black shadow-[0_0_15px_rgba(34,197,94,0.4)]'
-                        : 'bg-zinc-950 text-brand-500 border border-zinc-800 group-hover:border-brand-500/50 group-hover:text-brand-400'
-                    } transition-colors duration-300`}
+                        ? 'bg-brand-500 text-black shadow-[0_0_15px_rgba(16,185,129,0.4)]'
+                        : 'bg-zinc-950 text-brand-500 border border-zinc-800/50 group-hover:border-brand-500/50 group-hover:text-brand-400 group-hover:scale-110 transition-all duration-300'
+                    }`}
                   >
-                    <Icon icon={contact.icon} className="h-5 w-5" />
+                    <Icon icon={contact.icon} className="h-6 w-6" />
                   </Box>
 
-                  <VStack className="gap-0.5 min-w-0 flex-1">
+                  <VStack className="gap-1 min-w-0 flex-1 relative z-10">
                     <Text className="text-[10px] font-bold uppercase tracking-wider text-zinc-500 group-hover:text-brand-500 transition-colors">
                       {contact.label}
                     </Text>
@@ -109,28 +143,33 @@ export function ContactSection() {
                   </VStack>
 
                   {contact.href && (
-                    <Icon
-                      icon={ArrowRight}
-                      className="h-4 w-4 text-zinc-700 group-hover:text-brand-500 -translate-x-2 opacity-0 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300 shrink-0"
-                    />
+                    <Box className="relative z-10 w-8 h-8 flex items-center justify-center rounded-full bg-transparent group-hover:bg-brand-500/10 transition-colors">
+                      <Icon
+                        icon={ArrowRight}
+                        className="h-4 w-4 text-zinc-600 group-hover:text-brand-500 group-hover:-rotate-45 transition-all duration-300"
+                      />
+                    </Box>
                   )}
-                </a>
+                </motion.a>
               </motion.div>
             ))}
 
             {/* Linktree Card Compact */}
-            <motion.div variants={item}>
-              <a
+            <motion.div variants={item} className="h-full">
+              <motion.a
                 href="https://linktr.ee/gabrielCirqueira"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group flex items-center justify-between gap-4 bg-zinc-900/40 border border-zinc-800 hover:border-brand-500 p-4 rounded-xl transition-all duration-300 h-full hover:bg-brand-500/5"
+                className="group flex items-center justify-between gap-4 bg-zinc-900/30 border border-zinc-800 hover:border-brand-500 p-6 rounded-xl transition-all duration-300 h-full hover:bg-brand-500/5 backdrop-blur-sm relative overflow-hidden"
+                whileHover={{ y: -5, transition: { duration: 0.2 } }}
               >
-                <HStack className="items-center gap-4">
-                  <Box className="p-3 rounded-lg bg-zinc-950 border border-zinc-800 text-brand-500 group-hover:bg-brand-500 group-hover:text-black transition-colors shrink-0">
-                    <Icon icon={ExternalLink} className="h-5 w-5" />
+                <div className="absolute inset-0 bg-gradient-to-r from-brand-500/0 via-brand-500/5 to-brand-500/0 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000" />
+
+                <HStack className="items-center gap-5 relative z-10">
+                  <Box className="p-3.5 rounded-xl bg-zinc-950 border border-zinc-800 text-brand-500 group-hover:bg-brand-500 group-hover:text-black transition-all duration-300 shrink-0 group-hover:shadow-[0_0_15px_rgba(16,185,129,0.4)]">
+                    <Icon icon={ExternalLink} className="h-6 w-6" />
                   </Box>
-                  <VStack className="gap-0.5">
+                  <VStack className="gap-1">
                     <Text className="text-[10px] font-bold uppercase tracking-wider text-zinc-500 group-hover:text-brand-500 transition-colors">
                       Mais Links
                     </Text>
@@ -140,10 +179,10 @@ export function ContactSection() {
                   </VStack>
                 </HStack>
 
-                <Badge className="bg-brand-500 text-black hover:bg-brand-600 font-bold text-[10px] uppercase tracking-wider px-2 py-1">
+                <Badge className="bg-brand-500 text-black hover:bg-brand-400 font-bold text-[10px] uppercase tracking-wider px-3 py-1.5 shadow-[0_0_10px_rgba(16,185,129,0.3)] relative z-10">
                   Acessar
                 </Badge>
-              </a>
+              </motion.a>
             </motion.div>
           </Grid>
         </motion.div>
