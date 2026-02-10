@@ -9,6 +9,30 @@ import { Text, Title } from '@/shadcn/components/ui/typography'
 
 const sistemas = [
   {
+    title: 'Sistema de Organiza Bus',
+    description:
+      'OrganizaBus é uma plataforma SaaS para gestão de transporte coletivo, usada por prefeituras, cooperativas e instituições.',
+    image: '/images/sistemas/organizaBus/Login.png',
+    link: '#',
+    technologies: ['Symfony', 'React', 'TypeScript', 'Chakra UI', 'JWT', 'Docker'],
+  },
+  {
+    title: 'SpaceNow',
+    description:
+      'O SpaceNow é uma plataforma web interativa que utiliza dados oficiais da NASA para transformar informações astronômicas reais.',
+    image: '/images/sistemas/spacenow/home.png',
+    link: '#',
+    technologies: [
+      'Symfony',
+      'React',
+      'TypeScript',
+      'Tailwind CSS',
+      'RabbitMQ',
+      'Three.js',
+      'Docker',
+    ],
+  },
+  {
     title: 'Sistema de Monitoramento Escolar',
     description: 'Sistema completo para monitoramento e gestão de atividades escolares',
     image: 'https://monitoramento.escolansl.com/public/assents/img/sistema/painel.png',
@@ -29,7 +53,7 @@ const jogos = [
     title: 'Biome Quest',
     description:
       'Jogo educativo onde um robô percorre diferentes biomas resolvendo problemas ambientais.',
-    image: '/images/biome-quest.png',
+    image: '/images/jogos/missao-verde/amazonia.png',
     link: 'https://gd.games/oldgabriel/biome-quest',
     technologies: ['JavaScript', 'GDevelop', 'Game Design'],
   },
