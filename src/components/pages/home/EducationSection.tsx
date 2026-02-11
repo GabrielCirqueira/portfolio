@@ -5,6 +5,7 @@ import { Badge } from '@/shadcn/components/ui/badge'
 import { Icon } from '@/shadcn/components/ui/icon'
 import { Box, Container, Grid, HStack } from '@/shadcn/components/ui/layout'
 import { Text, Title } from '@/shadcn/components/ui/typography'
+import { useIsLowPerformance } from '@/utils/deviceDetection'
 
 const container = {
   hidden: { opacity: 0 },
@@ -73,6 +74,8 @@ const experiencias = [
 ]
 
 export const EducationSection = memo(() => {
+  const isLowPerf = useIsLowPerformance()
+
   return (
     <Box id="formacao" className="py-24 bg-black relative font-sans overflow-hidden">
       <Box className="absolute inset-0 bg-zinc-950/50" />
@@ -85,7 +88,6 @@ export const EducationSection = memo(() => {
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
           className="text-center mb-20"
-          style={{ willChange: 'transform, opacity' }}
         >
           <Badge
             variant="outline"
@@ -114,17 +116,16 @@ export const EducationSection = memo(() => {
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0 }}
             className="relative"
-            style={{ willChange: 'transform, opacity' }}
           >
             <Box className="absolute inset-0 bg-gradient-to-b from-brand-500/5 to-transparent rounded-xl pointer-events-none" />
             <Box
-              className="
+              className={`
                 border border-brand-500/20 rounded-xl p-8
-                bg-black/40 backdrop-blur-md h-full
+                ${isLowPerf ? 'bg-black/80' : 'bg-black/40 backdrop-blur-md'} h-full
                 hover:border-brand-500/40 transition-all duration-300
                 hover:shadow-[0_0_20px_var(--tw-shadow-color)]
                 hover:shadow-brand-500/5
-              "
+              `}
             >
               <HStack className="items-center mb-8 gap-4 border-b border-brand-500/10 pb-4">
                 <Box className="p-2 bg-brand-500/10 rounded-lg">
@@ -182,17 +183,16 @@ export const EducationSection = memo(() => {
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.2 }}
             className="md:-mt-8 relative"
-            style={{ willChange: 'transform, opacity' }}
           >
             <Box className="absolute inset-0 bg-gradient-to-b from-brand-500/5 to-transparent rounded-xl pointer-events-none" />
             <Box
-              className="
+              className={`
                 border border-brand-500/20 rounded-xl p-8
-                bg-zinc-900/40 backdrop-blur-md h-full
+                ${isLowPerf ? 'bg-zinc-900/80' : 'bg-zinc-900/40 backdrop-blur-md'} h-full
                 hover:border-brand-500/40 transition-all duration-300
                 hover:shadow-[0_0_25px_var(--tw-shadow-color)] hover:shadow-brand-500/10
                 hover:-translate-y-2 transform
-              "
+              `}
             >
               <HStack className="items-center mb-8 gap-4 border-b border-brand-500/10 pb-4">
                 <Box className="p-2 bg-brand-500/10 rounded-lg">
@@ -251,17 +251,16 @@ export const EducationSection = memo(() => {
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.1 }}
             className="relative"
-            style={{ willChange: 'transform, opacity' }}
           >
             <Box className="absolute inset-0 bg-gradient-to-b from-brand-500/5 to-transparent rounded-xl pointer-events-none" />
             <Box
-              className="
+              className={`
                 border border-brand-500/20 rounded-xl p-8
-                bg-black/40 backdrop-blur-md h-full
+                ${isLowPerf ? 'bg-black/80' : 'bg-black/40 backdrop-blur-md'} h-full
                 hover:border-brand-500/40 transition-all duration-300
                 hover:shadow-[0_0_20px_var(--tw-shadow-color)]
                 hover:shadow-brand-500/5
-              "
+              `}
             >
               <HStack className="items-center mb-8 gap-4 border-b border-brand-500/10 pb-4">
                 <Box className="p-2 bg-brand-500/10 rounded-lg">
@@ -317,7 +316,6 @@ export const EducationSection = memo(() => {
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
           className="mt-20 max-w-3xl mx-auto text-center"
-          style={{ willChange: 'transform, opacity' }}
         >
           <Badge
             className="

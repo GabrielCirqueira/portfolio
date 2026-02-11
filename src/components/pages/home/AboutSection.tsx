@@ -6,6 +6,7 @@ import { Card } from '@/shadcn/components/ui/card'
 import { Icon } from '@/shadcn/components/ui/icon'
 import { Box, Container, Grid, HStack, VStack } from '@/shadcn/components/ui/layout'
 import { Text, Title } from '@/shadcn/components/ui/typography'
+import { useIsLowPerformance } from '@/utils/deviceDetection'
 
 const container = {
   hidden: { opacity: 0 },
@@ -47,21 +48,28 @@ const aboutCards = [
 ]
 
 export const AboutSection = memo(() => {
+  const isLowPerf = useIsLowPerformance()
+
   return (
     <Box id="sobre" className="py-24 relative font-sans bg-zinc-950/30 overflow-hidden">
       <Box className="absolute inset-0 bg-dotted-pattern opacity-5 pointer-events-none" />
 
       <motion.div
-        animate={{
-          scale: [1, 1.2, 1],
-          opacity: [0.1, 0.2, 0.1],
-          y: [0, -30, 0],
-        }}
+        animate={
+          isLowPerf
+            ? {}
+            : {
+                scale: [1, 1.2, 1],
+                opacity: [0.1, 0.2, 0.1],
+                y: [0, -30, 0],
+              }
+        }
         transition={{ duration: 10, repeat: Infinity, ease: 'easeInOut' }}
-        style={{ willChange: 'transform, opacity' }}
         className="absolute top-1/2 left-0 w-[500px] h-[500px] -translate-y-1/2 -translate-x-1/2 pointer-events-none"
       >
-        <div className="w-full h-full bg-brand-500/5 rounded-full blur-[120px]" />
+        <div
+          className={`w-full h-full bg-brand-500/5 rounded-full ${isLowPerf ? 'blur-[60px]' : 'blur-[120px]'}`}
+        />
       </motion.div>
 
       <Container size="xl" className="relative z-10 px-4">
@@ -71,7 +79,6 @@ export const AboutSection = memo(() => {
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
           className="text-center mb-16"
-          style={{ willChange: 'transform, opacity' }}
         >
           <Badge
             variant="outline"
@@ -97,7 +104,6 @@ export const AboutSection = memo(() => {
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
             className="flex justify-center"
-            style={{ willChange: 'transform, opacity' }}
           >
             <Box className="relative w-full max-w-sm aspect-[3/4] rounded-2xl overflow-hidden border border-zinc-800 bg-zinc-900 shadow-2xl group">
               <div className="absolute inset-0 bg-brand-500/10 mix-blend-overlay opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-10 pointer-events-none" />
@@ -152,21 +158,16 @@ export const AboutSection = memo(() => {
 
             <Grid className="grid-cols-1 sm:grid-cols-2 gap-5">
               {aboutCards.map((card) => (
-                <motion.div
-                  key={card.title}
-                  variants={item}
-                  className="h-full"
-                  style={{ willChange: 'transform, opacity' }}
-                >
+                <motion.div key={card.title} variants={item} className="h-full">
                   <Card
-                    className="
-                      bg-zinc-900/40 border border-zinc-800 p-6
+                    className={`
+                      ${isLowPerf ? 'bg-zinc-900/80' : 'bg-zinc-900/40 backdrop-blur-sm'} border border-zinc-800 p-6
                       hover:border-brand-500/30 transition-all
                       duration-300 group h-full
                       hover:shadow-[0_0_20px_var(--tw-shadow-color)]
                       hover:shadow-brand-500/10 hover:-translate-y-1
-                      backdrop-blur-sm relative overflow-hidden
-                    "
+                      relative overflow-hidden
+                    `}
                   >
                     <Box className="absolute inset-0 bg-gradient-to-br from-brand-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
                     <HStack className="items-start gap-4 relative z-10">
@@ -202,7 +203,6 @@ export const AboutSection = memo(() => {
           viewport={{ once: true }}
           transition={{ duration: 0.5, delay: 0.2 }}
           className="mt-24 flex justify-center"
-          style={{ willChange: 'transform, opacity' }}
         >
           <Box className="max-w-2xl text-center border-t border-white/5 pt-10 relative">
             <Box className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 w-20 h-1 bg-brand-500 rounded-full blur-[1px]" />

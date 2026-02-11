@@ -14,11 +14,16 @@ interface ProjetoModalProps {
   projeto: Projeto
 }
 
+function formatarData(data: string): string {
+  const [ano, mes, dia] = data.split('-')
+  return `${dia}/${mes}/${ano}`
+}
+
 function formatarPeriodo(dataInicio: string, dataFim?: string): string {
   if (!dataFim) {
-    return `${dataInicio} à Presente`
+    return `${formatarData(dataInicio)} à Presente`
   }
-  return `${dataInicio} à ${dataFim}`
+  return `${formatarData(dataInicio)} à ${formatarData(dataFim)}`
 }
 
 export function ProjetoModal({ isOpen, onClose, projeto }: ProjetoModalProps) {
@@ -52,7 +57,7 @@ export function ProjetoModal({ isOpen, onClose, projeto }: ProjetoModalProps) {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.2 }}
-            className="fixed inset-0 z-[100] bg-black/70 backdrop-blur-sm"
+            className="fixed inset-0 z-[100] bg-black/80"
             onClick={onClose}
           />
 
@@ -68,7 +73,7 @@ export function ProjetoModal({ isOpen, onClose, projeto }: ProjetoModalProps) {
                 <Box className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,_var(--tw-gradient-stops))] from-brand-500/5 via-transparent to-transparent pointer-events-none z-0" />
                 <Box className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-brand-500/50 to-transparent z-0" />
 
-                <Box className="relative z-10 bg-gradient-to-br from-zinc-900/90 to-zinc-950/90 backdrop-blur-xl border-b border-zinc-800 p-4 md:p-5 flex-shrink-0">
+                <Box className="relative z-10 bg-gradient-to-br from-zinc-900/95 to-zinc-950/95 border-b border-zinc-800 p-4 md:p-5 flex-shrink-0">
                   <HStack className="justify-between items-start gap-3">
                     <VStack className="gap-2 flex-1 min-w-0">
                       <HStack className="items-center gap-2 flex-wrap">
@@ -117,9 +122,9 @@ export function ProjetoModal({ isOpen, onClose, projeto }: ProjetoModalProps) {
 
                           <Button
                             onClick={() => setImagemExpandida(projeto.imagens[imagemSelecionada])}
-                            className="absolute top-2 right-2 z-[3] opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-black/80 border border-zinc-700 hover:border-brand-500 hover:bg-brand-600 hover:text-black text-white rounded-lg w-8 h-8 p-0 flex items-center justify-center backdrop-blur-md"
+                            className="absolute top-2 right-2 z-[3] bg-zinc-900/90 border border-brand-500/30 text-brand-400 hover:bg-brand-500 hover:text-black hover:border-brand-500 transition-all duration-300 rounded-lg w-10 h-10 p-0 flex items-center justify-center backdrop-blur-md shadow-lg shadow-brand-500/10 hover:shadow-brand-500/40"
                           >
-                            <Icon icon={ImageIcon} className="w-4 h-4" />
+                            <Icon icon={ImageIcon} className="w-5 h-5" />
                           </Button>
                         </Box>
 
@@ -209,16 +214,29 @@ export function ProjetoModal({ isOpen, onClose, projeto }: ProjetoModalProps) {
                     </VStack>
 
                     {projeto.link && (
-                      <Box className="pb-2">
-                        <a href={projeto.link} target="_blank" className="block w-full">
-                          <Button className="w-full bg-gradient-to-r from-zinc-900 to-zinc-950 border border-zinc-700 hover:border-brand-500 hover:from-brand-600 hover:to-brand-500 hover:text-black text-white font-bold font-mono text-xs md:text-sm uppercase tracking-widest h-11 md:h-12 transition-all duration-300 rounded-lg relative overflow-hidden group shadow-lg hover:shadow-brand-500/30">
-                            <Box className="absolute inset-0 bg-gradient-to-r from-brand-500/0 via-brand-400/20 to-brand-500/0 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700" />
-                            <span className="relative z-10 flex items-center justify-center gap-2">
-                              <Icon icon={ExternalLink} className="w-4 h-4" />
-                              {projeto.tipo === 'jogo' ? 'Jogar Agora' : 'Acessar Projeto'}
-                            </span>
-                          </Button>
-                        </a>
+                      <Box className="pb-2 w-full">
+                        <motion.a
+                          href={projeto.link}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          whileHover={{ scale: 1.02 }}
+                          whileTap={{ scale: 0.98 }}
+                          className="
+                            w-full px-6 py-3 border border-brand-500/30
+                            bg-brand-500/5 text-brand-400 font-bold
+                            uppercase tracking-widest hover:bg-brand-500
+                            hover:text-black hover:border-brand-500
+                            transition-all duration-300 rounded text-sm
+                            shadow-[0_0_15px_var(--tw-shadow-color)]
+                            shadow-brand-500/10
+                            hover:shadow-[0_0_25px_var(--tw-shadow-color)]
+                            hover:shadow-brand-500/40
+                            flex items-center justify-center gap-2
+                          "
+                        >
+                          <Icon icon={ExternalLink} className="w-4 h-4" />
+                          {projeto.tipo === 'jogo' ? 'Jogar Agora' : 'Acessar Projeto'}
+                        </motion.a>
                       </Box>
                     )}
                   </VStack>

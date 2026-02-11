@@ -29,11 +29,16 @@ const itemVariants = {
   },
 }
 
+function formatarData(data: string): string {
+  const [ano, mes, dia] = data.split('-')
+  return `${dia}/${mes}/${ano}`
+}
+
 function formatarPeriodo(dataInicio: string, dataFim?: string): string {
   if (!dataFim) {
-    return `${dataInicio} à Presente`
+    return `${formatarData(dataInicio)} à Presente`
   }
-  return `${dataInicio} à ${dataFim}`
+  return `${formatarData(dataInicio)} à ${formatarData(dataFim)}`
 }
 
 interface CardProjetoProps {
@@ -42,11 +47,7 @@ interface CardProjetoProps {
 }
 
 const CardProjeto = memo(({ projeto, onAbrirModal }: CardProjetoProps) => (
-  <motion.div
-    variants={itemVariants}
-    className="h-full"
-    style={{ willChange: 'transform, opacity' }}
-  >
+  <motion.div variants={itemVariants} className="h-full">
     <Box
       className="
         card-project bg-zinc-950 border
@@ -57,7 +58,7 @@ const CardProjeto = memo(({ projeto, onAbrirModal }: CardProjetoProps) => (
       <Box className="block relative aspect-video w-full overflow-hidden border-b border-zinc-800">
         <Box
           className="
-            absolute inset-0 bg-brand-900/20 z-10
+            absolute inset-0 bg-brand-900/10 z-10
             opacity-0 group-hover:opacity-100
             transition-opacity duration-500
             pointer-events-none mix-blend-color
@@ -134,22 +135,26 @@ const CardProjeto = memo(({ projeto, onAbrirModal }: CardProjetoProps) => (
             )}
           </HStack>
 
-          <Button
-            onClick={() => onAbrirModal(projeto.id)}
-            className="
-              w-full bg-zinc-900 border border-zinc-700
-              hover:border-brand-500 hover:bg-brand-600
-              hover:text-black text-white font-bold
-              font-mono text-xs uppercase tracking-widest
-              h-12 transition-all duration-300 rounded
-              relative overflow-hidden group/btn
-            "
-          >
-            <span className="relative z-10 flex items-center justify-center gap-2">
+          <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }} className="w-full">
+            <Button
+              onClick={() => onAbrirModal(projeto.id)}
+              className="
+                w-full px-6 py-6 border border-brand-500/30
+                bg-brand-500/5 text-brand-400 font-bold
+                uppercase tracking-widest hover:bg-brand-500
+                hover:text-black hover:border-brand-500
+                transition-all duration-300 rounded text-xs
+                shadow-[0_0_15px_var(--tw-shadow-color)]
+                shadow-brand-500/10
+                hover:shadow-[0_0_25px_var(--tw-shadow-color)]
+                hover:shadow-brand-500/40
+                flex items-center justify-center gap-2
+              "
+            >
               <Icon icon={Info} className="w-4 h-4" />
               Ver Detalhes
-            </span>
-          </Button>
+            </Button>
+          </motion.div>
         </VStack>
       </VStack>
     </Box>
@@ -178,7 +183,6 @@ export const ProjectsSection = memo(() => {
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
-            style={{ willChange: 'transform, opacity' }}
           >
             <Badge
               variant="outline"
@@ -199,7 +203,6 @@ export const ProjectsSection = memo(() => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.2 }}
-            style={{ willChange: 'transform, opacity' }}
           >
             <Title className="text-4xl md:text-5xl font-bold uppercase tracking-tight font-heading">
               Projetos <span className="text-gradient">Em Destaque</span>
@@ -215,7 +218,6 @@ export const ProjectsSection = memo(() => {
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               className="flex items-center gap-4 mb-12"
-              style={{ willChange: 'transform, opacity' }}
             >
               <Box
                 className="
@@ -252,7 +254,6 @@ export const ProjectsSection = memo(() => {
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               className="flex items-center gap-4 mb-12"
-              style={{ willChange: 'transform, opacity' }}
             >
               <Box
                 className="

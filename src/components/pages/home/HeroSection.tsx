@@ -8,14 +8,17 @@ import { Icon } from '@/shadcn/components/ui/icon'
 import { Box, Container, VStack } from '@/shadcn/components/ui/layout'
 import { Link } from '@/shadcn/components/ui/link'
 import { Text } from '@/shadcn/components/ui/typography'
+import { useIsLowPerformance } from '@/utils/deviceDetection'
 
 export const HeroSection = memo(() => {
   const [loaded, setLoaded] = useState(false)
   const containerRef = useRef<HTMLDivElement>(null)
+  const isLowPerf = useIsLowPerformance()
   const { scrollY } = useScroll()
 
-  const y1 = useTransform(scrollY, [0, 500], [0, 200])
-  const y2 = useTransform(scrollY, [0, 500], [0, -150])
+  // Desabilita parallax em dispositivos de baixa performance
+  const y1 = useTransform(scrollY, [0, 500], isLowPerf ? [0, 0] : [0, 200])
+  const y2 = useTransform(scrollY, [0, 500], isLowPerf ? [0, 0] : [0, -150])
 
   useEffect(() => {
     setLoaded(true)
@@ -30,38 +33,48 @@ export const HeroSection = memo(() => {
       <Box className="absolute inset-0 hero-noise" />
 
       <motion.div
-        style={{ y: y1, willChange: 'transform' }}
+        style={{ y: y1 }}
         className="absolute top-0 right-0 w-full h-full overflow-hidden pointer-events-none z-0"
       >
         <motion.div
-          animate={{
-            scale: [1, 1.2, 1],
-            opacity: [0.15, 0.25, 0.15],
-            rotate: [0, 45, 0],
-          }}
+          animate={
+            isLowPerf
+              ? {}
+              : {
+                  scale: [1, 1.2, 1],
+                  opacity: [0.15, 0.25, 0.15],
+                  rotate: [0, 45, 0],
+                }
+          }
           transition={{ duration: 15, repeat: Infinity, ease: 'easeInOut' }}
-          style={{ willChange: 'transform, opacity' }}
           className="absolute top-[-10%] right-[-5%] w-[600px] h-[600px]"
         >
-          <div className="w-full h-full bg-brand-500/20 rounded-full blur-[120px]" />
+          <div
+            className={`w-full h-full bg-brand-500/20 rounded-full ${isLowPerf ? 'blur-[60px]' : 'blur-[120px]'}`}
+          />
         </motion.div>
       </motion.div>
 
       <motion.div
-        style={{ y: y2, willChange: 'transform' }}
+        style={{ y: y2 }}
         className="absolute bottom-0 left-0 w-full h-full overflow-hidden pointer-events-none z-0"
       >
         <motion.div
-          animate={{
-            scale: [1, 1.3, 1],
-            opacity: [0.1, 0.2, 0.1],
-            x: [0, 30, 0],
-          }}
+          animate={
+            isLowPerf
+              ? {}
+              : {
+                  scale: [1, 1.3, 1],
+                  opacity: [0.1, 0.2, 0.1],
+                  x: [0, 30, 0],
+                }
+          }
           transition={{ duration: 18, repeat: Infinity, ease: 'easeInOut', delay: 2 }}
-          style={{ willChange: 'transform, opacity' }}
           className="absolute bottom-[-10%] left-[-10%] w-[500px] h-[500px]"
         >
-          <div className="w-full h-full bg-brand-800/20 rounded-full blur-[100px]" />
+          <div
+            className={`w-full h-full bg-brand-800/20 rounded-full ${isLowPerf ? 'blur-[50px]' : 'blur-[100px]'}`}
+          />
         </motion.div>
       </motion.div>
 
@@ -80,7 +93,6 @@ export const HeroSection = memo(() => {
             initial={{ opacity: 0, scale: 0.9, y: 20 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             transition={{ duration: 0.6, ease: 'easeOut' }}
-            style={{ willChange: 'transform, opacity' }}
             className="mb-8"
           >
             <Badge
@@ -103,7 +115,6 @@ export const HeroSection = memo(() => {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, ease: 'easeOut', delay: 0.2 }}
-            style={{ willChange: 'transform, opacity' }}
             className="text-5xl md:text-7xl lg:text-9xl font-bold mb-6 leading-tight tracking-tighter relative z-20"
           >
             <span className="block text-white mb-2 text-4xl md:text-6xl lg:text-7xl font-medium tracking-tight">
@@ -153,7 +164,6 @@ export const HeroSection = memo(() => {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.8 }}
-            style={{ willChange: 'transform, opacity' }}
             className="flex flex-col sm:flex-row gap-6 mb-32 w-full justify-center px-4 max-w-lg mx-auto sm:max-w-none"
           >
             <Link href="#projetos" className="w-full sm:w-auto group">
