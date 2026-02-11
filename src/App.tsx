@@ -1,11 +1,14 @@
 import { ThemeProvider } from '@app/contexts'
 import { MainLayout, RootLayout } from '@app/layouts'
+import LogRocket from 'logrocket'
 import {
   createBrowserRouter,
   createRoutesFromElements,
   Route,
   RouterProvider,
 } from 'react-router-dom'
+
+LogRocket.init('8cvlis/portifolio')
 
 const router = createBrowserRouter(
   createRoutesFromElements(
