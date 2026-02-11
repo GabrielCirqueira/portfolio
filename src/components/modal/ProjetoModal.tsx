@@ -61,26 +61,26 @@ export function ProjetoModal({ isOpen, onClose, projeto }: ProjetoModalProps) {
             onClick={onClose}
           />
 
-          <Box className="fixed inset-0 z-[101] flex items-center justify-center p-0 md:p-4 pointer-events-none">
+          <Box className="fixed inset-0 z-[101] flex items-center justify-center p-0 sm:p-4 md:p-6 pointer-events-none">
             <motion.div
               initial={{ opacity: 0, scale: 0.95, y: 20 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.95, y: 20 }}
               transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
-              className="relative w-full h-full md:h-auto md:max-w-6xl md:max-h-[90vh] pointer-events-auto"
+              className="relative w-full h-full sm:h-auto sm:max-w-[90vw] md:max-w-4xl lg:max-w-5xl sm:max-h-[85vh] md:max-h-[88vh] pointer-events-auto"
             >
-              <Box className="relative bg-zinc-950 border-0 md:border md:border-zinc-800 md:rounded-xl shadow-2xl shadow-brand-500/10 h-full md:h-auto md:max-h-[90vh] flex flex-col overflow-hidden">
+              <Box className="relative bg-zinc-950 border-0 sm:border sm:border-zinc-800 sm:rounded-xl md:rounded-2xl shadow-2xl shadow-brand-500/10 h-full sm:h-auto sm:max-h-[85vh] md:max-h-[88vh] flex flex-col overflow-hidden">
                 <Box className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,_var(--tw-gradient-stops))] from-brand-500/5 via-transparent to-transparent pointer-events-none z-0" />
                 <Box className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-brand-500/50 to-transparent z-0" />
 
-                <Box className="relative z-10 bg-gradient-to-br from-zinc-900/95 to-zinc-950/95 border-b border-zinc-800 p-4 md:p-5 flex-shrink-0">
+                <Box className="relative z-10 bg-gradient-to-br from-zinc-900/95 to-zinc-950/95 border-b border-zinc-800 p-3 sm:p-4 md:p-5 flex-shrink-0">
                   <HStack className="justify-between items-start gap-3">
                     <VStack className="gap-2 flex-1 min-w-0">
                       <HStack className="items-center gap-2 flex-wrap">
                         <Box className="p-1.5 bg-brand-500/10 border border-brand-500/20 rounded-lg flex-shrink-0">
                           <Icon icon={Sparkles} className="w-4 h-4 text-brand-400" />
                         </Box>
-                        <Title className="text-base md:text-xl lg:text-2xl font-bold uppercase tracking-tight font-heading text-white">
+                        <Title className="text-sm sm:text-base md:text-xl lg:text-2xl font-bold uppercase tracking-tight font-heading text-white leading-tight">
                           {projeto.titulo}
                         </Title>
                       </HStack>
@@ -107,17 +107,17 @@ export function ProjetoModal({ isOpen, onClose, projeto }: ProjetoModalProps) {
                   </HStack>
                 </Box>
 
-                <Box className="relative z-10 overflow-y-auto overflow-x-hidden custom-scrollbar flex-1">
-                  <VStack className="p-4 md:p-6 gap-6">
+                <Box className="relative z-10 overflow-y-auto overflow-x-hidden custom-scrollbar flex-1 overscroll-behavior-contain">
+                  <VStack className="p-3 sm:p-4 md:p-6 gap-4 sm:gap-5 md:gap-6">
                     <Box className="relative w-full">
                       <Box className="relative w-full overflow-hidden rounded-lg border border-zinc-800 bg-gradient-to-br from-zinc-900 to-zinc-950 shadow-lg group">
                         <Box className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent pointer-events-none z-[1]" />
 
-                        <Box className="relative w-full min-h-[250px] md:min-h-[300px] lg:min-h-[350px] flex items-center justify-center p-3">
+                        <Box className="relative w-full min-h-[180px] sm:min-h-[220px] md:min-h-[280px] lg:min-h-[350px] flex items-center justify-center p-2 sm:p-3">
                           <img
                             src={projeto.imagens[imagemSelecionada]}
                             alt={`${projeto.titulo} - ${imagemSelecionada + 1}`}
-                            className="max-w-full max-h-[250px] md:max-h-[300px] lg:max-h-[400px] object-contain rounded relative z-[2]"
+                            className="max-w-full max-h-[180px] sm:max-h-[220px] md:max-h-[280px] lg:max-h-[400px] object-contain rounded relative z-[2]"
                           />
 
                           <Button
@@ -175,7 +175,7 @@ export function ProjetoModal({ isOpen, onClose, projeto }: ProjetoModalProps) {
                         <Box className="p-1.5 bg-brand-500/10 border border-brand-500/20 rounded-lg">
                           <Icon icon={Code2} className="w-4 h-4 text-brand-400" />
                         </Box>
-                        <Title className="text-base md:text-lg font-bold uppercase tracking-wide font-heading text-white">
+                        <Title className="text-sm sm:text-base md:text-lg font-bold uppercase tracking-wide font-heading text-white">
                           Sobre o Projeto
                         </Title>
                         <Box className="h-px bg-gradient-to-r from-brand-500/50 to-transparent flex-1" />
@@ -186,7 +186,7 @@ export function ProjetoModal({ isOpen, onClose, projeto }: ProjetoModalProps) {
                         {projeto.descricaoCompleta.map((paragrafo, index) => (
                           <Text
                             key={index}
-                            className="text-gray-300 text-xs md:text-sm leading-relaxed text-justify"
+                            className="text-gray-300 text-xs sm:text-sm leading-relaxed"
                           >
                             {paragrafo}
                           </Text>
@@ -197,7 +197,7 @@ export function ProjetoModal({ isOpen, onClose, projeto }: ProjetoModalProps) {
                     <VStack className="gap-3">
                       <HStack className="items-center gap-2">
                         <Box className="w-0.5 h-5 bg-gradient-to-b from-brand-500 to-brand-400 rounded-full" />
-                        <Title className="text-sm md:text-base font-bold uppercase tracking-wide font-heading text-white">
+                        <Title className="text-xs sm:text-sm md:text-base font-bold uppercase tracking-wide font-heading text-white">
                           Tecnologias Utilizadas
                         </Title>
                       </HStack>
@@ -222,11 +222,11 @@ export function ProjetoModal({ isOpen, onClose, projeto }: ProjetoModalProps) {
                           whileHover={{ scale: 1.02 }}
                           whileTap={{ scale: 0.98 }}
                           className="
-                            w-full px-6 py-3 border border-brand-500/30
+                            w-full px-4 sm:px-5 md:px-6 py-2.5 sm:py-3 border border-brand-500/30
                             bg-brand-500/5 text-brand-400 font-bold
                             uppercase tracking-widest hover:bg-brand-500
                             hover:text-black hover:border-brand-500
-                            transition-all duration-300 rounded text-sm
+                            transition-all duration-300 rounded text-xs sm:text-sm
                             shadow-[0_0_15px_var(--tw-shadow-color)]
                             shadow-brand-500/10
                             hover:shadow-[0_0_25px_var(--tw-shadow-color)]
@@ -234,7 +234,7 @@ export function ProjetoModal({ isOpen, onClose, projeto }: ProjetoModalProps) {
                             flex items-center justify-center gap-2
                           "
                         >
-                          <Icon icon={ExternalLink} className="w-4 h-4" />
+                          <Icon icon={ExternalLink} className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
                           {projeto.tipo === 'jogo' ? 'Jogar Agora' : 'Acessar Projeto'}
                         </motion.a>
                       </Box>

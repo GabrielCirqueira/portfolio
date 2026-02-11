@@ -28,7 +28,7 @@ export const HeroSection = memo(() => {
     <Box
       id="inicio"
       ref={containerRef}
-      className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20 pb-24 font-sans selection:bg-brand-500/30"
+      className="relative min-h-screen flex items-center justify-center overflow-hidden pt-14 sm:pt-16 md:pt-20 pb-12 sm:pb-16 md:pb-24 px-3 sm:px-4 font-sans selection:bg-brand-500/30"
     >
       <Box className="absolute inset-0 hero-noise" />
 
@@ -93,7 +93,7 @@ export const HeroSection = memo(() => {
             initial={{ opacity: 0, scale: 0.9, y: 20 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             transition={{ duration: 0.6, ease: 'easeOut' }}
-            className="mb-8"
+            className="mb-6 sm:mb-7 md:mb-8"
           >
             <Badge
               className="
@@ -103,7 +103,7 @@ export const HeroSection = memo(() => {
                 md:text-sm uppercase tracking-widest
                 font-bold shadow-[0_0_20px_var(--tw-shadow-color)]
                 shadow-brand-500/15 hover:bg-brand-500/20
-                transition-colors cursor-default
+                transition-colors cursor-default text-[10px] sm:text-xs md:text-sm
               "
             >
               <Icon icon={Terminal} className="w-3.5 h-3.5 mr-2 text-brand-400" />
@@ -115,9 +115,9 @@ export const HeroSection = memo(() => {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, ease: 'easeOut', delay: 0.2 }}
-            className="text-5xl md:text-7xl lg:text-9xl font-bold mb-6 leading-tight tracking-tighter relative z-20"
+            className="text-2xl sm:text-3xl md:text-5xl lg:text-6xl xl:text-8xl font-bold mb-3 sm:mb-4 md:mb-6 leading-none tracking-tighter relative z-20 px-4"
           >
-            <span className="block text-white mb-2 text-4xl md:text-6xl lg:text-7xl font-medium tracking-tight">
+            <span className="block text-white mb-1 sm:mb-2 text-xl sm:text-2xl md:text-3xl lg:text-5xl xl:text-6xl font-medium tracking-tight">
               Olá, sou
             </span>
             <span className="text-gradient font-black relative inline-block filter drop-shadow-sm">
@@ -135,7 +135,7 @@ export const HeroSection = memo(() => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.5, delay: 0.6 }}
-            className="text-xl md:text-3xl text-gray-400 mb-12 h-10 font-light flex items-center justify-center"
+            className="text-base sm:text-lg md:text-xl lg:text-3xl text-gray-400 mb-6 sm:mb-8 md:mb-12 h-7 sm:h-8 md:h-10 font-light flex items-center justify-center"
           >
             {loaded && (
               <TypeAnimation
@@ -164,14 +164,14 @@ export const HeroSection = memo(() => {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.8 }}
-            className="flex flex-col sm:flex-row gap-6 mb-32 w-full justify-center px-4 max-w-lg mx-auto sm:max-w-none"
+            className="flex flex-col sm:flex-row gap-3 sm:gap-4 md:gap-6 mb-20 sm:mb-24 md:mb-28 lg:mb-32 w-full justify-center px-3 sm:px-4 max-w-lg mx-auto sm:max-w-none"
           >
             <Link href="#projetos" className="w-full sm:w-auto group">
               <Button
                 type="button"
                 className="
-                  w-full sm:w-auto rounded px-8 py-6
-                  bg-brand-600 hover:bg-brand-500 text-black
+                  w-full sm:w-auto rounded px-6 sm:px-7 md:px-8 py-4 sm:py-5 md:py-6
+                  bg-brand-600 hover:bg-brand-500 text-black text-xs sm:text-sm md:text-base
                   font-bold uppercase tracking-widest
                   shadow-[0_0_20px_var(--tw-shadow-color)]
                   shadow-brand-500/30
@@ -202,8 +202,8 @@ export const HeroSection = memo(() => {
                 type="button"
                 variant="outline"
                 className="
-                  w-full sm:w-auto rounded px-8 py-6
-                  font-bold border-2 border-zinc-700
+                  w-full sm:w-auto rounded px-6 sm:px-7 md:px-8 py-4 sm:py-5 md:py-6
+                  font-bold border-2 border-zinc-700 text-xs sm:text-sm md:text-base
                   text-zinc-300 hover:text-white
                   hover:border-brand-500 hover:bg-brand-500/10
                   uppercase tracking-widest transition-all

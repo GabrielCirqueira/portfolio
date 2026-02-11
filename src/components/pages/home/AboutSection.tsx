@@ -51,7 +51,10 @@ export const AboutSection = memo(() => {
   const isLowPerf = useIsLowPerformance()
 
   return (
-    <Box id="sobre" className="py-24 relative font-sans bg-zinc-950/30 overflow-hidden">
+    <Box
+      id="sobre"
+      className="py-16 sm:py-20 md:py-24 relative font-sans bg-zinc-950/30 overflow-hidden"
+    >
       <Box className="absolute inset-0 bg-dotted-pattern opacity-5 pointer-events-none" />
 
       <motion.div
@@ -78,7 +81,7 @@ export const AboutSection = memo(() => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
-          className="text-center mb-16"
+          className="text-center mb-12 sm:mb-14 md:mb-16"
         >
           <Badge
             variant="outline"
@@ -92,20 +95,20 @@ export const AboutSection = memo(() => {
           >
             Sobre Mim
           </Badge>
-          <Title className="text-4xl md:text-5xl font-bold font-heading uppercase tracking-wide">
+          <Title className="text-3xl sm:text-4xl md:text-5xl font-bold font-heading uppercase tracking-wide">
             Minha <span className="text-gradient">Trajetória</span>
           </Title>
         </motion.div>
 
-        <Grid className="grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+        <Grid className="grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-10 lg:gap-20 items-center">
           <motion.div
             initial={{ opacity: 0, x: -30 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
-            className="flex justify-center"
+            className="flex justify-center px-4"
           >
-            <Box className="relative w-full max-w-sm aspect-[3/4] rounded-2xl overflow-hidden border border-zinc-800 bg-zinc-900 shadow-2xl group">
+            <Box className="relative w-full max-w-[280px] sm:max-w-sm aspect-[3/4] rounded-2xl overflow-hidden border border-zinc-800 bg-zinc-900 shadow-2xl group">
               <div className="absolute inset-0 bg-brand-500/10 mix-blend-overlay opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-10 pointer-events-none" />
               <img
                 src="/images/gabriel1.png"
@@ -148,7 +151,7 @@ export const AboutSection = memo(() => {
             className="flex flex-col gap-10"
           >
             <VStack className="gap-4">
-              <Text className="text-zinc-400 text-lg leading-relaxed mb-2 text-justify lg:text-left">
+              <Text className="text-zinc-400 text-base sm:text-lg leading-relaxed mb-2">
                 Desenvolvedor Fullstack focado na criação de aplicações web modernas e escaláveis.
                 Combino conhecimento técnico sólido com uma visão prática para entregar software
                 robusto e de alto valor. Minha paixão é transformar ideias complexas em interfaces
@@ -161,7 +164,7 @@ export const AboutSection = memo(() => {
                 <motion.div key={card.title} variants={item} className="h-full">
                   <Card
                     className={`
-                      ${isLowPerf ? 'bg-zinc-900/80' : 'bg-zinc-900/40 backdrop-blur-sm'} border border-zinc-800 p-6
+                      ${isLowPerf ? 'bg-zinc-900/80' : 'bg-zinc-900/40 backdrop-blur-sm'} border border-zinc-800 p-5 sm:p-6
                       hover:border-brand-500/30 transition-all
                       duration-300 group h-full
                       hover:shadow-[0_0_20px_var(--tw-shadow-color)]

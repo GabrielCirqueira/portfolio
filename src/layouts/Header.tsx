@@ -189,21 +189,21 @@ export function Header() {
             animate="open"
             exit="closed"
             variants={menuVariants}
-            className="fixed inset-0 z-40 bg-black/95 backdrop-blur-3xl flex items-center justify-center md:hidden"
+            className="fixed inset-0 z-40 bg-black/98 backdrop-blur-xl flex flex-col md:hidden"
           >
             <Box className="absolute inset-0 bg-brand-500/5 pointer-events-none" />
-            <Box className="absolute top-0 right-0 w-64 h-64 bg-brand-500/10 rounded-full blur-[100px] pointer-events-none" />
-            <Box className="absolute bottom-0 left-0 w-64 h-64 bg-brand-800/10 rounded-full blur-[100px] pointer-events-none" />
+            <Box className="absolute top-0 right-0 w-48 h-48 bg-brand-500/10 rounded-full blur-[80px] pointer-events-none" />
+            <Box className="absolute bottom-0 left-0 w-48 h-48 bg-brand-800/10 rounded-full blur-[80px] pointer-events-none" />
 
             <Container
               size="xl"
-              className="relative z-10 w-full h-full flex flex-col justify-center"
+              className="relative z-10 w-full flex-1 flex flex-col justify-center py-20 px-6"
             >
               <motion.div
                 variants={containerVariants}
                 initial="hidden"
                 animate="show"
-                className="flex flex-col items-center space-y-8"
+                className="flex flex-col items-center space-y-4"
               >
                 {navItems.map((item) => (
                   <motion.a
@@ -211,47 +211,37 @@ export function Header() {
                     href={item.href}
                     variants={itemVariants}
                     onClick={() => setIsOpen(false)}
-                    className="group relative block text-center"
+                    className="group relative block text-center w-full py-2"
                   >
                     <Text
                       className="
-                        text-4xl md:text-5xl font-black uppercase
-                        tracking-tighter text-transparent text-outline
-                        hover:text-white transition-all duration-300
+                        text-xl font-black uppercase
+                        tracking-tight text-white
+                        hover:text-brand-400 transition-all duration-300
                         font-heading
                       "
                     >
                       {item.name}
                     </Text>
-                    <Text
-                      className="
-                        text-4xl md:text-5xl font-black uppercase
-                        tracking-tighter text-brand-500 absolute
-                        top-0 left-0 w-full h-full opacity-0
-                        group-hover:opacity-100 group-hover:blur-[2px]
-                        transition-all duration-300 pointer-events-none
-                        transform translate-y-1 scale-105
-                      "
-                    >
-                      {item.name}
-                    </Text>
+                    <Box className="absolute bottom-0 left-1/2 -translate-x-1/2 w-0 h-0.5 bg-brand-500 group-hover:w-20 transition-all duration-300" />
                   </motion.a>
                 ))}
 
-                <motion.div variants={itemVariants} className="pt-8">
+                <motion.div variants={itemVariants} className="pt-6 w-full max-w-xs">
                   <a
                     href="https://linktr.ee/gabrielCirqueira"
                     target="_blank"
                     rel="noopener noreferrer"
+                    onClick={() => setIsOpen(false)}
                     className="
-                      px-8 py-3 border border-brand-500
+                      w-full px-5 py-3 border border-brand-500
                       text-brand-500 font-bold uppercase
                       tracking-widest hover:bg-brand-500
                       hover:text-black transition-all
-                      duration-300 rounded text-sm block
+                      duration-300 rounded text-xs block text-center
                     "
                   >
-                    Ver Tudo (Linktree)
+                    Linktree
                   </a>
                 </motion.div>
               </motion.div>

@@ -23,7 +23,13 @@
   }
 
   ::-webkit-scrollbar {
-    width: 6px;
+    width: 4px;
+  }
+
+  @media (min-width: 768px) {
+    ::-webkit-scrollbar {
+      width: 6px;
+    }
   }
 
   ::-webkit-scrollbar-track {
@@ -38,8 +44,47 @@
     @apply bg-brand-500;
   }
 
+  /* Mobile-specific improvements */
+  @media (max-width: 768px) {
+    body {
+      font-size: 13px;
+      line-height: 1.5;
+    }
+
+    /* Reduzir espaçamentos globais no mobile */
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+      line-height: 1.2;
+    }
+  }
+
+  @media (max-width: 480px) {
+    body {
+      font-size: 12px;
+    }
+  }
+
   ::selection {
     @apply bg-brand-500/30 text-brand-100;
+  }
+}
+
+/* Utilidades mobile-first */
+@media (max-width: 640px) {
+  .mobile-compact {
+    padding: 0.75rem !important;
+  }
+
+  .mobile-text-sm {
+    font-size: 0.75rem !important;
+  }
+
+  .mobile-gap-sm {
+    gap: 0.5rem !important;
   }
 }
 

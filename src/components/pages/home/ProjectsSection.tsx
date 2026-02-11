@@ -84,7 +84,7 @@ const CardProjeto = memo(({ projeto, onAbrirModal }: CardProjetoProps) => (
 
       <VStack
         className="
-          p-6 md:p-8 flex-grow justify-between gap-6
+        p-4 sm:p-5 md:p-6 lg:p-8 flex-grow justify-between gap-4 sm:gap-5 md:gap-6
           relative overflow-hidden bg-zinc-950
         "
       >
@@ -93,14 +93,14 @@ const CardProjeto = memo(({ projeto, onAbrirModal }: CardProjetoProps) => (
         <VStack className="gap-3 relative z-10">
           <Title
             className="
-              text-xl md:text-2xl font-bold font-heading text-white
+              text-base sm:text-lg md:text-xl lg:text-2xl font-bold font-heading text-white
               group-hover:text-brand-400
               transition-colors uppercase tracking-wide
             "
           >
             {projeto.titulo}
           </Title>
-          <Text className="text-gray-400 text-sm leading-relaxed font-normal">
+          <Text className="text-gray-400 text-[11px] sm:text-xs md:text-sm leading-relaxed font-normal">
             {projeto.descricao}
           </Text>
         </VStack>
@@ -139,11 +139,11 @@ const CardProjeto = memo(({ projeto, onAbrirModal }: CardProjetoProps) => (
             <Button
               onClick={() => onAbrirModal(projeto.id)}
               className="
-                w-full px-6 py-6 border border-brand-500/30
+                w-full px-4 sm:px-5 md:px-6 py-4 sm:py-5 md:py-6 border border-brand-500/30
                 bg-brand-500/5 text-brand-400 font-bold
                 uppercase tracking-widest hover:bg-brand-500
                 hover:text-black hover:border-brand-500
-                transition-all duration-300 rounded text-xs
+                transition-all duration-300 rounded text-[10px] sm:text-[11px] md:text-xs
                 shadow-[0_0_15px_var(--tw-shadow-color)]
                 shadow-brand-500/10
                 hover:shadow-[0_0_25px_var(--tw-shadow-color)]
@@ -170,14 +170,17 @@ export const ProjectsSection = memo(() => {
   const projetoAtual = [...sistemas, ...jogos].find((p) => p.id === modalAberto)
 
   return (
-    <Box id="projetos" className="py-32 relative bg-black font-sans overflow-hidden">
+    <Box
+      id="projetos"
+      className="py-12 sm:py-16 md:py-20 lg:py-32 relative bg-black font-sans overflow-hidden"
+    >
       {projetoAtual && (
         <ProjetoModal isOpen={!!modalAberto} onClose={fecharModal} projeto={projetoAtual} />
       )}
       <Box className="absolute inset-0 bg-game-black opacity-50" />
       <Box className="absolute inset-0 bg-[radial-gradient(currentColor_1px,transparent_1px)] bg-[size:20px_20px] text-brand-500/40" />
       <Container size="xl" className="relative z-10 px-4">
-        <VStack className="items-center text-center gap-4 mb-24">
+        <VStack className="items-center text-center gap-3 sm:gap-4 mb-12 sm:mb-14 md:mb-16 lg:mb-24 px-3 sm:px-4">
           <motion.div
             initial={{ opacity: 0, scale: 0.5 }}
             whileInView={{ opacity: 1, scale: 1 }}
@@ -204,7 +207,7 @@ export const ProjectsSection = memo(() => {
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.2 }}
           >
-            <Title className="text-4xl md:text-5xl font-bold uppercase tracking-tight font-heading">
+            <Title className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold uppercase tracking-tight font-heading">
               Projetos <span className="text-gradient">Em Destaque</span>
             </Title>
             <Box className="w-24 h-1 bg-brand-500 mx-auto mt-6 rounded-full opacity-50" />
@@ -229,7 +232,7 @@ export const ProjectsSection = memo(() => {
               >
                 <Icon icon={Monitor} className="w-6 h-6 text-brand-500" />
               </Box>
-              <Text className="text-2xl font-bold uppercase tracking-wider font-heading text-white">
+              <Text className="text-base sm:text-lg md:text-xl lg:text-2xl font-bold uppercase tracking-wider font-heading text-white">
                 Sistemas Web
               </Text>
               <Box className="h-px bg-gradient-to-r from-brand-500/50 to-transparent flex-1 ml-6" />
@@ -240,7 +243,7 @@ export const ProjectsSection = memo(() => {
               initial="hidden"
               whileInView="visible"
               viewport={{ once: true, margin: '-100px' }}
-              className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-10"
+              className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6 md:gap-8 lg:gap-10"
             >
               {sistemas.map((projeto) => (
                 <CardProjeto key={projeto.id} projeto={projeto} onAbrirModal={abrirModal} />
@@ -265,7 +268,7 @@ export const ProjectsSection = memo(() => {
               >
                 <Icon icon={Gamepad2} className="w-6 h-6 text-brand-500" />
               </Box>
-              <Text className="text-2xl font-bold uppercase tracking-wider font-heading text-white">
+              <Text className="text-base sm:text-lg md:text-xl lg:text-2xl font-bold uppercase tracking-wider font-heading text-white">
                 Jogos Desenvolvidos
               </Text>
               <Box className="h-px bg-gradient-to-r from-brand-500/50 to-transparent flex-1 ml-6" />
@@ -276,7 +279,7 @@ export const ProjectsSection = memo(() => {
               initial="hidden"
               whileInView="visible"
               viewport={{ once: true, margin: '-100px' }}
-              className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-10"
+              className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6 md:gap-8 lg:gap-10"
             >
               {jogos.map((projeto) => (
                 <CardProjeto key={projeto.id} projeto={projeto} onAbrirModal={abrirModal} />

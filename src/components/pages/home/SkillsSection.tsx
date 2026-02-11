@@ -70,9 +70,12 @@ const itemVariants = {
 
 export const SkillsSection = memo(() => {
   return (
-    <Box id="habilidades" className="py-24 relative bg-black font-sans overflow-hidden">
+    <Box
+      id="habilidades"
+      className="py-12 sm:py-16 md:py-20 lg:py-24 relative bg-black font-sans overflow-hidden"
+    >
       <Container size="xl" className="relative z-10 px-4">
-        <VStack className="items-center text-center gap-4 mb-20">
+        <VStack className="items-center text-center gap-3 sm:gap-4 mb-10 sm:mb-12 md:mb-14 lg:mb-20 px-3 sm:px-4">
           <motion.div
             initial={{ opacity: 0, scale: 0.5 }}
             whileInView={{ opacity: 1, scale: 1 }}
@@ -99,10 +102,10 @@ export const SkillsSection = memo(() => {
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.2 }}
           >
-            <Title className="text-4xl md:text-5xl font-bold uppercase tracking-tight font-heading">
+            <Title className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold uppercase tracking-tight font-heading">
               Stack & <span className="text-gradient">Ferramentas</span>
             </Title>
-            <Text className="text-gray-400 mt-6 max-w-2xl mx-auto text-lg">
+            <Text className="text-gray-400 mt-3 sm:mt-4 md:mt-6 max-w-2xl mx-auto text-sm sm:text-base md:text-lg px-3">
               Trabalho com um conjunto de tecnologias modernas voltadas à criação de aplicações web
               performáticas, escaláveis e bem estruturadas. Busco sempre utilizar ferramentas que
               facilitem manutenção, colaboração e evolução contínua dos sistemas.
@@ -115,14 +118,14 @@ export const SkillsSection = memo(() => {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: '-50px' }}
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6"
+          className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4 md:gap-6"
         >
           {skills.map((skill) => (
             <motion.div key={skill.category} variants={itemVariants} className="h-full">
               <Box
                 className="
                   group relative h-full bg-zinc-900/40 border border-zinc-800/60 
-                  rounded-2xl p-6 overflow-hidden hover:border-brand-500/30
+                  rounded-2xl p-3 sm:p-4 md:p-5 lg:p-6 overflow-hidden hover:border-brand-500/30
                   transition-all duration-300 hover:-translate-y-1
                   hover:shadow-[0_10px_40px_-10px_rgba(0,0,0,0.5)]
                   hover:shadow-brand-500/5
@@ -139,12 +142,12 @@ export const SkillsSection = memo(() => {
                   <HStack className="justify-between items-start">
                     <Box
                       className="
-                        p-3 rounded-lg bg-zinc-950 border border-zinc-800
+                        p-2 sm:p-2.5 md:p-3 rounded-lg bg-zinc-950 border border-zinc-800
                         group-hover:border-brand-500/30 group-hover:text-brand-400
                         text-zinc-400 transition-colors duration-300
                       "
                     >
-                      <Icon icon={skill.icon} className="w-6 h-6" />
+                      <Icon icon={skill.icon} className="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6" />
                     </Box>
                     <Box
                       className="
@@ -156,10 +159,10 @@ export const SkillsSection = memo(() => {
                   </HStack>
 
                   <VStack className="gap-2">
-                    <Title className="text-lg font-bold font-heading uppercase tracking-wide text-white">
+                    <Title className="text-xs sm:text-sm md:text-base lg:text-lg font-bold font-heading uppercase tracking-wide text-white">
                       {skill.category}
                     </Title>
-                    <Text className="text-xs text-gray-400 leading-relaxed min-h-[40px]">
+                    <Text className="text-[10px] sm:text-xs leading-relaxed min-h-[30px] sm:min-h-[36px] md:min-h-[40px]">
                       {skill.description}
                     </Text>
                   </VStack>

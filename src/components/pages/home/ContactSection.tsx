@@ -57,12 +57,15 @@ const item = {
 
 export const ContactSection = memo(() => {
   return (
-    <Box id="contato" className="py-24 relative bg-black font-sans overflow-hidden">
+    <Box
+      id="contato"
+      className="py-12 sm:py-16 md:py-20 lg:py-24 relative bg-black font-sans overflow-hidden"
+    >
       <Box className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_right,_var(--tw-gradient-stops))] from-brand-900/10 via-black to-black pointer-events-none" />
       <Box className="absolute inset-0 bg-dotted-pattern opacity-10 pointer-events-none" />
 
       <Container size="xl" className="relative z-10 px-4">
-        <VStack className="items-center text-center gap-6 mb-16">
+        <VStack className="items-center text-center gap-3 sm:gap-4 md:gap-5 lg:gap-6 mb-8 sm:mb-10 md:mb-12 lg:mb-16 px-3 sm:px-4">
           <motion.div
             initial={{ opacity: 0, scale: 0.5 }}
             whileInView={{ opacity: 1, scale: 1 }}
@@ -90,7 +93,7 @@ export const ContactSection = memo(() => {
             transition={{ duration: 0.5, delay: 0.2 }}
             style={{ willChange: 'transform, opacity' }}
           >
-            <Title className="text-4xl md:text-5xl font-heading font-bold uppercase tracking-wide">
+            <Title className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-heading font-bold uppercase tracking-wide">
               Canais de <span className="text-brand-500 relative inline-block">Contato</span>
             </Title>
           </motion.div>
@@ -102,7 +105,7 @@ export const ContactSection = memo(() => {
           whileInView="show"
           viewport={{ once: true }}
         >
-          <Grid className="grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <Grid className="grid-cols-2 md:grid-cols-3 gap-3 sm:gap-4 md:gap-6">
             {contactItems.map((contact, index) => (
               <motion.div
                 key={index}
@@ -114,7 +117,7 @@ export const ContactSection = memo(() => {
                   href={contact.href || undefined}
                   target={contact.href ? '_blank' : undefined}
                   rel={contact.href ? 'noopener noreferrer' : undefined}
-                  className={`group flex items-center gap-5 bg-zinc-900/40 border border-zinc-800 p-6 rounded-xl transition-all duration-300 h-full backdrop-blur-sm relative overflow-hidden ${
+                  className={`group flex items-center gap-3 sm:gap-4 md:gap-5 bg-zinc-900/40 border border-zinc-800 p-3 sm:p-4 md:p-5 lg:p-6 rounded-xl transition-all duration-300 h-full backdrop-blur-sm relative overflow-hidden ${
                     contact.highlight
                       ? 'border-brand-500/50 bg-brand-500/10 shadow-[0_0_30px_var(--tw-shadow-color)] shadow-brand-500/15'
                       : 'hover:border-brand-500/40 hover:bg-zinc-900/60 hover:shadow-[0_0_20px_var(--tw-shadow-color)] hover:shadow-brand-500/10'

@@ -77,7 +77,10 @@ export const EducationSection = memo(() => {
   const isLowPerf = useIsLowPerformance()
 
   return (
-    <Box id="formacao" className="py-24 bg-black relative font-sans overflow-hidden">
+    <Box
+      id="formacao"
+      className="py-16 sm:py-20 md:py-24 bg-black relative font-sans overflow-hidden"
+    >
       <Box className="absolute inset-0 bg-zinc-950/50" />
       <Box className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px]" />
 
@@ -87,7 +90,7 @@ export const EducationSection = memo(() => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
-          className="text-center mb-20"
+          className="text-center mb-14 sm:mb-16 md:mb-20"
         >
           <Badge
             variant="outline"
@@ -100,15 +103,15 @@ export const EducationSection = memo(() => {
           >
             Carreira
           </Badge>
-          <Title className="text-3xl md:text-5xl font-bold font-heading mb-4 uppercase tracking-wide">
+          <Title className="text-2xl sm:text-3xl md:text-5xl font-bold font-heading mb-3 sm:mb-4 uppercase tracking-wide">
             Formação e <span className="text-gradient">Experiência</span>
           </Title>
-          <Text className="text-gray-400 max-w-2xl mx-auto text-lg font-light">
+          <Text className="text-gray-400 max-w-2xl mx-auto text-base sm:text-lg font-light">
             Meu percurso acadêmico e profissional na área de tecnologia.
           </Text>
         </motion.div>
 
-        <Grid className="grid-cols-1 md:grid-cols-3 gap-8 items-start">
+        <Grid className="grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8 items-start">
           {}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -120,7 +123,7 @@ export const EducationSection = memo(() => {
             <Box className="absolute inset-0 bg-gradient-to-b from-brand-500/5 to-transparent rounded-xl pointer-events-none" />
             <Box
               className={`
-                border border-brand-500/20 rounded-xl p-8
+                border border-brand-500/20 rounded-xl p-6 sm:p-7 md:p-8
                 ${isLowPerf ? 'bg-black/80' : 'bg-black/40 backdrop-blur-md'} h-full
                 hover:border-brand-500/40 transition-all duration-300
                 hover:shadow-[0_0_20px_var(--tw-shadow-color)]
