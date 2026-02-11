@@ -1,70 +1,14 @@
 import { motion } from 'framer-motion'
-import { ExternalLink, Gamepad2, Monitor } from 'lucide-react'
-import { memo } from 'react'
+import { Calendar, Gamepad2, Info, Monitor } from 'lucide-react'
+import { memo, useState } from 'react'
+import { ProjetoModal } from '@/components/modal/ProjetoModal'
+import { jogos, sistemas } from '@/data/projetos'
 import { Badge } from '@/shadcn/components/ui/badge'
 import { Button } from '@/shadcn/components/ui/button'
 import { Icon } from '@/shadcn/components/ui/icon'
 import { Box, Container, HStack, VStack } from '@/shadcn/components/ui/layout'
 import { Text, Title } from '@/shadcn/components/ui/typography'
-
-const sistemas = [
-  {
-    title: 'Sistema de Organiza Bus',
-    description:
-      'OrganizaBus é uma plataforma SaaS para gestão de transporte coletivo, usada por prefeituras, cooperativas e instituições.',
-    image: '/images/sistemas/organizaBus/Login.png',
-    link: '#',
-    technologies: ['Symfony', 'React', 'TypeScript', 'Chakra UI', 'JWT', 'Docker'],
-  },
-  {
-    title: 'SpaceNow',
-    description:
-      'O SpaceNow é uma plataforma web interativa que utiliza dados oficiais da NASA para transformar informações astronômicas reais.',
-    image: '/images/sistemas/spacenow/home.png',
-    link: '#',
-    technologies: [
-      'Symfony',
-      'React',
-      'TypeScript',
-      'Tailwind CSS',
-      'RabbitMQ',
-      'Three.js',
-      'Docker',
-    ],
-  },
-  {
-    title: 'Sistema de Monitoramento Escolar',
-    description: 'Sistema completo para monitoramento e gestão de atividades escolares',
-    image: 'https://monitoramento.escolansl.com/public/assents/img/sistema/painel.png',
-    link: 'https://monitoramento.escolansl.com/sistema',
-    technologies: ['PHP', 'MySQL', 'JavaScript', 'CSS'],
-  },
-  {
-    title: 'Sistema de Eletivas e Tutorias',
-    description: 'Plataforma para gerenciamento de eletivas e tutorias escolares',
-    image: 'https://et.escolansl.com/public/assets/images/sistema/painel.png',
-    link: 'https://et.escolansl.com/sistema',
-    technologies: ['PHP', 'MySQL', 'JavaScript', 'CSS'],
-  },
-]
-
-const jogos = [
-  {
-    title: 'Biome Quest',
-    description:
-      'Jogo educativo onde um robô percorre diferentes biomas resolvendo problemas ambientais.',
-    image: '/images/jogos/missao-verde/amazonia.png',
-    link: 'https://gd.games/oldgabriel/biome-quest',
-    technologies: ['JavaScript', 'GDevelop', 'Game Design'],
-  },
-  {
-    title: 'Pixel World',
-    description: 'Jogo com temática inspirada em One Piece. Colete chaves e enfrente chefões.',
-    image: '/images/pixel-world.png',
-    link: 'https://gd.games/oldgabriel/pixel-world',
-    technologies: ['JavaScript', 'GDevelop', 'Pixel Art'],
-  },
-]
+import type { Projeto } from '@/types/projeto'
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -85,9 +29,146 @@ const itemVariants = {
   },
 }
 
+function formatarPeriodo(dataInicio: string, dataFim?: string): string {
+  if (!dataFim) {
+    return `${dataInicio} à Presente`
+  }
+  return `${dataInicio} à ${dataFim}`
+}
+
+interface CardProjetoProps {
+  projeto: Projeto
+  onAbrirModal: (id: string) => void
+}
+
+const CardProjeto = memo(({ projeto, onAbrirModal }: CardProjetoProps) => (
+  <motion.div
+    variants={itemVariants}
+    className="h-full"
+    style={{ willChange: 'transform, opacity' }}
+  >
+    <Box
+      className="
+        card-project bg-zinc-950 border
+        border-zinc-800 rounded-xl overflow-hidden
+        group flex flex-col h-full relative
+      "
+    >
+      <Box className="block relative aspect-video w-full overflow-hidden border-b border-zinc-800">
+        <Box
+          className="
+            absolute inset-0 bg-brand-900/20 z-10
+            opacity-0 group-hover:opacity-100
+            transition-opacity duration-500
+            pointer-events-none mix-blend-color
+          "
+        />
+        <img
+          src={projeto.imagem}
+          alt={projeto.titulo}
+          className="
+            object-cover w-full h-full transform
+            group-hover:scale-110 transition-transform
+            duration-700 ease-in-out
+            opacity-90 group-hover:opacity-100
+          "
+        />
+        <HStack className="absolute bottom-3 right-3 items-center gap-2 text-xs text-white font-mono bg-black/80 backdrop-blur-md px-3 py-1.5 rounded-lg border border-zinc-700/50 shadow-lg">
+          <Icon icon={Calendar} className="w-3.5 h-3.5 text-brand-400" />
+          <Text className="text-zinc-100 font-medium">
+            {formatarPeriodo(projeto.dataInicio, projeto.dataFim)}
+          </Text>
+        </HStack>
+      </Box>
+
+      <VStack
+        className="
+          p-6 md:p-8 flex-grow justify-between gap-6
+          relative overflow-hidden bg-zinc-950
+        "
+      >
+        <Box className="absolute top-0 right-0 w-48 h-48 bg-brand-500/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2 pointer-events-none" />
+
+        <VStack className="gap-3 relative z-10">
+          <Title
+            className="
+              text-xl md:text-2xl font-bold font-heading text-white
+              group-hover:text-brand-400
+              transition-colors uppercase tracking-wide
+            "
+          >
+            {projeto.titulo}
+          </Title>
+          <Text className="text-gray-400 text-sm leading-relaxed font-normal">
+            {projeto.descricao}
+          </Text>
+        </VStack>
+
+        <VStack className="gap-3 relative z-10 w-full">
+          <HStack className="flex-wrap gap-2">
+            {projeto.tecnologias.slice(0, 4).map((tech) => (
+              <Badge
+                key={tech}
+                className="
+                  bg-zinc-900 text-brand-300 border
+                  border-brand-500/20 px-3 py-1
+                  text-[10px] font-mono uppercase
+                  tracking-wider rounded transition-colors
+                  group-hover:border-brand-500/40
+                "
+              >
+                {tech}
+              </Badge>
+            ))}
+            {projeto.tecnologias.length > 4 && (
+              <Badge
+                className="
+                  bg-zinc-900 text-zinc-400 border
+                  border-zinc-700 px-3 py-1
+                  text-[10px] font-mono uppercase
+                  tracking-wider rounded
+                "
+              >
+                +{projeto.tecnologias.length - 4}
+              </Badge>
+            )}
+          </HStack>
+
+          <Button
+            onClick={() => onAbrirModal(projeto.id)}
+            className="
+              w-full bg-zinc-900 border border-zinc-700
+              hover:border-brand-500 hover:bg-brand-600
+              hover:text-black text-white font-bold
+              font-mono text-xs uppercase tracking-widest
+              h-12 transition-all duration-300 rounded
+              relative overflow-hidden group/btn
+            "
+          >
+            <span className="relative z-10 flex items-center justify-center gap-2">
+              <Icon icon={Info} className="w-4 h-4" />
+              Ver Detalhes
+            </span>
+          </Button>
+        </VStack>
+      </VStack>
+    </Box>
+  </motion.div>
+))
+
 export const ProjectsSection = memo(() => {
+  const [modalAberto, setModalAberto] = useState<string | null>(null)
+
+  const abrirModal = (id: string) => setModalAberto(id)
+  const fecharModal = () => setModalAberto(null)
+
+  const projetoAtual = [...sistemas, ...jogos].find((p) => p.id === modalAberto)
+
   return (
     <Box id="projetos" className="py-32 relative bg-black font-sans overflow-hidden">
+      {projetoAtual && (
+        <ProjetoModal isOpen={!!modalAberto} onClose={fecharModal} projeto={projetoAtual} />
+      )}
       <Box className="absolute inset-0 bg-game-black opacity-50" />
       <Box className="absolute inset-0 bg-[radial-gradient(currentColor_1px,transparent_1px)] bg-[size:20px_20px] text-brand-500/40" />
       <Container size="xl" className="relative z-10 px-4">
@@ -157,109 +238,10 @@ export const ProjectsSection = memo(() => {
               initial="hidden"
               whileInView="visible"
               viewport={{ once: true, margin: '-100px' }}
-              className="grid grid-cols-1 lg:grid-cols-2 gap-10"
+              className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-10"
             >
               {sistemas.map((projeto) => (
-                <motion.div
-                  variants={itemVariants}
-                  key={projeto.title}
-                  className="h-full"
-                  style={{ willChange: 'transform, opacity' }}
-                >
-                  <Box
-                    className="
-                      card-project bg-zinc-950 border
-                      border-zinc-800 rounded-xl overflow-hidden
-                      group flex flex-col h-full relative
-                    "
-                  >
-                    <a
-                      href={projeto.link}
-                      target="_blank"
-                      className="block relative aspect-video w-full overflow-hidden border-b border-zinc-800"
-                    >
-                      <Box
-                        className="
-                          absolute inset-0 bg-brand-900/20 z-10
-                          opacity-0 group-hover:opacity-100
-                          transition-opacity duration-500
-                          pointer-events-none mix-blend-color
-                        "
-                      />
-                      <img
-                        src={projeto.image}
-                        alt={projeto.title}
-                        className="
-                          object-cover w-full h-full transform
-                          group-hover:scale-110 transition-transform
-                          duration-700 ease-in-out
-                          opacity-90 group-hover:opacity-100
-                        "
-                      />
-                    </a>
-
-                    <VStack
-                      className="
-                        p-8 flex-grow justify-between gap-6
-                        relative overflow-hidden bg-zinc-950
-                      "
-                    >
-                      <Box className="absolute top-0 right-0 w-48 h-48 bg-brand-500/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2 pointer-events-none" />
-
-                      <VStack className="gap-3 relative z-10">
-                        <Title
-                          className="
-                            text-2xl font-bold font-heading text-white
-                            group-hover:text-brand-400
-                            transition-colors uppercase tracking-wide
-                          "
-                        >
-                          {projeto.title}
-                        </Title>
-                        <Text className="text-gray-400 text-sm leading-relaxed font-normal">
-                          {projeto.description}
-                        </Text>
-                      </VStack>
-
-                      <VStack className="gap-6 pt-2 relative z-10">
-                        <HStack className="flex-wrap gap-2">
-                          {projeto.technologies.map((tech) => (
-                            <Badge
-                              key={tech}
-                              className="
-                                bg-zinc-900 text-brand-300 border
-                                border-brand-500/20 px-3 py-1
-                                text-[10px] font-mono uppercase
-                                tracking-wider rounded transition-colors
-                                group-hover:border-brand-500/40
-                              "
-                            >
-                              {tech}
-                            </Badge>
-                          ))}
-                        </HStack>
-
-                        <a href={projeto.link} target="_blank" className="block w-full">
-                          <Button
-                            className="
-                              w-full bg-zinc-900 border border-zinc-700
-                              hover:border-brand-500 hover:bg-brand-600
-                              hover:text-black text-white font-bold
-                              font-mono text-xs uppercase tracking-widest
-                              h-12 transition-all duration-300 rounded
-                              relative overflow-hidden group/btn
-                            "
-                          >
-                            <span className="relative z-10 flex items-center justify-center gap-2">
-                              <Icon icon={ExternalLink} className="w-4 h-4" />
-                              Visualizar Projeto
-                            </span>
-                          </Button>
-                        </a>
-                      </VStack>
-                    </VStack>
-                  </Box>
-                </motion.div>
+                <CardProjeto key={projeto.id} projeto={projeto} onAbrirModal={abrirModal} />
               ))}
             </motion.div>
           </Box>
@@ -293,104 +275,10 @@ export const ProjectsSection = memo(() => {
               initial="hidden"
               whileInView="visible"
               viewport={{ once: true, margin: '-100px' }}
-              className="grid grid-cols-1 lg:grid-cols-2 gap-10"
+              className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-10"
             >
               {jogos.map((projeto) => (
-                <motion.div
-                  variants={itemVariants}
-                  key={projeto.title}
-                  className="h-full"
-                  style={{ willChange: 'transform, opacity' }}
-                >
-                  <Box
-                    className="
-                      card-project bg-zinc-950 border
-                      border-zinc-800 rounded-xl overflow-hidden
-                      group flex flex-col h-full relative
-                    "
-                  >
-                    <a
-                      href={projeto.link}
-                      target="_blank"
-                      className="block relative aspect-video w-full overflow-hidden border-b border-zinc-800"
-                    >
-                      <Box
-                        className="
-                          absolute inset-0 bg-brand-900/20 z-10
-                          opacity-0 group-hover:opacity-100
-                          transition-opacity duration-500
-                          pointer-events-none mix-blend-color
-                        "
-                      />
-                      <img
-                        src={projeto.image}
-                        alt={projeto.title}
-                        className="
-                          object-cover w-full h-full transform
-                          group-hover:scale-110 transition-transform
-                          duration-700 ease-in-out
-                          opacity-90 group-hover:opacity-100
-                        "
-                      />
-                    </a>
-
-                    <VStack className="p-8 flex-grow justify-between gap-6 relative overflow-hidden bg-zinc-950">
-                      <Box className="absolute top-0 right-0 w-48 h-48 bg-brand-500/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2 pointer-events-none" />
-
-                      <VStack className="gap-3 relative z-10">
-                        <Title
-                          className="
-                            text-2xl font-bold font-heading text-white
-                            group-hover:text-brand-400
-                            transition-colors uppercase tracking-wide
-                          "
-                        >
-                          {projeto.title}
-                        </Title>
-                        <Text className="text-gray-400 text-sm leading-relaxed font-normal">
-                          {projeto.description}
-                        </Text>
-                      </VStack>
-
-                      <VStack className="gap-6 pt-2 relative z-10">
-                        <HStack className="flex-wrap gap-2">
-                          {projeto.technologies.map((tech) => (
-                            <Badge
-                              key={tech}
-                              className="
-                                bg-zinc-900 text-brand-300 border
-                                border-brand-500/20 px-3 py-1
-                                text-[10px] font-mono uppercase
-                                tracking-wider rounded transition-colors
-                                group-hover:border-brand-500/40
-                              "
-                            >
-                              {tech}
-                            </Badge>
-                          ))}
-                        </HStack>
-
-                        <a href={projeto.link} target="_blank" className="block w-full">
-                          <Button
-                            className="
-                              w-full bg-zinc-900 border border-zinc-700
-                              hover:border-brand-500 hover:bg-brand-600
-                              hover:text-black text-white font-bold
-                              font-mono text-xs uppercase tracking-widest
-                              h-12 transition-all duration-300 rounded
-                              relative overflow-hidden group/btn
-                            "
-                          >
-                            <span className="relative z-10 flex items-center justify-center gap-2">
-                              <Icon icon={Gamepad2} className="w-4 h-4" />
-                              Jogar Agora
-                            </span>
-                          </Button>
-                        </a>
-                      </VStack>
-                    </VStack>
-                  </Box>
-                </motion.div>
+                <CardProjeto key={projeto.id} projeto={projeto} onAbrirModal={abrirModal} />
               ))}
             </motion.div>
           </Box>

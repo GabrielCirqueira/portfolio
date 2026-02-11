@@ -148,3 +148,24 @@
   height: 6px;
   @apply bg-gradient-to-r from-brand-600 to-brand-400 rounded-full shadow-[0_0_10px_var(--tw-shadow-color)] shadow-brand-500/30;
 }
+
+.custom-scrollbar {
+  scrollbar-width: thin;
+  scrollbar-color: theme("colors.brand.500") theme("colors.zinc.900");
+}
+
+.custom-scrollbar::-webkit-scrollbar {
+  width: 8px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  @apply bg-zinc-900 rounded-lg;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  @apply bg-brand-500 rounded-lg;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  @apply bg-brand-400;
+}
