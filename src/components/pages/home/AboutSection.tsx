@@ -1,27 +1,9 @@
 import { motion } from 'framer-motion'
-import { FileCode, Github, GraduationCap, Lightbulb, User } from 'lucide-react'
+import { Github, GraduationCap, Lightbulb, User } from 'lucide-react'
 import { memo } from 'react'
-import { Badge } from '@/shadcn/components/ui/badge'
-import { Card } from '@/shadcn/components/ui/card'
-import { Icon } from '@/shadcn/components/ui/icon'
-import { Box, Container, Grid, HStack, VStack } from '@/shadcn/components/ui/layout'
-import { Text, Title } from '@/shadcn/components/ui/typography'
+import { AboutContent } from '@/components/responsive/AboutContent'
+import { Box, Container } from '@/shadcn/components/ui/layout'
 import { useIsLowPerformance } from '@/utils/deviceDetection'
-
-const container = {
-  hidden: { opacity: 0 },
-  show: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.1,
-    },
-  },
-}
-
-const item = {
-  hidden: { opacity: 0, y: 20 },
-  show: { opacity: 1, y: 0, transition: { duration: 0.5, ease: 'easeOut' as const } },
-}
 
 const aboutCards = [
   {
@@ -76,144 +58,7 @@ export const AboutSection = memo(() => {
       </motion.div>
 
       <Container size="xl" className="relative z-10 px-4">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5 }}
-          className="text-center mb-12 sm:mb-14 md:mb-16"
-        >
-          <Badge
-            variant="outline"
-            className="
-              mb-6 px-4 py-1.5 border-brand-500/30
-              text-brand-500 uppercase tracking-widest
-              text-xs font-bold bg-brand-500/5
-              backdrop-blur-md shadow-[0_0_15px_var(--tw-shadow-color)]
-              shadow-brand-500/10
-            "
-          >
-            Sobre Mim
-          </Badge>
-          <Title className="text-3xl sm:text-4xl md:text-5xl font-bold font-heading uppercase tracking-wide">
-            Minha <span className="text-gradient">Trajetória</span>
-          </Title>
-        </motion.div>
-
-        <Grid className="grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-10 lg:gap-20 items-center">
-          <motion.div
-            initial={{ opacity: 0, x: -30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5 }}
-            className="flex justify-center px-4"
-          >
-            <Box className="relative w-full max-w-[280px] sm:max-w-sm aspect-[3/4] rounded-2xl overflow-hidden border border-zinc-800 bg-zinc-900 shadow-2xl group">
-              <div className="absolute inset-0 bg-brand-500/10 mix-blend-overlay opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-10 pointer-events-none" />
-              <img
-                src="/images/gabriel1.png"
-                alt="Gabriel Cirqueira"
-                className="object-cover w-full h-full transform transition-transform duration-700 group-hover:scale-105 opacity-90 group-hover:opacity-100"
-              />
-
-              <Box className="absolute inset-x-0 bottom-0 h-2/3 bg-gradient-to-t from-black via-black/60 to-transparent z-10" />
-
-              <Box
-                className="
-                  absolute bottom-6 left-6 right-6 p-4
-                  rounded-xl border border-white/10
-                  bg-white/5 backdrop-blur-md z-20
-                  hover:bg-white/10 transition-colors duration-300
-                "
-              >
-                <HStack className="justify-between items-center">
-                  <VStack className="gap-0.5">
-                    <Text className="text-xs text-brand-400 font-mono uppercase tracking-wider mb-1">
-                      Fullstack Dev
-                    </Text>
-                    <Text className="text-xl font-bold text-white font-heading uppercase">
-                      Gabriel Cirqueira
-                    </Text>
-                  </VStack>
-                  <Box className="p-2.5 bg-brand-500 text-black rounded-lg shadow-[0_0_15px_var(--tw-shadow-color)] shadow-brand-500/50">
-                    <Icon icon={FileCode} className="h-5 w-5" />
-                  </Box>
-                </HStack>
-              </Box>
-            </Box>
-          </motion.div>
-
-          <motion.div
-            variants={container}
-            initial="hidden"
-            whileInView="show"
-            viewport={{ once: true }}
-            className="flex flex-col gap-10"
-          >
-            <VStack className="gap-4">
-              <Text className="text-zinc-400 text-base sm:text-lg leading-relaxed mb-2">
-                Desenvolvedor Fullstack focado na criação de aplicações web modernas e escaláveis.
-                Combino conhecimento técnico sólido com uma visão prática para entregar software
-                robusto e de alto valor. Minha paixão é transformar ideias complexas em interfaces
-                simples e funcionais.
-              </Text>
-            </VStack>
-
-            <Grid className="grid-cols-1 sm:grid-cols-2 gap-5">
-              {aboutCards.map((card) => (
-                <motion.div key={card.title} variants={item} className="h-full">
-                  <Card
-                    className={`
-                      ${isLowPerf ? 'bg-zinc-900/80' : 'bg-zinc-900/40 backdrop-blur-sm'} border border-zinc-800 p-5 sm:p-6
-                      hover:border-brand-500/30 transition-all
-                      duration-300 group h-full
-                      hover:shadow-[0_0_20px_var(--tw-shadow-color)]
-                      hover:shadow-brand-500/10 hover:-translate-y-1
-                      relative overflow-hidden
-                    `}
-                  >
-                    <Box className="absolute inset-0 bg-gradient-to-br from-brand-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
-                    <HStack className="items-start gap-4 relative z-10">
-                      <Box
-                        className="
-                          p-3 rounded-lg bg-zinc-950 text-brand-500
-                          border border-brand-500/10 mt-1 shrink-0
-                          group-hover:bg-brand-500 group-hover:text-black
-                          transition-all duration-300 shadow-sm
-                        "
-                      >
-                        <Icon icon={card.icon} className="h-5 w-5" />
-                      </Box>
-                      <VStack className="gap-2">
-                        <Text className="font-bold text-white uppercase font-heading tracking-wide text-sm group-hover:text-brand-400 transition-colors">
-                          {card.title}
-                        </Text>
-                        <Text className="text-sm text-zinc-500 group-hover:text-zinc-300 transition-colors leading-relaxed">
-                          {card.description}
-                        </Text>
-                      </VStack>
-                    </HStack>
-                  </Card>
-                </motion.div>
-              ))}
-            </Grid>
-          </motion.div>
-        </Grid>
-
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5, delay: 0.2 }}
-          className="mt-24 flex justify-center"
-        >
-          <Box className="max-w-2xl text-center border-t border-white/5 pt-10 relative">
-            <Box className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 w-20 h-1 bg-brand-500 rounded-full blur-[1px]" />
-            <Text className="text-zinc-500 font-medium text-sm tracking-[0.3em] uppercase animate-pulse">
-              Tecnologia é a ferramenta. Resultado é o objetivo.
-            </Text>
-          </Box>
-        </motion.div>
+        <AboutContent aboutCards={aboutCards} />
       </Container>
     </Box>
   )
