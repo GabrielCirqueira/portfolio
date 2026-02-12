@@ -1,0 +1,59 @@
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: symfony-pdv-app
+    ports:
+      - "8080:80"
+    volumes:
+      - .:/var/www/html
+      - ./var:/var/www/html/var
+    depends_on:
+      - database
+    networks:
+      - symfony-network
+    environment:
+      - DATABASE_URL=mysql://symfony_user:symfony_password@database:3306/ms_code_pdv_symfony?serverVersion=8.0&charset=utf8mb4
+
+  database:
+    image: mysql:8.0
+    container_name: symfony-pdv-mysql
+    ports:
+      - "3307:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: root_password
+      MYSQL_DATABASE: ms_code_pdv_symfony
+      MYSQL_USER: symfony_user
+      MYSQL_PASSWORD: symfony_password
+    volumes:
+      - mysql_data:/var/lib/mysql
+    networks:
+      - symfony-network
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-proot_password"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin:latest
+    container_name: symfony-pdv-phpmyadmin
+    ports:
+      - "8081:80"
+    environment:
+      PMA_HOST: database
+      PMA_USER: root
+      PMA_PASSWORD: root_password
+      MYSQL_ROOT_PASSWORD: root_password
+    depends_on:
+      - database
+    networks:
+      - symfony-network
+
+networks:
+  symfony-network:
+    driver: bridge
+
+volumes:
+  mysql_data:
