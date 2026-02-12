@@ -1,3 +1,5 @@
+import * as React from 'react'
+
 export const isMobileDevice = (): boolean => {
   const userAgent = navigator.userAgent.toLowerCase()
   const isMobileUA = /android|webos|iphone|ipad|ipod|blackberry|iemobile|opera mini/i.test(
@@ -20,8 +22,21 @@ export const isLowPerformanceDevice = (): boolean => {
 }
 
 export const useIsMobile = (): boolean => {
-  if (typeof window === 'undefined') return false
-  return isMobileDevice()
+  const [isMobile, setIsMobile] = React.useState(() => {
+    if (typeof window === 'undefined') return false
+    return isMobileDevice()
+  })
+
+  React.useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(isMobileDevice())
+    }
+
+    window.addEventListener('resize', handleResize)
+    return () => window.removeEventListener('resize', handleResize)
+  }, [])
+
+  return isMobile
 }
 
 export const useIsLowPerformance = (): boolean => {

@@ -1,5 +1,7 @@
 import { motion } from 'framer-motion'
-import { AtSign, Code, Github, Instagram, Phone } from 'lucide-react'
+import { Code, Phone } from 'lucide-react'
+import { Logo } from '@/components/responsive/Logo'
+import { SocialLinks } from '@/components/responsive/SocialLinks'
 import { Button } from '@/shadcn/components/ui/button'
 import { Icon } from '@/shadcn/components/ui/icon'
 import { Box, Container, Grid, HStack, VStack } from '@/shadcn/components/ui/layout'
@@ -7,12 +9,6 @@ import { Text, Title } from '@/shadcn/components/ui/typography'
 
 export function Footer() {
   const currentYear = new Date().getFullYear()
-
-  const socials = [
-    { icon: Github, href: 'https://github.com/GabrielCirqueira', label: 'GitHub' },
-    { icon: Instagram, href: 'https://www.instagram.com/gabrielcirqueira711/', label: 'Instagram' },
-    { icon: AtSign, href: 'mailto:gabrielcirqueira711@gmail.com', label: 'Email' },
-  ]
 
   const links = [
     { name: 'Início', href: '#inicio' },
@@ -32,48 +28,14 @@ export function Footer() {
       <Container size="xl" className="py-20 relative z-10 px-4">
         <Grid className="grid-cols-1 md:grid-cols-3 gap-16 items-start">
           <VStack className="gap-6">
-            <motion.a
-              href="#inicio"
-              className="flex items-center space-x-2 text-white hover:text-brand-500 transition-colors no-underline group w-fit"
-              whileHover={{ scale: 1.05 }}
-            >
-              <Text className="font-mono text-brand-500 text-2xl group-hover:rotate-12 transition-transform duration-300">
-                &lt;
-              </Text>
-              <Text className="font-bold text-2xl tracking-wide uppercase font-heading text-white">
-                Gabriel.Dev
-              </Text>
-              <Text className="font-mono text-brand-500 text-2xl group-hover:-rotate-12 transition-transform duration-300">
-                /&gt;
-              </Text>
-            </motion.a>
+            <Logo />
 
             <Text className="text-gray-400 text-sm leading-relaxed max-w-sm">
               Desenvolvedor Fullstack & Criador de Jogos. Transformando ideias complexas em soluções
               digitais interativas e performáticas.
             </Text>
 
-            <HStack className="gap-4 pt-4">
-              {socials.map((social, index) => (
-                <motion.a
-                  key={index}
-                  href={social.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="
-                    flex justify-center items-center w-10 h-10
-                    border border-white/10 rounded-full text-gray-400
-                    hover:bg-brand-500/10 hover:text-brand-500
-                    hover:border-brand-500/50 transition-all duration-300
-                  "
-                  aria-label={social.label}
-                  whileHover={{ scale: 1.1 }}
-                  whileTap={{ scale: 0.95 }}
-                >
-                  <Icon icon={social.icon} className="h-5 w-5" />
-                </motion.a>
-              ))}
-            </HStack>
+            <SocialLinks />
           </VStack>
 
           <VStack className="gap-8">

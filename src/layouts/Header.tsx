@@ -1,6 +1,7 @@
 import { AnimatePresence, motion } from 'framer-motion'
 import { Menu, X } from 'lucide-react'
 import { useEffect, useState } from 'react'
+import { Logo } from '@/components/responsive/Logo'
 import { Icon } from '@/shadcn/components/ui/icon'
 import { Box, Container, HStack } from '@/shadcn/components/ui/layout'
 import { Text } from '@/shadcn/components/ui/typography'
@@ -88,27 +89,7 @@ export function Header() {
       >
         <Container size="xl">
           <HStack className="justify-between items-center h-16 md:h-20">
-            <motion.a
-              href="#inicio"
-              className="
-                flex items-center space-x-2 text-white
-                hover:text-brand-400 transition-colors
-                no-underline group relative z-50
-              "
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              <Text className="font-mono text-brand-500 text-xl md:text-2xl group-hover:rotate-12 transition-transform duration-300">
-                &lt;
-              </Text>
-              <Text className="font-bold text-lg md:text-xl tracking-wide uppercase font-heading relative">
-                Gabriel.Dev
-                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-brand-500 transition-all duration-300 group-hover:w-full"></span>
-              </Text>
-              <Text className="font-mono text-brand-500 text-xl md:text-2xl group-hover:-rotate-12 transition-transform duration-300">
-                /&gt;
-              </Text>
-            </motion.a>
+            <Logo />
 
             <HStack className="hidden md:flex items-center space-x-8">
               {navItems.map((item) => (

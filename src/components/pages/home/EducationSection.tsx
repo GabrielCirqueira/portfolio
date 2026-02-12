@@ -1,81 +1,65 @@
 import { motion } from 'framer-motion'
 import { Award, Briefcase, CheckCircle } from 'lucide-react'
 import { memo } from 'react'
+import { SectionHeader } from '@/components/responsive/SectionHeader'
+import type { TimelineItemData } from '@/components/responsive/TimelineCard'
+import { TimelineCard } from '@/components/responsive/TimelineCard'
 import { Badge } from '@/shadcn/components/ui/badge'
-import { Icon } from '@/shadcn/components/ui/icon'
-import { Box, Container, Grid, HStack } from '@/shadcn/components/ui/layout'
-import { Text, Title } from '@/shadcn/components/ui/typography'
-import { useIsLowPerformance } from '@/utils/deviceDetection'
+import { Box, Container, Grid } from '@/shadcn/components/ui/layout'
+import { Text as TypographyText } from '@/shadcn/components/ui/typography'
 
-const container = {
-  hidden: { opacity: 0 },
-  show: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.1,
-    },
-  },
-}
-
-const itemVariants = {
-  hidden: { opacity: 0, x: -20 },
-  show: { opacity: 1, x: 0, transition: { duration: 0.5 } },
-}
-
-const formacao = [
+const formacao: TimelineItemData[] = [
   {
-    titulo: 'Análise e Desenvolvimento de Sistemas (ADS)',
-    instituicao: 'Centro Universitário Vale do Cricaré (UNIVC)',
-    periodo: '2025 - Atual (Iniciando 3º Período)',
-    descricao:
+    title: 'Análise e Desenvolvimento de Sistemas (ADS)',
+    subtitle: 'Centro Universitário Vale do Cricaré (UNIVC)',
+    period: '2025 - Atual (Iniciando 3º Período)',
+    description:
       'Graduação superior com foco em engenharia de software, banco de dados e gestão de projetos.',
   },
   {
-    titulo: 'Ensino Médio Integrado - Técnico em Internet',
-    instituicao: 'Escola Nossa Senhora de Lourdes',
-    periodo: '2022 - 2024',
-    descricao: 'Formação técnica com foco em desenvolvimento web e tecnologias de internet.',
+    title: 'Ensino Médio Integrado - Técnico em Internet',
+    subtitle: 'Escola Nossa Senhora de Lourdes',
+    period: '2022 - 2024',
+    description: 'Formação técnica com foco em desenvolvimento web e tecnologias de internet.',
   },
 ]
 
-const conquistas = [
+const experiencias: TimelineItemData[] = [
   {
-    titulo: 'Etapa Nacional de Robótica',
-    descricao: 'Classificado para competir em Goiânia na etapa nacional.',
-    ano: '2024',
+    title: 'Desenvolvedor Web',
+    subtitle: 'Móveis Simonetti',
+    period: '2025 - 2026 (atual)',
+    description: 'Desenvolvimento com Symfony e React, trabalhando com sistemas corporativos.',
   },
   {
-    titulo: 'MS CODE - Formação Web',
-    instituicao: 'Móveis Simonetti',
-    periodo: '2024',
-    descricao:
+    title: 'Desenvolvedor de Sistemas Escolares',
+    subtitle: 'Projetos Independentes',
+    period: '2023 - 2024',
+    description: 'Criação de sistemas completos para monitoramento e gestão escolar.',
+  },
+]
+
+const conquistas: TimelineItemData[] = [
+  {
+    title: 'Etapa Nacional de Robótica',
+    period: '2024',
+    description: 'Classificado para competir em Goiânia na etapa nacional.',
+  },
+  {
+    title: 'MS CODE - Formação Web',
+    subtitle: 'Móveis Simonetti',
+    period: '2024',
+    description:
       'Treinamento intensivo de programação web. Finalizado com apresentação de projeto prático.',
   },
   {
-    titulo: 'Olimpíadas de Programação',
-    descricao: 'Participação em diversas competições de programação.',
-    ano: '2023-2024',
-  },
-]
-
-const experiencias = [
-  {
-    cargo: 'Desenvolvedor Web',
-    empresa: 'Móveis Simonetti',
-    periodo: '2025 - 2026 (atual)',
-    descricao: 'Desenvolvimento com Symfony e React, trabalhando com sistemas corporativos.',
-  },
-  {
-    cargo: 'Desenvolvedor de Sistemas Escolares',
-    empresa: 'Projetos Independentes',
-    periodo: '2023 - 2024',
-    descricao: 'Criação de sistemas completos para monitoramento e gestão escolar.',
+    title: 'Olimpíadas de Programação',
+    period: '2023-2024',
+    description: 'Participação em diversas competições de programação.',
   },
 ]
 
 export const EducationSection = memo(() => {
-  const isLowPerf = useIsLowPerformance()
-
   return (
     <Box
       id="formacao"
@@ -85,232 +69,24 @@ export const EducationSection = memo(() => {
       <Box className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px]" />
 
       <Container size="xl" className="relative z-10 px-4">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5 }}
-          className="text-center mb-14 sm:mb-16 md:mb-20"
-        >
-          <Badge
-            variant="outline"
-            className="
-              mb-4 px-4 py-1 border-brand-500/50
-              bg-brand-500/10 text-brand-500
-              uppercase tracking-widest
-              font-bold backdrop-blur-md
-            "
-          >
-            Carreira
-          </Badge>
-          <Title className="text-2xl sm:text-3xl md:text-5xl font-bold font-heading mb-3 sm:mb-4 uppercase tracking-wide">
-            Formação e <span className="text-gradient">Experiência</span>
-          </Title>
-          <Text className="text-gray-400 max-w-2xl mx-auto text-base sm:text-lg font-light">
-            Meu percurso acadêmico e profissional na área de tecnologia.
-          </Text>
-        </motion.div>
+        <SectionHeader
+          badge="Carreira"
+          title={
+            <>
+              Formação e <span className="text-gradient">Experiência</span>
+            </>
+          }
+          subtitle="Meu percurso acadêmico e profissional na área de tecnologia."
+        />
 
         <Grid className="grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8 items-start">
-          {}
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: 0 }}
-            className="relative"
-          >
-            <Box className="absolute inset-0 bg-gradient-to-b from-brand-500/5 to-transparent rounded-xl pointer-events-none" />
-            <Box
-              className={`
-                border border-brand-500/20 rounded-xl p-6 sm:p-7 md:p-8
-                ${isLowPerf ? 'bg-black/80' : 'bg-black/40 backdrop-blur-md'} h-full
-                hover:border-brand-500/40 transition-all duration-300
-                hover:shadow-[0_0_20px_var(--tw-shadow-color)]
-                hover:shadow-brand-500/5
-              `}
-            >
-              <HStack className="items-center mb-8 gap-4 border-b border-brand-500/10 pb-4">
-                <Box className="p-2 bg-brand-500/10 rounded-lg">
-                  <Icon icon={CheckCircle} className="h-6 w-6 text-brand-500" />
-                </Box>
-                <Text className="text-xl font-bold font-heading uppercase text-white tracking-widest">
-                  Formação
-                </Text>
-              </HStack>
+          <TimelineCard icon={CheckCircle} title="Formação" items={formacao} delay={0} />
 
-              <motion.div
-                variants={container}
-                initial="hidden"
-                whileInView="show"
-                viewport={{ once: true }}
-                className="space-y-10"
-              >
-                {formacao.map((item, index) => (
-                  <motion.div
-                    key={index}
-                    variants={itemVariants}
-                    className="relative pl-8 border-l-2 border-brand-500/20 group"
-                  >
-                    <Box
-                      className="
-                        absolute top-0 left-0 w-4 h-4 -translate-x-[9px]
-                        translate-y-1 rounded-full bg-black border-2
-                        border-brand-500 group-hover:bg-brand-500
-                        group-hover:shadow-[0_0_10px_var(--tw-shadow-color)]
-                        group-hover:shadow-brand-500/80 transition-all duration-300
-                      "
-                    />
-                    <Text className="font-bold text-white text-lg group-hover:text-brand-500 transition-colors uppercase tracking-wide leading-tight">
-                      {item.titulo}
-                    </Text>
-                    <Text className="text-sm text-gray-400 font-bold font-mono mt-2 mb-1">
-                      {item.instituicao}
-                    </Text>
-                    <Badge className="bg-brand-500/10 text-brand-500 border-none mb-3 text-[10px] uppercase font-bold px-2 py-0.5">
-                      {item.periodo}
-                    </Badge>
-                    <Text className="text-sm text-gray-300 leading-relaxed font-light">
-                      {item.descricao}
-                    </Text>
-                  </motion.div>
-                ))}
-              </motion.div>
-            </Box>
-          </motion.div>
+          <Box className="md:-mt-8">
+            <TimelineCard icon={Briefcase} title="Experiência" items={experiencias} delay={0.2} />
+          </Box>
 
-          {}
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: 0.2 }}
-            className="md:-mt-8 relative"
-          >
-            <Box className="absolute inset-0 bg-gradient-to-b from-brand-500/5 to-transparent rounded-xl pointer-events-none" />
-            <Box
-              className={`
-                border border-brand-500/20 rounded-xl p-8
-                ${isLowPerf ? 'bg-zinc-900/80' : 'bg-zinc-900/40 backdrop-blur-md'} h-full
-                hover:border-brand-500/40 transition-all duration-300
-                hover:shadow-[0_0_25px_var(--tw-shadow-color)] hover:shadow-brand-500/10
-                hover:-translate-y-2 transform
-              `}
-            >
-              <HStack className="items-center mb-8 gap-4 border-b border-brand-500/10 pb-4">
-                <Box className="p-2 bg-brand-500/10 rounded-lg">
-                  <Icon icon={Briefcase} className="h-6 w-6 text-brand-500" />
-                </Box>
-                <Text className="text-xl font-bold font-heading uppercase text-white tracking-widest">
-                  Experiência
-                </Text>
-              </HStack>
-
-              <motion.div
-                variants={container}
-                initial="hidden"
-                whileInView="show"
-                viewport={{ once: true }}
-                className="space-y-10"
-              >
-                {experiencias.map((item, index) => (
-                  <motion.div
-                    key={index}
-                    variants={itemVariants}
-                    className="relative pl-8 border-l-2 border-brand-500/20 group"
-                  >
-                    <Box
-                      className="
-                        absolute top-0 left-0 w-4 h-4
-                        -translate-x-[9px] translate-y-1
-                        rounded-full bg-black border-2
-                        border-brand-500 group-hover:bg-brand-500
-                        group-hover:shadow-[0_0_10px_var(--tw-shadow-color)]
-                        group-hover:shadow-brand-500/80 transition-all duration-300
-                      "
-                    />
-                    <Text className="font-bold text-white text-lg group-hover:text-brand-500 transition-colors uppercase tracking-wide leading-tight">
-                      {item.cargo}
-                    </Text>
-                    <Text className="text-sm text-gray-400 font-bold font-mono mt-2 mb-1">
-                      {item.empresa}
-                    </Text>
-                    <Badge className="bg-brand-500/10 text-brand-500 border-none mb-3 text-[10px] uppercase font-bold px-2 py-0.5">
-                      {item.periodo}
-                    </Badge>
-                    <Text className="text-sm text-gray-300 leading-relaxed font-light">
-                      {item.descricao}
-                    </Text>
-                  </motion.div>
-                ))}
-              </motion.div>
-            </Box>
-          </motion.div>
-
-          {}
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: 0.1 }}
-            className="relative"
-          >
-            <Box className="absolute inset-0 bg-gradient-to-b from-brand-500/5 to-transparent rounded-xl pointer-events-none" />
-            <Box
-              className={`
-                border border-brand-500/20 rounded-xl p-8
-                ${isLowPerf ? 'bg-black/80' : 'bg-black/40 backdrop-blur-md'} h-full
-                hover:border-brand-500/40 transition-all duration-300
-                hover:shadow-[0_0_20px_var(--tw-shadow-color)]
-                hover:shadow-brand-500/5
-              `}
-            >
-              <HStack className="items-center mb-8 gap-4 border-b border-brand-500/10 pb-4">
-                <Box className="p-2 bg-brand-500/10 rounded-lg">
-                  <Icon icon={Award} className="h-6 w-6 text-brand-500" />
-                </Box>
-                <Text className="text-xl font-bold font-heading uppercase text-white tracking-widest">
-                  Conquistas
-                </Text>
-              </HStack>
-
-              <motion.div
-                variants={container}
-                initial="hidden"
-                whileInView="show"
-                viewport={{ once: true }}
-                className="space-y-10"
-              >
-                {conquistas.map((item, index) => (
-                  <motion.div
-                    key={index}
-                    variants={itemVariants}
-                    className="relative pl-8 border-l-2 border-brand-500/20 group"
-                  >
-                    <Box
-                      className="
-                        absolute top-0 left-0 w-4 h-4
-                        -translate-x-[9px] translate-y-1
-                        rounded-full bg-black border-2
-                        border-brand-500 group-hover:bg-brand-500
-                        group-hover:shadow-[0_0_10px_var(--tw-shadow-color)]
-                        group-hover:shadow-brand-500/80 transition-all duration-300
-                      "
-                    />
-                    <Text className="font-bold text-white text-lg group-hover:text-brand-500 transition-colors uppercase tracking-wide leading-tight">
-                      {item.titulo}
-                    </Text>
-                    <Badge className="bg-brand-500/10 text-brand-500 border-none my-2 text-[10px] uppercase font-bold px-2 py-0.5">
-                      {item.ano}
-                    </Badge>
-                    <Text className="text-sm text-gray-300 leading-relaxed font-light block">
-                      {item.descricao}
-                    </Text>
-                  </motion.div>
-                ))}
-              </motion.div>
-            </Box>
-          </motion.div>
+          <TimelineCard icon={Award} title="Conquistas" items={conquistas} delay={0.1} />
         </Grid>
 
         <motion.div
@@ -331,10 +107,10 @@ export const EducationSection = memo(() => {
           >
             Sempre em evolução
           </Badge>
-          <Text className="text-gray-400 font-light text-lg">
+          <TypographyText className="text-gray-400 font-light text-lg">
             Busco constantemente novas oportunidades de aprendizado para continuar evoluindo no
             campo da tecnologia.
-          </Text>
+          </TypographyText>
         </motion.div>
       </Container>
     </Box>

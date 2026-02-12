@@ -1,10 +1,12 @@
 import { motion } from 'framer-motion'
-import { ArrowRight, ExternalLink, Github, Instagram, Mail, MapPin, Smartphone } from 'lucide-react'
+import { ExternalLink, Github, Instagram, Mail, MapPin, Smartphone } from 'lucide-react'
 import { memo } from 'react'
+import { ContactCard } from '@/components/responsive/ContactCard'
+import { SectionHeader } from '@/components/responsive/SectionHeader'
 import { Badge } from '@/shadcn/components/ui/badge'
 import { Icon } from '@/shadcn/components/ui/icon'
 import { Box, Container, Grid, HStack, VStack } from '@/shadcn/components/ui/layout'
-import { Text, Title } from '@/shadcn/components/ui/typography'
+import { Text } from '@/shadcn/components/ui/typography'
 
 const contactItems = [
   {
@@ -66,37 +68,14 @@ export const ContactSection = memo(() => {
 
       <Container size="xl" className="relative z-10 px-4">
         <VStack className="items-center text-center gap-3 sm:gap-4 md:gap-5 lg:gap-6 mb-8 sm:mb-10 md:mb-12 lg:mb-16 px-3 sm:px-4">
-          <motion.div
-            initial={{ opacity: 0, scale: 0.5 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5 }}
-            style={{ willChange: 'transform, opacity' }}
-          >
-            <Badge
-              variant="outline"
-              className="
-                border-brand-500/50 text-brand-500 uppercase
-                tracking-widest text-xs font-bold px-3 py-1
-                bg-brand-500/5 shadow-[0_0_10px_var(--tw-shadow-color)]
-                shadow-brand-500/30
-              "
-            >
-              Fale Comigo
-            </Badge>
-          </motion.div>
-
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: 0.2 }}
-            style={{ willChange: 'transform, opacity' }}
-          >
-            <Title className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-heading font-bold uppercase tracking-wide">
-              Canais de <span className="text-brand-500 relative inline-block">Contato</span>
-            </Title>
-          </motion.div>
+          <SectionHeader
+            badge="Fale Comigo"
+            title={
+              <>
+                Canais de <span className="text-brand-500 relative inline-block">Contato</span>
+              </>
+            }
+          />
         </VStack>
 
         <motion.div
@@ -113,47 +92,7 @@ export const ContactSection = memo(() => {
                 className="h-full"
                 style={{ willChange: 'transform, opacity' }}
               >
-                <motion.a
-                  href={contact.href || undefined}
-                  target={contact.href ? '_blank' : undefined}
-                  rel={contact.href ? 'noopener noreferrer' : undefined}
-                  className={`group flex items-center gap-3 sm:gap-4 md:gap-5 bg-zinc-900/40 border border-zinc-800 p-3 sm:p-4 md:p-5 lg:p-6 rounded-xl transition-all duration-300 h-full backdrop-blur-sm relative overflow-hidden ${
-                    contact.highlight
-                      ? 'border-brand-500/50 bg-brand-500/10 shadow-[0_0_30px_var(--tw-shadow-color)] shadow-brand-500/15'
-                      : 'hover:border-brand-500/40 hover:bg-zinc-900/60 hover:shadow-[0_0_20px_var(--tw-shadow-color)] hover:shadow-brand-500/10'
-                  }`}
-                  whileHover={{ y: -5, transition: { duration: 0.2 } }}
-                >
-                  <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700 ease-in-out pointer-events-none" />
-
-                  <Box
-                    className={`p-3.5 rounded-xl shrink-0 ${
-                      contact.highlight
-                        ? 'bg-brand-500 text-black shadow-[0_0_15px_var(--tw-shadow-color)] shadow-brand-500/40'
-                        : 'bg-zinc-950 text-brand-500 border border-zinc-800/50 group-hover:border-brand-500/50 group-hover:text-brand-400 group-hover:scale-110 transition-all duration-300'
-                    }`}
-                  >
-                    <Icon icon={contact.icon} className="h-6 w-6" />
-                  </Box>
-
-                  <VStack className="gap-1 min-w-0 flex-1 relative z-10">
-                    <Text className="text-[10px] font-bold uppercase tracking-wider text-zinc-500 group-hover:text-brand-500 transition-colors">
-                      {contact.label}
-                    </Text>
-                    <Text className="text-sm md:text-base font-bold font-heading text-white truncate group-hover:text-brand-100 transition-colors">
-                      {contact.value}
-                    </Text>
-                  </VStack>
-
-                  {contact.href && (
-                    <Box className="relative z-10 w-8 h-8 flex items-center justify-center rounded-full bg-transparent group-hover:bg-brand-500/10 transition-colors">
-                      <Icon
-                        icon={ArrowRight}
-                        className="h-4 w-4 text-zinc-600 group-hover:text-brand-500 group-hover:-rotate-45 transition-all duration-300"
-                      />
-                    </Box>
-                  )}
-                </motion.a>
+                <ContactCard {...contact} />
               </motion.div>
             ))}
 
@@ -173,8 +112,10 @@ export const ContactSection = memo(() => {
                   transition-all duration-300 h-full
                   hover:bg-brand-500/5 backdrop-blur-sm
                   relative overflow-hidden
+                  mobile-touch-feedback
                 "
                 whileHover={{ y: -5, transition: { duration: 0.2 } }}
+                whileTap={{ scale: 0.98 }}
               >
                 <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700 ease-in-out pointer-events-none" />
 
