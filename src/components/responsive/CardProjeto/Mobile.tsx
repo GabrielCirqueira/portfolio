@@ -2,7 +2,6 @@ import { motion } from 'framer-motion'
 import { Calendar, ChevronRight } from 'lucide-react'
 import { memo } from 'react'
 import { Badge } from '@/shadcn/components/ui/badge'
-import { Button } from '@/shadcn/components/ui/button'
 import { Icon } from '@/shadcn/components/ui/icon'
 import { Box, Flex, HStack, VStack } from '@/shadcn/components/ui/layout'
 import { Span, Text, Title } from '@/shadcn/components/ui/typography'
@@ -31,14 +30,13 @@ export const Mobile = memo(({ projeto, onAbrirModal }: CardProjetoProps) => (
     transition={{ duration: 0.3 }}
     className="w-full"
   >
-    <Button
-      variant="ghost"
+    <Box
       onClick={() => onAbrirModal(projeto.id)}
       className="
-        w-full h-auto bg-zinc-950 border border-zinc-800 rounded-xl
-        overflow-hidden flex flex-col text-left p-0
+        w-full bg-zinc-950 border border-zinc-800 rounded-xl
+        overflow-hidden flex flex-col cursor-pointer
         active:border-brand-500/40 active:bg-zinc-900/50
-        transition-colors duration-150
+        transition-all duration-150 hover:border-zinc-700
       "
     >
       <Box className="relative w-full aspect-[2/1] overflow-hidden">
@@ -94,6 +92,6 @@ export const Mobile = memo(({ projeto, onAbrirModal }: CardProjetoProps) => (
           </Span>
         </HStack>
       </VStack>
-    </Button>
+    </Box>
   </motion.div>
 ))

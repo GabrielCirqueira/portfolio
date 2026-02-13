@@ -1,13 +1,21 @@
+import { ContadorAnimado } from '@app/components/ui/ContadorAnimado'
 import { motion } from 'framer-motion'
-import { FileCode } from 'lucide-react'
+import { Code, FileCode, FolderGit2, Layers, Trophy } from 'lucide-react'
 import { memo } from 'react'
 import { Badge } from '@/shadcn/components/ui/badge'
 import { Card } from '@/shadcn/components/ui/card'
 import { Icon } from '@/shadcn/components/ui/icon'
 import { Box, Grid, HStack, VStack } from '@/shadcn/components/ui/layout'
-import { Text, Title } from '@/shadcn/components/ui/typography'
+import { Span, Text, Title } from '@/shadcn/components/ui/typography'
 import { useIsLowPerformance } from '@/utils/deviceDetection'
 import type { AboutCard } from './index'
+
+const estatisticas = [
+  { icone: FolderGit2, rotulo: 'Repositórios', valor: 18, sufixo: '+' },
+  { icone: Layers, rotulo: 'Projetos', valor: 12, sufixo: '+' },
+  { icone: Code, rotulo: 'Tecnologias', valor: 20, sufixo: '+' },
+  { icone: Trophy, rotulo: 'Conquistas', valor: 5, sufixo: '' },
+]
 
 const container = {
   hidden: { opacity: 0 },
@@ -53,7 +61,7 @@ export const Desktop = memo(({ aboutCards }: DesktopProps) => {
           Sobre Mim
         </Badge>
         <Title className="text-3xl sm:text-4xl md:text-5xl font-bold font-heading uppercase tracking-wide">
-          Minha <span className="text-gradient">Trajetória</span>
+          Minha <Span className="text-gradient">Trajetória</Span>
         </Title>
       </motion.div>
 
@@ -66,7 +74,7 @@ export const Desktop = memo(({ aboutCards }: DesktopProps) => {
           className="flex justify-center px-4"
         >
           <Box className="relative w-full max-w-[280px] sm:max-w-sm aspect-[3/4] rounded-2xl overflow-hidden border border-zinc-800 bg-zinc-900 shadow-2xl group">
-            <div className="absolute inset-0 bg-brand-500/10 mix-blend-overlay opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-10 pointer-events-none" />
+            <Box className="absolute inset-0 bg-brand-500/10 mix-blend-overlay opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-10 pointer-events-none" />
             <img
               src="/images/gabriel1.png"
               alt="Gabriel Cirqueira"
@@ -158,11 +166,48 @@ export const Desktop = memo(({ aboutCards }: DesktopProps) => {
       </Grid>
 
       <motion.div
+        initial={{ opacity: 0, y: 30 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.6, delay: 0.3 }}
+        className="mt-20"
+      >
+        <Grid className="grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
+          {estatisticas.map((estatistica, index) => (
+            <motion.div
+              key={estatistica.rotulo}
+              initial={{ opacity: 0, scale: 0.8 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.4, delay: index * 0.1 }}
+            >
+              <Box className="relative group text-center p-6 rounded-xl border border-zinc-800 bg-zinc-900/40 backdrop-blur-sm hover:border-brand-500/40 transition-all duration-300 hover:shadow-[0_0_25px_var(--tw-shadow-color)] hover:shadow-brand-500/10 overflow-hidden">
+                <Box className="absolute inset-0 bg-gradient-to-t from-brand-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
+                <Box className="mx-auto mb-3 w-10 h-10 rounded-lg bg-brand-500/10 flex items-center justify-center group-hover:bg-brand-500/20 transition-colors">
+                  <Icon icon={estatistica.icone} className="h-5 w-5 text-brand-500" />
+                </Box>
+                <Text className="text-3xl md:text-4xl font-black text-white font-heading mb-1">
+                  <ContadorAnimado
+                    ate={estatistica.valor}
+                    sufixo={estatistica.sufixo}
+                    duracao={2.5}
+                  />
+                </Text>
+                <Text className="text-[10px] md:text-xs text-zinc-500 uppercase tracking-widest font-bold">
+                  {estatistica.rotulo}
+                </Text>
+              </Box>
+            </motion.div>
+          ))}
+        </Grid>
+      </motion.div>
+
+      <motion.div
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         transition={{ duration: 0.5, delay: 0.2 }}
-        className="mt-24 flex justify-center"
+        className="mt-16 flex justify-center"
       >
         <Box className="max-w-2xl text-center border-t border-white/5 pt-10 relative">
           <Box className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 w-20 h-1 bg-brand-500 rounded-full blur-[1px]" />

@@ -144,7 +144,7 @@ export const Desktop = memo(({ socials, links }: FooterContentProps) => {
 
       <HStack className="flex-col sm:flex-row justify-between items-center gap-4 text-center sm:text-left">
         <Text className="text-gray-500 text-xs font-mono uppercase tracking-widest">
-          © {currentYear} Gabriel Cirqueira.
+          © {currentYear} Gabriel Cirqueira. ( digite "cirqueira" 👀)
         </Text>
         <HStack className="items-center gap-2 opacity-50 hover:opacity-100 transition-opacity cursor-default">
           <Text className="text-gray-500 text-xs font-mono">Code with</Text>

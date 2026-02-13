@@ -1,9 +1,28 @@
 import { motion } from 'framer-motion'
 import { memo } from 'react'
+import Marquee from 'react-fast-marquee'
 import { EducationGrid } from '@/components/responsive/EducationGrid'
 import { Badge } from '@/shadcn/components/ui/badge'
 import { Box, Container } from '@/shadcn/components/ui/layout'
-import { Text, Title } from '@/shadcn/components/ui/typography'
+import { Span, Text, Title } from '@/shadcn/components/ui/typography'
+
+const palavrasChaveCarreira = [
+  'Symfony',
+  'React',
+  'TypeScript',
+  'PHP',
+  'Docker',
+  'FastAPI',
+  'MySQL',
+  'Linux',
+  'Git',
+  'Tailwind CSS',
+  'RabbitMQ',
+  'Nginx',
+  'REST APIs',
+  'JWT',
+  'Vite',
+]
 
 const formacao = [
   {
@@ -86,7 +105,7 @@ export const EducationSection = memo(() => {
             Carreira
           </Badge>
           <Title className="text-2xl sm:text-3xl md:text-5xl font-bold font-heading mb-3 sm:mb-4 uppercase tracking-wide">
-            Formação e <span className="text-gradient">Experiência</span>
+            Formação e <Span className="text-gradient">Experiência</Span>
           </Title>
           <Text className="text-gray-400 max-w-2xl mx-auto text-base sm:text-lg font-light">
             Meu percurso acadêmico e profissional na área de tecnologia.
@@ -117,6 +136,29 @@ export const EducationSection = memo(() => {
             Busco constantemente novas oportunidades de aprendizado para continuar evoluindo no
             campo da tecnologia.
           </Text>
+        </motion.div>
+
+        <motion.div
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8, delay: 0.3 }}
+          className="mt-16 relative"
+        >
+          <Box className="absolute inset-y-0 left-0 w-24 sm:w-40 bg-gradient-to-r from-black to-transparent z-10 pointer-events-none" />
+          <Box className="absolute inset-y-0 right-0 w-24 sm:w-40 bg-gradient-to-l from-black to-transparent z-10 pointer-events-none" />
+          <Box className="border-y border-zinc-800/50 py-5">
+            <Marquee speed={25} gradient={false} direction="right">
+              {palavrasChaveCarreira.map((palavraChave, index) => (
+                <Box key={index} className="flex items-center mx-5 sm:mx-8">
+                  <Text className="text-[10px] sm:text-xs text-zinc-700 uppercase tracking-[0.3em] font-mono font-bold whitespace-nowrap">
+                    {palavraChave}
+                  </Text>
+                  <Box className="w-1.5 h-1.5 rounded-full bg-brand-500/30 ml-5 sm:ml-8" />
+                </Box>
+              ))}
+            </Marquee>
+          </Box>
         </motion.div>
       </Container>
     </Box>

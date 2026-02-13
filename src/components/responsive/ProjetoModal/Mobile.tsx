@@ -206,7 +206,7 @@ export function Mobile({ isOpen, onClose, projeto }: ProjetoModalProps) {
                   </HStack>
                   <VStack className="gap-2.5 pl-2.5 border-l-2 border-brand-500/20">
                     {projeto.descricaoCompleta.map((paragrafo, index) => (
-                      <Text key={index} className="text-zinc-400 text-[12px] leading-[1.6]">
+                      <Text key={index} className="text-zinc-400 text-[15px] leading-[1.6]">
                         {paragrafo}
                       </Text>
                     ))}

@@ -172,7 +172,7 @@ export function Desktop({ isOpen, onClose, projeto }: ProjetoModalProps) {
                       <VStack className="gap-3 relative pl-3">
                         <Box className="absolute -left-0 top-0 bottom-0 w-0.5 bg-gradient-to-b from-brand-500/50 via-brand-500/20 to-transparent rounded-full" />
                         {projeto.descricaoCompleta.map((paragrafo, index) => (
-                          <Text key={index} className="text-gray-300 text-sm leading-relaxed">
+                          <Text key={index} className="text-gray-300 text-md leading-relaxed">
                             {paragrafo}
                           </Text>
                         ))}

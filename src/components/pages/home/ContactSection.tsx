@@ -5,7 +5,7 @@ import { memo } from 'react'
 import { ContactGrid } from '@/components/responsive/ContactGrid'
 import { Badge } from '@/shadcn/components/ui/badge'
 import { Box, Container, VStack } from '@/shadcn/components/ui/layout'
-import { Title } from '@/shadcn/components/ui/typography'
+import { Span, Text, Title } from '@/shadcn/components/ui/typography'
 
 const contactItems = [
   {
@@ -82,6 +82,22 @@ export const ContactSection = memo(() => {
             <Title className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-heading font-bold uppercase tracking-wide">
               Canais de <span className="text-brand-500 relative inline-block">Contato</span>
             </Title>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, scale: 0.9 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.4 }}
+            className="flex items-center gap-2.5 px-4 py-2 rounded-full border border-green-500/30 bg-green-500/5 backdrop-blur-sm"
+          >
+            <Span className="relative flex h-2.5 w-2.5">
+              <Span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75" />
+              <Span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-green-500" />
+            </Span>
+            <Text className="text-xs text-green-400 font-bold uppercase tracking-widest">
+              Disponível para projetos
+            </Text>
           </motion.div>
         </VStack>
 

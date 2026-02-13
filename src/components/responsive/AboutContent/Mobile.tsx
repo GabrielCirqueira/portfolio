@@ -1,11 +1,19 @@
+import { ContadorAnimado } from '@app/components/ui/ContadorAnimado'
 import { motion } from 'framer-motion'
-import { FileCode } from 'lucide-react'
+import { Code, FileCode, FolderGit2, Layers, Trophy } from 'lucide-react'
 import { memo } from 'react'
 import { Badge } from '@/shadcn/components/ui/badge'
 import { Icon } from '@/shadcn/components/ui/icon'
-import { Box, HStack, VStack } from '@/shadcn/components/ui/layout'
+import { Box, Grid, HStack, VStack } from '@/shadcn/components/ui/layout'
 import { Span, Text, Title } from '@/shadcn/components/ui/typography'
 import type { AboutCard } from './index'
+
+const estatisticas = [
+  { icone: FolderGit2, rotulo: 'Repos', valor: 32, sufixo: '+' },
+  { icone: Layers, rotulo: 'Projetos', valor: 12, sufixo: '+' },
+  { icone: Code, rotulo: 'Techs', valor: 20, sufixo: '+' },
+  { icone: Trophy, rotulo: 'Conquistas', valor: 5, sufixo: '' },
+]
 
 interface MobileProps {
   aboutCards: AboutCard[]
@@ -92,6 +100,43 @@ export const Mobile = memo(({ aboutCards }: MobileProps) => {
           </motion.div>
         ))}
       </VStack>
+
+      <motion.div
+        initial={{ opacity: 0, y: 12 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.4, delay: 0.15 }}
+        className="mb-8"
+      >
+        <Grid className="grid-cols-4 gap-2">
+          {estatisticas.map((estatistica, index) => (
+            <motion.div
+              key={estatistica.rotulo}
+              initial={{ opacity: 0, scale: 0.8 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.3, delay: index * 0.08 }}
+            >
+              <Box className="text-center p-3 rounded-lg border border-zinc-800 bg-zinc-900/60">
+                <Icon
+                  icon={estatistica.icone}
+                  className="h-3.5 w-3.5 text-brand-500 mx-auto mb-1.5"
+                />
+                <Text className="text-lg font-black text-white font-heading">
+                  <ContadorAnimado
+                    ate={estatistica.valor}
+                    sufixo={estatistica.sufixo}
+                    duracao={2}
+                  />
+                </Text>
+                <Text className="text-[8px] text-zinc-500 uppercase tracking-widest font-bold">
+                  {estatistica.rotulo}
+                </Text>
+              </Box>
+            </motion.div>
+          ))}
+        </Grid>
+      </motion.div>
 
       <motion.div
         initial={{ opacity: 0 }}

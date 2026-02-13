@@ -1,6 +1,7 @@
 import { motion, useScroll, useTransform } from 'framer-motion'
 import { ArrowDownCircle, Code, Terminal } from 'lucide-react'
 import { memo, useEffect, useRef, useState } from 'react'
+import { SiDocker, SiPhp, SiReact, SiSymfony, SiTailwindcss, SiTypescript } from 'react-icons/si'
 import { TypeAnimation } from 'react-type-animation'
 import { Badge } from '@/shadcn/components/ui/badge'
 import { Button } from '@/shadcn/components/ui/button'
@@ -9,6 +10,15 @@ import { Box, Container, VStack } from '@/shadcn/components/ui/layout'
 import { Link } from '@/shadcn/components/ui/link'
 import { Text } from '@/shadcn/components/ui/typography'
 import { useIsLowPerformance } from '@/utils/deviceDetection'
+
+const iconesFlutantes = [
+  { Icone: SiReact, cor: '#61DAFB', x: '10%', y: '20%', atraso: 0, duracao: 6 },
+  { Icone: SiTypescript, cor: '#3178C6', x: '85%', y: '25%', atraso: 1, duracao: 7 },
+  { Icone: SiPhp, cor: '#777BB4', x: '15%', y: '70%', atraso: 2, duracao: 5 },
+  { Icone: SiSymfony, cor: '#ffffff', x: '80%', y: '75%', atraso: 0.5, duracao: 8 },
+  { Icone: SiTailwindcss, cor: '#06B6D4', x: '50%', y: '10%', atraso: 1.5, duracao: 6 },
+  { Icone: SiDocker, cor: '#2496ED', x: '90%', y: '50%', atraso: 3, duracao: 7 },
+]
 
 export const Desktop = memo(() => {
   const [loaded, setLoaded] = useState(false)
@@ -47,7 +57,7 @@ export const Desktop = memo(() => {
           transition={{ duration: 15, repeat: Infinity, ease: 'easeInOut' }}
           className="absolute top-[-10%] right-[-5%] w-[600px] h-[600px]"
         >
-          <div
+          <Box
             className={`w-full h-full bg-brand-500/20 rounded-full ${isLowPerf ? 'blur-[60px]' : 'blur-[120px]'}`}
           />
         </motion.div>
@@ -70,7 +80,7 @@ export const Desktop = memo(() => {
           transition={{ duration: 18, repeat: Infinity, ease: 'easeInOut', delay: 2 }}
           className="absolute bottom-[-10%] left-[-10%] w-[500px] h-[500px]"
         >
-          <div
+          <Box
             className={`w-full h-full bg-brand-800/20 rounded-full ${isLowPerf ? 'blur-[50px]' : 'blur-[100px]'}`}
           />
         </motion.div>
@@ -84,6 +94,28 @@ export const Desktop = memo(() => {
           pointer-events-none
         "
       />
+
+      {!isLowPerf &&
+        iconesFlutantes.map((tecnologia, index) => (
+          <motion.div
+            key={index}
+            className="absolute pointer-events-none z-[1] opacity-[0.07]"
+            style={{ left: tecnologia.x, top: tecnologia.y }}
+            animate={{
+              y: [0, -20, 0, 15, 0],
+              x: [0, 10, 0, -10, 0],
+              rotate: [0, 10, -5, 8, 0],
+            }}
+            transition={{
+              duration: tecnologia.duracao,
+              repeat: Infinity,
+              ease: 'easeInOut',
+              delay: tecnologia.atraso,
+            }}
+          >
+            <tecnologia.Icone size={32} style={{ color: tecnologia.cor }} />
+          </motion.div>
+        ))}
 
       <Container size="xl" className="relative z-10">
         <VStack className="items-center justify-center text-center gap-0">
