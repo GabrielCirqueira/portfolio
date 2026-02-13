@@ -277,7 +277,7 @@ export const SkillsSection = memo(() => {
 
         <Box className="mt-12 sm:mt-16 md:mt-20 lg:mt-24 relative">
           <TooltipProvider delayDuration={200}>
-            <Marquee speed={50} gradient gradientColor="#000000" gradientWidth={80} pauseOnHover>
+            <Marquee speed={50} gradient gradientColor="#000000" gradientWidth={130} pauseOnHover>
               {techIcons.map((tech, index) => (
                 <Tooltip
                   key={index}
@@ -288,7 +288,7 @@ export const SkillsSection = memo(() => {
                     <Center
                       onClick={(e) => handleTooltipClick(index, e)}
                       className="
-                        flex-shrink-0 lg:px-10 py-5 px-5
+                        flex-shrink-0 lg:px-7 py-5 px-5
                         transition-all duration-300
                         group cursor-pointer
                       "

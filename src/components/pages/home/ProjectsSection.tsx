@@ -101,7 +101,7 @@ export const ProjectsSection = memo(() => {
               initial="hidden"
               whileInView="visible"
               viewport={{ once: true, margin: '-100px' }}
-              className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6 md:gap-8 lg:gap-10"
+              className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 md:gap-8 lg:gap-10"
             >
               {sistemas.map((projeto) => (
                 <CardProjeto key={projeto.id} projeto={projeto} onAbrirModal={abrirModal} />
@@ -137,7 +137,7 @@ export const ProjectsSection = memo(() => {
               initial="hidden"
               whileInView="visible"
               viewport={{ once: true, margin: '-100px' }}
-              className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6 md:gap-8 lg:gap-10"
+              className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 md:gap-8 lg:gap-10"
             >
               {jogos.map((projeto) => (
                 <CardProjeto key={projeto.id} projeto={projeto} onAbrirModal={abrirModal} />

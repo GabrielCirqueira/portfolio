@@ -7,6 +7,7 @@ export interface Projeto {
   imagens: string[]
   tecnologias: string[]
   link?: string
+  gitHub?: string
   dataInicio: string
   dataFim?: string
   tipo: 'sistema' | 'jogo'
