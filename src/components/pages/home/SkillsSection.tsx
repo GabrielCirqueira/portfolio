@@ -233,10 +233,10 @@ export const SkillsSection = memo(() => {
     <Box
       as="section"
       id="habilidades"
-      className="py-12 sm:py-16 md:py-20 lg:py-24 relative bg-black font-sans overflow-hidden"
+      className="py-16 sm:py-20 md:py-24 lg:py-28 relative bg-black font-sans overflow-hidden"
     >
-      <Container size="xl" className="relative z-10 px-4">
-        <VStack className="items-center text-center gap-3 sm:gap-4 mb-10 sm:mb-12 md:mb-14 lg:mb-20 px-3 sm:px-4">
+      <Container size="xl" className="relative z-10 px-4 sm:px-6">
+        <VStack className="items-center text-center gap-4 sm:gap-5 mb-12 sm:mb-14 md:mb-16 lg:mb-20">
           <motion.div
             initial={{ opacity: 0, scale: 0.5 }}
             whileInView={{ opacity: 1, scale: 1 }}
@@ -246,11 +246,10 @@ export const SkillsSection = memo(() => {
             <Badge
               variant="outline"
               className="
-                border-brand-500/30 text-brand-500
-                uppercase tracking-widest text-xs font-mono
-                px-4 py-1.5 bg-brand-500/5 backdrop-blur-md
-                shadow-[0_0_15px_var(--tw-shadow-color)]
-                shadow-brand-500/10
+                border-brand-500/40 text-brand-400
+                uppercase tracking-wider text-xs font-semibold
+                px-5 py-2 bg-brand-500/10 backdrop-blur-md
+                shadow-lg shadow-brand-500/10 rounded-full
               "
             >
               Habilidades
@@ -262,23 +261,24 @@ export const SkillsSection = memo(() => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.2 }}
+            className="space-y-4"
           >
             <Title className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold uppercase tracking-tight font-heading">
               Stack & <span className="text-gradient">Ferramentas</span>
             </Title>
-            <Text className="text-gray-400 mt-3 sm:mt-4 md:mt-6 max-w-2xl mx-auto text-sm sm:text-base md:text-lg px-3">
+            <Box className="w-20 sm:w-24 h-1 bg-brand-500 mx-auto rounded-full opacity-60" />
+            <Text className="text-zinc-400 max-w-2xl mx-auto text-sm sm:text-base md:text-lg px-4 leading-relaxed">
               Trabalho com um conjunto de tecnologias modernas voltadas à criação de aplicações web
-              performáticas, escaláveis e bem estruturadas. Busco sempre utilizar ferramentas que
-              facilitem manutenção, colaboração e evolução contínua dos sistemas.
+              performáticas, escaláveis e bem estruturadas.
             </Text>
           </motion.div>
         </VStack>
 
         <SkillsGrid skills={skills} />
 
-        <Box className="mt-12 sm:mt-16 md:mt-20 lg:mt-24 relative">
+        <Box className="mt-16 sm:mt-20 md:mt-24 lg:mt-28 relative">
           <TooltipProvider delayDuration={200}>
-            <Marquee speed={50} gradient gradientColor="#000000" gradientWidth={130} pauseOnHover>
+            <Marquee speed={50} gradient gradientColor="#000000" gradientWidth={100} pauseOnHover>
               {techIcons.map((tech, index) => (
                 <Tooltip
                   key={index}
@@ -289,21 +289,21 @@ export const SkillsSection = memo(() => {
                     <Center
                       onClick={(e) => handleTooltipClick(index, e)}
                       className="
-                        flex-shrink-0 lg:px-7 py-5 px-5
+                        flex-shrink-0 px-4 sm:px-6 lg:px-8 py-4 sm:py-5
                         transition-all duration-300
                         group cursor-pointer
                       "
                     >
                       <tech.Icon
-                        size={isMobile ? 25 : 40}
+                        size={isMobile ? 32 : 42}
                         style={{ color: tech.color }}
-                        className="sm:text-[36px] md:text-[40px] group-hover:scale-150 transition-transform duration-300"
+                        className="group-hover:scale-125 transition-transform duration-300"
                       />
                     </Center>
                   </TooltipTrigger>
                   <TooltipContent className="bg-zinc-900 border-zinc-800 max-w-sm">
-                    <Text className="text-sm font-bold text-brand-500 mb-1">{tech.name}</Text>
-                    <Text className="text-md text-zinc-400">{tech.description}</Text>
+                    <Text className="text-sm font-bold text-brand-400 mb-1">{tech.name}</Text>
+                    <Text className="text-xs text-zinc-400">{tech.description}</Text>
                   </TooltipContent>
                 </Tooltip>
               ))}

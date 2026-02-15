@@ -16,10 +16,23 @@
     scrollbar-width: thin;
     scrollbar-color: theme("colors.brand.500") #000;
     overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
   }
 
   html {
     scroll-behavior: smooth;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  /* Better touch targets for mobile */
+  @media (max-width: 768px) {
+    button,
+    a {
+      min-height: 44px;
+      min-width: 44px;
+    }
   }
 
   ::-webkit-scrollbar {
@@ -47,11 +60,11 @@
   /* Mobile-specific improvements */
   @media (max-width: 768px) {
     body {
-      font-size: 13px;
-      line-height: 1.5;
+      font-size: 14px;
+      line-height: 1.6;
     }
 
-    /* Reduzir espaçamentos globais no mobile */
+    /* Better line height for headings */
     h1,
     h2,
     h3,
@@ -59,12 +72,24 @@
     h5,
     h6 {
       line-height: 1.2;
+      letter-spacing: -0.02em;
+    }
+
+    /* Optimize touch interactions */
+    * {
+      -webkit-tap-highlight-color: rgba(var(--brand-500), 0.1);
+    }
+
+    /* Improve scroll performance */
+    * {
+      -webkit-overflow-scrolling: touch;
     }
   }
 
   @media (max-width: 480px) {
     body {
-      font-size: 12px;
+      font-size: 13px;
+      line-height: 1.55;
     }
   }
 

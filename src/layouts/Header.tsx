@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react'
 import { Icon } from '@/shadcn/components/ui/icon'
 import { Box, Container, HStack } from '@/shadcn/components/ui/layout'
 import { Text } from '@/shadcn/components/ui/typography'
+import { MobileMenu } from './MobileMenu'
 
 export function Header() {
   const [isOpen, setIsOpen] = useState(false)
@@ -39,41 +40,6 @@ export function Header() {
     { name: 'Contato', href: '#contato' },
   ]
 
-  const menuVariants = {
-    closed: {
-      opacity: 0,
-      y: '-100%',
-      transition: {
-        duration: 0.5,
-        ease: [0.22, 1, 0.36, 1] as const,
-      },
-    },
-    open: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        duration: 0.5,
-        ease: [0.22, 1, 0.36, 1] as const,
-      },
-    },
-  }
-
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    show: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.1,
-        delayChildren: 0.3,
-      },
-    },
-  }
-
-  const itemVariants = {
-    hidden: { opacity: 0, y: 50 },
-    show: { opacity: 1, y: 0, transition: { duration: 0.4 } },
-  }
-
   return (
     <>
       <Box
@@ -81,31 +47,31 @@ export function Header() {
           fixed top-0 w-full z-50 transition-all
           duration-500 font-sans ${
             scrolled
-              ? 'bg-black/80 backdrop-blur-xl border-b border-white/5 shadow-lg'
-              : 'bg-transparent border-b border-transparent py-4'
+              ? 'bg-black/90 backdrop-blur-xl border-b border-white/10 shadow-lg'
+              : 'bg-transparent border-b border-transparent'
           }
         `}
       >
-        <Container size="xl">
-          <HStack className="justify-between items-center h-16 md:h-20">
+        <Container size="xl" className="px-4 sm:px-6">
+          <HStack className="justify-between items-center h-16 sm:h-18 md:h-20">
             <motion.a
               href="#inicio"
               className="
-                flex items-center space-x-2 text-white
+                flex items-center gap-2 text-white
                 hover:text-brand-400 transition-colors
                 no-underline group relative z-50
               "
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
             >
-              <Text className="font-mono text-brand-500 text-xl md:text-2xl group-hover:rotate-12 transition-transform duration-300">
+              <Text className="font-mono text-brand-500 text-lg sm:text-xl md:text-2xl group-hover:rotate-12 transition-transform duration-300">
                 &lt;
               </Text>
-              <Text className="font-bold text-lg md:text-xl tracking-wide uppercase font-heading relative">
+              <Text className="font-bold text-base sm:text-lg md:text-xl tracking-wide uppercase font-heading relative">
                 Gabriel.Dev
                 <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-brand-500 transition-all duration-300 group-hover:w-full"></span>
               </Text>
-              <Text className="font-mono text-brand-500 text-xl md:text-2xl group-hover:-rotate-12 transition-transform duration-300">
+              <Text className="font-mono text-brand-500 text-lg sm:text-xl md:text-2xl group-hover:-rotate-12 transition-transform duration-300">
                 /&gt;
               </Text>
             </motion.a>
@@ -147,10 +113,10 @@ export function Header() {
             <button
               type="button"
               onClick={() => setIsOpen(!isOpen)}
-              className="p-2 md:hidden text-white hover:text-brand-500 transition-all focus:outline-none relative z-50"
+              className="p-2 md:hidden text-white hover:text-brand-500 transition-all focus:outline-none relative z-50 active:scale-95"
               aria-label="Menu"
             >
-              <div className="w-8 h-8 relative flex items-center justify-center">
+              <div className="w-7 h-7 sm:w-8 sm:h-8 relative flex items-center justify-center">
                 <AnimatePresence mode="wait">
                   {isOpen ? (
                     <motion.div
@@ -161,7 +127,7 @@ export function Header() {
                       transition={{ duration: 0.2 }}
                       className="absolute"
                     >
-                      <Icon icon={X} className="h-8 w-8" />
+                      <Icon icon={X} className="h-7 w-7 sm:h-8 sm:w-8" />
                     </motion.div>
                   ) : (
                     <motion.div
@@ -172,7 +138,7 @@ export function Header() {
                       transition={{ duration: 0.2 }}
                       className="absolute"
                     >
-                      <Icon icon={Menu} className="h-8 w-8" />
+                      <Icon icon={Menu} className="h-7 w-7 sm:h-8 sm:w-8" />
                     </motion.div>
                   )}
                 </AnimatePresence>
@@ -182,73 +148,7 @@ export function Header() {
         </Container>
       </Box>
 
-      <AnimatePresence>
-        {isOpen && (
-          <motion.div
-            initial="closed"
-            animate="open"
-            exit="closed"
-            variants={menuVariants}
-            className="fixed inset-0 z-40 bg-black/98 backdrop-blur-xl flex flex-col md:hidden"
-          >
-            <Box className="absolute inset-0 bg-brand-500/5 pointer-events-none" />
-            <Box className="absolute top-0 right-0 w-48 h-48 bg-brand-500/10 rounded-full blur-[80px] pointer-events-none" />
-            <Box className="absolute bottom-0 left-0 w-48 h-48 bg-brand-800/10 rounded-full blur-[80px] pointer-events-none" />
-
-            <Container
-              size="xl"
-              className="relative z-10 w-full flex-1 flex flex-col justify-center py-20 px-6"
-            >
-              <motion.div
-                variants={containerVariants}
-                initial="hidden"
-                animate="show"
-                className="flex flex-col items-center space-y-4"
-              >
-                {navItems.map((item) => (
-                  <motion.a
-                    key={item.name}
-                    href={item.href}
-                    variants={itemVariants}
-                    onClick={() => setIsOpen(false)}
-                    className="group relative block text-center w-full py-2"
-                  >
-                    <Text
-                      className="
-                        text-xl font-black uppercase
-                        tracking-tight text-white
-                        hover:text-brand-400 transition-all duration-300
-                        font-heading
-                      "
-                    >
-                      {item.name}
-                    </Text>
-                    <Box className="absolute bottom-0 left-1/2 -translate-x-1/2 w-0 h-0.5 bg-brand-500 group-hover:w-20 transition-all duration-300" />
-                  </motion.a>
-                ))}
-
-                <motion.div variants={itemVariants} className="pt-6 w-full max-w-xs">
-                  <a
-                    href="https://linktr.ee/gabrielCirqueira"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    onClick={() => setIsOpen(false)}
-                    className="
-                      w-full px-5 py-3 border border-brand-500
-                      text-brand-500 font-bold uppercase
-                      tracking-widest hover:bg-brand-500
-                      hover:text-black transition-all
-                      duration-300 rounded text-xs block text-center
-                    "
-                  >
-                    Linktree
-                  </a>
-                </motion.div>
-              </motion.div>
-            </Container>
-          </motion.div>
-        )}
-      </AnimatePresence>
+      <MobileMenu isOpen={isOpen} onClose={() => setIsOpen(false)} />
     </>
   )
 }

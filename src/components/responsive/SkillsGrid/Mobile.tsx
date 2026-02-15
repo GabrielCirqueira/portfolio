@@ -26,44 +26,45 @@ export const Mobile = memo(({ skills }: SkillsGridProps) => {
   }
 
   return (
-    <VStack className="gap-2 w-full">
+    <VStack className="gap-3 w-full px-2">
       {skills.map((skill, index) => {
         const isOpen = openIndex === index
 
         return (
           <motion.div
             key={skill.category}
-            initial={{ opacity: 0, y: 10 }}
+            initial={{ opacity: 0, y: 15 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.25, delay: index * 0.05 }}
+            transition={{ duration: 0.4, delay: index * 0.1 }}
             className="w-full"
           >
             <Button
               variant="ghost"
               onClick={() => toggle(index)}
               className={`
-                w-full h-auto flex items-center gap-3 px-4 py-3.5
-                bg-zinc-900/60 border rounded-xl
-                transition-all duration-200
+                w-full h-auto flex items-center gap-4 px-5 py-4
+                bg-zinc-900/60 backdrop-blur-sm border rounded-2xl
+                transition-all duration-200 shadow-lg
+                active:scale-[0.98]
                 ${
                   isOpen
-                    ? 'border-brand-500/30 bg-zinc-900/80 rounded-b-none'
-                    : 'border-zinc-800/60 active:bg-zinc-800/50'
+                    ? 'border-brand-500/40 bg-zinc-900/90 rounded-b-none shadow-brand-500/10'
+                    : 'border-zinc-800 active:bg-zinc-800/60'
                 }
               `}
             >
               <Box
                 className={`
-                p-2 rounded-lg border transition-colors duration-200
+                p-3 rounded-xl border transition-all duration-200
                 ${
                   isOpen
-                    ? 'bg-brand-500 border-brand-500 text-black'
+                    ? 'bg-gradient-to-br from-brand-500 to-brand-600 border-brand-500 text-black shadow-lg shadow-brand-500/20'
                     : 'bg-zinc-950 border-zinc-800 text-zinc-400'
                 }
               `}
               >
-                <Icon icon={skill.icon} className="w-4 h-4" />
+                <Icon icon={skill.icon} className="w-5 h-5" />
               </Box>
 
               <Span
@@ -76,14 +77,14 @@ export const Mobile = memo(({ skills }: SkillsGridProps) => {
                 {skill.category}
               </Span>
 
-              <Span className="text-[10px] text-zinc-500 font-mono mr-1">
+              <Badge className="bg-zinc-950 text-zinc-400 border border-zinc-800 px-2 py-1 text-xs font-mono rounded-lg">
                 {skill.technologies.length}
-              </Span>
+              </Badge>
 
               <motion.div animate={{ rotate: isOpen ? 180 : 0 }} transition={{ duration: 0.2 }}>
                 <Icon
                   icon={ChevronDown}
-                  className={`w-4 h-4 transition-colors ${isOpen ? 'text-brand-400' : 'text-zinc-600'}`}
+                  className={`w-5 h-5 transition-colors ${isOpen ? 'text-brand-400' : 'text-zinc-600'}`}
                 />
               </motion.div>
             </Button>
@@ -94,24 +95,26 @@ export const Mobile = memo(({ skills }: SkillsGridProps) => {
                   initial={{ height: 0, opacity: 0 }}
                   animate={{ height: 'auto', opacity: 1 }}
                   exit={{ height: 0, opacity: 0 }}
-                  transition={{ duration: 0.25, ease: 'easeInOut' }}
+                  transition={{ duration: 0.3, ease: 'easeInOut' }}
                   className="overflow-hidden"
                 >
-                  <VStack className="px-4 pb-4 pt-3 bg-zinc-900/40 border border-t-0 border-zinc-800/40 rounded-b-xl gap-3">
-                    <Text className="text-zinc-400 text-[11px] leading-relaxed">
+                  <VStack className="px-5 pb-5 pt-4 bg-zinc-900/60 backdrop-blur-sm border border-t-0 border-zinc-800 rounded-b-2xl gap-4 shadow-lg">
+                    <Text className="text-zinc-400 text-xs leading-relaxed">
                       {skill.description}
                     </Text>
 
-                    <Flex className="flex-wrap gap-1.5">
+                    <Flex className="flex-wrap gap-2">
                       {skill.technologies.map((tech) => (
                         <Badge
                           key={tech}
                           className="
-                            flex items-center gap-1.5 bg-zinc-950 border border-zinc-800
-                            text-zinc-300 px-2.5 py-1 text-[11px] font-mono rounded-lg
+                            flex items-center gap-2 bg-zinc-950 border border-zinc-800
+                            text-zinc-300 px-3 py-1.5 text-xs font-mono rounded-xl
+                            active:border-brand-500/30 active:bg-zinc-900
+                            transition-all duration-150
                           "
                         >
-                          <Box className="w-1 h-1 rounded-full bg-brand-500/60" />
+                          <Box className="w-1.5 h-1.5 rounded-full bg-brand-500" />
                           {tech}
                         </Badge>
                       ))}
