@@ -34,6 +34,7 @@ export const AboutSection = memo(() => {
 
   return (
     <Box
+      as="section"
       id="sobre"
       className="py-16 sm:py-20 md:py-24 relative font-sans bg-zinc-950/30 overflow-hidden"
     >

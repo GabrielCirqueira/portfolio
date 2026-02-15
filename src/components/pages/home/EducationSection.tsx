@@ -79,6 +79,7 @@ const experiencias = [
 export const EducationSection = memo(() => {
   return (
     <Box
+      as="section"
       id="formacao"
       className="py-16 sm:py-20 md:py-24 bg-black relative font-sans overflow-hidden"
     >

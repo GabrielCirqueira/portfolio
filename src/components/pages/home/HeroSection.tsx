@@ -4,7 +4,7 @@ import { Box } from '@/shadcn/components/ui/layout'
 
 export const HeroSection = memo(() => {
   return (
-    <Box id="inicio">
+    <Box as="section" id="inicio">
       <HeroContent />
     </Box>
   )

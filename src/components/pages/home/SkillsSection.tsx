@@ -231,6 +231,7 @@ export const SkillsSection = memo(() => {
 
   return (
     <Box
+      as="section"
       id="habilidades"
       className="py-12 sm:py-16 md:py-20 lg:py-24 relative bg-black font-sans overflow-hidden"
     >

@@ -44,6 +44,7 @@ const contactItems = [
 export const ContactSection = memo(() => {
   return (
     <Box
+      as="section"
       id="contato"
       className="py-12 sm:py-16 md:py-20 lg:py-24 relative bg-black font-sans overflow-hidden"
     >

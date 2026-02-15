@@ -1,4 +1,6 @@
+import { EasterEgg } from '@app/components/ui/EasterEgg'
 import { ThemeProvider } from '@app/contexts'
+import { EasterEggProvider } from '@app/contexts/EasterEggContext'
 import { MainLayout, RootLayout } from '@app/layouts'
 import LogRocket from 'logrocket'
 import {
@@ -26,7 +28,10 @@ const router = createBrowserRouter(
 export default function App() {
   return (
     <ThemeProvider>
-      <RouterProvider router={router} />
+      <EasterEggProvider>
+        <EasterEgg />
+        <RouterProvider router={router} />
+      </EasterEggProvider>
     </ThemeProvider>
   )
 }

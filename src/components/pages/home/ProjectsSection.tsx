@@ -32,6 +32,7 @@ export const ProjectsSection = memo(() => {
 
   return (
     <Box
+      as="section"
       id="projetos"
       className="py-10 sm:py-16 md:py-20 lg:py-32 relative bg-black font-sans overflow-hidden"
     >
