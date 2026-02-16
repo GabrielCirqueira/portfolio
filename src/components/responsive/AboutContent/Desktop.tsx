@@ -76,7 +76,7 @@ export const Desktop = memo(({ aboutCards }: DesktopProps) => {
           <Box className="relative w-full max-w-[280px] sm:max-w-sm aspect-[3/4] rounded-2xl overflow-hidden border border-zinc-800 bg-zinc-900 shadow-2xl group">
             <Box className="absolute inset-0 bg-brand-500/10 mix-blend-overlay opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-10 pointer-events-none" />
             <img
-              src="/images/gabriel1.png"
+              src="/images/gabriel1.webp"
               alt="Gabriel Cirqueira"
               className="object-cover w-full h-full transform transition-transform duration-700 group-hover:scale-105 opacity-90 group-hover:opacity-100"
             />

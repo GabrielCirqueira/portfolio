@@ -4,8 +4,9 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
-    "build": "tsc -b && vite build",
+    "generate-favicon": "node scripts/generate-favicon.cjs",
+    "dev": "npm run generate-favicon && vite",
+    "build": "npm run generate-favicon && tsc -b && vite build",
     "lint": "biome lint .",
     "lint:fix": "biome lint --write .",
     "format": "biome format --write .",

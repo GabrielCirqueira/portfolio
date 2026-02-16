@@ -50,7 +50,7 @@ export const Mobile = memo(({ aboutCards }: MobileProps) => {
       >
         <Box className="relative w-36 h-44 rounded-2xl overflow-hidden border-2 border-zinc-800 bg-zinc-900 shadow-xl mb-6 group">
           <img
-            src="/images/gabriel1.png"
+            src="/images/gabriel1.webp"
             alt="Gabriel Cirqueira"
             className="object-cover w-full h-full opacity-90 transition-transform duration-300 group-active:scale-105"
           />
