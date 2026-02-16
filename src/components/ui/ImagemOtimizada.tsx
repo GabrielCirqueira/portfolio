@@ -19,7 +19,8 @@ export const ImagemOtimizada = memo(
     height,
     loading = 'lazy',
     priority = false,
-  }: ImagemOtimizadaProps) => {
+    objectFit = 'cover',
+  }: ImagemOtimizadaProps & { objectFit?: 'cover' | 'contain' | 'fill' }) => {
     const [carregada, setCarregada] = useState(false)
     const [erro, setErro] = useState(false)
 
@@ -41,7 +42,7 @@ export const ImagemOtimizada = memo(
             onLoad={() => setCarregada(true)}
             onError={() => setErro(true)}
             className={`${className} transition-opacity duration-300 ${carregada ? 'opacity-100' : 'opacity-0'}`}
-            style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+            style={{ width: '100%', height: '100%', objectFit }}
           />
         )}
       </div>

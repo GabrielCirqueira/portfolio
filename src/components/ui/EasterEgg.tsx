@@ -24,6 +24,8 @@ const MatrixRain = memo(() => {
     const columns = Math.floor(canvas.width / fontSize)
     const drops: number[] = new Array(columns).fill(1)
 
+    let animationFrameId: number
+
     const draw = () => {
       ctx.fillStyle = 'rgba(0, 0, 0, 0.05)'
       ctx.fillRect(0, 0, canvas.width, canvas.height)
@@ -40,10 +42,11 @@ const MatrixRain = memo(() => {
         }
         drops[i]++
       }
+      animationFrameId = requestAnimationFrame(draw)
     }
 
-    const interval = setInterval(draw, 35)
-    return () => clearInterval(interval)
+    draw()
+    return () => cancelAnimationFrame(animationFrameId)
   }, [])
 
   return <canvas ref={canvasRef} className="absolute inset-0 w-full h-full opacity-20" />
@@ -53,19 +56,14 @@ export const EasterEgg = memo(() => {
   const { activate, deactivate } = useEasterEgg()
   const [triggered, setTriggered] = useState(false)
   const [showMessage, setShowMessage] = useState(true)
-  const [tapCount, setTapCount] = useState(0)
   const inputRef = useRef<string[]>([])
   const timeoutRef = useRef<ReturnType<typeof setTimeout> | undefined>(undefined)
-
-  const tapCountRef = useRef(0)
-  const tapTimeoutRef = useRef<ReturnType<typeof setTimeout> | undefined>(undefined)
 
   const lastAccelerationRef = useRef({ x: 0, y: 0, z: 0 })
 
   const activateEasterEgg = useCallback(() => {
     setTriggered(true)
     setShowMessage(true)
-    setTapCount(0)
     activate()
   }, [activate])
 
@@ -81,38 +79,6 @@ export const EasterEgg = memo(() => {
       if (match && inputRef.current.length === KONAMI_CODE.length) {
         activateEasterEgg()
         inputRef.current = []
-      }
-    },
-    [activateEasterEgg]
-  )
-
-  const handleTouch = useCallback(
-    (e: TouchEvent) => {
-      const touch = e.touches[0]
-      const { clientX, clientY } = touch
-      const { innerWidth, innerHeight } = window
-
-      const isTopCorner =
-        clientY < innerHeight * 0.2 && (clientX < innerWidth * 0.3 || clientX > innerWidth * 0.7)
-
-      if (isTopCorner) {
-        tapCountRef.current++
-        setTapCount(tapCountRef.current)
-
-        if (tapCountRef.current === 1) {
-          tapTimeoutRef.current = setTimeout(() => {
-            tapCountRef.current = 0
-            setTapCount(0)
-          }, 2000)
-        }
-
-        if (tapCountRef.current >= 5) {
-          activateEasterEgg()
-          tapCountRef.current = 0
-          if (tapTimeoutRef.current) {
-            clearTimeout(tapTimeoutRef.current)
-          }
-        }
       }
     },
     [activateEasterEgg]
@@ -143,18 +109,13 @@ export const EasterEgg = memo(() => {
 
   useEffect(() => {
     window.addEventListener('keydown', handleKeyDown)
-    window.addEventListener('touchstart', handleTouch)
     window.addEventListener('devicemotion', handleMotion)
 
     return () => {
       window.removeEventListener('keydown', handleKeyDown)
-      window.removeEventListener('touchstart', handleTouch)
       window.removeEventListener('devicemotion', handleMotion)
-      if (tapTimeoutRef.current) {
-        clearTimeout(tapTimeoutRef.current)
-      }
     }
-  }, [handleKeyDown, handleTouch, handleMotion])
+  }, [handleKeyDown, handleMotion])
 
   useEffect(() => {
     if (triggered) {
@@ -334,38 +295,9 @@ export const EasterEgg = memo(() => {
             clip-path: polygon(0 55%, 100% 55%, 100% 100%, 0 100%);
           }
 
-          .easter-egg-hint {
-            animation: pulse-glow 3s ease-in-out infinite;
-          }
 
-          @media (hover: hover) {
-            .easter-egg-hint {
-              display: none;
-            }
-          }
         `}
       </style>
-
-      <div className="easter-egg-hint fixed top-4 left-4 w-8 h-8 bg-purple-500/10 rounded-full pointer-events-none z-50 md:hidden" />
-      <div className="easter-egg-hint fixed top-4 right-4 w-8 h-8 bg-purple-500/10 rounded-full pointer-events-none z-50 md:hidden" />
-
-      {tapCount > 0 && tapCount < 5 && (
-        <motion.div
-          initial={{ scale: 0, opacity: 0 }}
-          animate={{ scale: 1, opacity: 1 }}
-          exit={{ scale: 0, opacity: 0 }}
-          className="fixed top-8 left-1/2 -translate-x-1/2 flex gap-2 bg-black/80 backdrop-blur-sm px-4 py-2 rounded-full border border-purple-500/30 z-50 md:hidden"
-        >
-          {[...Array(5)].map((_, i) => (
-            <div
-              key={i}
-              className={`w-2 h-2 rounded-full transition-all ${
-                i < tapCount ? 'bg-purple-500 scale-125' : 'bg-purple-500/30'
-              }`}
-            />
-          ))}
-        </motion.div>
-      )}
 
       <AnimatePresence>
         {triggered && (

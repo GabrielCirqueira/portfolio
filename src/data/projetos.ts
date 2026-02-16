@@ -148,7 +148,7 @@ export const sistemas: Sistema[] = [
     tipo: 'sistema',
     titulo: 'Sistema de Monitoramento Escolar',
     descricao: 'Sistema completo para monitoramento e gestão de atividades escolares',
-    imagem: 'https://monitoramento.escolansl.com/public/assents/img/sistema/painel.webp',
+    imagem: '/images/sistemas/monitoramento/homeADM.webp',
     link: 'https://monitoramento.escolansl.com/sistema',
     tecnologias: ['PHP', 'MySQL', 'JavaScript', 'CSS'],
     dataInicio: '2024-04-14',

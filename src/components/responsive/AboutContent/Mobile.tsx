@@ -54,7 +54,7 @@ export const Mobile = memo(({ aboutCards }: MobileProps) => {
         transition={{ duration: ehDispositivoLento ? 0.2 : 0.3 }}
         className="flex flex-col items-center mb-10"
       >
-        <Box className="relative w-36 h-44 rounded-2xl overflow-hidden border-2 border-zinc-800 bg-zinc-900 shadow-xl mb-6 group">
+        <Box className="relative w-56 h-72 rounded-2xl overflow-hidden border-2 border-zinc-800 bg-zinc-900 shadow-xl mb-6 group">
           <img
             src="/images/gabriel1.webp"
             alt="Gabriel Cirqueira"

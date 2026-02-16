@@ -28,14 +28,16 @@ export const Mascote = memo(() => {
   const { isActive } = useEasterEgg()
   const [showMessage, setShowMessage] = useState(false)
   const [crazyMessage, setCrazyMessage] = useState(crazyMessages[0])
+  const [hintMessage, setHintMessage] = useState<string | null>(null)
   const isHoveringRef = useRef(false)
   const crazyIndexRef = useRef(0)
 
-  const message = isActive ? crazyMessage : mascoteMessages[currentSection]
+  const message = isActive ? crazyMessage : hintMessage || mascoteMessages[currentSection]
 
   // biome-ignore lint/correctness/useExhaustiveDependencies: Precisamos atualizar quando a seção muda
   useEffect(() => {
     if (!isActive) {
+      setHintMessage(null)
       setShowMessage(true)
       const timer = setTimeout(() => {
         if (!isHoveringRef.current) {
@@ -47,7 +49,40 @@ export const Mascote = memo(() => {
   }, [isActive, currentSection])
 
   useEffect(() => {
+    if (isActive) return
+
+    const interval = setInterval(() => {
+      if (Math.random() > 0.7 && !isHoveringRef.current && !showMessage) {
+        const isMobile = window.matchMedia('(pointer: coarse)').matches
+        const hints = [
+          'Psst... já encontrou o segredo? 🕵️‍♂️',
+          isMobile
+            ? 'Que tal agitar seu celular um pouco? 📱'
+            : "Tente digitar 'cirqueira' no teclado... 👀",
+          'Tem um easter egg escondido por aqui... 🥚',
+          'Gosta de Matrix? 😎',
+          'O sistema tem segredos...',
+        ]
+        const randomHint = hints[Math.floor(Math.random() * hints.length)]
+
+        setHintMessage(randomHint)
+        setShowMessage(true)
+
+        setTimeout(() => {
+          setHintMessage(null)
+          if (!isHoveringRef.current) {
+            setShowMessage(false)
+          }
+        }, 5000)
+      }
+    }, 15000)
+
+    return () => clearInterval(interval)
+  }, [isActive, showMessage])
+
+  useEffect(() => {
     if (isActive) {
+      setHintMessage(null)
       setShowMessage(true)
       const interval = setInterval(() => {
         crazyIndexRef.current = (crazyIndexRef.current + 1) % crazyMessages.length

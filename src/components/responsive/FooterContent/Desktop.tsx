@@ -84,21 +84,24 @@ export const Desktop = memo(({ socials, links }: FooterContentProps) => {
                 href={link.href}
                 className="
                   text-gray-400 hover:text-brand-500
-                  hover:pl-2 transition-all duration-300
+                  transition-colors duration-300
                   flex items-center group text-sm font-semibold
                   uppercase tracking-wider relative overflow-hidden
                 "
               >
                 <Text
                   className="
-                    text-brand-500 mr-2 opacity-0
-                    group-hover:opacity-100 transition-opacity
-                    -ml-4 group-hover:ml-0 duration-300
+                    text-brand-500 absolute left-0
+                    opacity-0 -translate-x-2
+                    group-hover:opacity-100 group-hover:translate-x-0
+                    transition-all duration-300
                   "
                 >
                   ›
                 </Text>
-                {link.name}
+                <span className="transition-transform duration-300 group-hover:translate-x-4">
+                  {link.name}
+                </span>
               </a>
             ))}
           </Grid>
