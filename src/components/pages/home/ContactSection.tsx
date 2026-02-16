@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion'
-import { Github, Instagram, Mail, MapPin, Smartphone } from 'lucide-react'
+import { Github, Instagram, Linkedin, Mail, Smartphone } from 'lucide-react'
 import { memo } from 'react'
 
 import { ContactGrid } from '@/components/responsive/ContactGrid'
@@ -22,6 +22,12 @@ const contactItems = [
     href: 'mailto:gabrielcirqueira711@gmail.com',
   },
   {
+    icon: Linkedin,
+    label: 'LinkedIn',
+    value: 'Gabriel Cirqueira',
+    href: 'https://www.linkedin.com/in/gabriel-cirqueira-barbosa/',
+  },
+  {
     icon: Instagram,
     label: 'Instagram',
     value: '@gabrielcirqueira711',
@@ -32,12 +38,6 @@ const contactItems = [
     label: 'GitHub',
     value: '@GabrielCirqueira',
     href: 'https://github.com/GabrielCirqueira',
-  },
-  {
-    icon: MapPin,
-    label: 'Localização',
-    value: 'ES, Brasil',
-    href: null,
   },
 ]
 

@@ -38,12 +38,14 @@ export const Component = memo(() => {
         <WhatsAppButton />
       </Suspense>
       <Header />
-      <HeroSection />
-      <AboutSection />
-      <SkillsSection />
-      <ProjectsSection />
-      <EducationSection />
-      <ContactSection />
+      <main>
+        <HeroSection />
+        <AboutSection />
+        <SkillsSection />
+        <ProjectsSection />
+        <EducationSection />
+        <ContactSection />
+      </main>
       <Footer />
     </AppContainer>
   )
