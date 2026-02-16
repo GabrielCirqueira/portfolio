@@ -31,7 +31,7 @@ const contactItems = [
     icon: Instagram,
     label: 'Instagram',
     value: '@gabrielcirqueira711',
-    href: 'https://www.instagram.com/gabrielcirqueira711/',
+    href: 'https://www.instagram.com/gabrielcirqueira7/',
   },
   {
     icon: Github,

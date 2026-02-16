@@ -111,7 +111,7 @@ O portfólio foi desenvolvido seguindo princípios de design moderno:
 - 📱 WhatsApp: [+55 27 99612-1313](https://wa.me/5527996121313)
 - 💼 LinkedIn: [Gabriel Cirqueira](https://www.linkedin.com/in/gabriel-cirqueira-barbosa/)
 - 🐙 GitHub: [@GabrielCirqueira](https://github.com/GabrielCirqueira)
-- 📷 Instagram: [@gabrielcirqueira711](https://instagram.com/gabrielcirqueira711)
+- 📷 Instagram: [@gabrielcirqueira711](https://instagram.com/gabrielcirqueira7)
 - 🔗 Linktree: [linktr.ee/GabrielCirqueira](https://linktr.ee/GabrielCirqueira)
 
 ---

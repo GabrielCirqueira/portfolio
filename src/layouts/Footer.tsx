@@ -10,7 +10,7 @@ export function Footer() {
       href: 'https://www.linkedin.com/in/gabriel-cirqueira-barbosa/',
       label: 'LinkedIn',
     },
-    { icon: Instagram, href: 'https://www.instagram.com/gabrielcirqueira711/', label: 'Instagram' },
+    { icon: Instagram, href: 'https://www.instagram.com/gabrielcirqueira7/', label: 'Instagram' },
     { icon: AtSign, href: 'mailto:gabrielcirqueira711@gmail.com', label: 'Email' },
   ]
 
