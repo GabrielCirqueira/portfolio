@@ -85,7 +85,6 @@ export const Desktop = memo(({ contactItems }: ContactGridProps) => (
         </motion.div>
       ))}
 
-      {/* Linktree card */}
       <motion.div variants={item} className="h-full" style={{ willChange: 'transform, opacity' }}>
         <motion.a
           href="https://linktr.ee/gabrielCirqueira"

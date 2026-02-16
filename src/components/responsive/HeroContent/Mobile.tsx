@@ -2,6 +2,7 @@ import { motion } from 'framer-motion'
 import { ArrowDownCircle, Code, Github, Sparkles } from 'lucide-react'
 import { memo, useEffect, useState } from 'react'
 import { TypeAnimation } from 'react-type-animation'
+import { useAnimacaoOtimizada } from '@/hooks/useAnimacaoOtimizada'
 import { Badge } from '@/shadcn/components/ui/badge'
 import { Button } from '@/shadcn/components/ui/button'
 import { Icon } from '@/shadcn/components/ui/icon'
@@ -11,6 +12,7 @@ import { Text } from '@/shadcn/components/ui/typography'
 
 export const Mobile = memo(() => {
   const [loaded, setLoaded] = useState(false)
+  const { usarAnimacoes, ehDispositivoLento } = useAnimacaoOtimizada()
 
   useEffect(() => {
     setLoaded(true)
@@ -18,7 +20,6 @@ export const Mobile = memo(() => {
 
   return (
     <Box className="relative min-h-[100svh] flex items-center justify-center overflow-hidden px-4 font-sans selection:bg-brand-500/30">
-      {/* Background Effects */}
       <Box className="absolute inset-0 bg-gradient-to-b from-black via-zinc-950 to-black" />
 
       <Box className="absolute top-[10%] right-[-20%] w-[250px] h-[250px] pointer-events-none z-0">
@@ -38,12 +39,11 @@ export const Mobile = memo(() => {
       />
 
       <Box className="relative z-10 w-full max-w-md mx-auto py-20">
-        <VStack className="items-center text-center gap-6">
-          {/* Badge */}
+        <VStack className="items-center text-center gap-6" style={{ willChange: 'transform' }}>
           <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.5, ease: 'easeOut' }}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: ehDispositivoLento ? 0.2 : 0.3, ease: 'easeOut' }}
           >
             <Badge
               className="
@@ -59,11 +59,14 @@ export const Mobile = memo(() => {
             </Badge>
           </motion.div>
 
-          {/* Title */}
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, ease: 'easeOut', delay: 0.2 }}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{
+              duration: ehDispositivoLento ? 0.2 : 0.4,
+              ease: 'easeOut',
+              delay: ehDispositivoLento ? 0 : 0.1,
+            }}
             className="space-y-2"
           >
             <Text className="text-zinc-400 text-base font-medium tracking-wide">Olá, eu sou</Text>
@@ -73,20 +76,27 @@ export const Mobile = memo(() => {
                 <br />
                 Cirqueira
               </h1>
-              <motion.div
-                initial={{ width: 0 }}
-                animate={{ width: '100%' }}
-                transition={{ delay: 1, duration: 0.8, ease: 'circOut' }}
-                className="absolute -bottom-2 left-0 h-1 bg-gradient-to-r from-brand-500 to-brand-600 rounded-full"
-              />
+              {usarAnimacoes && !ehDispositivoLento && (
+                <motion.div
+                  initial={{ width: 0 }}
+                  animate={{ width: '100%' }}
+                  transition={{ delay: 0.5, duration: 0.6, ease: 'circOut' }}
+                  className="absolute -bottom-2 left-0 h-1 bg-gradient-to-r from-brand-500 to-brand-600 rounded-full"
+                />
+              )}
+              {ehDispositivoLento && (
+                <Box className="absolute -bottom-2 left-0 w-full h-1 bg-gradient-to-r from-brand-500 to-brand-600 rounded-full" />
+              )}
             </Box>
           </motion.div>
 
-          {/* Typing Animation */}
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ duration: 0.5, delay: 0.5 }}
+            transition={{
+              duration: ehDispositivoLento ? 0.2 : 0.3,
+              delay: ehDispositivoLento ? 0 : 0.2,
+            }}
             className="h-8 flex items-center"
           >
             {loaded && (
@@ -112,22 +122,26 @@ export const Mobile = memo(() => {
             )}
           </motion.div>
 
-          {/* Description */}
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ duration: 0.5, delay: 0.7 }}
+            transition={{
+              duration: ehDispositivoLento ? 0.2 : 0.3,
+              delay: ehDispositivoLento ? 0 : 0.3,
+            }}
           >
             <Text className="text-zinc-500 text-sm leading-relaxed max-w-sm px-4">
               Criando experiências web modernas e escaláveis com foco em performance e design
             </Text>
           </motion.div>
 
-          {/* Buttons */}
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.9 }}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{
+              duration: ehDispositivoLento ? 0.2 : 0.3,
+              delay: ehDispositivoLento ? 0 : 0.4,
+            }}
             className="w-full pt-4"
           >
             <VStack className="gap-3 w-full px-6">
@@ -177,24 +191,35 @@ export const Mobile = memo(() => {
             </VStack>
           </motion.div>
 
-          {/* Scroll Indicator */}
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ duration: 0.6, delay: 1.2 }}
+            transition={{
+              duration: ehDispositivoLento ? 0.2 : 0.4,
+              delay: ehDispositivoLento ? 0 : 0.5,
+            }}
             className="pt-8"
           >
             <Link href="#sobre" className="no-underline">
-              <motion.div
-                animate={{ y: [0, 8, 0] }}
-                transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
-                className="flex flex-col items-center gap-2"
-              >
-                <Text className="text-zinc-600 text-xs uppercase tracking-widest font-semibold">
-                  Scroll
-                </Text>
-                <Icon icon={ArrowDownCircle} className="w-6 h-6 text-zinc-700" />
-              </motion.div>
+              {usarAnimacoes && !ehDispositivoLento ? (
+                <motion.div
+                  animate={{ y: [0, 8, 0] }}
+                  transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
+                  className="flex flex-col items-center gap-2"
+                >
+                  <Text className="text-zinc-600 text-xs uppercase tracking-widest font-semibold">
+                    Scroll
+                  </Text>
+                  <Icon icon={ArrowDownCircle} className="w-6 h-6 text-zinc-700" />
+                </motion.div>
+              ) : (
+                <div className="flex flex-col items-center gap-2">
+                  <Text className="text-zinc-600 text-xs uppercase tracking-widest font-semibold">
+                    Scroll
+                  </Text>
+                  <Icon icon={ArrowDownCircle} className="w-6 h-6 text-zinc-700" />
+                </div>
+              )}
             </Link>
           </motion.div>
         </VStack>

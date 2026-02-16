@@ -2,6 +2,7 @@ import { ContadorAnimado } from '@app/components/ui/ContadorAnimado'
 import { motion } from 'framer-motion'
 import { Code, FileCode, FolderGit2, Layers, Trophy } from 'lucide-react'
 import { memo } from 'react'
+import { useAnimacaoOtimizada } from '@/hooks/useAnimacaoOtimizada'
 import { Badge } from '@/shadcn/components/ui/badge'
 import { Icon } from '@/shadcn/components/ui/icon'
 import { Box, Grid, HStack, VStack } from '@/shadcn/components/ui/layout'
@@ -20,13 +21,15 @@ interface MobileProps {
 }
 
 export const Mobile = memo(({ aboutCards }: MobileProps) => {
+  const { ehDispositivoLento } = useAnimacaoOtimizada()
+
   return (
     <>
       <motion.div
-        initial={{ opacity: 0, y: 15 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.5 }}
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        viewport={{ once: true, margin: '0px' }}
+        transition={{ duration: ehDispositivoLento ? 0.2 : 0.3 }}
         className="text-center mb-10"
       >
         <Badge
@@ -42,10 +45,10 @@ export const Mobile = memo(({ aboutCards }: MobileProps) => {
       </motion.div>
 
       <motion.div
-        initial={{ opacity: 0, y: 15 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.5, delay: 0.1 }}
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        viewport={{ once: true, margin: '0px' }}
+        transition={{ duration: ehDispositivoLento ? 0.2 : 0.3 }}
         className="flex flex-col items-center mb-10"
       >
         <Box className="relative w-36 h-44 rounded-2xl overflow-hidden border-2 border-zinc-800 bg-zinc-900 shadow-xl mb-6 group">
@@ -81,11 +84,15 @@ export const Mobile = memo(({ aboutCards }: MobileProps) => {
         {aboutCards.map((card, index) => (
           <motion.div
             key={card.title}
-            initial={{ opacity: 0, x: -15 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.4, delay: index * 0.1 }}
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true, margin: '0px', amount: 0.2 }}
+            transition={{
+              duration: ehDispositivoLento ? 0.15 : 0.25,
+              delay: ehDispositivoLento ? 0 : index * 0.05,
+            }}
             className="w-full"
+            style={{ willChange: 'opacity' }}
           >
             <HStack className="items-start gap-4 bg-zinc-900/60 backdrop-blur-sm border border-zinc-800 p-5 rounded-2xl active:border-brand-500/40 active:bg-zinc-900/80 transition-all duration-200 shadow-lg">
               <Box className="p-3 rounded-xl bg-zinc-950 text-brand-400 border border-brand-500/20 shrink-0 shadow-inner">
@@ -103,20 +110,24 @@ export const Mobile = memo(({ aboutCards }: MobileProps) => {
       </VStack>
 
       <motion.div
-        initial={{ opacity: 0, y: 15 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.5, delay: 0.2 }}
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        viewport={{ once: true, margin: '0px' }}
+        transition={{ duration: ehDispositivoLento ? 0.2 : 0.3 }}
         className="mb-10 px-2"
       >
         <Grid className="grid-cols-2 gap-3">
           {estatisticas.map((estatistica, index) => (
             <motion.div
               key={estatistica.rotulo}
-              initial={{ opacity: 0, scale: 0.9 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.4, delay: index * 0.1 }}
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              viewport={{ once: true, margin: '0px' }}
+              transition={{
+                duration: ehDispositivoLento ? 0.15 : 0.25,
+                delay: ehDispositivoLento ? 0 : index * 0.05,
+              }}
+              style={{ willChange: 'opacity' }}
             >
               <Box className="text-center p-5 rounded-2xl border border-zinc-800 bg-zinc-900/60 backdrop-blur-sm shadow-lg active:border-brand-500/30 active:bg-zinc-900/80 transition-all duration-200">
                 <Icon icon={estatistica.icone} className="h-6 w-6 text-brand-400 mx-auto mb-3" />
@@ -139,8 +150,8 @@ export const Mobile = memo(({ aboutCards }: MobileProps) => {
       <motion.div
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.5, delay: 0.3 }}
+        viewport={{ once: true, margin: '0px' }}
+        transition={{ duration: ehDispositivoLento ? 0.2 : 0.3 }}
         className="text-center pt-8 border-t border-zinc-800/50 relative px-6"
       >
         <Box className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 w-16 h-1 bg-gradient-to-r from-transparent via-brand-500 to-transparent rounded-full" />

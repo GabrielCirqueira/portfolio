@@ -12,11 +12,9 @@ export function useVisibleSection() {
 
     const observer = new IntersectionObserver(
       (entries) => {
-        // Encontra a seção com maior intersecção
         const visibleEntries = entries.filter((entry) => entry.isIntersecting)
 
         if (visibleEntries.length > 0) {
-          // Ordena por ratio de intersecção (maior primeiro)
           const mostVisible = visibleEntries.reduce((prev, current) =>
             current.intersectionRatio > prev.intersectionRatio ? current : prev
           )

@@ -53,7 +53,6 @@ export const Desktop = memo(({ formacao, experiencias, conquistas }: EducationGr
 
   return (
     <Grid className="grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8 items-start">
-      {/* Formação */}
       <motion.div
         initial={{ opacity: 0, y: 30 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -120,7 +119,6 @@ export const Desktop = memo(({ formacao, experiencias, conquistas }: EducationGr
         </Box>
       </motion.div>
 
-      {/* Experiência */}
       <motion.div
         initial={{ opacity: 0, y: 30 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -187,7 +185,6 @@ export const Desktop = memo(({ formacao, experiencias, conquistas }: EducationGr
         </Box>
       </motion.div>
 
-      {/* Conquistas */}
       <motion.div
         initial={{ opacity: 0, y: 30 }}
         whileInView={{ opacity: 1, y: 0 }}

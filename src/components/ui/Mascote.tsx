@@ -59,7 +59,6 @@ export const Mascote = memo(() => {
 
   return (
     <div className="fixed bottom-4 left-4 md:bottom-6 md:left-6 z-50 flex flex-col items-start gap-2">
-      {/* Balão de diálogo */}
       <AnimatePresence mode="wait">
         {showMessage && (
           <motion.div
@@ -81,7 +80,6 @@ export const Mascote = memo(() => {
             <div
               className={`relative bg-gradient-to-br ${isActive ? 'from-purple-900 to-red-950 border-purple-500' : 'from-zinc-900 to-zinc-950 border-brand-500/40'} border-2 px-3 py-2 md:px-4 md:py-2 rounded-xl shadow-[0_0_20px_rgba(34,197,94,0.2)] backdrop-blur-sm`}
             >
-              {/* Brilho superior */}
               <div
                 className={`absolute top-0 left-0 right-0 h-1 bg-gradient-to-b ${isActive ? 'from-purple-500/40' : 'from-brand-500/20'} to-transparent rounded-t-xl`}
               />
@@ -92,7 +90,6 @@ export const Mascote = memo(() => {
                 {message}
               </p>
             </div>
-            {/* Triângulo do balão apontando para baixo */}
             <div
               className={`absolute -bottom-1.5 left-4 w-0 h-0 border-l-[7px] border-l-transparent border-r-[7px] border-r-transparent border-t-[8px] ${isActive ? 'border-t-purple-500' : 'border-t-brand-500/40'}`}
             />
@@ -103,7 +100,6 @@ export const Mascote = memo(() => {
         )}
       </AnimatePresence>
 
-      {/* Robô Mascote */}
       <motion.button
         type="button"
         onHoverStart={() => {
@@ -137,7 +133,6 @@ export const Mascote = memo(() => {
         className="relative w-12 h-14 md:w-14 md:h-16 cursor-pointer group"
         aria-label="Assistente virtual"
       >
-        {/* Glow effect de fundo */}
         <motion.div
           className={`absolute inset-0 ${isActive ? 'bg-purple-500/40' : 'bg-brand-500/20'} rounded-xl blur-lg`}
           animate={{
@@ -151,9 +146,7 @@ export const Mascote = memo(() => {
           }}
         />
 
-        {/* Corpo do robô */}
         <div className="relative w-full h-full flex flex-col items-center justify-center gap-0.5">
-          {/* Antena */}
           <motion.div
             className="absolute -top-1 left-1/2 -translate-x-1/2 flex flex-col items-center"
             animate={
@@ -227,17 +220,14 @@ export const Mascote = memo(() => {
             />
           </motion.div>
 
-          {/* Cabeça */}
           <div
             className={`relative bg-gradient-to-br ${isActive ? 'from-purple-800 to-red-900 border-purple-500' : 'from-zinc-800 to-zinc-900 border-brand-500/50'} border-2 rounded-lg w-8 h-6 md:w-9 md:h-7 flex items-center justify-center shadow-lg overflow-hidden`}
           >
-            {/* Brilho interno */}
             <div
               className={`absolute inset-0 bg-gradient-to-br ${isActive ? 'from-purple-500/40' : 'from-brand-500/20'} via-transparent to-transparent`}
             />
             <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-b from-white/10 to-transparent rounded-t-lg" />
 
-            {/* Visor/Olhos */}
             <div className="relative flex gap-1.5 md:gap-2 items-center">
               <motion.div
                 className={`w-1.5 h-2 md:w-2 md:h-2.5 ${isActive ? 'bg-purple-500' : 'bg-brand-500'} rounded-sm ${isActive ? 'shadow-[0_0_8px_rgba(168,85,247,0.9)]' : 'shadow-[0_0_6px_rgba(34,197,94,0.8)]'}`}
@@ -298,7 +288,6 @@ export const Mascote = memo(() => {
               />
             </div>
 
-            {/* Detalhes laterais */}
             <div
               className={`absolute left-0 top-1/2 -translate-y-1/2 w-0.5 h-1 ${isActive ? 'bg-purple-500/60' : 'bg-brand-500/40'}`}
             />
@@ -307,16 +296,13 @@ export const Mascote = memo(() => {
             />
           </div>
 
-          {/* Corpo/Torso */}
           <div
             className={`relative bg-gradient-to-br ${isActive ? 'from-purple-800 to-red-900 border-purple-500/60' : 'from-zinc-800 to-zinc-900 border-brand-500/40'} border-2 rounded-md w-7 h-5 md:w-8 md:h-6 flex items-center justify-center shadow-md overflow-hidden`}
           >
-            {/* Gradiente interno */}
             <div
               className={`absolute inset-0 bg-gradient-to-br ${isActive ? 'from-purple-500/20' : 'from-brand-500/10'} via-transparent to-transparent`}
             />
 
-            {/* Display central */}
             <motion.div
               className={`w-3 h-0.5 md:w-4 md:h-0.5 ${isActive ? 'bg-purple-500' : 'bg-brand-500/70'} rounded-full`}
               animate={
@@ -344,7 +330,6 @@ export const Mascote = memo(() => {
               }
             />
 
-            {/* Braços */}
             <motion.div
               className={`absolute -left-1 top-0.5 w-1 h-3 md:h-3.5 ${isActive ? 'bg-purple-800 border-purple-500/50' : 'bg-zinc-800 border-brand-500/30'} border rounded-full`}
               animate={
@@ -385,7 +370,6 @@ export const Mascote = memo(() => {
             />
           </div>
 
-          {/* Efeito de hover */}
           <motion.div
             className="absolute inset-0 border-2 border-brand-500/0 rounded-xl"
             whileHover={{
@@ -395,7 +379,6 @@ export const Mascote = memo(() => {
           />
         </div>
 
-        {/* Indicador de seção ativa com animação */}
         <motion.div
           className={`absolute -top-1 -right-1 w-2.5 h-2.5 md:w-3 md:h-3 ${isActive ? 'bg-purple-500' : 'bg-brand-500'} rounded-full border-2 border-black ${isActive ? 'shadow-[0_0_12px_rgba(168,85,247,0.9)]' : 'shadow-[0_0_8px_rgba(34,197,94,0.8)]'}`}
           animate={

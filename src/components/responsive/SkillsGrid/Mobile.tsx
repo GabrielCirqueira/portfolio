@@ -1,6 +1,7 @@
 import { AnimatePresence, motion } from 'framer-motion'
 import { ChevronDown, type LucideIcon } from 'lucide-react'
 import { memo, useState } from 'react'
+import { useAnimacaoOtimizada } from '@/hooks/useAnimacaoOtimizada'
 import { Badge } from '@/shadcn/components/ui/badge'
 import { Button } from '@/shadcn/components/ui/button'
 import { Icon } from '@/shadcn/components/ui/icon'
@@ -20,6 +21,7 @@ interface SkillsGridProps {
 
 export const Mobile = memo(({ skills }: SkillsGridProps) => {
   const [openIndex, setOpenIndex] = useState<number | null>(null)
+  const { ehDispositivoLento } = useAnimacaoOtimizada()
 
   const toggle = (index: number) => {
     setOpenIndex((prev) => (prev === index ? null : index))
@@ -33,11 +35,15 @@ export const Mobile = memo(({ skills }: SkillsGridProps) => {
         return (
           <motion.div
             key={skill.category}
-            initial={{ opacity: 0, y: 15 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.4, delay: index * 0.1 }}
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true, margin: '0px', amount: 0.2 }}
+            transition={{
+              duration: ehDispositivoLento ? 0.15 : 0.25,
+              delay: ehDispositivoLento ? 0 : index * 0.05,
+            }}
             className="w-full"
+            style={{ willChange: 'opacity' }}
           >
             <Button
               variant="ghost"
@@ -81,7 +87,10 @@ export const Mobile = memo(({ skills }: SkillsGridProps) => {
                 {skill.technologies.length}
               </Badge>
 
-              <motion.div animate={{ rotate: isOpen ? 180 : 0 }} transition={{ duration: 0.2 }}>
+              <motion.div
+                animate={{ rotate: isOpen ? 180 : 0 }}
+                transition={{ duration: ehDispositivoLento ? 0.15 : 0.2 }}
+              >
                 <Icon
                   icon={ChevronDown}
                   className={`w-5 h-5 transition-colors ${isOpen ? 'text-brand-400' : 'text-zinc-600'}`}
@@ -95,7 +104,10 @@ export const Mobile = memo(({ skills }: SkillsGridProps) => {
                   initial={{ height: 0, opacity: 0 }}
                   animate={{ height: 'auto', opacity: 1 }}
                   exit={{ height: 0, opacity: 0 }}
-                  transition={{ duration: 0.3, ease: 'easeInOut' }}
+                  transition={{
+                    duration: ehDispositivoLento ? 0.2 : 0.25,
+                    ease: 'easeInOut',
+                  }}
                   className="overflow-hidden"
                 >
                   <VStack className="px-5 pb-5 pt-4 bg-zinc-900/60 backdrop-blur-sm border border-t-0 border-zinc-800 rounded-b-2xl gap-4 shadow-lg">

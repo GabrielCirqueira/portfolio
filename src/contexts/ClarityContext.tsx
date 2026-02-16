@@ -18,21 +18,11 @@ interface ClarityContextValue {
 
 const ClarityContext = createContext<ClarityContextValue>({
   estaInicializado: false,
-  identificarUsuario: () => {
-    /* sem operação */
-  },
-  definirTag: () => {
-    /* sem operação */
-  },
-  registrarEvento: () => {
-    /* sem operação */
-  },
-  definirConsentimento: () => {
-    /* sem operação */
-  },
-  priorizarSessao: () => {
-    /* sem operação */
-  },
+  identificarUsuario: () => undefined,
+  definirTag: () => undefined,
+  registrarEvento: () => undefined,
+  definirConsentimento: () => undefined,
+  priorizarSessao: () => undefined,
 })
 
 interface PropriedadesProvedorClarity {
