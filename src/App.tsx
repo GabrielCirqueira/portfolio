@@ -2,15 +2,13 @@ import { EasterEgg } from '@app/components/ui/EasterEgg'
 import { ThemeProvider } from '@app/contexts'
 import { EasterEggProvider } from '@app/contexts/EasterEggContext'
 import { MainLayout, RootLayout } from '@app/layouts'
-import LogRocket from 'logrocket'
+import { useEffect } from 'react'
 import {
   createBrowserRouter,
   createRoutesFromElements,
   Route,
   RouterProvider,
 } from 'react-router-dom'
-
-LogRocket.init('8cvlis/portifolio')
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -26,6 +24,22 @@ const router = createBrowserRouter(
 )
 
 export default function App() {
+  useEffect(() => {
+    if (typeof window !== 'undefined' && 'requestIdleCallback' in window) {
+      window.requestIdleCallback(() => {
+        import('logrocket').then((LogRocket) => {
+          LogRocket.default.init('8cvlis/portifolio')
+        })
+      })
+    } else {
+      setTimeout(() => {
+        import('logrocket').then((LogRocket) => {
+          LogRocket.default.init('8cvlis/portifolio')
+        })
+      }, 3000)
+    }
+  }, [])
+
   return (
     <ThemeProvider>
       <EasterEggProvider>

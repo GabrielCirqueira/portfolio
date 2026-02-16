@@ -1,14 +1,16 @@
 import { motion } from 'framer-motion'
 import { Gamepad2, Monitor } from 'lucide-react'
-import { memo, useState } from 'react'
-import Marquee from 'react-fast-marquee'
+import { lazy, memo, Suspense, useState } from 'react'
 import { CardProjeto } from '@/components/responsive/CardProjeto'
 import { ProjetoModal } from '@/components/responsive/ProjetoModal'
 import { jogos, sistemas } from '@/data/projetos'
+import { useDispositivoMovel } from '@/hooks/useDispositivoMovel'
 import { Badge } from '@/shadcn/components/ui/badge'
 import { Icon } from '@/shadcn/components/ui/icon'
 import { Box, Container, VStack } from '@/shadcn/components/ui/layout'
 import { Text, Title } from '@/shadcn/components/ui/typography'
+
+const Marquee = lazy(() => import('react-fast-marquee'))
 
 const todasTecnologias = [...new Set([...sistemas, ...jogos].flatMap((p) => p.tecnologias))]
 
@@ -24,6 +26,7 @@ const containerVariants = {
 
 export const ProjectsSection = memo(() => {
   const [modalAberto, setModalAberto] = useState<string | null>(null)
+  const ehMovel = useDispositivoMovel()
 
   const abrirModal = (id: string) => setModalAberto(id)
   const fecharModal = () => setModalAberto(null)
@@ -119,18 +122,24 @@ export const ProjectsSection = memo(() => {
             transition={{ duration: 0.8 }}
             className="relative py-4 sm:py-5"
           >
-            <Box className="absolute inset-y-0 left-0 w-20 sm:w-32 bg-gradient-to-r from-black to-transparent z-10 pointer-events-none" />
-            <Box className="absolute inset-y-0 right-0 w-20 sm:w-32 bg-gradient-to-l from-black to-transparent z-10 pointer-events-none" />
-            <Marquee speed={20} gradient={false} className="overflow-hidden">
-              {todasTecnologias.map((tecnologia, index) => (
-                <Box key={index} className="flex items-center mx-4 sm:mx-6">
-                  <Box className="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-brand-500/70 mr-3 sm:mr-4 shrink-0" />
-                  <Text className="text-xs sm:text-sm text-zinc-600 uppercase tracking-wider font-mono font-semibold whitespace-nowrap hover:text-brand-400 transition-colors duration-300">
-                    {tecnologia}
-                  </Text>
-                </Box>
-              ))}
-            </Marquee>
+            {!ehMovel && (
+              <>
+                <Box className="absolute inset-y-0 left-0 w-20 sm:w-32 bg-gradient-to-r from-black to-transparent z-10 pointer-events-none" />
+                <Box className="absolute inset-y-0 right-0 w-20 sm:w-32 bg-gradient-to-l from-black to-transparent z-10 pointer-events-none" />
+                <Suspense fallback={<Box className="h-8" />}>
+                  <Marquee speed={20} gradient={false} className="overflow-hidden">
+                    {todasTecnologias.map((tecnologia, index) => (
+                      <Box key={index} className="flex items-center mx-4 sm:mx-6">
+                        <Box className="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-brand-500/70 mr-3 sm:mr-4 shrink-0" />
+                        <Text className="text-xs sm:text-sm text-zinc-600 uppercase tracking-wider font-mono font-semibold whitespace-nowrap hover:text-brand-400 transition-colors duration-300">
+                          {tecnologia}
+                        </Text>
+                      </Box>
+                    ))}
+                  </Marquee>
+                </Suspense>
+              </>
+            )}
           </motion.div>
 
           <Box>

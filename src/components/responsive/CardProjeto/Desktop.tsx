@@ -2,6 +2,7 @@ import { motion } from 'framer-motion'
 import { Calendar, Info } from 'lucide-react'
 import { memo } from 'react'
 import Tilt from 'react-parallax-tilt'
+import { ImagemOtimizada } from '@/components/ui/ImagemOtimizada'
 import { Badge } from '@/shadcn/components/ui/badge'
 import { Button } from '@/shadcn/components/ui/button'
 import { Icon } from '@/shadcn/components/ui/icon'
@@ -64,7 +65,7 @@ export const Desktop = memo(({ projeto, onAbrirModal }: CardProjetoProps) => (
             pointer-events-none mix-blend-color
           "
           />
-          <img
+          <ImagemOtimizada
             src={projeto.imagem}
             alt={projeto.titulo}
             className="

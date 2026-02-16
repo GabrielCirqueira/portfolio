@@ -8,6 +8,31 @@ const __dirname = path.dirname(__filename)
 
 export default defineConfig({
   plugins: [react()],
+  build: {
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          'react-vendor': ['react', 'react-dom', 'react-router-dom'],
+          'framer-motion': ['framer-motion'],
+          'ui-vendor': ['lucide-react', 'clsx', 'tailwind-merge'],
+          'radix-ui': [
+            '@radix-ui/react-dialog',
+            '@radix-ui/react-progress',
+            '@radix-ui/react-slot',
+          ],
+        },
+      },
+    },
+    chunkSizeWarningLimit: 1000,
+    cssMinify: true,
+    minify: 'terser',
+    terserOptions: {
+      compress: {
+        drop_console: true,
+        drop_debugger: true,
+      },
+    },
+  },
   resolve: {
     alias: [
       { find: '@app/layouts', replacement: path.resolve(__dirname, 'src/layouts') },

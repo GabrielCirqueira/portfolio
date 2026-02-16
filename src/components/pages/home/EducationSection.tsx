@@ -1,10 +1,12 @@
 import { motion } from 'framer-motion'
-import { memo } from 'react'
-import Marquee from 'react-fast-marquee'
+import { lazy, memo, Suspense } from 'react'
 import { EducationGrid } from '@/components/responsive/EducationGrid'
+import { useDispositivoMovel } from '@/hooks/useDispositivoMovel'
 import { Badge } from '@/shadcn/components/ui/badge'
 import { Box, Container } from '@/shadcn/components/ui/layout'
 import { Span, Text, Title } from '@/shadcn/components/ui/typography'
+
+const Marquee = lazy(() => import('react-fast-marquee'))
 
 const palavrasChaveCarreira = [
   'Symfony',
@@ -77,6 +79,8 @@ const experiencias = [
 ]
 
 export const EducationSection = memo(() => {
+  const ehMovel = useDispositivoMovel()
+
   return (
     <Box
       as="section"
@@ -149,20 +153,26 @@ export const EducationSection = memo(() => {
           transition={{ duration: 0.8, delay: 0.3 }}
           className="mt-16 sm:mt-20 relative"
         >
-          <Box className="absolute inset-y-0 left-0 w-20 sm:w-32 bg-gradient-to-r from-black to-transparent z-10 pointer-events-none" />
-          <Box className="absolute inset-y-0 right-0 w-20 sm:w-32 bg-gradient-to-l from-black to-transparent z-10 pointer-events-none" />
-          <Box className="border-y border-zinc-800/50 py-5">
-            <Marquee speed={25} gradient={false} direction="right">
-              {palavrasChaveCarreira.map((palavraChave, index) => (
-                <Box key={index} className="flex items-center mx-4 sm:mx-6">
-                  <Text className="text-xs sm:text-sm text-zinc-700 uppercase tracking-wider font-mono font-semibold whitespace-nowrap">
-                    {palavraChave}
-                  </Text>
-                  <Box className="w-1.5 h-1.5 rounded-full bg-brand-500/40 ml-4 sm:ml-6" />
-                </Box>
-              ))}
-            </Marquee>
-          </Box>
+          {!ehMovel && (
+            <>
+              <Box className="absolute inset-y-0 left-0 w-20 sm:w-32 bg-gradient-to-r from-black to-transparent z-10 pointer-events-none" />
+              <Box className="absolute inset-y-0 right-0 w-20 sm:w-32 bg-gradient-to-l from-black to-transparent z-10 pointer-events-none" />
+              <Box className="border-y border-zinc-800/50 py-5">
+                <Suspense fallback={<Box className="h-12" />}>
+                  <Marquee speed={25} gradient={false} direction="right">
+                    {palavrasChaveCarreira.map((palavraChave, index) => (
+                      <Box key={index} className="flex items-center mx-4 sm:mx-6">
+                        <Text className="text-xs sm:text-sm text-zinc-700 uppercase tracking-wider font-mono font-semibold whitespace-nowrap">
+                          {palavraChave}
+                        </Text>
+                        <Box className="w-1.5 h-1.5 rounded-full bg-brand-500/40 ml-4 sm:ml-6" />
+                      </Box>
+                    ))}
+                  </Marquee>
+                </Suspense>
+              </Box>
+            </>
+          )}
         </motion.div>
       </Container>
     </Box>

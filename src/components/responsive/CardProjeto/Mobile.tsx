@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion'
 import { Calendar, ChevronRight } from 'lucide-react'
 import { memo } from 'react'
+import { ImagemOtimizada } from '@/components/ui/ImagemOtimizada'
 import { Badge } from '@/shadcn/components/ui/badge'
 import { Icon } from '@/shadcn/components/ui/icon'
 import { Box, Flex, HStack, VStack } from '@/shadcn/components/ui/layout'
@@ -41,11 +42,10 @@ export const Mobile = memo(({ projeto, onAbrirModal }: CardProjetoProps) => (
       "
     >
       <Box className="relative w-full aspect-video overflow-hidden">
-        <img
+        <ImagemOtimizada
           src={projeto.imagem}
           alt={projeto.titulo}
           className="object-cover w-full h-full transition-transform duration-300"
-          loading="lazy"
         />
         <Box className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
 

@@ -27,14 +27,14 @@ export const Mascote = memo(() => {
   const currentSection = useVisibleSection()
   const { isActive } = useEasterEgg()
   const [showMessage, setShowMessage] = useState(false)
-  const [crazyMessage, setCrazyMessage] = useState('')
+  const [crazyMessage, setCrazyMessage] = useState(crazyMessages[0])
   const isHoveringRef = useRef(false)
+  const crazyIndexRef = useRef(0)
 
   const message = isActive ? crazyMessage : mascoteMessages[currentSection]
 
-  // Mostra a mensagem automaticamente quando a seção muda
+  // biome-ignore lint/correctness/useExhaustiveDependencies: Precisamos atualizar quando a seção muda
   useEffect(() => {
-    console.log('🤖 Seção atual:', currentSection)
     if (!isActive) {
       setShowMessage(true)
       const timer = setTimeout(() => {
@@ -44,15 +44,15 @@ export const Mascote = memo(() => {
       }, 3000)
       return () => clearTimeout(timer)
     }
-  }, [currentSection, isActive])
+  }, [isActive, currentSection])
 
-  // Modo maluco - mensagens aleatórias
   useEffect(() => {
     if (isActive) {
       setShowMessage(true)
       const interval = setInterval(() => {
-        setCrazyMessage(crazyMessages[Math.floor(Math.random() * crazyMessages.length)])
-      }, 500)
+        crazyIndexRef.current = (crazyIndexRef.current + 1) % crazyMessages.length
+        setCrazyMessage(crazyMessages[crazyIndexRef.current])
+      }, 1000)
       return () => clearInterval(interval)
     }
   }, [isActive])
@@ -69,19 +69,14 @@ export const Mascote = memo(() => {
               opacity: 1,
               y: 0,
               scale: 1,
-              ...(isActive && {
-                rotate: [0, -5, 5, -5, 5, 0],
-                x: [0, -5, 5, -5, 5, 0],
-              }),
             }}
             exit={{ opacity: 0, y: 10, scale: 0.9 }}
             transition={{
               type: 'spring',
               stiffness: 300,
               damping: 25,
-              ...(isActive && { duration: 0.3, repeat: Number.POSITIVE_INFINITY }),
             }}
-            className={`relative mb-1 ${isActive ? 'animate-pulse' : ''}`}
+            className={`relative mb-1`}
           >
             <div
               className={`relative bg-gradient-to-br ${isActive ? 'from-purple-900 to-red-950 border-purple-500' : 'from-zinc-900 to-zinc-950 border-brand-500/40'} border-2 px-3 py-2 md:px-4 md:py-2 rounded-xl shadow-[0_0_20px_rgba(34,197,94,0.2)] backdrop-blur-sm`}
@@ -126,19 +121,16 @@ export const Mascote = memo(() => {
         animate={
           isActive
             ? {
-                rotate: [0, 360],
-                scale: [1, 1.2, 0.8, 1.2, 1],
-                y: [0, -20, 0, -10, 0],
-                x: [0, 10, -10, 5, -5, 0],
+                rotate: 360,
+                scale: [1, 1.1, 1],
               }
             : {}
         }
         transition={
           isActive
             ? {
-                duration: 2,
-                repeat: Number.POSITIVE_INFINITY,
-                ease: 'easeInOut',
+                rotate: { duration: 3, repeat: Number.POSITIVE_INFINITY, ease: 'linear' },
+                scale: { duration: 1, repeat: Number.POSITIVE_INFINITY, ease: 'easeInOut' },
               }
             : {}
         }
@@ -148,30 +140,15 @@ export const Mascote = memo(() => {
         {/* Glow effect de fundo */}
         <motion.div
           className={`absolute inset-0 ${isActive ? 'bg-purple-500/40' : 'bg-brand-500/20'} rounded-xl blur-lg`}
-          animate={
-            isActive
-              ? {
-                  opacity: [0.5, 1, 0.5],
-                  scale: [1, 1.5, 1],
-                  rotate: [0, 180, 360],
-                }
-              : {
-                  opacity: [0.3, 0.6, 0.3],
-                  scale: [0.9, 1.1, 0.9],
-                }
-          }
-          transition={
-            isActive
-              ? {
-                  duration: 1,
-                  repeat: Number.POSITIVE_INFINITY,
-                }
-              : {
-                  duration: 3,
-                  repeat: Number.POSITIVE_INFINITY,
-                  ease: 'easeInOut',
-                }
-          }
+          animate={{
+            opacity: [0.3, 0.6, 0.3],
+            scale: [0.9, 1.1, 0.9],
+          }}
+          transition={{
+            duration: 3,
+            repeat: Number.POSITIVE_INFINITY,
+            ease: 'easeInOut',
+          }}
         />
 
         {/* Corpo do robô */}
