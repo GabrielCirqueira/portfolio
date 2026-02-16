@@ -45,6 +45,7 @@ export const Desktop = memo(({ contactItems }: ContactGridProps) => (
             href={contact.href || undefined}
             target={contact.href ? '_blank' : undefined}
             rel={contact.href ? 'noopener noreferrer' : undefined}
+            aria-label={`Visite ${contact.label}`}
             className={`group flex items-center gap-4 md:gap-5 bg-zinc-900/40 border border-zinc-800 p-4 md:p-5 lg:p-6 rounded-xl transition-all duration-300 h-full backdrop-blur-sm relative overflow-hidden ${
               contact.highlight
                 ? 'border-brand-500/50 bg-brand-500/10 shadow-[0_0_30px_var(--tw-shadow-color)] shadow-brand-500/15'
@@ -90,6 +91,7 @@ export const Desktop = memo(({ contactItems }: ContactGridProps) => (
           href="https://linktr.ee/gabrielCirqueira"
           target="_blank"
           rel="noopener noreferrer"
+          aria-label="Visite meu Linktree"
           className="
             group flex items-center justify-between gap-4
             bg-zinc-900/40 border border-zinc-800

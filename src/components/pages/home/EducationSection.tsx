@@ -110,7 +110,10 @@ export const EducationSection = memo(() => {
           >
             Formação
           </Badge>
-          <Title className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold font-heading uppercase tracking-tight">
+          <Title
+            as="h2"
+            className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold font-heading uppercase tracking-tight"
+          >
             Formação e <Span className="text-gradient">Experiência</Span>
           </Title>
           <Box className="w-20 sm:w-24 h-1 bg-brand-500 mx-auto rounded-full opacity-60" />

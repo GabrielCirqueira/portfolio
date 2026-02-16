@@ -64,6 +64,7 @@ export function Header() {
               "
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
+              aria-label="Ir para o início"
             >
               <Text className="font-mono text-brand-500 text-lg sm:text-xl md:text-2xl group-hover:rotate-12 transition-transform duration-300">
                 &lt;
@@ -83,6 +84,7 @@ export function Header() {
                   key={item.name}
                   href={item.href}
                   className="text-xs font-bold uppercase tracking-widest text-gray-400 hover:text-white transition-colors relative group no-underline py-2"
+                  aria-label={`Ir para a seção ${item.name}`}
                 >
                   <span className="relative z-10">{item.name}</span>
                   <span className="absolute bottom-0 left-0 w-0 h-[2px] bg-brand-500 group-hover:w-full transition-all duration-300 ease-out"></span>
@@ -95,6 +97,7 @@ export function Header() {
                 rel="noopener noreferrer"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
+                aria-label="Visite meu Linktree"
                 className="
                   ml-4 px-6 py-2.5 border border-brand-500/30
                   bg-brand-500/5 text-brand-400 font-bold

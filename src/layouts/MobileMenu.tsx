@@ -41,7 +41,7 @@ export function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
               asChild
               onClick={onClose}
             >
-              <a href={item.href}>
+              <a href={item.href} aria-label={`Ir para a seção ${item.name}`}>
                 <item.icon className="h-5 w-5 group-hover:text-brand-500 transition-colors" />
                 <span className="uppercase tracking-wide">{item.name}</span>
               </a>
@@ -57,7 +57,12 @@ export function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
             asChild
             onClick={onClose}
           >
-            <a href="https://linktr.ee/gabrielCirqueira" target="_blank" rel="noopener noreferrer">
+            <a
+              href="https://linktr.ee/gabrielCirqueira"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Visite meu Linktree"
+            >
               Linktree
             </a>
           </Button>

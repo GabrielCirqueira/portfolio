@@ -45,6 +45,7 @@ export const Mobile = memo(({ contactItems }: ContactGridProps) => {
               <Link
                 href={contact.href}
                 external
+                aria-label={`Visite ${contact.label}`}
                 className={`
                 flex items-center gap-3 w-full px-4 py-3.5
                 rounded-xl border transition-colors duration-150 no-underline
@@ -117,6 +118,7 @@ export const Mobile = memo(({ contactItems }: ContactGridProps) => {
         <Link
           href="https://linktr.ee/gabrielCirqueira"
           external
+          aria-label="Visite meu Linktree"
           className="
           flex items-center justify-between gap-3 w-full px-4 py-3.5
           rounded-xl border border-zinc-800/60 bg-zinc-900/50

@@ -60,7 +60,10 @@ export const Desktop = memo(({ aboutCards }: DesktopProps) => {
         >
           Sobre Mim
         </Badge>
-        <Title className="text-3xl sm:text-4xl md:text-5xl font-bold font-heading uppercase tracking-wide">
+        <Title
+          as="h2"
+          className="text-3xl sm:text-4xl md:text-5xl font-bold font-heading uppercase tracking-wide"
+        >
           Minha <Span className="text-gradient">Trajetória</Span>
         </Title>
       </motion.div>
@@ -78,6 +81,7 @@ export const Desktop = memo(({ aboutCards }: DesktopProps) => {
             <img
               src="/images/gabriel1.webp"
               alt="Gabriel Cirqueira"
+              loading="lazy"
               className="object-cover w-full h-full transform transition-transform duration-700 group-hover:scale-105 opacity-90 group-hover:opacity-100"
             />
 

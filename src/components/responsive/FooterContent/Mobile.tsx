@@ -28,7 +28,11 @@ export const Mobile = memo(({ socials, links }: FooterContentProps) => {
   return (
     <VStack className="py-12 px-6 relative z-10 gap-0">
       <Center className="mb-8">
-        <Link href="#inicio" className="flex items-center gap-2 text-white no-underline group">
+        <Link
+          href="#inicio"
+          className="flex items-center gap-2 text-white no-underline group"
+          aria-label="Ir para o início"
+        >
           <Span className="font-mono text-brand-500 text-xl group-active:rotate-12 transition-transform duration-300">
             &lt;
           </Span>
@@ -76,6 +80,7 @@ export const Mobile = memo(({ socials, links }: FooterContentProps) => {
       <Link
         href="https://wa.me/+5527996121313"
         external
+        aria-label="Fale comigo no WhatsApp"
         className="no-underline w-full max-w-sm mx-auto mb-8"
       >
         <Button

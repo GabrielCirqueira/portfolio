@@ -93,6 +93,7 @@ export const Desktop = memo(({ projeto, onAbrirModal }: CardProjetoProps) => (
 
           <VStack className="gap-3 relative z-10">
             <Title
+              as="h3"
               className="
               text-lg md:text-xl lg:text-2xl font-bold font-heading text-white
               group-hover:text-brand-400

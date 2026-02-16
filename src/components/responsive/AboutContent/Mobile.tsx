@@ -38,7 +38,10 @@ export const Mobile = memo(({ aboutCards }: MobileProps) => {
         >
           Sobre Mim
         </Badge>
-        <Title className="text-3xl font-bold font-heading uppercase tracking-tight text-white mb-3">
+        <Title
+          as="h2"
+          className="text-3xl font-bold font-heading uppercase tracking-tight text-white mb-3"
+        >
           Minha <Span className="text-gradient">Trajetória</Span>
         </Title>
         <Box className="w-16 h-1 bg-brand-500 mx-auto rounded-full opacity-60" />
@@ -55,6 +58,7 @@ export const Mobile = memo(({ aboutCards }: MobileProps) => {
           <img
             src="/images/gabriel1.webp"
             alt="Gabriel Cirqueira"
+            loading="lazy"
             className="object-cover w-full h-full opacity-90 transition-transform duration-300 group-active:scale-105"
           />
           <Box className="absolute inset-x-0 bottom-0 h-2/3 bg-gradient-to-t from-black via-black/60 to-transparent z-10" />

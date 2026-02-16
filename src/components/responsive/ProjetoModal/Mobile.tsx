@@ -101,7 +101,10 @@ export function Mobile({ isOpen, onClose, projeto }: ProjetoModalProps) {
                 <Box className="p-1 bg-brand-500/10 border border-brand-500/20 rounded-md flex-shrink-0">
                   <Icon icon={Sparkles} className="w-3.5 h-3.5 text-brand-400" />
                 </Box>
-                <Title className="text-[15px] font-bold uppercase tracking-tight font-heading text-white truncate">
+                <Title
+                  as="h2"
+                  className="text-[15px] font-bold uppercase tracking-tight font-heading text-white truncate"
+                >
                   {projeto.titulo}
                 </Title>
               </HStack>
@@ -199,9 +202,12 @@ export function Mobile({ isOpen, onClose, projeto }: ProjetoModalProps) {
                 <Box>
                   <HStack className="items-center gap-2 mb-2.5">
                     <Icon icon={Code2} className="w-3.5 h-3.5 text-brand-400" />
-                    <Span className="text-[13px] font-bold uppercase tracking-wide font-heading text-white">
+                    <Title
+                      as="h3"
+                      className="text-[13px] font-bold uppercase tracking-wide font-heading text-white"
+                    >
                       Sobre o Projeto
-                    </Span>
+                    </Title>
                     <Box className="h-px bg-gradient-to-r from-brand-500/40 to-transparent flex-1" />
                   </HStack>
                   <VStack className="gap-2.5 pl-2.5 border-l-2 border-brand-500/20">
@@ -216,9 +222,12 @@ export function Mobile({ isOpen, onClose, projeto }: ProjetoModalProps) {
                 <Box>
                   <HStack className="items-center gap-2 mb-2.5">
                     <Box className="w-0.5 h-4 bg-gradient-to-b from-brand-500 to-brand-400 rounded-full" />
-                    <Span className="text-[13px] font-bold uppercase tracking-wide font-heading text-white">
+                    <Title
+                      as="h3"
+                      className="text-[13px] font-bold uppercase tracking-wide font-heading text-white"
+                    >
                       Tecnologias
-                    </Span>
+                    </Title>
                   </HStack>
                   <Flex className="flex-wrap gap-1.5">
                     {projeto.tecnologias.map((tech) => (

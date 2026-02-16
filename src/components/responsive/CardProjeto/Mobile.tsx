@@ -68,7 +68,10 @@ export const Mobile = memo(({ projeto, onAbrirModal }: CardProjetoProps) => {
 
         <VStack className="p-4 gap-3 w-full">
           <HStack className="items-start justify-between gap-3 w-full">
-            <Title className="text-sm font-bold font-heading text-white uppercase tracking-wide leading-tight flex-1">
+            <Title
+              as="h3"
+              className="text-sm font-bold font-heading text-white uppercase tracking-wide leading-tight flex-1"
+            >
               {projeto.titulo}
             </Title>
             <Icon icon={ChevronRight} className="w-5 h-5 text-zinc-600 flex-shrink-0 mt-0.5" />

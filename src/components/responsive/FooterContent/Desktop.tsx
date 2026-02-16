@@ -117,6 +117,7 @@ export const Desktop = memo(({ socials, links }: FooterContentProps) => {
             target="_blank"
             className="w-full block"
             rel="noopener noreferrer"
+            aria-label="Fale comigo no WhatsApp"
             whileHover={{ scale: 1.02 }}
             whileTap={{ scale: 0.98 }}
           >

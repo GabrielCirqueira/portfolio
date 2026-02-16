@@ -80,7 +80,10 @@ export function Desktop({ isOpen, onClose, projeto }: ProjetoModalProps) {
                         <Box className="p-1.5 bg-brand-500/10 border border-brand-500/20 rounded-lg flex-shrink-0">
                           <Icon icon={Sparkles} className="w-4 h-4 text-brand-400" />
                         </Box>
-                        <Title className="text-base md:text-xl lg:text-2xl font-bold uppercase tracking-tight font-heading text-white leading-tight">
+                        <Title
+                          as="h2"
+                          className="text-base md:text-xl lg:text-2xl font-bold uppercase tracking-tight font-heading text-white leading-tight"
+                        >
                           {projeto.titulo}
                         </Title>
                       </HStack>
@@ -163,7 +166,10 @@ export function Desktop({ isOpen, onClose, projeto }: ProjetoModalProps) {
                         <Box className="p-1.5 bg-brand-500/10 border border-brand-500/20 rounded-lg">
                           <Icon icon={Code2} className="w-4 h-4 text-brand-400" />
                         </Box>
-                        <Title className="text-base md:text-lg font-bold uppercase tracking-wide font-heading text-white">
+                        <Title
+                          as="h3"
+                          className="text-base md:text-lg font-bold uppercase tracking-wide font-heading text-white"
+                        >
                           Sobre o Projeto
                         </Title>
                         <Box className="h-px bg-gradient-to-r from-brand-500/50 to-transparent flex-1" />
@@ -182,7 +188,10 @@ export function Desktop({ isOpen, onClose, projeto }: ProjetoModalProps) {
                     <VStack className="gap-3">
                       <HStack className="items-center gap-2">
                         <Box className="w-0.5 h-5 bg-gradient-to-b from-brand-500 to-brand-400 rounded-full" />
-                        <Title className="text-sm md:text-base font-bold uppercase tracking-wide font-heading text-white">
+                        <Title
+                          as="h3"
+                          className="text-sm md:text-base font-bold uppercase tracking-wide font-heading text-white"
+                        >
                           Tecnologias Utilizadas
                         </Title>
                       </HStack>

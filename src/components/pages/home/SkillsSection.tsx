@@ -266,7 +266,10 @@ export const SkillsSection = memo(() => {
             transition={{ duration: 0.5, delay: 0.2 }}
             className="space-y-4"
           >
-            <Title className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold uppercase tracking-tight font-heading">
+            <Title
+              as="h2"
+              className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold uppercase tracking-tight font-heading"
+            >
               Stack & <span className="text-gradient">Ferramentas</span>
             </Title>
             <Box className="w-20 sm:w-24 h-1 bg-brand-500 mx-auto rounded-full opacity-60" />

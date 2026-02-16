@@ -81,7 +81,10 @@ export const ContactSection = memo(() => {
             style={{ willChange: 'transform, opacity' }}
             className="space-y-4"
           >
-            <Title className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-heading font-bold uppercase tracking-tight">
+            <Title
+              as="h2"
+              className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-heading font-bold uppercase tracking-tight"
+            >
               Canais de <span className="text-gradient">Contato</span>
             </Title>
             <Box className="w-20 sm:w-24 h-1 bg-brand-500 mx-auto rounded-full opacity-60" />
