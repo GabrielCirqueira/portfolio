@@ -6,7 +6,7 @@ export const sistemas: Sistema[] = [
     tipo: 'sistema',
     titulo: 'SpaceNow',
     descricao:
-      'O SpaceNow é uma plataforma web interativa que utiliza dados oficiais da NASA para transformar informações astronômicas reais.',
+      'Plataforma web interativa que transforma dados astronômicos da NASA em visualizações 3D educativas, apresentando APOD, asteroides e o Sistema Solar.',
     imagem: '/images/sistemas/spacenow/home.webp',
     tecnologias: [
       'Symfony',
@@ -38,7 +38,7 @@ export const sistemas: Sistema[] = [
     tipo: 'sistema',
     titulo: 'Sistema de Organiza Bus',
     descricao:
-      'OrganizaBus é uma plataforma SaaS para gestão de transporte coletivo, usada por prefeituras, cooperativas e instituições.',
+      'Plataforma SaaS completa para gestão de transporte escolar com sistema de enquetes, votação de alunos e alocação manual de vagas nos ônibus.',
     imagem: '/images/sistemas/organizaBus/Login.webp',
     tecnologias: ['Symfony', 'React', 'TypeScript', 'Chakra UI', 'JWT', 'Docker'],
     dataInicio: '2025-03-20',
@@ -64,7 +64,7 @@ export const sistemas: Sistema[] = [
     tipo: 'sistema',
     titulo: 'PipChart',
     descricao:
-      'Aplicação web moderna para anotações em Picture-in-Picture, ideal para reuniões e multitarefa.',
+      'Aplicação web moderna para anotações em Picture-in-Picture com chats temáticos, armazenamento local e exportação JSON, perfeita para reuniões e multitarefa.',
     imagem: '/images/sistemas/PipChart/home2.webp',
     gitHub: 'https://github.com/GabrielCirqueira/PipChart',
     link: 'https://pipchart.vercel.app/',
@@ -92,7 +92,7 @@ export const sistemas: Sistema[] = [
     tipo: 'sistema',
     titulo: 'Sistema de PDV e Estoque',
     descricao:
-      'Sistema completo de Ponto de Venda desenvolvido durante o curso MS CODE, integrando gestão de produtos, vendas, clientes e controle de permissões.',
+      'Sistema completo de PDV com gestão de produtos, vendas, clientes e controle de permissões por roles. Desenvolvido com Symfony 7.1 e arquitetura MVC.',
     imagem: '/images/sistemas/estoquePDV/TelaPaginaInicial.webp',
     tecnologias: ['PHP', 'Symfony', 'MySQL', 'Docker', 'Twig', 'Stimulus', 'Turbo'],
     dataInicio: '2024-09-17',
@@ -123,7 +123,7 @@ export const sistemas: Sistema[] = [
     tipo: 'sistema',
     titulo: 'Sistema de Eletivas e Tutorias V3 (MVC)',
     descricao:
-      'Versão definitiva do sistema, reconstruída do zero em apenas 48h utilizando arquitetura MVC e Bootstrap, garantindo performance e estabilidade.',
+      'Versão definitiva do sistema de gestão de eletivas escolares, reconstruída do zero em 48h com arquitetura MVC e Bootstrap. Implementado com sucesso em produção.',
     imagem: '/images/sistemas/eletivaTutoriaV3/Login.webp',
     link: 'https://et.escolansl.com/sistema',
     tecnologias: ['PHP', 'MySQL', 'Bootstrap', 'MVC'],
@@ -147,7 +147,8 @@ export const sistemas: Sistema[] = [
     id: 'monitoramento',
     tipo: 'sistema',
     titulo: 'Sistema de Monitoramento Escolar',
-    descricao: 'Sistema completo para monitoramento e gestão de atividades escolares',
+    descricao:
+      'Plataforma completa de gestão escolar com criação de provas, gabaritos, correção automática e análise de desempenho com gráficos detalhados.',
     imagem: '/images/sistemas/monitoramento/homeADM.webp',
     link: 'https://monitoramento.escolansl.com/sistema',
     tecnologias: ['PHP', 'MySQL', 'JavaScript', 'CSS'],
@@ -177,7 +178,7 @@ export const sistemas: Sistema[] = [
     tipo: 'sistema',
     titulo: 'Sistema de Eletivas e Tutorias V2 (Web Legacy)',
     descricao:
-      'Primeira versão web do sistema, desenvolvida durante o aprendizado de PHP. Apesar do código legado, atendeu a escola com 100% de funcionalidade.',
+      'Primeira versão web do sistema de eletivas, desenvolvida durante o aprendizado de PHP. Implementado com sucesso em produção, atendendo integralmente às necessidades da escola.',
     imagem: '/images/sistemas/eletivaTutoriaV2/login.webp',
     tecnologias: ['PHP', 'MySQL', 'CSS'],
     dataInicio: '2023-08-23',
@@ -205,7 +206,7 @@ export const sistemas: Sistema[] = [
     tipo: 'sistema',
     titulo: 'Mini Cadastro de Produtos',
     descricao:
-      'Projeto de estudo inicial focado em fundamentos web com HTML, CSS e PHP, implementando cadastro e autenticação básicos.',
+      'Projeto inicial de aprendizado dos fundamentos web com HTML, CSS e PHP, implementando sistema de cadastro de produtos e autenticação básica.',
     imagem: '/images/sistemas/mini-formulario/telaLogin.webp',
     tecnologias: ['HTML', 'CSS', 'PHP'],
     dataInicio: '2023-07-13',
@@ -230,7 +231,7 @@ export const sistemas: Sistema[] = [
     tipo: 'sistema',
     titulo: 'Sistema de Inscrição em Tutoria V1 (CMD)',
     descricao:
-      'Protótipo inicial em C via linha de comando. Nasceu da necessidade real da escola e marcou o início da solução lógica para o problema.',
+      'Protótipo inicial em C com interface de linha de comando. Primeira solução lógica desenvolvida para gestão de eletivas e tutorias escolares.',
     imagem: '/images/sistemas/eletivaTutoriaV1/TelaTutores.webp',
     tecnologias: ['C', 'Sistema de Arquivos'],
     dataInicio: '2022-09-24',
@@ -259,7 +260,7 @@ export const jogos: Jogo[] = [
     tipo: 'jogo',
     titulo: 'Biome Quest',
     descricao:
-      'Jogo educativo onde um robô percorre diferentes biomas resolvendo problemas ambientais.',
+      'Jogo educativo 2D em pixel art onde um robô percorre todos os biomas brasileiros resolvendo problemas ambientais como queimadas, poluição e caça ilegal.',
     imagem: '/images/jogos/missao-verde/amazonia.webp',
     link: 'https://gd.games/oldgabriel/biome-quest',
     tecnologias: ['JavaScript', 'GDevelop', 'Game Design'],
@@ -284,7 +285,8 @@ export const jogos: Jogo[] = [
     id: 'pixel-world',
     tipo: 'jogo',
     titulo: 'Pixel World',
-    descricao: 'Jogo com temática inspirada em One Piece. Colete chaves e enfrente chefões.',
+    descricao:
+      'Jogo 2D em pixel art inspirado em One Piece. Explore mundos abertos, colete chaves, evolua habilidades e enfrente os Shichibukais em busca do One Piece.',
     imagem: '/images/pixel-world.webp',
     link: 'https://gd.games/oldgabriel/pixel-world',
     tecnologias: ['JavaScript', 'GDevelop', 'Pixel Art'],
@@ -315,7 +317,7 @@ export const jogos: Jogo[] = [
     tipo: 'jogo',
     titulo: 'Car Master',
     descricao:
-      'Jogo arcade de desvio em visão superior onde o objetivo é sobreviver o máximo de tempo desviando de obstáculos na rodovia.',
+      'Jogo arcade de desvio em visão superior com 4 modos de dificuldade e 3 cenários. Desvie de obstáculos, use habilidades especiais e sobreviva o máximo possível.',
     imagem: '/images/jogos/car-master/andando.webp',
     tecnologias: ['Scratch', 'Game Design'],
     dataInicio: '2022-08-25',
