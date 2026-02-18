@@ -1,14 +1,9 @@
-import type { LucideIcon } from 'lucide-react'
 import { useIsMobile } from '@/hooks/useMediaQuery'
+import type { SkillCategory } from '@/types/habilidades'
 import { Desktop } from './Desktop'
 import { Mobile } from './Mobile'
 
-export interface SkillCategory {
-  category: string
-  description: string
-  icon: LucideIcon
-  technologies: string[]
-}
+export type { SkillCategory }
 
 interface SkillsGridProps {
   skills: SkillCategory[]

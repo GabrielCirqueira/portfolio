@@ -1,21 +1,11 @@
-import { Code, type LucideIcon, Phone } from 'lucide-react'
+import { Code, Phone } from 'lucide-react'
 import { memo } from 'react'
 import { Button } from '@/shadcn/components/ui/button'
 import { Icon } from '@/shadcn/components/ui/icon'
 import { Box, Center, Grid, HStack, VStack } from '@/shadcn/components/ui/layout'
 import { Link } from '@/shadcn/components/ui/link'
 import { Span } from '@/shadcn/components/ui/typography'
-
-export interface SocialItem {
-  icon: LucideIcon
-  href: string
-  label: string
-}
-
-export interface LinkItem {
-  name: string
-  href: string
-}
+import type { LinkItem, SocialItem } from '@/types/navegacao'
 
 interface FooterContentProps {
   socials: SocialItem[]

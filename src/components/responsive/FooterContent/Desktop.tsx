@@ -1,21 +1,11 @@
 import { motion } from 'framer-motion'
-import { Code, type LucideIcon, Phone } from 'lucide-react'
+import { Code, Phone } from 'lucide-react'
 import { memo } from 'react'
 import { Button } from '@/shadcn/components/ui/button'
 import { Icon } from '@/shadcn/components/ui/icon'
 import { Box, Container, Grid, HStack, VStack } from '@/shadcn/components/ui/layout'
 import { Text, Title } from '@/shadcn/components/ui/typography'
-
-export interface SocialItem {
-  icon: LucideIcon
-  href: string
-  label: string
-}
-
-export interface LinkItem {
-  name: string
-  href: string
-}
+import type { LinkItem, SocialItem } from '@/types/navegacao'
 
 interface FooterContentProps {
   socials: SocialItem[]

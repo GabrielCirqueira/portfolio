@@ -1,13 +1,11 @@
 import { AnimatePresence, motion, useDragControls } from 'framer-motion'
-import { Calendar, ChevronLeft, ChevronRight, Code2, ExternalLink, Sparkles, X } from 'lucide-react'
+import { Calendar, Code2, ExternalLink, Sparkles, X } from 'lucide-react'
 import { useEffect, useRef, useState } from 'react'
-import { ImagemOtimizada } from '@/components/ui/ImagemOtimizada'
 import { Badge } from '@/shadcn/components/ui/badge'
 import { Button } from '@/shadcn/components/ui/button'
 import { Icon } from '@/shadcn/components/ui/icon'
 import { Box, HStack, VStack } from '@/shadcn/components/ui/layout'
-import { Link } from '@/shadcn/components/ui/link'
-import { Title } from '@/shadcn/components/ui/typography'
+import { Text, Title } from '@/shadcn/components/ui/typography'
 import type { Projeto } from '@/types/projeto'
 
 interface ProjetoModalProps {
@@ -28,7 +26,7 @@ function formatarPeriodo(dataInicio: string, dataFim?: string): string {
 
 export function Mobile({ isOpen, onClose, projeto }: ProjetoModalProps) {
   const [imagemAtual, setImagemAtual] = useState(0)
-  const [imagemExpandida, setImagemExpandida] = useState(false)
+  const [imagemExpandida, setImagemExpandida] = useState<string | null>(null)
   const dragControls = useDragControls()
   const contentRef = useRef<HTMLDivElement>(null)
 
@@ -45,16 +43,6 @@ export function Mobile({ isOpen, onClose, projeto }: ProjetoModalProps) {
   }, [isOpen])
 
   if (!isOpen) return null
-
-  const nextImage = (e?: React.MouseEvent) => {
-    e?.stopPropagation()
-    if (imagemAtual < projeto.imagens.length - 1) setImagemAtual((prev) => prev + 1)
-  }
-
-  const prevImage = (e?: React.MouseEvent) => {
-    e?.stopPropagation()
-    if (imagemAtual > 0) setImagemAtual((prev) => prev - 1)
-  }
 
   const handleSheetDrag = (
     _: unknown,
@@ -74,7 +62,7 @@ export function Mobile({ isOpen, onClose, projeto }: ProjetoModalProps) {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.2 }}
-            className="fixed inset-0 z-[100] bg-black/80"
+            className="fixed inset-0 z-[100] bg-black/80 backdrop-blur-sm"
             onClick={onClose}
           />
 
@@ -90,42 +78,50 @@ export function Mobile({ isOpen, onClose, projeto }: ProjetoModalProps) {
             dragConstraints={{ top: 0 }}
             dragElastic={0.05}
             onDragEnd={handleSheetDrag}
-            className="fixed bottom-0 left-0 right-0 z-[101] flex flex-col bg-zinc-950 rounded-t-[32px] border-t border-zinc-800 shadow-[0_-10px_40px_rgba(0,0,0,0.8)]"
-            style={{
-              height: '90vh',
-              willChange: 'transform',
-            }}
+            className="fixed bottom-0 left-0 right-0 z-[101] flex flex-col bg-zinc-950 rounded-t-[28px] border-t border-zinc-800 shadow-[0_-10px_60px_rgba(0,0,0,0.9)] overflow-hidden"
+            style={{ height: '92vh', willChange: 'transform' }}
           >
+            <Box className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-brand-500/60 to-transparent z-10 pointer-events-none" />
+
             <div
-              className="w-full pt-4 pb-2 flex justify-center flex-shrink-0 touch-none cursor-grab active:cursor-grabbing bg-zinc-950 rounded-t-[32px]"
+              className="w-full pt-4 pb-3 flex justify-center flex-shrink-0 touch-none cursor-grab active:cursor-grabbing rounded-t-[28px]"
               onPointerDown={(e) => dragControls.start(e)}
             >
-              <div className="w-12 h-1.5 bg-zinc-800 rounded-full" />
+              <div className="w-10 h-1 bg-zinc-700 rounded-full" />
             </div>
 
-            <div className="px-6 pb-4 flex items-center justify-between flex-shrink-0 border-b border-zinc-900 bg-zinc-950">
-              <VStack className="gap-1 flex-1 min-w-0 mr-4">
-                <HStack className="items-center gap-2">
-                  <Badge
-                    variant="outline"
-                    className=" bg-brand-500/10 text-brand-400 border-brand-500/20 px-2 py-0.5 text-[10px] h-auto rounded-full"
+            <div className="relative px-5 pb-4 flex items-start justify-between flex-shrink-0 border-b border-zinc-800 bg-gradient-to-br from-zinc-900/80 to-zinc-950/80">
+              <Box className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,_var(--tw-gradient-stops))] from-brand-500/5 via-transparent to-transparent pointer-events-none" />
+
+              <VStack className="gap-2 flex-1 min-w-0 mr-3 relative z-10">
+                <HStack className="items-center gap-2 flex-wrap">
+                  <Box className="p-1.5 bg-brand-500/10 border border-brand-500/20 rounded-lg flex-shrink-0">
+                    <Icon icon={Sparkles} className="w-3.5 h-3.5 text-brand-400" />
+                  </Box>
+                  <Title
+                    as="h2"
+                    className="text-lg font-bold font-heading text-white leading-tight tracking-tight"
                   >
-                    {projeto.tipo === 'jogo' ? 'Game' : 'System'}
-                  </Badge>
-                  <span className="text-[10px] text-zinc-500 font-mono">
-                    {new Date(projeto.dataInicio).getFullYear()}
-                  </span>
+                    {projeto.titulo}
+                  </Title>
                 </HStack>
-                <Title as="h2" className="text-xl font-bold font-heading text-white truncate">
-                  {projeto.titulo}
-                </Title>
+
+                <HStack className="items-center gap-2 flex-wrap">
+                  <HStack className="items-center gap-1.5 text-xs text-zinc-300 font-mono bg-zinc-900/80 border border-zinc-800 px-2.5 py-1 rounded-lg">
+                    <Icon icon={Calendar} className="w-3 h-3 text-brand-400" />
+                    <Text className="text-zinc-300 font-medium text-[11px]">
+                      {formatarPeriodo(projeto.dataInicio, projeto.dataFim)}
+                    </Text>
+                  </HStack>
+                  <Badge className="bg-brand-500/10 text-brand-300 border border-brand-500/30 px-2 py-0.5 text-[10px] font-mono uppercase tracking-wider rounded-lg h-auto">
+                    {projeto.tipo === 'jogo' ? '🎮 Jogo' : '💻 Sistema'}
+                  </Badge>
+                </HStack>
               </VStack>
 
               <Button
-                variant="outline"
-                size="icon"
                 onClick={onClose}
-                className="w-9 h-9 rounded-full bg-zinc-900 border-zinc-800 text-zinc-400 active:bg-zinc-800 active:text-white transition-colors"
+                className="relative z-10 w-9 h-9 min-w-9 rounded-lg bg-zinc-900 border border-zinc-700 hover:border-brand-500 hover:bg-brand-600 hover:text-black text-white transition-all duration-300 p-0 flex items-center justify-center flex-shrink-0 mt-0.5"
                 aria-label="Fechar"
               >
                 <Icon icon={X} className="w-4 h-4" />
@@ -134,170 +130,151 @@ export function Mobile({ isOpen, onClose, projeto }: ProjetoModalProps) {
 
             <div
               ref={contentRef}
-              className="flex-1 overflow-y-auto overscroll-contain bg-zinc-950 px-6 pb-safe"
+              className="flex-1 overflow-y-auto overscroll-contain px-5 pb-6 custom-scrollbar"
             >
-              <VStack className="py-6 gap-8">
-                <Box className="relative w-full aspect-video bg-zinc-900 rounded-2xl overflow-hidden border border-zinc-800 shadow-lg">
-                  <div
-                    className="w-full h-full relative cursor-pointer"
-                    onClick={() => setImagemExpandida(true)}
-                    onKeyDown={(e) => {
-                      if (e.key === 'Enter' || e.key === ' ') {
-                        e.preventDefault()
-                        setImagemExpandida(true)
-                      }
-                    }}
-                    role="button"
-                    tabIndex={0}
-                    aria-label="Expandir imagem"
-                  >
-                    <ImagemOtimizada
-                      src={projeto.imagens[imagemAtual]}
-                      alt={`${projeto.titulo} - ${imagemAtual + 1}`}
-                      className="w-full h-full object-contain"
-                      objectFit="contain"
-                    />
+              <VStack className="py-5 gap-5">
+                <Box className="relative w-full">
+                  <Box className="relative w-full overflow-hidden rounded-xl border border-zinc-800 bg-gradient-to-br from-zinc-900 to-zinc-950 shadow-lg group">
+                    <Box className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent pointer-events-none z-[1]" />
+                    <Box className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-brand-500/60 via-brand-400/40 to-transparent z-[2]" />
 
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent pointer-events-none" />
-                  </div>
+                    <button
+                      type="button"
+                      className="relative w-full min-h-[200px] flex items-center justify-center p-3 cursor-pointer"
+                      onClick={() => setImagemExpandida(projeto.imagens[imagemAtual])}
+                      aria-label="Expandir imagem"
+                    >
+                      <img
+                        src={projeto.imagens[imagemAtual]}
+                        alt={`${projeto.titulo} - ${imagemAtual + 1}`}
+                        className="max-w-full max-h-[200px] object-contain rounded relative z-[2]"
+                      />
+                    </button>
+                  </Box>
 
                   {projeto.imagens.length > 1 && (
-                    <>
-                      <Button
-                        variant="ghost"
-                        onClick={prevImage}
-                        disabled={imagemAtual === 0}
-                        className="absolute left-2 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-black/50 border border-white/10 p-0 text-white disabled:opacity-30 backdrop-blur-sm"
-                      >
-                        <ChevronLeft className="w-4 h-4" />
-                      </Button>
-                      <Button
-                        variant="ghost"
-                        onClick={nextImage}
-                        disabled={imagemAtual === projeto.imagens.length - 1}
-                        className="absolute right-2 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-black/50 border border-white/10 p-0 text-white disabled:opacity-30 backdrop-blur-sm"
-                      >
-                        <ChevronRight className="w-4 h-4" />
-                      </Button>
-                    </>
-                  )}
-
-                  {projeto.imagens.length > 1 && (
-                    <div className="absolute bottom-3 left-1/2 -translate-x-1/2 flex gap-1.5 px-3 py-1.5 bg-black/60 backdrop-blur-md rounded-full border border-white/5 z-10">
-                      {projeto.imagens.map((_, i) => (
-                        <div
-                          key={i}
-                          className={`w-1.5 h-1.5 rounded-full transition-all duration-300 ${i === imagemAtual ? 'bg-brand-500 w-3' : 'bg-white/40'}`}
-                        />
+                    <HStack className="gap-2 mt-3 overflow-x-auto pb-1 custom-scrollbar">
+                      {projeto.imagens.map((imagem, index) => (
+                        <button
+                          type="button"
+                          key={index}
+                          onClick={() => setImagemAtual(index)}
+                          className={`relative flex-shrink-0 w-14 h-10 rounded-lg overflow-hidden border-2 transition-all duration-300 cursor-pointer bg-zinc-900 flex items-center justify-center ${
+                            imagemAtual === index
+                              ? 'border-brand-500 shadow-md shadow-brand-500/30'
+                              : 'border-zinc-700 hover:border-zinc-600 opacity-50 hover:opacity-100'
+                          }`}
+                        >
+                          <img
+                            src={imagem}
+                            alt={`Miniatura ${index + 1}`}
+                            className="max-w-full max-h-full object-contain p-0.5"
+                          />
+                          {imagemAtual === index && (
+                            <Box className="absolute inset-0 bg-brand-500/10 pointer-events-none" />
+                          )}
+                        </button>
                       ))}
-                    </div>
+                    </HStack>
                   )}
                 </Box>
 
-                <div className="grid grid-cols-2 gap-3">
-                  <div className="bg-zinc-900/50 rounded-xl p-3 border border-zinc-800">
-                    <div className="flex items-center gap-2 mb-1 text-zinc-400 text-xs uppercase tracking-wider font-semibold">
-                      <Calendar className="w-3.5 h-3.5" />
-                      Periodo
-                    </div>
-                    <div className="text-sm text-zinc-200 font-mono">
-                      {formatarPeriodo(projeto.dataInicio, projeto.dataFim)}
-                    </div>
-                  </div>
-                  <div className="bg-zinc-900/50 rounded-xl p-3 border border-zinc-800">
-                    <div className="flex items-center gap-2 mb-1 text-zinc-400 text-xs uppercase tracking-wider font-semibold">
-                      <Sparkles className="w-3.5 h-3.5" />
-                      Status
-                    </div>
-                    <div className="text-sm text-zinc-200 font-mono">
-                      {projeto.dataFim ? 'Concluído' : 'Em Desenvolvimento'}
-                    </div>
-                  </div>
-                </div>
-
                 <VStack className="gap-3">
                   <HStack className="items-center gap-2">
-                    <Code2 className="w-4 h-4 text-brand-500" />
+                    <Box className="p-1.5 bg-brand-500/10 border border-brand-500/20 rounded-lg">
+                      <Icon icon={Code2} className="w-3.5 h-3.5 text-brand-400" />
+                    </Box>
                     <Title
                       as="h3"
-                      className="text-sm font-bold uppercase tracking-wider text-white"
+                      className="text-sm font-bold uppercase tracking-wide font-heading text-white"
                     >
                       Sobre o Projeto
                     </Title>
+                    <Box className="h-px bg-gradient-to-r from-brand-500/50 to-transparent flex-1" />
                   </HStack>
-                  <div className="space-y-3 text-zinc-400 text-sm leading-relaxed">
+
+                  <VStack className="gap-2.5 relative pl-3">
+                    <Box className="absolute left-0 top-0 bottom-0 w-0.5 bg-gradient-to-b from-brand-500/50 via-brand-500/20 to-transparent rounded-full" />
                     {projeto.descricaoCompleta.map((paragrafo, idx) => (
-                      <p key={idx}>{paragrafo}</p>
+                      <Text key={idx} className="text-zinc-400 text-sm leading-relaxed">
+                        {paragrafo}
+                      </Text>
                     ))}
-                  </div>
+                  </VStack>
                 </VStack>
 
                 <VStack className="gap-3">
-                  <Title
-                    as="h3"
-                    className="text-sm font-bold uppercase tracking-wider text-white pl-1 border-l-2 border-brand-500"
-                  >
-                    Tecnologias
-                  </Title>
-                  <div className="flex flex-wrap gap-2">
+                  <HStack className="items-center gap-2">
+                    <Box className="w-0.5 h-4 bg-gradient-to-b from-brand-500 to-brand-400 rounded-full" />
+                    <Title
+                      as="h3"
+                      className="text-sm font-bold uppercase tracking-wide font-heading text-white"
+                    >
+                      Tecnologias Utilizadas
+                    </Title>
+                  </HStack>
+                  <HStack className="flex-wrap gap-2">
                     {projeto.tecnologias.map((tech) => (
                       <Badge
                         key={tech}
-                        className="bg-zinc-900 text-zinc-300 hover:text-brand-400 border-zinc-800 px-3 py-1.5 text-xs font-mono uppercase rounded-lg transition-colors"
+                        className="bg-zinc-900 text-brand-300 border border-brand-500/20 px-2.5 py-1 text-xs font-mono uppercase tracking-wider rounded-lg transition-all duration-300 hover:border-brand-500/50 hover:bg-zinc-800"
                       >
                         {tech}
                       </Badge>
                     ))}
-                  </div>
+                  </HStack>
                 </VStack>
 
                 {projeto.link && (
-                  <div className="pt-2 sticky bottom-4 z-10 w-full">
-                    <Link href={projeto.link} external className="no-underline w-full block">
-                      <Button className="w-full py-6 bg-brand-500 hover:bg-brand-600 text-black font-bold uppercase tracking-widest text-sm rounded-xl shadow-lg shadow-brand-500/20 active:scale-[0.98] transition-all">
-                        <ExternalLink className="w-4 h-4 mr-2" />
-                        {projeto.tipo === 'jogo' ? 'Jogar Agora' : 'Acessar Projeto'}
-                      </Button>
-                    </Link>
-                  </div>
+                  <motion.a
+                    href={projeto.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    whileTap={{ scale: 0.97 }}
+                    className="w-full px-5 py-3 border border-brand-500/30 bg-brand-500/5 text-brand-400 font-bold uppercase tracking-widest hover:bg-brand-500 hover:text-black hover:border-brand-500 transition-all duration-300 rounded text-sm shadow-[0_0_15px_var(--tw-shadow-color)] shadow-brand-500/10 hover:shadow-[0_0_25px_var(--tw-shadow-color)] hover:shadow-brand-500/40 flex items-center justify-center gap-2"
+                  >
+                    <Icon icon={ExternalLink} className="w-4 h-4" />
+                    {projeto.tipo === 'jogo' ? 'Jogar Agora' : 'Acessar Projeto'}
+                  </motion.a>
                 )}
-
-                <div className="h-6" />
               </VStack>
             </div>
           </motion.div>
 
           <AnimatePresence>
             {imagemExpandida && (
-              <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
-                transition={{ duration: 0.2 }}
-                className="fixed inset-0 z-[200] bg-black flex flex-col items-center justify-center p-4"
-                onClick={() => setImagemExpandida(false)}
+              <Box
+                className="fixed inset-0 z-[200] flex items-center justify-center p-4"
+                onClick={() => setImagemExpandida(null)}
               >
-                <Button
-                  variant="ghost"
-                  size="icon"
-                  onClick={(e) => {
-                    e.stopPropagation()
-                    setImagemExpandida(false)
-                  }}
-                  className="absolute top-4 right-4 z-20 w-10 h-10 bg-zinc-900/80 rounded-full text-white"
-                >
-                  <X className="w-5 h-5" />
-                </Button>
-
-                <img
-                  src={projeto.imagens[imagemAtual]}
-                  alt="Zoom"
-                  className="max-w-full max-h-full object-contain"
+                <motion.div
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  transition={{ duration: 0.2 }}
+                  className="absolute inset-0 bg-black/98 backdrop-blur-lg"
                 />
-                <div className="absolute bottom-8 bg-zinc-900/80 px-4 py-2 rounded-full text-xs font-mono text-zinc-400">
-                  Aperte para fechar
-                </div>
-              </motion.div>
+                <motion.div
+                  initial={{ opacity: 0, scale: 0.9 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0, scale: 0.9 }}
+                  transition={{ duration: 0.3 }}
+                  className="relative max-w-[95vw] max-h-[95vh] flex items-center justify-center"
+                  onClick={(e: React.MouseEvent) => e.stopPropagation()}
+                >
+                  <Button
+                    onClick={() => setImagemExpandida(null)}
+                    className="absolute top-2 right-2 z-10 bg-black/80 border border-zinc-700 hover:border-brand-500 hover:bg-brand-600 hover:text-black text-white transition-all duration-300 rounded-lg w-10 h-10 p-0 flex items-center justify-center backdrop-blur-md shadow-lg"
+                  >
+                    <Icon icon={X} className="w-5 h-5" />
+                  </Button>
+                  <img
+                    src={imagemExpandida}
+                    alt="Visualização expandida"
+                    className="max-w-full max-h-[95vh] object-contain rounded-lg shadow-2xl border border-zinc-800"
+                  />
+                </motion.div>
+              </Box>
             )}
           </AnimatePresence>
         </>

@@ -1,5 +1,5 @@
 import { AnimatePresence, motion } from 'framer-motion'
-import { ChevronDown, type LucideIcon } from 'lucide-react'
+import { ChevronDown } from 'lucide-react'
 import { memo, useState } from 'react'
 import { useAnimacaoOtimizada } from '@/hooks/useAnimacaoOtimizada'
 import { Badge } from '@/shadcn/components/ui/badge'
@@ -7,13 +7,7 @@ import { Button } from '@/shadcn/components/ui/button'
 import { Icon } from '@/shadcn/components/ui/icon'
 import { Box, Flex, VStack } from '@/shadcn/components/ui/layout'
 import { Span, Text } from '@/shadcn/components/ui/typography'
-
-export interface SkillCategory {
-  category: string
-  description: string
-  icon: LucideIcon
-  technologies: string[]
-}
+import type { SkillCategory } from '@/types/habilidades'
 
 interface SkillsGridProps {
   skills: SkillCategory[]

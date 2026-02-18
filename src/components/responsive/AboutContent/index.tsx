@@ -1,13 +1,9 @@
-import type { LucideIcon } from 'lucide-react'
 import { useIsMobile } from '@/hooks/useMediaQuery'
+import type { AboutCard } from '@/types/sobre'
 import { Desktop } from './Desktop'
 import { Mobile } from './Mobile'
 
-export interface AboutCard {
-  icon: LucideIcon
-  title: string
-  description: string
-}
+export type { AboutCard }
 
 interface AboutContentProps {
   aboutCards: AboutCard[]

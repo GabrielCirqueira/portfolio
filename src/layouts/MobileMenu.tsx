@@ -1,4 +1,4 @@
-import { Briefcase, Code, GraduationCap, Home, Mail, User } from 'lucide-react'
+import { navItems } from '@/data/navegacao'
 import { Button } from '@/shadcn/components/ui/button'
 import { Separator } from '@/shadcn/components/ui/separator'
 import { Sheet, SheetContent, SheetHeader, SheetTitle } from '@/shadcn/components/ui/sheet'
@@ -7,15 +7,6 @@ interface MobileMenuProps {
   isOpen: boolean
   onClose: () => void
 }
-
-const navItems = [
-  { name: 'Início', href: '#inicio', icon: Home },
-  { name: 'Sobre', href: '#sobre', icon: User },
-  { name: 'Habilidades', href: '#habilidades', icon: Code },
-  { name: 'Projetos', href: '#projetos', icon: Briefcase },
-  { name: 'Formação', href: '#formacao', icon: GraduationCap },
-  { name: 'Contato', href: '#contato', icon: Mail },
-]
 
 export function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
   return (

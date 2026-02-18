@@ -1,28 +1,9 @@
 import { useIsMobile } from '@/hooks/useMediaQuery'
+import type { ConquistaItem, ExperienciaItem, FormacaoItem } from '@/types/educacao'
 import { Desktop } from './Desktop'
 import { Mobile } from './Mobile'
 
-export interface FormacaoItem {
-  titulo: string
-  instituicao: string
-  periodo: string
-  descricao: string
-}
-
-export interface ExperienciaItem {
-  cargo: string
-  empresa: string
-  periodo: string
-  descricao: string
-}
-
-export interface ConquistaItem {
-  titulo: string
-  descricao: string
-  ano: string
-  instituicao?: string
-  periodo?: string
-}
+export type { FormacaoItem, ExperienciaItem, ConquistaItem }
 
 interface EducationGridProps {
   formacao: FormacaoItem[]

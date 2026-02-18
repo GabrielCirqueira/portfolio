@@ -1,16 +1,9 @@
 import { motion } from 'framer-motion'
-import type { LucideIcon } from 'lucide-react'
 import { memo } from 'react'
 import { Icon } from '@/shadcn/components/ui/icon'
 import { Box, HStack, VStack } from '@/shadcn/components/ui/layout'
 import { Text, Title } from '@/shadcn/components/ui/typography'
-
-export interface SkillCategory {
-  category: string
-  description: string
-  icon: LucideIcon
-  technologies: string[]
-}
+import type { SkillCategory } from '@/types/habilidades'
 
 interface SkillsGridProps {
   skills: SkillCategory[]

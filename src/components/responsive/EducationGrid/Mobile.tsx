@@ -7,28 +7,7 @@ import { Button } from '@/shadcn/components/ui/button'
 import { Icon } from '@/shadcn/components/ui/icon'
 import { Box, HStack, VStack } from '@/shadcn/components/ui/layout'
 import { Span, Text, Title } from '@/shadcn/components/ui/typography'
-
-export interface FormacaoItem {
-  titulo: string
-  instituicao: string
-  periodo: string
-  descricao: string
-}
-
-export interface ExperienciaItem {
-  cargo: string
-  empresa: string
-  periodo: string
-  descricao: string
-}
-
-export interface ConquistaItem {
-  titulo: string
-  descricao: string
-  ano: string
-  instituicao?: string
-  periodo?: string
-}
+import type { ConquistaItem, ExperienciaItem, FormacaoItem } from '@/types/educacao'
 
 interface EducationGridProps {
   formacao: FormacaoItem[]

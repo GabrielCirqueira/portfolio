@@ -1,6 +1,7 @@
 import { AnimatePresence, motion } from 'framer-motion'
 import { Menu, X } from 'lucide-react'
 import { useEffect, useState } from 'react'
+import { navItems } from '@/data/navegacao'
 import { Icon } from '@/shadcn/components/ui/icon'
 import { Box, Container, HStack } from '@/shadcn/components/ui/layout'
 import { Text } from '@/shadcn/components/ui/typography'
@@ -30,15 +31,6 @@ export function Header() {
       document.body.style.overflow = 'unset'
     }
   }, [isOpen])
-
-  const navItems = [
-    { name: 'Início', href: '#inicio' },
-    { name: 'Sobre', href: '#sobre' },
-    { name: 'Habilidades', href: '#habilidades' },
-    { name: 'Projetos', href: '#projetos' },
-    { name: 'Formação', href: '#formacao' },
-    { name: 'Contato', href: '#contato' },
-  ]
 
   return (
     <>

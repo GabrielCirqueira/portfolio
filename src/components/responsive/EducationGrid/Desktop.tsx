@@ -5,29 +5,8 @@ import { Badge } from '@/shadcn/components/ui/badge'
 import { Icon } from '@/shadcn/components/ui/icon'
 import { Box, Grid, HStack } from '@/shadcn/components/ui/layout'
 import { Text } from '@/shadcn/components/ui/typography'
+import type { ConquistaItem, ExperienciaItem, FormacaoItem } from '@/types/educacao'
 import { useIsLowPerformance } from '@/utils/deviceDetection'
-
-export interface FormacaoItem {
-  titulo: string
-  instituicao: string
-  periodo: string
-  descricao: string
-}
-
-export interface ExperienciaItem {
-  cargo: string
-  empresa: string
-  periodo: string
-  descricao: string
-}
-
-export interface ConquistaItem {
-  titulo: string
-  descricao: string
-  ano: string
-  instituicao?: string
-  periodo?: string
-}
 
 interface EducationGridProps {
   formacao: FormacaoItem[]

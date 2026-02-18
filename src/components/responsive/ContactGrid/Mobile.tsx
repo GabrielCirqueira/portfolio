@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion'
-import { ArrowRight, ExternalLink, type LucideIcon } from 'lucide-react'
+import { ArrowRight, ExternalLink } from 'lucide-react'
 import { memo } from 'react'
 import { useAnimacaoOtimizada } from '@/hooks/useAnimacaoOtimizada'
 import { Badge } from '@/shadcn/components/ui/badge'
@@ -7,14 +7,7 @@ import { Icon } from '@/shadcn/components/ui/icon'
 import { Box, HStack, VStack } from '@/shadcn/components/ui/layout'
 import { Link } from '@/shadcn/components/ui/link'
 import { Text, Title } from '@/shadcn/components/ui/typography'
-
-export interface ContactItem {
-  icon: LucideIcon
-  label: string
-  value: string
-  href: string | null
-  highlight?: boolean
-}
+import type { ContactItem } from '@/types/contato'
 
 interface ContactGridProps {
   contactItems: ContactItem[]
