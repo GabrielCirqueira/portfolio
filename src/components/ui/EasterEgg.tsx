@@ -53,13 +53,19 @@ const MatrixRain = memo(() => {
 })
 
 export const EasterEgg = memo(() => {
-  const { activate, deactivate } = useEasterEgg()
+  const { activate, deactivate, isActive } = useEasterEgg()
   const [triggered, setTriggered] = useState(false)
   const [showMessage, setShowMessage] = useState(true)
   const inputRef = useRef<string[]>([])
   const timeoutRef = useRef<ReturnType<typeof setTimeout> | undefined>(undefined)
 
-  const lastAccelerationRef = useRef({ x: 0, y: 0, z: 0 })
+  // biome-ignore lint/correctness/useExhaustiveDependencies:x
+  useEffect(() => {
+    if (isActive && !triggered) {
+      setTriggered(true)
+      setShowMessage(true)
+    }
+  }, [isActive])
 
   const activateEasterEgg = useCallback(() => {
     setTriggered(true)
@@ -84,38 +90,13 @@ export const EasterEgg = memo(() => {
     [activateEasterEgg]
   )
 
-  const handleMotion = useCallback(
-    (e: DeviceMotionEvent) => {
-      const acceleration = e.accelerationIncludingGravity
-      if (!acceleration) return
-
-      const x = acceleration.x ?? 0
-      const y = acceleration.y ?? 0
-      const z = acceleration.z ?? 0
-      const last = lastAccelerationRef.current
-
-      const deltaX = Math.abs(x - last.x)
-      const deltaY = Math.abs(y - last.y)
-      const deltaZ = Math.abs(z - last.z)
-
-      if (deltaX + deltaY + deltaZ > 30) {
-        activateEasterEgg()
-      }
-
-      lastAccelerationRef.current = { x, y, z }
-    },
-    [activateEasterEgg]
-  )
-
   useEffect(() => {
     window.addEventListener('keydown', handleKeyDown)
-    window.addEventListener('devicemotion', handleMotion)
 
     return () => {
       window.removeEventListener('keydown', handleKeyDown)
-      window.removeEventListener('devicemotion', handleMotion)
     }
-  }, [handleKeyDown, handleMotion])
+  }, [handleKeyDown])
 
   useEffect(() => {
     if (triggered) {
