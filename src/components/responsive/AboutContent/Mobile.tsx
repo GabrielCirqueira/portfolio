@@ -2,6 +2,7 @@ import { ContadorAnimado } from '@app/components/ui/ContadorAnimado'
 import { motion } from 'framer-motion'
 import { Code, FileCode, FolderGit2, Layers, Trophy } from 'lucide-react'
 import { memo } from 'react'
+import Marquee from 'react-fast-marquee'
 import { useAnimacaoOtimizada } from '@/hooks/useAnimacaoOtimizada'
 import { Badge } from '@/shadcn/components/ui/badge'
 import { Icon } from '@/shadcn/components/ui/icon'
@@ -16,6 +17,18 @@ const estatisticas = [
   { icone: Trophy, rotulo: 'Conquistas', valor: 5, sufixo: '' },
 ]
 
+const technologies = [
+  'React',
+  'TypeScript',
+  'Node.js',
+  'Next.js',
+  'TailwindCSS',
+  'PostgreSQL',
+  'Docker',
+  'AWS',
+  'Git',
+]
+
 interface MobileProps {
   aboutCards: AboutCard[]
 }
@@ -24,89 +37,135 @@ export const Mobile = memo(({ aboutCards }: MobileProps) => {
   const { ehDispositivoLento } = useAnimacaoOtimizada()
 
   return (
-    <>
+    <Box className="w-full px-4 overflow-hidden">
       <motion.div
-        initial={{ opacity: 0 }}
-        whileInView={{ opacity: 1 }}
-        viewport={{ once: true, margin: '0px' }}
-        transition={{ duration: ehDispositivoLento ? 0.2 : 0.3 }}
-        className="text-center mb-10"
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.5 }}
+        className="text-center mb-10 space-y-3"
       >
         <Badge
           variant="outline"
-          className="mb-5 px-4 py-2 border-brand-500/40 text-brand-400 uppercase tracking-wider text-xs font-semibold bg-brand-500/5 backdrop-blur-sm rounded-full shadow-lg shadow-brand-500/10"
+          className="mx-auto w-fit px-3 py-1 border-brand-500/30 text-brand-400 uppercase tracking-wider text-[10px] font-bold bg-brand-500/5 backdrop-blur-sm rounded-full"
         >
           Sobre Mim
         </Badge>
         <Title
           as="h2"
-          className="text-3xl font-bold font-heading uppercase tracking-tight text-white mb-3"
+          className="text-3xl font-black font-heading uppercase tracking-tight text-white"
         >
           Minha <Span className="text-gradient">Trajetória</Span>
         </Title>
-        <Box className="w-16 h-1 bg-brand-500 mx-auto rounded-full opacity-60" />
       </motion.div>
 
       <motion.div
-        initial={{ opacity: 0 }}
-        whileInView={{ opacity: 1 }}
-        viewport={{ once: true, margin: '0px' }}
-        transition={{ duration: ehDispositivoLento ? 0.2 : 0.3 }}
+        initial={{ opacity: 0, scale: 0.95 }}
+        whileInView={{ opacity: 1, scale: 1 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.5 }}
         className="flex flex-col items-center mb-10"
       >
-        <Box className="relative w-56 h-72 rounded-2xl overflow-hidden border-2 border-zinc-800 bg-zinc-900 shadow-xl mb-6 group">
-          <img
-            src="/images/gabriel1.webp"
-            alt="Gabriel Cirqueira"
-            loading="lazy"
-            className="object-cover w-full h-full opacity-90 transition-transform duration-300 group-active:scale-105"
-          />
-          <Box className="absolute inset-x-0 bottom-0 h-2/3 bg-gradient-to-t from-black via-black/60 to-transparent z-10" />
-          <HStack className="absolute bottom-3 left-3 right-3 items-center justify-between z-20">
-            <VStack className="gap-0.5">
-              <Span className="text-[9px] text-brand-400 font-mono uppercase tracking-wider">
-                Fullstack Dev
-              </Span>
-              <Span className="text-xs font-bold text-white font-heading uppercase tracking-wide">
-                Gabriel C.
-              </Span>
-            </VStack>
-            <Box className="p-2 bg-gradient-to-br from-brand-500 to-brand-600 text-black rounded-lg shadow-lg">
-              <Icon icon={FileCode} className="h-3.5 w-3.5" />
-            </Box>
-          </HStack>
-        </Box>
+        <motion.div
+          animate={ehDispositivoLento ? {} : { y: [0, -8, 0] }}
+          transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
+        >
+          <Box className="relative w-64 h-80 rounded-2xl overflow-hidden border border-zinc-700/50 bg-zinc-900 shadow-2xl mb-6 group">
+            <Box className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent z-10" />
+            <img
+              src="/images/gabriel1.webp"
+              alt="Gabriel Cirqueira"
+              loading="lazy"
+              className="object-cover w-full h-full opacity-90"
+            />
+            <HStack className="absolute bottom-4 left-4 right-4 items-center justify-between z-20">
+              <VStack className="gap-0.5">
+                <Span className="text-[10px] text-brand-400 font-mono uppercase tracking-wider font-bold">
+                  Fullstack Dev
+                </Span>
+                <Span className="text-sm font-bold text-white font-heading uppercase">
+                  Gabriel C.
+                </Span>
+              </VStack>
+              <Box className="p-2 bg-brand-500 text-black rounded-lg shadow-lg shadow-brand-500/20">
+                <Icon icon={FileCode} className="h-4 w-4" />
+              </Box>
+            </HStack>
+          </Box>
+        </motion.div>
 
-        <Text className="text-zinc-400 text-sm leading-relaxed text-center px-4 max-w-md">
-          Desenvolvedor Fullstack focado na criação de aplicações web modernas e escaláveis. Combino
-          conhecimento técnico sólido com uma visão prática para entregar software robusto e de alto
-          valor.
+        <Text className="text-zinc-400 text-sm leading-relaxed text-center max-w-sm">
+          Desenvolvedor Fullstack focado na criação de{' '}
+          <Span className="text-white font-medium">aplicações web modernas e escaláveis.</Span>
         </Text>
       </motion.div>
 
-      <VStack className="gap-3.5 mb-10 w-full px-2">
+      <Grid className="grid-cols-2 gap-3 mb-8">
+        {estatisticas.map((stat, index) => (
+          <motion.div
+            key={stat.rotulo}
+            initial={{ opacity: 0, y: 10 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{
+              duration: ehDispositivoLento ? 0.2 : 0.4,
+              delay: index * 0.05,
+            }}
+            className="p-4 rounded-xl bg-zinc-900/40 border border-zinc-800/50 backdrop-blur-sm text-center relative overflow-hidden"
+          >
+            <motion.div
+              animate={{ opacity: [0, 0.1, 0] }}
+              transition={{ duration: 3, repeat: Infinity, delay: index * 1 }}
+              className="absolute inset-0 bg-brand-500 pointer-events-none"
+            />
+
+            <Icon icon={stat.icone} className="h-5 w-5 text-brand-500 mx-auto mb-2 opacity-80" />
+            <Text className="text-xl font-black text-white font-heading">
+              <ContadorAnimado ate={stat.valor} sufixo={stat.sufixo} duracao={2} />
+            </Text>
+            <Text className="text-[9px] text-zinc-500 uppercase tracking-widest font-bold mt-1">
+              {stat.rotulo}
+            </Text>
+          </motion.div>
+        ))}
+      </Grid>
+
+      <Box className="mb-10 -mx-4 py-3 bg-zinc-900/30 border-y border-zinc-800/30">
+        <Marquee gradient={false} speed={25}>
+          {technologies.map((tech) => (
+            <span
+              key={tech}
+              className="mx-4 text-zinc-500 font-bold uppercase tracking-widest text-[10px]"
+            >
+              {tech}
+            </span>
+          ))}
+        </Marquee>
+      </Box>
+
+      <VStack className="gap-4 w-full mb-10">
         {aboutCards.map((card, index) => (
           <motion.div
             key={card.title}
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true, margin: '0px', amount: 0.2 }}
+            initial={{ opacity: 0, x: -10 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
             transition={{
-              duration: ehDispositivoLento ? 0.15 : 0.25,
-              delay: ehDispositivoLento ? 0 : index * 0.05,
+              duration: ehDispositivoLento ? 0.2 : 0.4,
+              delay: index * 0.1,
             }}
-            className="w-full"
-            style={{ willChange: 'opacity' }}
           >
-            <HStack className="items-start gap-4 bg-zinc-900/60 backdrop-blur-sm border border-zinc-800 p-5 rounded-2xl active:border-brand-500/40 active:bg-zinc-900/80 transition-all duration-200 shadow-lg">
-              <Box className="p-3 rounded-xl bg-zinc-950 text-brand-400 border border-brand-500/20 shrink-0 shadow-inner">
+            <HStack className="items-start gap-4 bg-zinc-900/30 border border-zinc-800 p-5 rounded-2xl active:bg-zinc-800/50 transition-colors relative overflow-hidden">
+              <Box className="p-2.5 rounded-lg bg-zinc-950 text-brand-400 border border-zinc-800 shrink-0 relative z-10">
                 <Icon icon={card.icon} className="h-5 w-5" />
               </Box>
-              <VStack className="flex-1 min-w-0 gap-1.5">
+              <VStack className="gap-1 relative z-10">
                 <Span className="font-bold text-white uppercase font-heading tracking-wide text-sm">
                   {card.title}
                 </Span>
-                <Span className="text-xs text-zinc-400 leading-relaxed">{card.description}</Span>
+                <Span className="text-xs text-zinc-400 leading-relaxed text-balance">
+                  {card.description}
+                </Span>
               </VStack>
             </HStack>
           </motion.div>
@@ -116,55 +175,10 @@ export const Mobile = memo(({ aboutCards }: MobileProps) => {
       <motion.div
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
-        viewport={{ once: true, margin: '0px' }}
-        transition={{ duration: ehDispositivoLento ? 0.2 : 0.3 }}
-        className="mb-10 px-2"
-      >
-        <Grid className="grid-cols-2 gap-3">
-          {estatisticas.map((estatistica, index) => (
-            <motion.div
-              key={estatistica.rotulo}
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
-              viewport={{ once: true, margin: '0px' }}
-              transition={{
-                duration: ehDispositivoLento ? 0.15 : 0.25,
-                delay: ehDispositivoLento ? 0 : index * 0.05,
-              }}
-              style={{ willChange: 'opacity' }}
-            >
-              <Box className="text-center p-5 rounded-2xl border border-zinc-800 bg-zinc-900/60 backdrop-blur-sm shadow-lg active:border-brand-500/30 active:bg-zinc-900/80 transition-all duration-200">
-                <Icon icon={estatistica.icone} className="h-6 w-6 text-brand-400 mx-auto mb-3" />
-                <Text className="text-2xl font-black text-white font-heading mb-1">
-                  <ContadorAnimado
-                    ate={estatistica.valor}
-                    sufixo={estatistica.sufixo}
-                    duracao={2}
-                  />
-                </Text>
-                <Text className="text-[10px] text-zinc-500 uppercase tracking-wider font-semibold">
-                  {estatistica.rotulo}
-                </Text>
-              </Box>
-            </motion.div>
-          ))}
-        </Grid>
-      </motion.div>
-
-      <motion.div
-        initial={{ opacity: 0 }}
-        whileInView={{ opacity: 1 }}
-        viewport={{ once: true, margin: '0px' }}
-        transition={{ duration: ehDispositivoLento ? 0.2 : 0.3 }}
-        className="text-center pt-8 border-t border-zinc-800/50 relative px-6"
-      >
-        <Box className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 w-16 h-1 bg-gradient-to-r from-transparent via-brand-500 to-transparent rounded-full" />
-        <Text className="text-zinc-500 font-medium text-xs tracking-wider leading-relaxed">
-          Tecnologia é a ferramenta.
-          <br />
-          <Span className="text-brand-400">Resultado é o objetivo.</Span>
-        </Text>
-      </motion.div>
-    </>
+        viewport={{ once: true }}
+        transition={{ delay: 0.5 }}
+        className="text-center pt-6 border-t border-white/5 relative"
+      ></motion.div>
+    </Box>
   )
 })
