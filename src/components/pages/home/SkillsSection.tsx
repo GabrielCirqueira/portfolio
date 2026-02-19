@@ -107,7 +107,7 @@ export const SkillsSection = memo(() => {
                       >
                         <tech.Icon
                           size={isMobile ? 32 : 42}
-                          style={{ color: tech.color }}
+                          color={tech.color}
                           className="group-hover:scale-125 transition-transform duration-300"
                         />
                       </Center>

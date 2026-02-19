@@ -1,3 +1,4 @@
+import { memo } from 'react'
 import { useIsMobile } from '@/hooks/useMediaQuery'
 import type { ContactItem } from '@/types/contato'
 import { Desktop } from './Desktop'
@@ -9,7 +10,8 @@ interface ContactGridProps {
   contactItems: ContactItem[]
 }
 
-export function ContactGrid(props: ContactGridProps) {
+export const ContactGrid = memo(function ContactGrid({ contactItems }: ContactGridProps) {
   const isMobile = useIsMobile()
-  return isMobile ? <Mobile {...props} /> : <Desktop {...props} />
-}
+
+  return isMobile ? <Mobile contactItems={contactItems} /> : <Desktop contactItems={contactItems} />
+})

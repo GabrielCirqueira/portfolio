@@ -5,6 +5,7 @@ import {
   HeroSection,
   ProjectsSection,
   SkillsSection,
+  WorkflowSection,
 } from '@app/components/pages/home'
 import { AppContainer, Footer, Header } from '@app/layouts'
 import { lazy, memo, Suspense } from 'react'
@@ -44,6 +45,7 @@ export const Component = memo(() => {
         <SkillsSection />
         <ProjectsSection />
         <EducationSection />
+        <WorkflowSection />
         <ContactSection />
       </main>
       <Footer />

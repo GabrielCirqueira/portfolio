@@ -2,6 +2,7 @@ import {
   AtSign,
   Briefcase,
   Code,
+  GitBranch,
   Github,
   GraduationCap,
   Home,
@@ -18,6 +19,7 @@ export const navItems: NavItem[] = [
   { name: 'Habilidades', href: '#habilidades', icon: Code },
   { name: 'Projetos', href: '#projetos', icon: Briefcase },
   { name: 'Formação', href: '#formacao', icon: GraduationCap },
+  { name: 'Workflow', href: '#workflow', icon: GitBranch },
   { name: 'Contato', href: '#contato', icon: Mail },
 ]
 
@@ -37,5 +39,6 @@ export const footerLinks: LinkItem[] = [
   { name: 'Sobre', href: '#sobre' },
   { name: 'Projetos', href: '#projetos' },
   { name: 'Formação', href: '#formacao' },
+  { name: 'Workflow', href: '#workflow' },
   { name: 'Contato', href: '#contato' },
 ]

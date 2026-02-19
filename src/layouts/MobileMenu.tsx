@@ -1,5 +1,6 @@
 import { navItems } from '@/data/navegacao'
 import { Button } from '@/shadcn/components/ui/button'
+import { Icon } from '@/shadcn/components/ui/icon'
 import { Separator } from '@/shadcn/components/ui/separator'
 import { Sheet, SheetContent, SheetHeader, SheetTitle } from '@/shadcn/components/ui/sheet'
 
@@ -33,7 +34,12 @@ export function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
               onClick={onClose}
             >
               <a href={item.href} aria-label={`Ir para a seção ${item.name}`}>
-                <item.icon className="h-5 w-5 group-hover:text-brand-500 transition-colors" />
+                {item.icon && (
+                  <Icon
+                    icon={item.icon}
+                    className="h-5 w-5 group-hover:text-brand-500 transition-colors"
+                  />
+                )}
                 <span className="uppercase tracking-wide">{item.name}</span>
               </a>
             </Button>
