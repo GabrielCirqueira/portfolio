@@ -6,4 +6,6 @@ export interface ContactItem {
   value: string
   href: string | null
   highlight?: boolean
+  description?: string
+  responseTime?: string
 }

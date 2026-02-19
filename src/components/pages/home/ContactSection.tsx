@@ -14,7 +14,6 @@ export const ContactSection = memo(() => {
       className="py-16 sm:py-20 md:py-24 lg:py-28 relative bg-black font-sans overflow-hidden"
     >
       <Box className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_right,_var(--tw-gradient-stops))] from-brand-900/10 via-black to-black pointer-events-none" />
-      <Box className="absolute inset-0 bg-dotted-pattern opacity-10 pointer-events-none" />
 
       <Container size="xl" className="relative z-10 px-4 sm:px-6">
         <VStack className="items-center text-center gap-4 sm:gap-5 mb-12 sm:mb-14 md:mb-16">

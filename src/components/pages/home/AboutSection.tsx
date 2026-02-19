@@ -15,7 +15,8 @@ export const AboutSection = memo(() => {
       className="py-16 sm:py-20 md:py-24 relative font-sans bg-zinc-950/30 overflow-hidden"
     >
       <Box className="absolute inset-0 bg-dotted-pattern opacity-5 pointer-events-none" />
-
+      <Box className="absolute inset-0 bg-zinc-950/50" />
+      <Box className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px]" />
       <motion.div
         animate={
           isLowPerf

@@ -130,12 +130,13 @@ export const sistemas: Sistema[] = [
     imagem: '/images/sistemas/eletivaTutoriaV3/RefactorHome.webp',
     link: 'https://et.escolansl.com/sistema',
     tecnologias: ['React', 'TypeScript', 'PHP', 'API REST', 'MySQL', 'CSS Modules'],
-    dataInicio: '2025-01-07',
+    dataInicio: '2025-01-17',
     dataFim: '2025-02-16',
     descricaoCompleta: [
       'Esta versão representa a evolução definitiva do sistema de Eletivas e Tutorias, nascida do desejo de aplicar conhecimentos modernos de React em um projeto real. A interface foi totalmente reconstruída com TypeScript e CSS Modules, oferecendo tema escuro, responsividade e uma experiência de usuário muito mais fluida.',
       'Para suportar o novo frontend, o backend PHP foi transformado em uma API RESTful, permitindo comunicação assíncrona e eficiente. As regras de negócio originais foram preservadas, garantindo que o fluxo de escolha de disciplinas e tutores continuasse atendendo perfeitamente às necessidades da escola.',
       'Além da modernização técnica, o sistema ganhou melhorias significativas em usabilidade, com feedbacks visuais instantâneos e componentes reutilizáveis. O painel administrativo e a área do aluno mantêm todas as funcionalidades essenciais, agora em uma arquitetura escalável e de fácil manutenção.',
+      'O sistema está hospedado em um plano de Hospedagem Compartilhada na Hostinger, oferecendo alta disponibilidade e performance adequada para o uso escolar, atendendo centenas de alunos simultaneamente durante os períodos de escolha de disciplinas.',
     ],
     imagens: [
       '/images/sistemas/eletivaTutoriaV3/RefactorLogin.webp',
@@ -164,8 +165,8 @@ export const sistemas: Sistema[] = [
       'Aplicação web moderna para download de vídeos de redes sociais. Hub centralizado que permite baixar vídeos do YouTube, Instagram, TikTok e Twitter de forma gratuita e prática.',
     imagem: '/images/sistemas/Vidflux/tiktok.webp',
     tecnologias: ['React', 'TypeScript', 'Symfony', 'PHP', 'Chakra UI', 'yt-dlp', 'Framer Motion'],
-    dataInicio: '2025-01-08',
-    dataFim: '2025-01-19',
+    dataInicio: '2025-01-03',
+    dataFim: '2025-01-14',
     descricaoCompleta: [
       'VidFlux é um hub centralizado para download de vídeos de redes sociais como YouTube, Instagram, TikTok e Twitter. A aplicação oferece uma interface limpa onde o usuário cola o link e recebe o arquivo pronto, com previews detalhados (thumbnail e título) antes do download, eliminando complicações.',
       'Desenvolvido como projeto de estudo para aprofundar em React e integrações de API, o sistema possui um frontend moderno com Chakra UI e animações Framer Motion. O backend em Symfony atua como API, processando as requisições através ferramanta yt-dlp, garantindo compatibilidade com diversas plataformas.',
@@ -227,6 +228,7 @@ export const sistemas: Sistema[] = [
       'Esta versão do sistema de Eletivas e Tutorias foi desenvolvida no final de 2024, representando um marco importante na minha evolução como desenvolvedor. Com conhecimentos avançados em desenvolvimento web, o sistema foi reescrito do zero em apenas um final de semana (7 e 8 de setembro), substituindo completamente a versão anterior que operava desde 2023.',
       'Diferente da versão anterior, este projeto utiliza arquitetura MVC (Model-View-Controller) e Bootstrap para o front-end, resultando em um código limpo, estruturado e de fácil manutenção. O foco foi corrigir as falhas lógicas do legado e entregar uma experiência de usuário robusta e confiável.',
       'O sistema foi implantado na segunda-feira, 9 de setembro, e utilizado imediatamente por toda a escola sem apresentar bugs, validando a eficácia da nova arquitetura e a maturidade técnica adquirida. Esta versão serviu como base sólida para a posterior refatoração em React.',
+      'O sistema foi hospedado em um plano de Hospedagem Compartilhada na Hostinger, proporcionando estabilidade e desempenho suficiente para atender toda a demanda escolar em produção, sendo utilizado por centenas de alunos simultaneamente.',
     ],
     imagens: [
       '/images/sistemas/eletivaTutoriaV2/Login.webp',
@@ -251,6 +253,7 @@ export const sistemas: Sistema[] = [
       'O sistema de Monitoramento Escolar foi desenvolvido do zero com PHP, MySQL e JavaScript para gerenciar o ciclo completo de avaliações. Ele permite a criação, aplicação e correção automática de provas, centralizando processos e facilitando a vida de professores e alunos com uma interface prática.',
       'Administradores possuem controle total para gerenciar turmas, disciplinas e períodos de prova, enquanto professores podem criar gabaritos e visualizar relatórios detalhados de desempenho. A correção automática agiliza o feedback, permitindo que docentes foquem na análise pedagógica dos resultados.',
       'Para os alunos, a plataforma oferece uma área intuitiva para realização de provas e consulta de gabaritos. Gestores têm acesso a dashboards com gráficos estratégicos, permitindo acompanhar o rendimento global da escola e tomar decisões baseadas em dados concretos e atualizados.',
+      'O sistema está em produção hospedado em um plano de Hospedagem Compartilhada na Hostinger, garantindo alta disponibilidade para que professores e alunos possam acessá-lo de forma confiável durante os períodos de avaliação escolar.',
     ],
     imagens: [
       '/images/sistemas/monitoramento/homeADM.webp',
@@ -278,6 +281,7 @@ export const sistemas: Sistema[] = [
       'Este foi o primeiro sistema web desenvolvido para a escola, marcando minha transição para o desenvolvimento web em 2023. Criado com PHP e MySQL enquanto eu ainda aprendia as tecnologias, o projeto gerenciou com sucesso o processo de escolha de eletivas e tutorias pelos alunos através de autenticação por RA.',
       'Apesar de conter lógicas iniciantes e código legado, o sistema atendeu 100% da demanda escolar, funcionando sem falhas críticas em produção. Ele provou que é possível entregar valor real mesmo durante o processo de aprendizado, resolvendo um problema complexo de gestão acadêmica.',
       'O projeto foi fundamental para meu desenvolvimento, ensinando na prática sobre banco de dados, sessões e regras de negócio. Sua execução bem-sucedida serviu como prova de conceito para as versões futuras, mais modernas e robustas, que viriam a substituí-lo.',
+      'Esta primeira versão foi hospedada em um plano de Hospedagem Compartilhada na Hostinger, onde funcionou de forma estável durante todo o período letivo, atendendo a demanda de todos os alunos da escola sem problemas de desempenho.',
     ],
     imagens: [
       '/images/sistemas/eletivaTutoriaV1/login.webp',
@@ -319,7 +323,7 @@ export const sistemas: Sistema[] = [
   {
     id: 'tutoria-cmd',
     tipo: 'sistema',
-    titulo: 'Sistema de Tutoria (CMD)',
+    titulo: 'Tutoria (CMD)',
     descricao:
       'Protótipo inicial em C via linha de comando. Nasceu da necessidade real da escola e marcou o início da solução lógica para o problema de gestão de tutorias.',
     imagem: '/images/sistemas/tutoriaCMD/TelaTutores.webp',

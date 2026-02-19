@@ -40,7 +40,7 @@ export const Desktop = memo(({ contactItems }: ContactGridProps) => (
     whileInView="show"
     viewport={{ once: true, margin: '-50px' }}
   >
-    <Grid className="grid-cols-2 md:grid-cols-3 gap-4 md:gap-5 lg:gap-6">
+    <Grid className="grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-5">
       {contactItems.map((contact, index) => (
         <motion.div key={index} variants={item} className="h-full">
           <motion.a
@@ -48,41 +48,39 @@ export const Desktop = memo(({ contactItems }: ContactGridProps) => (
             target={contact.href ? '_blank' : undefined}
             rel={contact.href ? 'noopener noreferrer' : undefined}
             aria-label={`${contact.label}: ${contact.value}`}
-            className={`group block relative h-full rounded-2xl transition-all duration-300 ${
+            className={`group block relative h-full rounded-xl transition-all duration-300 ${
               contact.highlight
-                ? 'bg-gradient-to-br from-brand-500/15 via-brand-500/10 to-transparent border-2 border-brand-500/50'
-                : 'bg-zinc-900/40 border border-zinc-800/80 hover:border-brand-500/40'
-            } backdrop-blur-sm overflow-hidden`}
-            whileHover={{ y: -8, scale: 1.02 }}
+                ? 'bg-zinc-950 border border-brand-500/50 shadow-lg shadow-brand-500/20'
+                : 'bg-zinc-950 border border-zinc-800 hover:border-brand-500/40'
+            } overflow-hidden`}
+            whileHover={{ y: -6, scale: 1.01 }}
             whileTap={{ scale: 0.98 }}
             transition={{ duration: 0.2, ease: 'easeOut' }}
           >
-            {/* Efeito de brilho animado */}
-            <Box className="absolute inset-0 bg-gradient-to-r from-transparent via-white/[0.07] to-transparent translate-x-[-200%] group-hover:translate-x-[200%] transition-transform duration-1000 ease-out" />
+            <Box className="absolute inset-0 bg-gradient-to-r from-transparent via-white/[0.05] to-transparent -translate-x-[200%] group-hover:translate-x-[200%] transition-transform duration-1000 ease-out" />
 
-            {/* Glow effect no hover */}
             <Box
-              className={`absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 ${
+              className={`absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 ${
                 contact.highlight
                   ? 'bg-brand-500/5'
-                  : 'bg-gradient-to-br from-brand-500/[0.02] to-transparent'
+                  : 'bg-gradient-to-br from-brand-500/[0.03] to-transparent'
               }`}
             />
 
             <Box className="relative z-10 p-5 md:p-6 h-full flex flex-col">
               <HStack className="items-start justify-between gap-4 mb-4">
                 <Box
-                  className={`p-3.5 rounded-xl shrink-0 transition-all duration-300 ${
+                  className={`p-3 rounded-xl shrink-0 transition-all duration-300 ${
                     contact.highlight
-                      ? 'bg-brand-500 text-white shadow-lg shadow-brand-500/40 group-hover:shadow-xl group-hover:shadow-brand-500/50 group-hover:scale-110'
-                      : 'bg-zinc-950/80 text-brand-400 border border-zinc-800/50 group-hover:bg-brand-500 group-hover:text-white group-hover:border-brand-500 group-hover:scale-110 group-hover:shadow-lg group-hover:shadow-brand-500/30'
+                      ? 'bg-brand-500 text-white shadow-lg shadow-brand-500/40 group-hover:shadow-xl group-hover:shadow-brand-500/50 group-hover:scale-105'
+                      : 'bg-zinc-900 text-brand-400 border border-zinc-800 group-hover:bg-brand-500 group-hover:text-white group-hover:border-brand-500 group-hover:scale-105 group-hover:shadow-lg group-hover:shadow-brand-500/30'
                   }`}
                 >
                   <Icon icon={contact.icon} className="h-6 w-6" />
                 </Box>
 
                 {contact.href && (
-                  <Box className="p-2 rounded-lg bg-zinc-950/40 opacity-0 group-hover:opacity-100 transition-all duration-300 group-hover:bg-brand-500/20">
+                  <Box className="p-2 rounded-lg bg-zinc-900/50 opacity-0 group-hover:opacity-100 transition-all duration-300 group-hover:bg-brand-500/20">
                     <Icon
                       icon={ArrowRight}
                       className="h-4 w-4 text-zinc-500 group-hover:text-brand-400 group-hover:-rotate-45 transition-all duration-300"
@@ -95,9 +93,22 @@ export const Desktop = memo(({ contactItems }: ContactGridProps) => (
                 <Text className="text-[10px] font-bold uppercase tracking-widest text-zinc-500 group-hover:text-brand-400 transition-colors duration-300">
                   {contact.label}
                 </Text>
-                <Text className="text-base md:text-lg font-bold font-heading text-white group-hover:text-brand-50 transition-colors duration-300 leading-snug">
+                <Text className="text-base md:text-lg font-bold font-heading text-white group-hover:text-brand-50 transition-colors duration-300 leading-snug break-words">
                   {contact.value}
                 </Text>
+
+                {contact.description && (
+                  <Text className="text-xs text-zinc-500 group-hover:text-zinc-400 transition-colors duration-300 mt-1 leading-relaxed">
+                    {contact.description}
+                  </Text>
+                )}
+
+                {contact.responseTime && (
+                  <HStack className="items-center gap-2 mt-2 text-xs text-brand-400/80 group-hover:text-brand-400 transition-colors duration-300">
+                    <Box className="w-1.5 h-1.5 rounded-full bg-brand-400 animate-pulse" />
+                    <Text className="font-medium">{contact.responseTime}</Text>
+                  </HStack>
+                )}
               </VStack>
 
               {contact.highlight && (
@@ -107,11 +118,16 @@ export const Desktop = memo(({ contactItems }: ContactGridProps) => (
                   transition={{ delay: 0.5 }}
                   className="mt-4 pt-4 border-t border-brand-500/20"
                 >
-                  <HStack className="items-center gap-2 text-brand-400">
-                    <Icon icon={Sparkles} className="h-3 w-3" />
-                    <Text className="text-xs font-semibold uppercase tracking-wider">
-                      Preferencial
-                    </Text>
+                  <HStack className="items-center justify-between gap-2">
+                    <HStack className="items-center gap-2 text-brand-400 flex-1">
+                      <Icon icon={Sparkles} className="h-3 w-3" />
+                      <Text className="text-xs font-semibold uppercase tracking-wider">
+                        Preferencial
+                      </Text>
+                    </HStack>
+                    <Badge className="bg-brand-500/20 text-brand-400 border border-brand-500/30 hover:bg-brand-500/30 text-[10px] font-bold px-2 py-0.5 transition-colors">
+                      Urgente
+                    </Badge>
                   </HStack>
                 </motion.div>
               )}
@@ -120,7 +136,6 @@ export const Desktop = memo(({ contactItems }: ContactGridProps) => (
         </motion.div>
       ))}
 
-      {/* Card Linktree */}
       <motion.div variants={item} className="h-full">
         <motion.a
           href="https://linktr.ee/gabrielCirqueira"
@@ -129,21 +144,20 @@ export const Desktop = memo(({ contactItems }: ContactGridProps) => (
           aria-label="Ver todos os links no Linktree"
           className="
             group block relative h-full
-            bg-gradient-to-br from-zinc-900/60 via-zinc-900/40 to-zinc-950/60
-            border border-zinc-800/80 hover:border-brand-500
-            rounded-2xl transition-all duration-300
-            backdrop-blur-sm overflow-hidden
+            bg-zinc-950 border border-zinc-800 hover:border-brand-500
+            rounded-xl transition-all duration-300
+            overflow-hidden
           "
-          whileHover={{ y: -8, scale: 1.02 }}
+          whileHover={{ y: -6, scale: 1.01 }}
           whileTap={{ scale: 0.98 }}
           transition={{ duration: 0.2, ease: 'easeOut' }}
         >
-          <Box className="absolute inset-0 bg-gradient-to-r from-transparent via-white/[0.07] to-transparent translate-x-[-200%] group-hover:translate-x-[200%] transition-transform duration-1000 ease-out" />
-          <Box className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-gradient-to-br from-brand-500/[0.05] via-transparent to-blue-500/[0.05]" />
+          <Box className="absolute inset-0 bg-gradient-to-r from-transparent via-white/[0.05] to-transparent -translate-x-[200%] group-hover:translate-x-[200%] transition-transform duration-1000 ease-out" />
+          <Box className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-gradient-to-br from-brand-500/[0.03] via-transparent to-blue-500/[0.03]" />
 
           <Box className="relative z-10 p-5 md:p-6 h-full flex flex-col justify-between">
             <HStack className="items-start justify-between gap-4">
-              <Box className="p-3.5 rounded-xl bg-zinc-950/80 border border-zinc-800 text-brand-400 group-hover:bg-brand-500 group-hover:text-white group-hover:border-brand-500 transition-all duration-300 group-hover:scale-110 group-hover:shadow-lg group-hover:shadow-brand-500/30 shrink-0">
+              <Box className="p-3 rounded-xl bg-zinc-900 border border-zinc-800 text-brand-400 group-hover:bg-brand-500 group-hover:text-white group-hover:border-brand-500 transition-all duration-300 group-hover:scale-105 group-hover:shadow-lg group-hover:shadow-brand-500/30 shrink-0">
                 <Icon icon={ExternalLink} className="h-6 w-6" />
               </Box>
 

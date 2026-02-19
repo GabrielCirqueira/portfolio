@@ -18,9 +18,6 @@ export const EducationSection = memo(() => {
       id="formacao"
       className="py-16 sm:py-20 md:py-24 lg:py-28 bg-black relative font-sans overflow-hidden"
     >
-      <Box className="absolute inset-0 bg-zinc-950/50" />
-      <Box className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px]" />
-
       <Container size="xl" className="relative z-10 px-4 sm:px-6">
         <motion.div
           initial={{ opacity: 0, y: 20 }}

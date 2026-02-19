@@ -70,7 +70,7 @@ export function Header() {
               </Text>
             </motion.a>
 
-            <HStack className="hidden md:flex items-center space-x-8">
+            <HStack className="hidden md:flex items-center space-x-5">
               {navItems.map((item) => (
                 <a
                   key={item.name}
@@ -83,27 +83,6 @@ export function Header() {
                   <span className="absolute -inset-x-2 -inset-y-1 bg-brand-500/0 rounded-md group-hover:bg-brand-500/5 transition-colors duration-300 -z-10"></span>
                 </a>
               ))}
-              <motion.a
-                href="https://linktr.ee/gabrielCirqueira"
-                target="_blank"
-                rel="noopener noreferrer"
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                aria-label="Visite meu Linktree"
-                className="
-                  ml-4 px-6 py-2.5 border border-brand-500/30
-                  bg-brand-500/5 text-brand-400 font-bold
-                  uppercase tracking-widest hover:bg-brand-500
-                  hover:text-black hover:border-brand-500
-                  transition-all duration-300 rounded text-xs
-                  shadow-[0_0_15px_var(--tw-shadow-color)]
-                  shadow-brand-500/10
-                  hover:shadow-[0_0_25px_var(--tw-shadow-color)]
-                  hover:shadow-brand-500/40
-                "
-              >
-                Linktree
-              </motion.a>
             </HStack>
 
             <button

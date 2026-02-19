@@ -2,7 +2,6 @@ import { Cloud, Layout, Server, Wrench } from 'lucide-react'
 import {
   SiChakraui,
   SiDocker,
-  SiFastapi,
   SiFramer,
   SiGit,
   SiGithub,
@@ -132,12 +131,6 @@ export const techIcons: TechIcon[] = [
     name: 'Docker',
     color: '#2496ED',
     description: 'Containerização para ambientes consistentes',
-  },
-  {
-    Icon: SiFastapi,
-    name: 'FastAPI',
-    color: '#009688',
-    description: 'Framework Python moderno para APIs de alta performance',
   },
   {
     Icon: SiVite,

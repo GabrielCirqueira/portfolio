@@ -40,17 +40,16 @@ export const Mobile = memo(({ contactItems }: ContactGridProps) => {
                 external
                 aria-label={`${contact.label}: ${contact.value}`}
                 className={`
-                  block w-full rounded-2xl border backdrop-blur-sm
+                  block w-full rounded-xl border
                   transition-all duration-200 no-underline
                   active:scale-[0.98] relative overflow-hidden
                   ${
                     isHighlight
-                      ? 'bg-gradient-to-br from-brand-500/15 via-brand-500/10 to-transparent border-brand-500/50 active:border-brand-500/70'
-                      : 'bg-zinc-900/50 border-zinc-800/80 active:bg-zinc-800/70 active:border-brand-500/30'
+                      ? 'bg-zinc-950 border-brand-500/50 active:border-brand-500/70 shadow-lg shadow-brand-500/20'
+                      : 'bg-zinc-950 border-zinc-800 active:bg-zinc-900 active:border-brand-500/30'
                   }
                 `}
               >
-                {/* Efeito de brilho */}
                 <Box
                   className={`absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent ${isHighlight ? 'opacity-50' : 'opacity-30'}`}
                 />
@@ -62,7 +61,7 @@ export const Mobile = memo(({ contactItems }: ContactGridProps) => {
                       ${
                         isHighlight
                           ? 'bg-brand-500 text-white shadow-lg shadow-brand-500/40'
-                          : 'bg-zinc-950/80 text-brand-400 border border-zinc-800'
+                          : 'bg-zinc-900 text-brand-400 border border-zinc-800'
                       }
                     `}
                   >
@@ -76,18 +75,37 @@ export const Mobile = memo(({ contactItems }: ContactGridProps) => {
                     <Text className="text-sm font-bold font-heading text-white truncate">
                       {contact.value}
                     </Text>
+
+                    {contact.description && (
+                      <Text className="text-xs text-zinc-500 mt-0.5 leading-snug">
+                        {contact.description}
+                      </Text>
+                    )}
+
                     {isHighlight && (
-                      <HStack className="items-center gap-1.5 text-brand-400 mt-0.5">
-                        <Icon icon={Sparkles} className="h-2.5 w-2.5" />
-                        <Text className="text-[9px] font-semibold uppercase tracking-wider">
-                          Preferencial
-                        </Text>
+                      <HStack className="items-center justify-between gap-2 mt-1">
+                        <HStack className="items-center gap-1.5 text-brand-400">
+                          <Icon icon={Sparkles} className="h-2.5 w-2.5" />
+                          <Text className="text-[9px] font-semibold uppercase tracking-wider">
+                            Preferencial
+                          </Text>
+                        </HStack>
+                        <Badge className="bg-brand-500/20 text-brand-400 border border-brand-500/30 text-[9px] font-bold px-1.5 py-0.5">
+                          Urgente
+                        </Badge>
+                      </HStack>
+                    )}
+
+                    {contact.responseTime && (
+                      <HStack className="items-center gap-1.5 mt-1 text-[10px] text-brand-400/80">
+                        <Box className="w-1 h-1 rounded-full bg-brand-400 animate-pulse" />
+                        <Text className="font-medium">{contact.responseTime}</Text>
                       </HStack>
                     )}
                   </VStack>
 
                   <Box
-                    className={`p-2 rounded-lg transition-all duration-200 ${isHighlight ? 'bg-brand-500/20' : 'bg-zinc-950/40'}`}
+                    className={`p-2 rounded-lg transition-all duration-200 ${isHighlight ? 'bg-brand-500/20' : 'bg-zinc-900/50'}`}
                   >
                     <Icon
                       icon={ArrowRight}
@@ -99,15 +117,15 @@ export const Mobile = memo(({ contactItems }: ContactGridProps) => {
             ) : (
               <Box
                 className="
-                  w-full rounded-2xl border bg-zinc-900/50 
-                  border-zinc-800/80 backdrop-blur-sm
+                  w-full rounded-xl border bg-zinc-950 
+                  border-zinc-800
                   relative overflow-hidden
                 "
               >
                 <Box className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent opacity-30" />
 
                 <Box className="relative z-10 p-4 flex items-center gap-3.5">
-                  <Box className="p-3 rounded-xl bg-zinc-950/80 text-brand-400 border border-zinc-800 flex-shrink-0">
+                  <Box className="p-3 rounded-xl bg-zinc-900 text-brand-400 border border-zinc-800 flex-shrink-0">
                     <Icon icon={contact.icon} className="w-5 h-5" />
                   </Box>
 
@@ -118,6 +136,19 @@ export const Mobile = memo(({ contactItems }: ContactGridProps) => {
                     <Text className="text-sm font-bold font-heading text-white">
                       {contact.value}
                     </Text>
+
+                    {contact.description && (
+                      <Text className="text-xs text-zinc-500 mt-0.5 leading-snug">
+                        {contact.description}
+                      </Text>
+                    )}
+
+                    {contact.responseTime && (
+                      <HStack className="items-center gap-1.5 mt-1 text-[10px] text-brand-400/80">
+                        <Box className="w-1 h-1 rounded-full bg-brand-400 animate-pulse" />
+                        <Text className="font-medium">{contact.responseTime}</Text>
+                      </HStack>
+                    )}
                   </VStack>
                 </Box>
               </Box>
@@ -143,10 +174,10 @@ export const Mobile = memo(({ contactItems }: ContactGridProps) => {
           external
           aria-label="Ver todos os links no Linktree"
           className="
-            block w-full rounded-2xl border border-zinc-800/80
-            bg-gradient-to-br from-zinc-900/60 via-zinc-900/40 to-zinc-950/60
-            backdrop-blur-sm transition-all duration-200
-            active:scale-[0.98] active:border-brand-500/30
+            block w-full rounded-xl border border-zinc-800
+            bg-zinc-950
+            transition-all duration-200
+            active:scale-[0.98] active:border-brand-500/30 active:bg-zinc-900
             no-underline relative overflow-hidden
           "
         >
@@ -155,7 +186,7 @@ export const Mobile = memo(({ contactItems }: ContactGridProps) => {
 
           <Box className="relative z-10 p-4">
             <HStack className="items-center justify-between gap-3 mb-3">
-              <Box className="p-3 rounded-xl bg-zinc-950/80 text-brand-400 border border-zinc-800 flex-shrink-0">
+              <Box className="p-3 rounded-xl bg-zinc-900 text-brand-400 border border-zinc-800 flex-shrink-0">
                 <Icon icon={ExternalLink} className="w-5 h-5" />
               </Box>
 
