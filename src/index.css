@@ -26,7 +26,6 @@
     -webkit-tap-highlight-color: transparent;
   }
 
-  /* Better touch targets for mobile */
   @media (max-width: 768px) {
     button,
     a {
@@ -57,14 +56,12 @@
     @apply bg-brand-500;
   }
 
-  /* Mobile-specific improvements */
   @media (max-width: 768px) {
     body {
       font-size: 14px;
       line-height: 1.6;
     }
 
-    /* Better line height for headings */
     h1,
     h2,
     h3,
@@ -75,22 +72,18 @@
       letter-spacing: -0.02em;
     }
 
-    /* Optimize touch interactions */
     * {
       -webkit-tap-highlight-color: rgba(var(--brand-500), 0.1);
     }
 
-    /* Improve scroll performance */
     * {
       -webkit-overflow-scrolling: touch;
     }
 
-    /* Performance optimizations for mobile animations */
     [data-animate] {
       will-change: transform, opacity;
     }
 
-    /* Reduce motion complexity on mobile */
     @media (prefers-reduced-motion: reduce) {
       *,
       *::before,
@@ -114,7 +107,6 @@
   }
 }
 
-/* Utilidades mobile-first */
 @media (max-width: 640px) {
   .mobile-compact {
     padding: 0.75rem !important;
@@ -148,7 +140,6 @@
     @apply bg-black/40 backdrop-blur-md border border-white/5;
   }
 
-  /* Performance optimizations */
   .gpu-accelerate {
     transform: translateZ(0);
     backface-visibility: hidden;
@@ -163,7 +154,6 @@
     transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
   }
 
-  /* Mobile-optimized animations */
   @media (max-width: 768px) {
     .mobile-fade {
       animation: mobileFadeIn 0.3s ease-out forwards;
@@ -176,6 +166,41 @@
       to {
         opacity: 1;
       }
+    }
+  }
+
+  .tw-shine-border {
+    position: relative;
+    border-radius: 1rem;
+    background:
+      linear-gradient(#09090b, #09090b) padding-box,
+      conic-gradient(
+        from 0deg,
+        transparent 0deg,
+        theme("colors.brand.500 / 20%") 120deg,
+        theme("colors.brand.500 / 20%") 200deg,
+        theme("colors.brand.500 / 50%") 280deg,
+        transparent 360deg
+      )
+      border-box;
+
+    border: 1px solid transparent;
+    animation: tw-shine-rotate 8s linear infinite;
+  }
+
+  @keyframes tw-shine-rotate {
+    to {
+      background:
+        linear-gradient(#09090b, #09090b) padding-box,
+        conic-gradient(
+          from 360deg,
+          transparent 0deg,
+          theme("colors.brand.500 / 20%") 120deg,
+          theme("colors.brand.500 / 20%") 200deg,
+          theme("colors.brand.500 / 50%") 280deg,
+          transparent 360deg
+        )
+        border-box;
     }
   }
 }

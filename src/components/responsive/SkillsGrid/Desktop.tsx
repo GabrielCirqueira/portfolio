@@ -42,7 +42,7 @@ export const Desktop = memo(({ skills }: SkillsGridProps) => (
             rounded-2xl p-4 md:p-5 lg:p-6 overflow-hidden hover:border-brand-500/30
             transition-all duration-300 hover:-translate-y-1
             hover:shadow-[0_10px_40px_-10px_rgba(0,0,0,0.5)]
-            hover:shadow-brand-500/5
+            hover:shadow-brand-500/5 tw-shine-border
           "
         >
           <Box

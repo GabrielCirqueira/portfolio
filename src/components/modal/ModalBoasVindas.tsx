@@ -1,48 +1,18 @@
 import { AnimatePresence, motion } from 'framer-motion'
-import { Rocket, Sparkles, Terminal, X } from 'lucide-react'
-import { useEffect, useState } from 'react'
+import { Sparkles, Terminal, X } from 'lucide-react'
+import { MascoteVisual } from '@/components/ui/MascoteVisual'
+import { useWelcome } from '@/contexts/WelcomeContext'
 import { Button } from '@/shadcn/components/ui/button'
 import { Icon } from '@/shadcn/components/ui/icon'
 import { Box, HStack, VStack } from '@/shadcn/components/ui/layout'
 import { Text, Title } from '@/shadcn/components/ui/typography'
 
 export function ModalBoasVindas() {
-  const [estaAberto, setEstaAberto] = useState(false)
-
-  useEffect(() => {
-    const contagemArmazenada = localStorage.getItem('contadorVisitas')
-    let contagem = contagemArmazenada ? parseInt(contagemArmazenada, 10) : 0
-
-    contagem += 1
-
-    let deveExibir = false
-
-    if (contagem === 1) {
-      deveExibir = true
-    } else if (contagem >= 5) {
-      deveExibir = true
-      contagem = 1
-    }
-
-    localStorage.setItem('contadorVisitas', contagem.toString())
-
-    if (deveExibir) {
-      const temporizador = setTimeout(() => {
-        setEstaAberto(true)
-        document.body.style.overflow = 'hidden'
-      }, 500)
-      return () => clearTimeout(temporizador)
-    }
-  }, [])
-
-  const fecharModal = () => {
-    setEstaAberto(false)
-    document.body.style.overflow = ''
-  }
+  const { isWelcomeModalOpen, closeWelcomeModal } = useWelcome()
 
   return (
     <AnimatePresence>
-      {estaAberto && (
+      {isWelcomeModalOpen && (
         <>
           <motion.div
             initial={{ opacity: 0 }}
@@ -50,7 +20,7 @@ export function ModalBoasVindas() {
             exit={{ opacity: 0 }}
             transition={{ duration: 0.3 }}
             className="fixed inset-0 z-[100] bg-black/80 backdrop-blur-sm"
-            onClick={fecharModal}
+            onClick={closeWelcomeModal}
           />
 
           <Box className="fixed inset-0 z-[101] flex items-center justify-center p-4 pointer-events-none">
@@ -72,8 +42,10 @@ export function ModalBoasVindas() {
                 <VStack className="relative z-10 p-6 sm:p-8 gap-6 text-center items-center">
                   <Box className="relative">
                     <Box className="absolute inset-0 bg-brand-500/20 blur-xl rounded-full" />
-                    <Box className="relative p-4 bg-zinc-900/50 border border-brand-500/30 rounded-2xl shadow-inner shadow-white/5">
-                      <Icon icon={Rocket} className="w-8 h-8 sm:w-10 sm:h-10 text-brand-400" />
+                    <Box className="relative w-24 h-28 mx-auto">
+                      <motion.div layoutId="mascote-hero" className="w-full h-full">
+                        <MascoteVisual isActive={false} />
+                      </motion.div>
                     </Box>
                   </Box>
 
@@ -99,7 +71,7 @@ export function ModalBoasVindas() {
                   </HStack>
 
                   <Button
-                    onClick={fecharModal}
+                    onClick={closeWelcomeModal}
                     className="w-full sm:w-auto min-w-[200px] bg-brand-500 hover:bg-brand-600 text-black font-bold tracking-wide uppercase py-6 text-sm transition-all duration-300 shadow-lg shadow-brand-500/25 hover:shadow-brand-500/40"
                   >
                     Começar a Explorar
@@ -108,7 +80,7 @@ export function ModalBoasVindas() {
                   <Button
                     variant="ghost"
                     size="icon"
-                    onClick={fecharModal}
+                    onClick={closeWelcomeModal}
                     className="absolute top-4 right-4 text-zinc-500 hover:text-white hover:bg-zinc-800/50"
                   >
                     <Icon icon={X} className="w-5 h-5" />

@@ -112,6 +112,10 @@ module.exports = {
           from: { height: '0' },
           to: { height: 'var(--radix-accordion-content-height)' },
         },
+        shine: {
+          '0%': { transform: 'rotate(0deg)' },
+          '100%': { transform: 'rotate(360deg)' },
+        },
         'accordion-up': {
           from: { height: 'var(--radix-accordion-content-height)' },
           to: { height: '0' },
@@ -130,6 +134,7 @@ module.exports = {
         'accordion-up': 'accordion-up 0.2s ease-out',
         float: 'float 3s ease-in-out infinite',
         shimmer: 'shimmer 2s linear infinite',
+        shine: 'shine var(--shine-duration, 14s) linear infinite',
       },
     },
   },

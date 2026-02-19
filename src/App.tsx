@@ -1,6 +1,7 @@
 import { EasterEgg } from '@app/components/ui/EasterEgg'
 import { ThemeProvider } from '@app/contexts'
 import { EasterEggProvider } from '@app/contexts/EasterEggContext'
+import { WelcomeProvider } from '@app/contexts/WelcomeContext'
 import { MainLayout, RootLayout } from '@app/layouts'
 import { useEffect } from 'react'
 import {
@@ -43,8 +44,10 @@ export default function App() {
   return (
     <ThemeProvider>
       <EasterEggProvider>
-        <EasterEgg />
-        <RouterProvider router={router} />
+        <WelcomeProvider>
+          <EasterEgg />
+          <RouterProvider router={router} />
+        </WelcomeProvider>
       </EasterEggProvider>
     </ThemeProvider>
   )
