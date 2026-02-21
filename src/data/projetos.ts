@@ -6,7 +6,7 @@ export const sistemas: Sistema[] = [
     tipo: 'sistema',
     titulo: 'SpaceNow',
     descricao:
-      'O SpaceNow é uma plataforma web interativa que utiliza dados oficiais da NASA para transformar informações astronômicas reais.',
+      'Plataforma web interativa desenvolvida como hobby por minha paixão pela astronomia, utilizando dados reais da NASA.',
     imagem: '/images/sistemas/spacenow/home.webp',
     tecnologias: [
       'Symfony',
@@ -19,9 +19,9 @@ export const sistemas: Sistema[] = [
     ],
     dataInicio: '2025-12-01',
     descricaoCompleta: [
-      'O SpaceNow é um projeto pessoal em desenvolvimento, ainda não publicado em produção, que está sendo desenvolvido individualmente por mim como uma plataforma web voltada à visualização e exploração de dados astronômicos reais. O projeto teve início em 1º de dezembro de 2025 e segue em progresso contínuo até hoje, evoluindo de forma incremental tanto em funcionalidades quanto em profundidade técnica e visual.',
-      'Atualmente, o SpaceNow já conta com uma página principal funcional, que integra a APOD diária (Astronomy Picture of the Day), uma seção de APODs recentes e um bloco dedicado a asteroides potencialmente perigosos, todos consumindo dados oficiais da NASA. Além disso, já existe uma página de asteroides com foco em visualização 3D, onde é possível representar trajetórias orbitais e relações espaciais baseadas em dados reais, servindo como núcleo técnico do projeto.',
-      'O desenvolvimento segue ativo, com a página do Sistema Solar em fase inicial, estabelecendo a base para uma representação interativa dos planetas, suas órbitas e escalas, além de futuras expansões como ajustes de escala, mais camadas de informação e refinamento visual. O SpaceNow é pensado como um projeto de longo prazo, com foco educacional e científico, que continuará sendo expandido conforme novos estudos, testes e integrações forem sendo realizados.',
+      'O SpaceNow é um projeto que estou desenvolvendo apenas por hobby e porque gosto muito de astronomia. É uma plataforma web voltada à visualização e exploração de dados astronômicos reais, utilizando APIs da NASA para transformar informações complexas em experiências interativas.',
+      'Atualmente, o projeto conta com integração da APOD (Astronomy Picture of the Day), seções de asteroides potencialmente perigosos e visualizações 3D de trajetórias orbitais. Ele segue em desenvolvimento contínuo, evoluindo de forma incremental conforme novas ideias e tecnologias são exploradas.',
+      'O SpaceNow é pensado como um projeto de longo prazo, com foco educacional e científico, permitindo-me explorar tecnologias como Three.js e Symfony enquanto crio algo que realmente me fascina e me permite aprender mais sobre o cosmos.',
     ],
     imagens: [
       '/images/sistemas/spacenow/home.webp',
@@ -44,7 +44,7 @@ export const sistemas: Sistema[] = [
     tipo: 'sistema',
     titulo: 'Boi na Conta',
     descricao:
-      'Sistema completo de gestão para o agronegócio, focado em pecuária. Controle estratégico de custos, receitas, rebanho e indicadores de rentabilidade.',
+      'Sistema completo de gestão para o agronegócio desenvolvido para um cliente, focado em controle estratégico de pecuária e rentabilidade.',
     imagem: '/images/sistemas/BoiNaConta/Bois.webp',
     tecnologias: [
       'Symfony',
@@ -59,9 +59,9 @@ export const sistemas: Sistema[] = [
     ],
     dataInicio: '2026-01-25',
     descricaoCompleta: [
-      'O Boi na Conta é um sistema de gestão voltado ao agronegócio, especificamente para a pecuária, desenvolvido para organizar e controlar financeiramente a propriedade rural. O projeto permite acompanhar custos, receitas, compra e venda de animais e indicadores de rentabilidade, transformando decisões baseadas na experiência em estratégias orientadas por dados.',
-      'O backend, construído com PHP 8.3 e Symfony 7, utiliza Doctrine ORM e segue a Clean Architecture, enquanto o frontend em React 18 com TypeScript oferece uma interface moderna. Funcionalidades incluem gestão completa de animais, histórico de pesagens, controle de gastos categorizados e cálculo automático de ROI.',
-      'Além das regras de negócio sólidas como exclusão em cascata e integridade de dados, o sistema automatiza processos complexos, como o registro de aquisição. Faltam apenas módulos finais de relatórios para a conclusão total, consolidando uma ferramenta robusta para o produtor rural.',
+      'O Boi na Conta é um sistema de gestão desenvolvido para um cliente do setor de agronegócio. O foco principal é o controle financeiro e estratégico de propriedades rurais voltadas para a pecuária, permitindo um acompanhamento rigoroso de custos, receitas e rebanho.',
+      'Desenvolvido com Symfony e React, o sistema permite monitorar indicadores de rentabilidade e automatizar processos como o registro de aquisição e pesagem de animais, transformando a gestão tradicional em uma estratégia orientada por dados.',
+      'Além das regras de negócio sólidas, o projeto foca na usabilidade para o produtor rural e na integridade dos dados, consolidando uma ferramenta robusta que facilita a tomada de decisão estratégica no dia a dia da fazenda.',
     ],
     imagens: [
       '/images/sistemas/BoiNaConta/Login.webp',
@@ -77,17 +77,17 @@ export const sistemas: Sistema[] = [
   {
     id: 'organizabus',
     tipo: 'sistema',
-    titulo: 'Sistema de Organiza Bus',
+    titulo: 'OrganizaBus',
     descricao:
-      'OrganizaBus é uma plataforma SaaS para gestão de transporte coletivo, usada por prefeituras, cooperativas e instituições.',
+      'Sistema desenvolvido para otimizar o transporte universitário por meio de votações organizadas, garantindo mais eficiência no deslocamento dos alunos.',
     imagem: '/images/sistemas/organizaBus/Login.webp',
     tecnologias: ['Symfony', 'React', 'TypeScript', 'Chakra UI', 'JWT', 'Docker'],
     dataInicio: '2025-03-20',
     dataFim: '2025-10-12',
     descricaoCompleta: [
-      'O OrganizaBus atualmente está na versão 1, funcionando como um sistema de apoio à gestão de transporte escolar ou institucional, com foco em organização manual e controle centralizado. Ele possui duas áreas principais: a página do aluno, onde o usuário pode visualizar enquetes abertas e registrar seu voto, e a página do gestor, que concentra todas as decisões e cadastros do sistema. Nesta fase, o OrganizaBus ainda não possui automações avançadas nem lógica de distribuição automática.',
-      'Na área do gestor, o sistema permite criar e gerenciar enquetes, cadastrar cidades, usuários, ônibus e registrar votos manualmente quando necessário. O gestor consegue visualizar os votos por aluno e tem controle total sobre os dados base do sistema. Todo o funcionamento depende de ações humanas diretas, sem regras automáticas de limite, sem cronogramas e sem processamento assíncrono, reforçando o caráter operacional da V1.',
-      'O ponto central do OrganizaBus hoje é a alocação manual dos alunos nos ônibus. Após os votos serem registrados, o gestor decide em qual ônibus cada aluno será colocado, controlando a lotação e a organização das rotas de forma manual. O sistema, portanto, atua como uma ferramenta de organização e visualização, enquanto a tomada de decisão permanece totalmente sob responsabilidade do gestor.',
+      'O OrganizaBus é um sistema que foi desenvolvido para que, por meio de uma votação organizada, o transporte de alunos para a faculdade seja mais eficiente. Ele foi projetado para centralizar as necessidades dos estudantes e facilitar a logística de transporte de forma prática.',
+      'Através da plataforma, os alunos podem registrar seus votos e necessidades, enquanto o gestor utiliza esses dados para organizar as rotas e a alocação nos ônibus. É uma ferramenta focada em melhorar a coordenação e a organização coletiva do transporte.',
+      'É importante notar que o sistema foi desenvolvido especificamente para operar seguindo esse fluxo de organização e, embora sua estrutura lógica esteja pronta, o projeto ainda não está em produção ou uso oficial.',
     ],
     imagens: [
       '/images/sistemas/organizaBus/Login.webp',
@@ -113,9 +113,9 @@ export const sistemas: Sistema[] = [
     dataInicio: '2025-08-03',
     dataFim: '2025-11-10',
     descricaoCompleta: [
-      'O PipChart nasceu da necessidade de consultar anotações durante reuniões sem alternar janelas, oferecendo uma aplicação web focada em produtividade com suporte nativo ao modo Picture-in-Picture (PiP). Isso permite destacar notas em uma janela flutuante sobreposta, mantendo o foco na tarefa principal.',
-      'Construído inteiramente no frontend com React 19, TypeScript e Vite, o projeto prioriza performance e privacidade. Todos os dados são armazenados localmente (LocalStorage) e podem ser exportados/importados via JSON para backup, garantindo segurança e portabilidade total das informações.',
-      'A interface utiliza Chakra UI e Framer Motion para criar uma experiência premium e fluida. O sistema organiza anotações em chats temáticos e foi desenvolvido como uma solução moderna e prática para multitarefa, eliminando a dependência de internet para funcionamento básico.',
+      'O PipChart foi desenvolvido para suprir uma necessidade pessoal: durante minhas reuniões, eu sempre sentia a necessidade de visualizar alguns tópicos específicos para falar sem precisar mudar de janela o tempo todo. Procurei plataformas e sites que permitissem uma janela flutuante fora do navegador, mas como não encontrei nada que atendesse minha necessidade, decidi criar minha própria solução.',
+      'Inspirado por essa lacuna, decidi criar minha própria ferramenta utilizando a API Picture-in-Picture do navegador. O sistema permite transformar anotações em janelas flutuantes que ficam sobrepostas a qualquer outra aplicação, facilitando a multitarefa e o foco durante reuniões e apresentações.',
+      'Construído com React 19 e TypeScript, o projeto prioriza a simplicidade e a utilidade imediata. Todos os dados são armazenados localmente (LocalStorage), garantindo total privacidade e eliminando a dependência de internet para o funcionamento básico da ferramenta.',
     ],
     imagens: [
       '/images/sistemas/PipChart/welcome.webp',
@@ -174,9 +174,9 @@ export const sistemas: Sistema[] = [
     dataInicio: '2025-01-03',
     dataFim: '2025-01-14',
     descricaoCompleta: [
-      'VidFlux é um hub centralizado para download de vídeos de redes sociais como YouTube, Instagram, TikTok e Twitter. A aplicação oferece uma interface limpa onde o usuário cola o link e recebe o arquivo pronto, com previews detalhados (thumbnail e título) antes do download, eliminando complicações.',
-      'Desenvolvido como projeto de estudo para aprofundar em React e integrações de API, o sistema possui um frontend moderno com Chakra UI e animações Framer Motion. O backend em Symfony atua como API, processando as requisições através ferramanta yt-dlp, garantindo compatibilidade com diversas plataformas.',
-      'Embora opere atualmente em ambiente local, o projeto demonstra uma arquitetura sólida com componentes reutilizáveis e controllers específicos. O VidFlux serviu para consolidar conceitos avançados de desenvolvimento web, resultando em uma ferramenta prática e visualmente agradável.',
+      'O VidFlux é um projeto estritamente pessoal, desenvolvido para fins didáticos e como uma forma de aprender e aplicar novas tecnologias. O objetivo era criar um hub centralizado para download de vídeos de redes sociais, integrando diversas ferramentas e APIs em um único lugar.',
+      'Desenvolvido com React no frontend e Symfony no backend, o projeto permitiu aprofundar conhecimentos em integrações complexas e manipulação de fluxos de dados assíncronos, utilizando a ferramenta yt-dlp como motor de processamento.',
+      'Embora opere como uma aplicação funcional com interface moderna, seu propósito principal foi consolidar conceitos avançados de desenvolvimento web e experimentação técnica, resultando em uma ferramenta prática e visualmente agradável.',
     ],
     imagens: [
       '/images/sistemas/Vidflux/home.webp',
@@ -231,10 +231,9 @@ export const sistemas: Sistema[] = [
     dataInicio: '2024-09-07',
     dataFim: '2024-09-08',
     descricaoCompleta: [
-      'Esta versão do sistema de Eletivas e Tutorias foi desenvolvida no final de 2024, representando um marco importante na minha evolução como desenvolvedor. Com conhecimentos avançados em desenvolvimento web, o sistema foi reescrito do zero em apenas um final de semana (7 e 8 de setembro), substituindo completamente a versão anterior que operava desde 2023.',
-      'Diferente da versão anterior, este projeto utiliza arquitetura MVC (Model-View-Controller) e Bootstrap para o front-end, resultando em um código limpo, estruturado e de fácil manutenção. O foco foi corrigir as falhas lógicas do legado e entregar uma experiência de usuário robusta e confiável.',
-      'O sistema foi implantado na segunda-feira, 9 de setembro, e utilizado imediatamente por toda a escola sem apresentar bugs, validando a eficácia da nova arquitetura e a maturidade técnica adquirida. Esta versão serviu como base sólida para a posterior refatoração em React.',
-      'O sistema foi hospedado em um plano de Hospedagem Compartilhada na Hostinger, proporcionando estabilidade e desempenho suficiente para atender toda a demanda escolar em produção, sendo utilizado por centenas de alunos simultaneamente.',
+      'O Sistema de Eletivas v2 foi desenvolvido para substituir a primeira versão (V1), que já estava bastante depreciada na época. Eu o criei em apenas um final de semana, utilizando conhecimentos que eu havia recém-adquirido sobre arquitetura MVC e desenvolvimento web para entregar uma solução robusta.',
+      'Diferente da versão inicial, este projeto foi estruturado de forma muito mais profissional e performática, utilizando PHP puro e Bootstrap. O foco foi corrigir falhas lógicas e garantir que a escola pudesse utilizar o sistema imediatamente sem erros críticos, o que foi validado pelo uso de centenas de alunos.',
+      'Este sistema serviu como o motor principal para a gestão de eletivas durante seu período de vigência, provando que uma base sólida de conhecimento permite criar soluções resilientes em tempo recorde. Além disso, serviu de base para a futura evolução em React.',
     ],
     imagens: [
       '/images/sistemas/eletivaTutoriaV2/Login.webp',
@@ -256,10 +255,9 @@ export const sistemas: Sistema[] = [
     dataInicio: '2024-04-14',
     dataFim: '2024-09-04',
     descricaoCompleta: [
-      'O sistema de Monitoramento Escolar foi desenvolvido do zero com PHP, MySQL e JavaScript para gerenciar o ciclo completo de avaliações. Ele permite a criação, aplicação e correção automática de provas, centralizando processos e facilitando a vida de professores e alunos com uma interface prática.',
-      'Administradores possuem controle total para gerenciar turmas, disciplinas e períodos de prova, enquanto professores podem criar gabaritos e visualizar relatórios detalhados de desempenho. A correção automática agiliza o feedback, permitindo que docentes foquem na análise pedagógica dos resultados.',
-      'Para os alunos, a plataforma oferece uma área intuitiva para realização de provas e consulta de gabaritos. Gestores têm acesso a dashboards com gráficos estratégicos, permitindo acompanhar o rendimento global da escola e tomar decisões baseadas em dados concretos e atualizados.',
-      'O sistema está em produção hospedado em um plano de Hospedagem Compartilhada na Hostinger, garantindo alta disponibilidade para que professores e alunos possam acessá-lo de forma confiável durante os períodos de avaliação escolar.',
+      'O projeto de Monitoramento foi algo que, para a época, achei extremamente desafiador, mas consegui entregar exatamente o esperado. O sistema possui um CRUD completo para professores, turmas, alunos, disciplinas, gestores, PFAs e períodos (trimestres).',
+      'Através da plataforma, os professores podem cadastrar provas para as turmas, e os alunos conseguem visualizar esses exames e registrar seus gabaritos. O sistema realiza o cálculo automático das notas e gera relatórios completos de desempenho e descritores para os professores.',
+      'Para o gestor, o sistema oferece um panorama completo de como estão as turmas e a escola como um todo, facilitando a análise pedagógica e a tomada de decisões baseada em dados reais e atualizados gerados pelo próprio sistema.',
     ],
     imagens: [
       '/images/sistemas/monitoramento/homeADM.webp',
@@ -284,10 +282,9 @@ export const sistemas: Sistema[] = [
     dataInicio: '2023-08-23',
     dataFim: '2023-12-12',
     descricaoCompleta: [
-      'Este foi o primeiro sistema web desenvolvido para a escola, marcando minha transição para o desenvolvimento web em 2023. Criado com PHP e MySQL enquanto eu ainda aprendia as tecnologias, o projeto gerenciou com sucesso o processo de escolha de eletivas e tutorias pelos alunos através de autenticação por RA.',
-      'Apesar de conter lógicas iniciantes e código legado, o sistema atendeu 100% da demanda escolar, funcionando sem falhas críticas em produção. Ele provou que é possível entregar valor real mesmo durante o processo de aprendizado, resolvendo um problema complexo de gestão acadêmica.',
-      'O projeto foi fundamental para meu desenvolvimento, ensinando na prática sobre banco de dados, sessões e regras de negócio. Sua execução bem-sucedida serviu como prova de conceito para as versões futuras, mais modernas e robustas, que viriam a substituí-lo.',
-      'Esta primeira versão foi hospedada em um plano de Hospedagem Compartilhada na Hostinger, onde funcionou de forma estável durante todo o período letivo, atendendo a demanda de todos os alunos da escola sem problemas de desempenho.',
+      'O Sistema de Eletivas v1 foi o meu primeiro projeto web "pra valer". Eu fui aprendendo as tecnologias enquanto o desenvolvia, e na época (2023) eu achava que o que estava fazendo era muita coisa.',
+      'Vendo hoje, percebo que utilizei muitas técnicas ruins e que o código está bastante precário, mas na época em que eu estava iniciando, eu não tinha a noção técnica que tenho agora. Foi um projeto de aprendizado prático e intenso onde tudo era novo.',
+      'Apesar das limitações técnicas e das escolhas de design que hoje vejo como ruins, o sistema atendeu 100% da demanda escolar da época, servindo como a base fundamental para minha jornada no desenvolvimento web.',
     ],
     imagens: [
       '/images/sistemas/eletivaTutoriaV1/login.webp',

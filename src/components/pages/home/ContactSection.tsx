@@ -29,7 +29,7 @@ export const ContactSection = memo(() => {
               Vamos criar algo{' '}
               <Span className="relative inline-block">
                 <Span className="text-gradient font-black">incrível</Span>
-                <Box className="absolute -bottom-2 left-0 right-0 h-1 bg-gradient-to-r from-brand-500 to-blue-500 rounded-full" />
+                <Box className="absolute -bottom-2 left-0 right-0 h-1 bg-gradient-to-r from-brand-500 to-brand-200 rounded-full" />
               </Span>{' '}
               juntos?
             </Title>

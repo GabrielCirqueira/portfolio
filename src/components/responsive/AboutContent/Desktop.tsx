@@ -280,7 +280,8 @@ export const Desktop = memo(({ aboutCards }: DesktopProps) => {
           >
             <Marquee
               gradient={true}
-              gradientColor="rgba(0,0,0,0)"
+              gradientColor="#000000"
+              gradientWidth={50}
               speed={30}
               className="overflow-hidden py-1"
             >

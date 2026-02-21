@@ -3,7 +3,6 @@ import { Award, Briefcase, CheckCircle } from 'lucide-react'
 import { memo, useState } from 'react'
 import { useAnimacaoOtimizada } from '@/hooks/useAnimacaoOtimizada'
 import { Badge } from '@/shadcn/components/ui/badge'
-import { Button } from '@/shadcn/components/ui/button'
 import { Icon } from '@/shadcn/components/ui/icon'
 import { Box, HStack, VStack } from '@/shadcn/components/ui/layout'
 import { Span, Text, Title } from '@/shadcn/components/ui/typography'
@@ -29,28 +28,36 @@ export const Mobile = memo(({ formacao, experiencias, conquistas }: EducationGri
 
   return (
     <VStack className="gap-4 w-full">
-      <HStack className="bg-zinc-900 border border-zinc-800 rounded-xl p-1 gap-1 w-full">
+      <HStack className="bg-zinc-900 border border-zinc-800 rounded-xl p-1 gap-1 w-full relative">
         {tabs.map((tab) => {
           const isActive = activeTab === tab.key
           return (
-            <Button
+            <button
               key={tab.key}
-              variant="ghost"
+              type="button"
               onClick={() => setActiveTab(tab.key)}
               className={`
-                flex-1 flex items-center justify-center gap-1.5 py-2.5 rounded-lg h-auto
-                text-[11px] font-bold uppercase tracking-wider
-                transition-all duration-200 relative
-                ${
-                  isActive
-                    ? 'bg-brand-500 text-black shadow-md shadow-brand-500/20'
-                    : 'text-zinc-400 active:bg-zinc-800'
-                }
+                flex-1 flex items-center justify-center gap-1.5 py-2.5 rounded-lg h-10
+                text-[10px] sm:text-[11px] font-bold uppercase tracking-wider
+                transition-colors duration-300 relative outline-none
+                ${isActive ? 'text-black' : 'text-zinc-500 active:text-zinc-300'}
               `}
             >
-              <Icon icon={tab.icon} className="w-3.5 h-3.5" />
-              <Span className="hidden min-[380px]:inline">{tab.label}</Span>
-            </Button>
+              {isActive && (
+                <motion.div
+                  layoutId="activeEducationTab"
+                  className="absolute inset-0 bg-brand-500 rounded-lg shadow-lg shadow-brand-500/20"
+                  transition={{ type: 'spring', bounce: 0.2, duration: 0.6 }}
+                />
+              )}
+              <HStack className="relative z-10 gap-1.5 items-center justify-center">
+                <Icon
+                  icon={tab.icon}
+                  className={`w-3.5 h-3.5 transition-colors ${isActive ? 'text-black' : 'text-zinc-500'}`}
+                />
+                <Span className="hidden min-[340px]:inline">{tab.label}</Span>
+              </HStack>
+            </button>
           )
         })}
       </HStack>

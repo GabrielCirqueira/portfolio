@@ -131,7 +131,7 @@ export const Mobile = memo(({ aboutCards }: MobileProps) => {
       </Grid>
 
       <Box className="mb-10 -mx-4 py-3 bg-zinc-900/30 border-y border-zinc-800/30">
-        <Marquee gradient={false} speed={25}>
+        <Marquee gradient gradientColor="#000000" gradientWidth={100} speed={25}>
           {technologies.map((tech) => (
             <span
               key={tech}
