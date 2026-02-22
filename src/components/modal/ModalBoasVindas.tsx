@@ -49,8 +49,8 @@ export function ModalBoasVindas() {
                     </Box>
                   </Box>
 
-                  <VStack className="gap-2">
-                    <Title className="text-2xl sm:text-3xl font-bold font-heading text-white tracking-tight">
+                  <VStack className="gap-2 bg-green-300">
+                    <Title className="text-2xl sm:text-3xl text-center font-bold font-heading text-white tracking-tight">
                       Bem-vindo ao meu <span className="text-brand-400">Portfólio</span>!
                     </Title>
                     <Text className="text-zinc-400 text-sm sm:text-base leading-relaxed max-w-sm mx-auto">

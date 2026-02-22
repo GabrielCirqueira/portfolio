@@ -109,7 +109,6 @@ export const sistemas: Sistema[] = [
       'Aplicação web moderna para anotações em Picture-in-Picture, ideal para reuniões e multitarefa.',
     imagem: '/images/sistemas/PipChart/home2.webp',
     gitHub: 'https://github.com/GabrielCirqueira/PipChart',
-    link: 'https://pipchart.vercel.app/',
     tecnologias: ['React 19', 'TypeScript', 'Vite', 'Chakra UI', 'Framer Motion', 'LocalStorage'],
     dataInicio: '2025-08-03',
     dataFim: '2025-11-10',
@@ -135,7 +134,6 @@ export const sistemas: Sistema[] = [
     descricao:
       'Refatoração completa do frontend utilizando React, transformando o sistema MVC em uma arquitetura moderna com API REST, tema escuro e responsividade total.',
     imagem: '/images/sistemas/eletivaTutoriaV3/RefactorHome.webp',
-    link: 'https://et.escolansl.com/sistema',
     tecnologias: ['React', 'TypeScript', 'PHP', 'API REST', 'MySQL', 'CSS Modules'],
     dataInicio: '2025-01-17',
     dataFim: '2025-02-16',
@@ -227,7 +225,6 @@ export const sistemas: Sistema[] = [
     descricao:
       'Versão definitiva do sistema em PHP puro, reconstruída do zero em apenas 48h utilizando arquitetura MVC e Bootstrap, garantindo performance e estabilidade.',
     imagem: '/images/sistemas/eletivaTutoriaV2/Login.webp',
-    link: 'https://et.escolansl.com/sistema',
     tecnologias: ['PHP', 'MySQL', 'Bootstrap', 'MVC'],
     dataInicio: '2024-09-07',
     dataFim: '2024-09-08',
@@ -251,7 +248,6 @@ export const sistemas: Sistema[] = [
     titulo: 'Sistema de Monitoramento Escolar',
     descricao: 'Sistema completo para monitoramento e gestão de atividades escolares',
     imagem: '/images/sistemas/monitoramento/homeADM.webp',
-    link: 'https://monitoramento.escolansl.com/sistema',
     tecnologias: ['PHP', 'MySQL', 'JavaScript', 'CSS'],
     dataInicio: '2024-04-14',
     dataFim: '2024-09-04',
@@ -412,6 +408,7 @@ export const jogos: Jogo[] = [
     id: 'car-master',
     tipo: 'jogo',
     titulo: 'Car Master',
+    link: 'https://scratch.mit.edu/projects/728458296/',
     descricao:
       'Jogo arcade de desvio em visão superior onde o objetivo é sobreviver o máximo de tempo desviando de obstáculos na rodovia.',
     imagem: '/images/jogos/car-master/andando.webp',
