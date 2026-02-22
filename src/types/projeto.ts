@@ -10,6 +10,7 @@ export interface Projeto {
   gitHub?: string
   dataInicio: string
   dataFim?: string
+  anoExibicao?: string
   tipo: 'sistema' | 'jogo'
 }
 

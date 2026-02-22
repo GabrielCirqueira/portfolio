@@ -8,7 +8,8 @@ import {
   WorkflowSection,
 } from '@app/components/pages/home'
 import { AppContainer, Footer, Header } from '@app/layouts'
-import { lazy, memo, Suspense } from 'react'
+import { lazy, memo, Suspense, useEffect } from 'react'
+import { useLocation } from 'react-router-dom'
 
 const Mascote = lazy(() =>
   import('@app/components/ui/Mascote').then((module) => ({ default: module.Mascote }))
@@ -30,6 +31,20 @@ const WhatsAppButton = lazy(() =>
 )
 
 export const Component = memo(() => {
+  const location = useLocation()
+
+  useEffect(() => {
+    if (location.hash) {
+      const id = location.hash.replace('#', '')
+      const elemento = document.getElementById(id)
+      if (elemento) {
+        setTimeout(() => {
+          elemento.scrollIntoView({ behavior: 'smooth' })
+        }, 50)
+      }
+    }
+  }, [location.hash])
+
   return (
     <AppContainer paddingX="0" className={`min-h-screen bg-black w-full`}>
       <Suspense fallback={null}>

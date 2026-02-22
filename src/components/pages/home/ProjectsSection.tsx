@@ -1,20 +1,24 @@
 import { motion } from 'framer-motion'
-import { Gamepad2, Monitor } from 'lucide-react'
+import { ArrowRight, Layers } from 'lucide-react'
 import { memo, useState } from 'react'
+import { Link } from 'react-router-dom'
 import { CardProjeto } from '@/components/responsive/CardProjeto'
 import { ProjetoModal } from '@/components/responsive/ProjetoModal'
 import { jogos, sistemas } from '@/data/projetos'
 import { Badge } from '@/shadcn/components/ui/badge'
+import { Button } from '@/shadcn/components/ui/button'
 import { Icon } from '@/shadcn/components/ui/icon'
-import { Box, Container, VStack } from '@/shadcn/components/ui/layout'
+import { Box, Container, HStack, VStack } from '@/shadcn/components/ui/layout'
 import { Text, Title } from '@/shadcn/components/ui/typography'
+
+const PROJETOS_DESTAQUE = ['spacenow', 'monitoramento', 'estoque-pdv', 'pip-chart']
 
 const containerVariants = {
   hidden: { opacity: 0 },
   visible: {
     opacity: 1,
     transition: {
-      staggerChildren: 0.2,
+      staggerChildren: 0.15,
     },
   },
 }
@@ -25,7 +29,9 @@ export const ProjectsSection = memo(() => {
   const abrirModal = (id: string) => setModalAberto(id)
   const fecharModal = () => setModalAberto(null)
 
+  const projetosDestaque = sistemas.filter((p) => PROJETOS_DESTAQUE.includes(p.id))
   const projetoAtual = [...sistemas, ...jogos].find((p) => p.id === modalAberto)
+  const totalProjetos = sistemas.length + jogos.length
 
   return (
     <Box
@@ -73,79 +79,68 @@ export const ProjectsSection = memo(() => {
               Projetos <span className="text-gradient">Em Destaque</span>
             </Title>
             <Box className="w-20 sm:w-24 h-1 bg-brand-500 mx-auto rounded-full opacity-60" />
+            <Text className="text-zinc-400 max-w-2xl mx-auto text-sm sm:text-base md:text-lg px-4 leading-relaxed">
+              Uma seleção dos meus principais projetos. Explore mais de {totalProjetos} trabalhos na
+              página completa.
+            </Text>
           </motion.div>
         </VStack>
 
-        <VStack className="gap-16 sm:gap-20 md:gap-28">
-          <Box>
-            <motion.div
-              initial={{ opacity: 0, x: -30 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              className="flex items-center gap-3 sm:gap-4 mb-8 sm:mb-12"
-            >
-              <Box
-                className="
-                  p-2.5 sm:p-3 bg-zinc-900/80 border
-                  border-brand-500/30 rounded-xl
-                  shadow-lg shadow-brand-500/10
-                "
-              >
-                <Icon icon={Monitor} className="w-5 h-5 sm:w-6 sm:h-6 text-brand-400" />
-              </Box>
-              <Text className="text-base sm:text-lg md:text-xl lg:text-2xl font-bold uppercase tracking-wide font-heading text-white">
-                Sistemas Web
-              </Text>
-              <Box className="h-px bg-gradient-to-r from-brand-500/60 to-transparent flex-1 ml-2 sm:ml-6" />
-            </motion.div>
+        <motion.div
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: '-100px' }}
+          className="grid grid-cols-1 sm:grid-cols-2 gap-6 sm:gap-8 md:gap-10 lg:gap-12 max-w-6xl mx-auto"
+        >
+          {projetosDestaque.map((projeto) => (
+            <CardProjeto key={projeto.id} projeto={projeto} onAbrirModal={abrirModal} />
+          ))}
+        </motion.div>
 
-            <motion.div
-              variants={containerVariants}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true, margin: '-100px' }}
-              className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 md:gap-8 lg:gap-10"
-            >
-              {sistemas.map((projeto) => (
-                <CardProjeto key={projeto.id} projeto={projeto} onAbrirModal={abrirModal} />
-              ))}
-            </motion.div>
-          </Box>
-          <Box>
-            <motion.div
-              initial={{ opacity: 0, x: -30 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              className="flex items-center gap-3 sm:gap-4 mb-8 sm:mb-12"
-            >
-              <Box
-                className="
-                  p-2.5 sm:p-3 bg-zinc-900/80 border
-                  border-brand-500/30 rounded-xl
-                  shadow-lg shadow-brand-500/10
-                "
-              >
-                <Icon icon={Gamepad2} className="w-5 h-5 sm:w-6 sm:h-6 text-brand-400" />
-              </Box>
-              <Text className="text-base sm:text-lg md:text-xl lg:text-2xl font-bold uppercase tracking-wide font-heading text-white">
-                Jogos Desenvolvidos
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6, delay: 0.4 }}
+          className="mt-16 sm:mt-20 md:mt-24"
+        >
+          <VStack className="items-center gap-6 text-center">
+            <Box className="max-w-md mx-auto px-4">
+              <Text className="text-zinc-400 text-sm sm:text-base leading-relaxed">
+                Estes são apenas alguns dos meus principais projetos. Já desenvolvi mais de{' '}
+                <span className="text-brand-400 font-semibold">{totalProjetos} projetos</span>{' '}
+                incluindo sistemas web e jogos.
               </Text>
-              <Box className="h-px bg-gradient-to-r from-brand-500/60 to-transparent flex-1 ml-2 sm:ml-6" />
-            </motion.div>
+            </Box>
 
-            <motion.div
-              variants={containerVariants}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true, margin: '-100px' }}
-              className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-6 md:gap-8 lg:gap-10"
-            >
-              {jogos.map((projeto) => (
-                <CardProjeto key={projeto.id} projeto={projeto} onAbrirModal={abrirModal} />
-              ))}
-            </motion.div>
-          </Box>
-        </VStack>
+            <Link to="/projetos">
+              <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+                <Button
+                  size="lg"
+                  className="
+                    bg-brand-500 hover:bg-brand-600 text-black font-bold
+                    px-8 py-6 text-base uppercase tracking-wider
+                    rounded-xl shadow-lg shadow-brand-500/30
+                    hover:shadow-brand-500/50 hover:shadow-xl
+                    transition-all duration-300
+                    group relative overflow-hidden
+                  "
+                >
+                  <Box className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700" />
+                  <HStack className="items-center gap-3 relative z-10">
+                    <Icon icon={Layers} className="w-5 h-5" />
+                    <span>Explorar Todos os Projetos</span>
+                    <Icon
+                      icon={ArrowRight}
+                      className="w-5 h-5 group-hover:translate-x-1 transition-transform"
+                    />
+                  </HStack>
+                </Button>
+              </motion.div>
+            </Link>
+          </VStack>
+        </motion.div>
       </Container>
     </Box>
   )

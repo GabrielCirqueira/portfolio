@@ -2,6 +2,7 @@ import { useEasterEgg } from '@app/contexts/EasterEggContext'
 import { type SectionId, useVisibleSection } from '@app/hooks/useVisibleSection'
 import { AnimatePresence, motion } from 'framer-motion'
 import { memo, useCallback, useEffect, useRef, useState } from 'react'
+import { useLocation } from 'react-router-dom'
 import { MascoteVisual } from '@/components/ui/MascoteVisual'
 import { useWelcome } from '@/contexts/WelcomeContext'
 
@@ -13,6 +14,16 @@ const mascoteMessages: Record<SectionId, string> = {
   formacao: '🎓 Minha jornada acadêmica',
   contato: '📬 Vamos conversar?',
 }
+
+const projetosPageMessages = [
+  '🛠️ Explorando meus projetos!',
+  '💡 Cada projeto tem uma história',
+  '🔍 Filtre por tipo acima!',
+  '📅 Organizados por ano',
+  '🎮 Tem até jogos aqui!',
+  '💻 Sistemas web completos',
+  '🚀 +15 projetos para ver!',
+]
 
 const crazyMessages = [
   '🤪 MODO MALUCO ATIVADO!',
@@ -29,14 +40,18 @@ const LONG_PRESS_DURATION = 2000
 
 export const Mascote = memo(() => {
   const currentSection = useVisibleSection()
+  const location = useLocation()
+  const isProjetosPage = location.pathname === '/projetos'
   const { isActive, activate } = useEasterEgg()
   const { isWelcomeModalOpen } = useWelcome()
   const [showMessage, setShowMessage] = useState(false)
   const [crazyMessage, setCrazyMessage] = useState(crazyMessages[0])
   const [hintMessage, setHintMessage] = useState<string | null>(null)
+  const [projetosMessage, setProjetosMessage] = useState(projetosPageMessages[0])
   const [longPressProgress, setLongPressProgress] = useState(0)
   const isHoveringRef = useRef(false)
   const crazyIndexRef = useRef(0)
+  const projetosMessageIndexRef = useRef(0)
   const longPressStartRef = useRef<number>(0)
   const longPressIntervalRef = useRef<ReturnType<typeof setInterval> | undefined>(undefined)
 
@@ -61,7 +76,9 @@ export const Mascote = memo(() => {
     }, 16)
   }, [isActive, activate])
 
-  const message = isActive ? crazyMessage : hintMessage || mascoteMessages[currentSection]
+  const message = isActive
+    ? crazyMessage
+    : hintMessage || (isProjetosPage ? projetosMessage : mascoteMessages[currentSection])
 
   // biome-ignore lint/correctness/useExhaustiveDependencies: x
   useEffect(() => {
@@ -75,7 +92,26 @@ export const Mascote = memo(() => {
       }, 3000)
       return () => clearTimeout(timer)
     }
-  }, [isActive, currentSection])
+  }, [isActive, currentSection, isProjetosPage])
+
+  // Rotacionar mensagens na página de projetos
+  useEffect(() => {
+    if (!isProjetosPage || isActive) return
+
+    const interval = setInterval(() => {
+      projetosMessageIndexRef.current =
+        (projetosMessageIndexRef.current + 1) % projetosPageMessages.length
+      setProjetosMessage(projetosPageMessages[projetosMessageIndexRef.current])
+      setShowMessage(true)
+      setTimeout(() => {
+        if (!isHoveringRef.current) {
+          setShowMessage(false)
+        }
+      }, 4000)
+    }, 12000)
+
+    return () => clearInterval(interval)
+  }, [isProjetosPage, isActive])
 
   useEffect(() => {
     if (isActive) return
@@ -128,7 +164,7 @@ export const Mascote = memo(() => {
       <AnimatePresence mode="wait">
         {showMessage && (
           <motion.div
-            key={isActive ? crazyMessage : currentSection}
+            key={isActive ? crazyMessage : isProjetosPage ? projetosMessage : currentSection}
             initial={{ opacity: 0, y: 10, scale: 0.9 }}
             animate={{
               opacity: 1,

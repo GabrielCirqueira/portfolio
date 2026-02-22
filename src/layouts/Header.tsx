@@ -1,6 +1,7 @@
 import { AnimatePresence, motion } from 'framer-motion'
 import { Menu, X } from 'lucide-react'
 import { useEffect, useState } from 'react'
+import { Link } from 'react-router-dom'
 import { navItems } from '@/data/navegacao'
 import { Icon } from '@/shadcn/components/ui/icon'
 import { Box, Container, HStack } from '@/shadcn/components/ui/layout'
@@ -47,28 +48,29 @@ export function Header() {
       >
         <Container size="xl" className="px-4 sm:px-6">
           <HStack className="justify-between items-center h-16 sm:h-18 md:h-20">
-            <motion.a
-              href="#inicio"
-              className="
-                flex items-center gap-2 text-white
-                hover:text-brand-400 transition-colors
-                no-underline group relative z-50
-              "
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              aria-label="Ir para o início"
-            >
-              <Text className="font-mono text-brand-500 text-lg sm:text-xl md:text-2xl group-hover:rotate-12 transition-transform duration-300">
-                &lt;
-              </Text>
-              <Text className="font-bold text-base sm:text-lg md:text-xl tracking-wide uppercase font-heading relative">
-                Gabriel.Dev
-                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-brand-500 transition-all duration-300 group-hover:w-full"></span>
-              </Text>
-              <Text className="font-mono text-brand-500 text-lg sm:text-xl md:text-2xl group-hover:-rotate-12 transition-transform duration-300">
-                /&gt;
-              </Text>
-            </motion.a>
+            <Link to="/">
+              <motion.div
+                className="
+                  flex items-center gap-2 text-white
+                  hover:text-brand-400 transition-colors
+                  no-underline group relative z-50 cursor-pointer
+                "
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                aria-label="Ir para o início"
+              >
+                <Text className="font-mono text-brand-500 text-lg sm:text-xl md:text-2xl group-hover:rotate-12 transition-transform duration-300">
+                  &lt;
+                </Text>
+                <Text className="font-bold text-base sm:text-lg md:text-xl tracking-wide uppercase font-heading relative">
+                  Gabriel.Dev
+                  <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-brand-500 transition-all duration-300 group-hover:w-full"></span>
+                </Text>
+                <Text className="font-mono text-brand-500 text-lg sm:text-xl md:text-2xl group-hover:-rotate-12 transition-transform duration-300">
+                  /&gt;
+                </Text>
+              </motion.div>
+            </Link>
 
             <HStack className="hidden md:flex items-center space-x-5">
               {navItems.map((item) => (

@@ -18,6 +18,7 @@ export const sistemas: Sistema[] = [
       'Docker',
     ],
     dataInicio: '2025-12-01',
+    anoExibicao: '2026',
     descricaoCompleta: [
       'O SpaceNow é um projeto que estou desenvolvendo apenas por hobby e porque gosto muito de astronomia. É uma plataforma web voltada à visualização e exploração de dados astronômicos reais, utilizando APIs da NASA para transformar informações complexas em experiências interativas.',
       'Atualmente, o projeto conta com integração da APOD (Astronomy Picture of the Day), seções de asteroides potencialmente perigosos e visualizações 3D de trajetórias orbitais. Ele segue em desenvolvimento contínuo, evoluindo de forma incremental conforme novas ideias e tecnologias são exploradas.',

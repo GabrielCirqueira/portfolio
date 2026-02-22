@@ -17,6 +17,7 @@ const router = createBrowserRouter(
       <Route element={<RootLayout />}>
         <Route element={<MainLayout />}>
           <Route index lazy={() => import('@app/pages/Home/Home')} />
+          <Route path="projetos" lazy={() => import('@app/pages/Projetos/Projetos')} />
           <Route path="*" lazy={() => import('@app/pages/NotFound/NotFound')} />
         </Route>
       </Route>
