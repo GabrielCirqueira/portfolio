@@ -74,7 +74,7 @@ export function Mobile({ isOpen, onClose, projeto }: ProjetoModalProps) {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.3 }}
-            className="fixed inset-0 z-[100] bg-black/95 backdrop-blur-md"
+            className="fixed inset-0 z-[100] bg-black/80 backdrop-blur-sm"
             onClick={onClose}
           />
 
@@ -90,18 +90,18 @@ export function Mobile({ isOpen, onClose, projeto }: ProjetoModalProps) {
             dragConstraints={{ top: 0 }}
             dragElastic={0.1}
             onDragEnd={handleSheetDrag}
-            className="fixed bottom-0 left-0 right-0 z-[101] flex flex-col bg-zinc-950 rounded-t-[32px] border-t border-zinc-800 shadow-[0_-20px_80px_rgba(0,0,0,1)] overflow-hidden h-[94vh]"
+            className="fixed bottom-0 left-0 right-0 z-[101] flex flex-col bg-zinc-950 rounded-t-[32px] border-t border-zinc-800 overflow-hidden h-[94vh] will-change-transform transform-gpu shadow-2xl shadow-black/50"
           >
             <Box className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-brand-500 to-transparent opacity-50 z-50" />
 
             <div
-              className="w-full pt-4 pb-2 flex justify-center flex-shrink-0 touch-none cursor-grab active:cursor-grabbing rounded-t-[32px] bg-zinc-950/80 backdrop-blur-xl z-40"
+              className="w-full pt-4 pb-2 flex justify-center flex-shrink-0 touch-none cursor-grab active:cursor-grabbing rounded-t-[32px] bg-zinc-950 z-40 border-b border-zinc-900/50"
               onPointerDown={(e) => dragControls.start(e)}
             >
               <div className="w-12 h-1.5 bg-zinc-800/80 rounded-full" />
             </div>
 
-            <div className="relative px-6 py-4 flex items-center justify-between flex-shrink-0 border-b border-zinc-900 bg-zinc-950/80 backdrop-blur-xl z-40">
+            <div className="relative px-6 py-4 flex items-center justify-between flex-shrink-0 border-b border-zinc-900 bg-zinc-950 z-40">
               <VStack className="gap-1 flex-1 min-w-0">
                 <HStack className="items-center gap-2">
                   <Badge
@@ -159,21 +159,20 @@ export function Mobile({ isOpen, onClose, projeto }: ProjetoModalProps) {
                       }}
                       className="relative w-full h-full flex items-center justify-center cursor-pointer overflow-hidden p-2 touch-pan-y"
                     >
-                      <AnimatePresence mode="popLayout" initial={false}>
+                      <AnimatePresence initial={false}>
                         <motion.img
                           key={imagemAtual}
-                          initial={{ x: 300, opacity: 0 }}
-                          animate={{ x: 0, opacity: 1 }}
-                          exit={{ x: -300, opacity: 0 }}
-                          transition={{ type: 'spring', stiffness: 300, damping: 30 }}
+                          initial={{ opacity: 0, x: 20 }}
+                          animate={{ opacity: 1, x: 0 }}
+                          exit={{ opacity: 0, x: -20 }}
+                          transition={{ duration: 0.2, ease: 'easeOut' }}
                           src={projeto.imagens[imagemAtual]}
                           alt={`${projeto.titulo} - ${imagemAtual + 1}`}
-                          className="w-full h-full object-contain rounded-lg relative z-10 cursor-pointer"
-                          loading="eager"
+                          className="w-full h-full object-contain rounded-lg relative z-10 cursor-pointer will-change-[transform,opacity]"
+                          loading="lazy"
                           onClick={() => setImagemExpandida(projeto.imagens[imagemAtual])}
                         />
                       </AnimatePresence>
-                      <Box className="absolute inset-0 bg-[radial-gradient(circle_at_center,#ffffff08_0%,transparent_70%)] pointer-events-none" />
                     </motion.div>
 
                     <Box className="absolute bottom-4 right-4 z-20 px-2.5 py-1 bg-black/60 backdrop-blur-md border border-white/10 rounded-full text-[10px] font-mono font-bold text-white/70 flex items-center gap-1.5">
@@ -205,7 +204,7 @@ export function Mobile({ isOpen, onClose, projeto }: ProjetoModalProps) {
                         key={index}
                         onClick={() => setImagemAtual(index)}
                         className={cn(
-                          'relative flex-shrink-0 w-20 h-14 rounded-xl overflow-hidden border-2 transition-all duration-300 active:scale-95',
+                          'relative flex-shrink-0 w-20 h-14 rounded-xl overflow-hidden border-2 transition-all duration-300 active:scale-95 transform-gpu',
                           imagemAtual === index
                             ? 'border-brand-500 scale-105 shadow-xl shadow-brand-500/20'
                             : 'border-zinc-800 opacity-40 grayscale-[50%]'
@@ -227,7 +226,7 @@ export function Mobile({ isOpen, onClose, projeto }: ProjetoModalProps) {
 
               <VStack className="px-6 pb-12 gap-8 mt-4">
                 <HStack className="gap-3 w-full">
-                  <Box className="flex-1 p-3 rounded-2xl bg-zinc-900/40 border border-zinc-800/60 backdrop-blur-sm text-center">
+                  <Box className="flex-1 p-3 rounded-2xl bg-zinc-900/60 border border-zinc-800/60 text-center">
                     <VStack className="gap-1.5 items-center">
                       <Icon icon={Calendar} className="w-3.5 h-3.5 text-brand-500" />
                       <Text className="text-[9px] text-zinc-500 uppercase font-black tracking-widest leading-none">
@@ -238,7 +237,7 @@ export function Mobile({ isOpen, onClose, projeto }: ProjetoModalProps) {
                       </Text>
                     </VStack>
                   </Box>
-                  <Box className="flex-1 p-3 rounded-2xl bg-zinc-900/40 border border-zinc-800/60 backdrop-blur-sm text-center">
+                  <Box className="flex-1 p-3 rounded-2xl bg-zinc-900/60 border border-zinc-800/60 text-center">
                     <VStack className="gap-1.5 items-center">
                       <Icon icon={Layers} className="w-3.5 h-3.5 text-brand-500" />
                       <Text className="text-[9px] text-zinc-500 uppercase font-black tracking-widest leading-none">
@@ -251,7 +250,6 @@ export function Mobile({ isOpen, onClose, projeto }: ProjetoModalProps) {
                   </Box>
                 </HStack>
 
-                {/* Description Section */}
                 <VStack className="gap-4">
                   <HStack className="items-center gap-3">
                     <Box className="p-2 rounded-lg bg-brand-500/5 border border-brand-500/10 flex items-center justify-center">
@@ -307,7 +305,6 @@ export function Mobile({ isOpen, onClose, projeto }: ProjetoModalProps) {
                   </Box>
                 </VStack>
 
-                {/* Footer Action */}
                 {projeto.link && (
                   <motion.a
                     href={projeto.link}
@@ -338,7 +335,7 @@ export function Mobile({ isOpen, onClose, projeto }: ProjetoModalProps) {
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
                   exit={{ opacity: 0 }}
-                  className="absolute inset-0 bg-black/98 backdrop-blur-2xl"
+                  className="absolute inset-0 bg-black/90 backdrop-blur-md"
                 />
                 <motion.div
                   initial={{ opacity: 0, scale: 0.9, y: 20 }}
