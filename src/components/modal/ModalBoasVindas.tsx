@@ -49,11 +49,11 @@ export function ModalBoasVindas() {
                     </Box>
                   </Box>
 
-                  <VStack className="gap-2 bg-green-300">
+                  <VStack align="items-center" className="gap-2 w-full">
                     <Title className="text-2xl sm:text-3xl text-center font-bold font-heading text-white tracking-tight">
                       Bem-vindo ao meu <span className="text-brand-400">Portfólio</span>!
                     </Title>
-                    <Text className="text-zinc-400 text-sm sm:text-base leading-relaxed max-w-sm mx-auto">
+                    <Text className="text-zinc-400 text-sm sm:text-base text-center leading-relaxed max-w-sm mx-auto">
                       Explore meus projetos, conheça minhas habilidades e veja como transformo
                       ideias em código. Sinta-se à vontade para navegar!
                     </Text>

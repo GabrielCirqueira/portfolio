@@ -11,7 +11,7 @@ import { Icon } from '@/shadcn/components/ui/icon'
 import { Box, Container, HStack, VStack } from '@/shadcn/components/ui/layout'
 import { Text, Title } from '@/shadcn/components/ui/typography'
 
-const PROJETOS_DESTAQUE = ['spacenow', 'monitoramento', 'estoque-pdv', 'pip-chart']
+const PROJETOS_DESTAQUE = ['spacenow', 'monitoramento', 'estoque-pdv', 'organizabus']
 
 const containerVariants = {
   hidden: { opacity: 0 },
