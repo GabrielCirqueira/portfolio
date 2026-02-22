@@ -1,4 +1,4 @@
-import { Code, Phone } from 'lucide-react'
+import { Phone } from 'lucide-react'
 import { memo } from 'react'
 import { Button } from '@/shadcn/components/ui/button'
 import { Icon } from '@/shadcn/components/ui/icon'
@@ -13,8 +13,6 @@ interface FooterContentProps {
 }
 
 export const Mobile = memo(({ socials, links }: FooterContentProps) => {
-  const currentYear = new Date().getFullYear()
-
   return (
     <VStack className="py-12 px-6 relative z-10 gap-0">
       <Center className="mb-8">
@@ -90,17 +88,7 @@ export const Mobile = memo(({ socials, links }: FooterContentProps) => {
 
       <Box className="h-px bg-gradient-to-r from-transparent via-zinc-800 to-transparent mb-6 w-full" />
 
-      <VStack className="items-center gap-3">
-        <Span className="text-zinc-500 text-xs font-mono uppercase tracking-wider">
-          © {currentYear} Gabriel Cirqueira.
-        </Span>
-        <HStack className="items-center gap-2">
-          <Span className="text-zinc-600 text-xs font-mono">Code with</Span>
-          <Icon icon={Code} className="w-3 h-3 text-brand-500" />
-          <Span className="text-zinc-600 text-xs font-mono">&</Span>
-          <Span className="text-xs font-mono text-zinc-400">Passion</Span>
-        </HStack>
-      </VStack>
+      <VStack className="items-center gap-3"></VStack>
     </VStack>
   )
 })

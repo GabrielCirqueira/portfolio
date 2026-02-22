@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion'
-import { Code, Phone } from 'lucide-react'
+import { Phone } from 'lucide-react'
 import { memo } from 'react'
 import { Button } from '@/shadcn/components/ui/button'
 import { Icon } from '@/shadcn/components/ui/icon'
@@ -13,8 +13,6 @@ interface FooterContentProps {
 }
 
 export const Desktop = memo(({ socials, links }: FooterContentProps) => {
-  const currentYear = new Date().getFullYear()
-
   return (
     <Container size="xl" className="py-20 relative z-10 px-4">
       <Grid className="grid-cols-1 md:grid-cols-3 gap-16 items-start">
@@ -136,22 +134,7 @@ export const Desktop = memo(({ socials, links }: FooterContentProps) => {
 
       <Box className="my-16 h-px bg-gradient-to-r from-transparent via-zinc-800 to-transparent" />
 
-      <HStack className="flex-col sm:flex-row justify-between items-center gap-4 text-center sm:text-left">
-        <Text className="text-gray-500 text-xs font-mono uppercase tracking-widest">
-          © {currentYear} Gabriel Cirqueira. ( digite "cirqueira" 👀)
-        </Text>
-        <HStack className="items-center gap-2 opacity-50 hover:opacity-100 transition-opacity cursor-default">
-          <Text className="text-gray-500 text-xs font-mono">Code with</Text>
-          <motion.div
-            animate={{ scale: [1, 1.2, 1] }}
-            transition={{ repeat: Infinity, duration: 2 }}
-          >
-            <Icon icon={Code} className="w-3 h-3 text-brand-500" />
-          </motion.div>
-          <Text className="text-gray-500 text-xs font-mono">&</Text>
-          <Text className="text-xs font-mono text-white">Passion</Text>
-        </HStack>
-      </HStack>
+      <HStack className="flex-col sm:flex-row justify-between items-center gap-4 text-center sm:text-left"></HStack>
     </Container>
   )
 })
