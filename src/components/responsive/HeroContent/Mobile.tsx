@@ -44,6 +44,7 @@ export const Mobile = memo(() => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: ehDispositivoLento ? 0.2 : 0.3, ease: 'easeOut' }}
+            style={{ willChange: 'opacity' }}
           >
             <Badge
               className="
@@ -68,6 +69,7 @@ export const Mobile = memo(() => {
               delay: ehDispositivoLento ? 0 : 0.1,
             }}
             className="space-y-2"
+            style={{ willChange: 'opacity' }}
           >
             <Text className="text-zinc-400 text-base font-medium tracking-wide">Olá, eu sou</Text>
             <Box className="relative">
@@ -99,7 +101,7 @@ export const Mobile = memo(() => {
             }}
             className="h-8 flex items-center"
           >
-            {loaded && (
+            {loaded && !ehDispositivoLento && (
               <TypeAnimation
                 sequence={[
                   'Desenvolvedor PHP',
@@ -119,6 +121,11 @@ export const Mobile = memo(() => {
                 className="text-brand-400 font-mono font-medium text-sm tracking-wide"
                 cursor={true}
               />
+            )}
+            {ehDispositivoLento && (
+              <span className="text-brand-400 font-mono font-medium text-sm tracking-wide">
+                Desenvolvedor Fullstack
+              </span>
             )}
           </motion.div>
 

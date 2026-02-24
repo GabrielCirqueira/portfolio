@@ -21,7 +21,6 @@ export function useVisibleSection() {
 
           const id = mostVisible.target.id as SectionId
           if (id) {
-            console.log('👁️ Seção visível:', id, 'Ratio:', mostVisible.intersectionRatio)
             setVisibleSection(id)
           }
         }

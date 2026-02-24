@@ -6,6 +6,7 @@ import { navItems } from '@/data/navegacao'
 import { Icon } from '@/shadcn/components/ui/icon'
 import { Box, Container, HStack } from '@/shadcn/components/ui/layout'
 import { Text } from '@/shadcn/components/ui/typography'
+import { rafThrottle } from '@/utils/performance'
 import { MobileMenu } from './MobileMenu'
 
 export function Header() {
@@ -13,15 +14,11 @@ export function Header() {
   const [scrolled, setScrolled] = useState(false)
 
   useEffect(() => {
-    const handleScroll = () => {
-      if (window.scrollY > 20) {
-        setScrolled(true)
-      } else {
-        setScrolled(false)
-      }
-    }
+    const handleScroll = rafThrottle(() => {
+      setScrolled(window.scrollY > 20)
+    })
 
-    window.addEventListener('scroll', handleScroll)
+    window.addEventListener('scroll', handleScroll, { passive: true })
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 

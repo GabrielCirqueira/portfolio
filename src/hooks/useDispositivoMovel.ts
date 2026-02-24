@@ -1,20 +1,16 @@
 import { useEffect, useState } from 'react'
+import { debounce, isMobileDevice } from '@/utils/performance'
 
 export function useDispositivoMovel(): boolean {
-  const [ehMovel, setEhMovel] = useState(false)
+  const [ehMovel, setEhMovel] = useState(() => isMobileDevice())
 
   useEffect(() => {
-    const verificarDispositivo = () => {
-      const largura = window.innerWidth
-      const userAgent = navigator.userAgent.toLowerCase()
-      const ehDispositivoMovel =
-        /android|webos|iphone|ipad|ipod|blackberry|iemobile|opera mini/i.test(userAgent)
-
-      setEhMovel(largura < 768 || ehDispositivoMovel)
-    }
+    const verificarDispositivo = debounce(() => {
+      setEhMovel(isMobileDevice())
+    }, 200)
 
     verificarDispositivo()
-    window.addEventListener('resize', verificarDispositivo)
+    window.addEventListener('resize', verificarDispositivo, { passive: true })
 
     return () => window.removeEventListener('resize', verificarDispositivo)
   }, [])

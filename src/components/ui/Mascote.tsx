@@ -5,6 +5,7 @@ import { memo, useCallback, useEffect, useRef, useState } from 'react'
 import { useLocation } from 'react-router-dom'
 import { MascoteVisual } from '@/components/ui/MascoteVisual'
 import { useWelcome } from '@/contexts/WelcomeContext'
+import { isMobileDevice } from '@/utils/performance'
 
 const mascoteMessages: Record<SectionId, string> = {
   inicio: '👋 Bem-vindo ao meu portfólio!',
@@ -54,6 +55,7 @@ export const Mascote = memo(() => {
   const projetosMessageIndexRef = useRef(0)
   const longPressStartRef = useRef<number>(0)
   const longPressIntervalRef = useRef<ReturnType<typeof setInterval> | undefined>(undefined)
+  const isMobile = isMobileDevice()
 
   const cancelLongPress = useCallback(() => {
     if (longPressIntervalRef.current) clearInterval(longPressIntervalRef.current)
@@ -94,9 +96,8 @@ export const Mascote = memo(() => {
     }
   }, [isActive, currentSection, isProjetosPage])
 
-  // Rotacionar mensagens na página de projetos
   useEffect(() => {
-    if (!isProjetosPage || isActive) return
+    if (!isProjetosPage || isActive || isMobile) return
 
     const interval = setInterval(() => {
       projetosMessageIndexRef.current =
@@ -108,24 +109,21 @@ export const Mascote = memo(() => {
           setShowMessage(false)
         }
       }, 4000)
-    }, 12000)
+    }, 15000)
 
     return () => clearInterval(interval)
-  }, [isProjetosPage, isActive])
+  }, [isProjetosPage, isActive, isMobile])
 
   useEffect(() => {
-    if (isActive) return
+    if (isActive || isMobile) return
 
     const interval = setInterval(() => {
       if (Math.random() > 0.7 && !isHoveringRef.current && !showMessage) {
-        const isMobile = window.matchMedia('(pointer: coarse)').matches
         const hints = [
           'Psst... já encontrou o segredo? 🕵️‍♂️',
-          isMobile
-            ? 'Segure em mim por 2 segundos... 🤫'
-            : "Tente digitar 'cirqueira' no teclado... 👀",
+          'Segure em mim por 2 segundos... 🤫',
           'Tem um easter egg escondido por aqui... 🥚',
-          isMobile ? 'Tente me segurar... 👆' : 'Gosta de Matrix? 😎',
+          'Tente me segurar... 👆',
           'O sistema tem segredos...',
         ]
         const randomHint = hints[Math.floor(Math.random() * hints.length)]
@@ -140,10 +138,10 @@ export const Mascote = memo(() => {
           }
         }, 5000)
       }
-    }, 15000)
+    }, 20000)
 
     return () => clearInterval(interval)
-  }, [isActive, showMessage])
+  }, [isActive, showMessage, isMobile])
 
   useEffect(() => {
     if (isActive) {

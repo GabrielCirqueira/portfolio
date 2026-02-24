@@ -8,7 +8,14 @@ const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
 
 export default defineConfig({
-  plugins: [react(), Sitemap({ hostname: 'https://cirqueira.com' })],
+  plugins: [
+    react({
+      babel: {
+        plugins: [['@babel/plugin-transform-react-jsx', { runtime: 'automatic' }]],
+      },
+    }),
+    Sitemap({ hostname: 'https://cirqueira.com' }),
+  ],
   build: {
     rollupOptions: {
       output: {
@@ -20,19 +27,28 @@ export default defineConfig({
             '@radix-ui/react-dialog',
             '@radix-ui/react-progress',
             '@radix-ui/react-slot',
+            '@radix-ui/react-tooltip',
           ],
+          icons: ['react-icons/si', 'react-icons/fa'],
         },
       },
     },
     chunkSizeWarningLimit: 1000,
-    cssMinify: true,
+    cssMinify: 'lightningcss',
     minify: 'terser',
     terserOptions: {
       compress: {
         drop_console: true,
         drop_debugger: true,
+        pure_funcs: ['console.log', 'console.info'],
+        passes: 2,
+      },
+      mangle: {
+        safari10: true,
       },
     },
+    reportCompressedSize: false, // Acelera o build
+    sourcemap: false, // Desabilitar sourcemaps em produção
   },
   resolve: {
     alias: [

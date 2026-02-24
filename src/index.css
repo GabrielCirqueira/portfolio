@@ -19,6 +19,9 @@
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     text-rendering: optimizeLegibility;
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior-y: none;
+    touch-action: pan-y pinch-zoom;
   }
 
   html {
@@ -76,14 +79,6 @@
       -webkit-tap-highlight-color: rgba(var(--brand-500), 0.1);
     }
 
-    * {
-      -webkit-overflow-scrolling: touch;
-    }
-
-    [data-animate] {
-      will-change: transform, opacity;
-    }
-
     @media (prefers-reduced-motion: reduce) {
       *,
       *::before,
@@ -92,6 +87,26 @@
         animation-iteration-count: 1 !important;
         transition-duration: 0.01ms !important;
       }
+    }
+
+    img,
+    video {
+      content-visibility: auto;
+    }
+
+    .blur-3xl,
+    .blur-\[120px\],
+    .blur-\[100px\] {
+      filter: blur(40px) !important;
+    }
+
+    .blur-\[70px\],
+    .blur-\[60px\] {
+      filter: blur(30px) !important;
+    }
+    * {
+      animation-duration: 0.5s !important;
+      transition-duration: 150ms !important;
     }
   }
 
