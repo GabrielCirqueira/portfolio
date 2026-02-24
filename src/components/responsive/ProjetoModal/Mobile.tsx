@@ -1,6 +1,7 @@
 import { AnimatePresence, motion, useDragControls } from 'framer-motion'
 import {
   Calendar,
+  ChevronLeft,
   ChevronRight,
   Code2,
   ExternalLink,
@@ -93,6 +94,18 @@ export function Mobile({ isOpen, onClose, projeto }: ProjetoModalProps) {
       setTimeout(() => {
         isDraggingRef.current = false
       }, 200)
+    }
+  }, [imagemAtual, projeto.imagens.length])
+
+  const handlePrevImage = useCallback(() => {
+    if (imagemAtual > 0) {
+      setImagemAtual((prev) => prev - 1)
+    }
+  }, [imagemAtual])
+
+  const handleNextImage = useCallback(() => {
+    if (imagemAtual < projeto.imagens.length - 1) {
+      setImagemAtual((prev) => prev + 1)
     }
   }, [imagemAtual, projeto.imagens.length])
 
@@ -202,6 +215,28 @@ export function Mobile({ isOpen, onClose, projeto }: ProjetoModalProps) {
                         onClick={() => setImagemExpandida(projeto.imagens[imagemAtual])}
                       />
                     </div>
+
+                    {projeto.imagens.length > 1 && (
+                      <>
+                        {imagemAtual > 0 && (
+                          <Button
+                            onClick={handlePrevImage}
+                            className="absolute left-3 top-1/2 -translate-y-1/2 z-30 w-10 h-10 rounded-full bg-black/80 border border-white/20 text-white backdrop-blur-sm active:scale-90 active:bg-brand-500 active:border-brand-500 transition-all duration-200 shadow-xl"
+                          >
+                            <Icon icon={ChevronLeft} className="w-5 h-5" />
+                          </Button>
+                        )}
+
+                        {imagemAtual < projeto.imagens.length - 1 && (
+                          <Button
+                            onClick={handleNextImage}
+                            className="absolute right-3 top-1/2 -translate-y-1/2 z-30 w-10 h-10 rounded-full bg-black/80 border border-white/20 text-white backdrop-blur-sm active:scale-90 active:bg-brand-500 active:border-brand-500 transition-all duration-200 shadow-xl"
+                          >
+                            <Icon icon={ChevronRight} className="w-5 h-5" />
+                          </Button>
+                        )}
+                      </>
+                    )}
 
                     <Box className="absolute bottom-4 right-4 z-20 px-2.5 py-1 bg-black/80 border border-white/10 rounded-full text-[10px] font-mono font-bold text-white/70 flex items-center gap-1.5">
                       <Box className="w-1 h-1 rounded-full bg-brand-500 animate-pulse" />
@@ -365,7 +400,7 @@ export function Mobile({ isOpen, onClose, projeto }: ProjetoModalProps) {
                   animate={{ opacity: 1 }}
                   exit={{ opacity: 0 }}
                   transition={{ duration: 0.12 }}
-                  className="absolute inset-0 bg-black/98"
+                  className="absolute inset-0 bg-black/80"
                 />
                 <motion.div
                   initial={{ opacity: 0, scale: 0.98 }}
