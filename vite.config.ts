@@ -34,7 +34,6 @@ export default defineConfig({
       },
     },
     chunkSizeWarningLimit: 1000,
-    cssMinify: 'lightningcss',
     minify: 'terser',
     terserOptions: {
       compress: {
@@ -47,8 +46,8 @@ export default defineConfig({
         safari10: true,
       },
     },
-    reportCompressedSize: false, // Acelera o build
-    sourcemap: false, // Desabilitar sourcemaps em produção
+    reportCompressedSize: false,
+    sourcemap: false,
   },
   resolve: {
     alias: [
