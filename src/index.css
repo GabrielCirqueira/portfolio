@@ -104,10 +104,6 @@
     .blur-\[60px\] {
       filter: blur(30px) !important;
     }
-    * {
-      animation-duration: 0.5s !important;
-      transition-duration: 150ms !important;
-    }
   }
 
   @media (max-width: 480px) {
@@ -200,7 +196,13 @@
       border-box;
 
     border: 1px solid transparent;
-    animation: tw-shine-rotate 8s linear infinite;
+    animation: tw-shine-rotate 10s linear infinite;
+  }
+
+  @media (max-width: 768px) {
+    .tw-shine-border {
+      animation: tw-shine-rotate 14s linear infinite;
+    }
   }
 
   @keyframes tw-shine-rotate {
@@ -234,7 +236,13 @@
   -webkit-background-clip: text;
   text-fill-color: transparent;
   -webkit-text-fill-color: transparent;
-  animation: shimmer 6s linear infinite;
+  animation: shimmer 8s linear infinite;
+}
+
+@media (max-width: 768px) {
+  .text-gradient {
+    animation: shimmer 12s linear infinite;
+  }
 }
 
 @keyframes shimmer {
@@ -266,8 +274,14 @@
   opacity: 0.1;
   position: absolute;
   bottom: 100%;
-  animation: scanline 8s linear infinite;
+  animation: scanline 12s linear infinite;
   pointer-events: none;
+}
+
+@media (max-width: 768px) {
+  .scanline {
+    animation: scanline 16s linear infinite;
+  }
 }
 
 @keyframes scanline {
@@ -280,7 +294,13 @@
 }
 
 .animate-glow {
-  animation: glow 3s ease-in-out infinite alternate;
+  animation: glow 4s ease-in-out infinite alternate;
+}
+
+@media (max-width: 768px) {
+  .animate-glow {
+    animation: glow 6s ease-in-out infinite alternate;
+  }
 }
 
 @keyframes glow {
