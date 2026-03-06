@@ -1,6 +1,6 @@
 import { AnimatePresence, motion } from 'framer-motion'
 import { Calendar, Code2, ExternalLink, Image as ImageIcon, Sparkles, X } from 'lucide-react'
-import { useEffect, useState } from 'react'
+import { memo, useCallback, useEffect, useState } from 'react'
 import { Badge } from '@/shadcn/components/ui/badge'
 import { Button } from '@/shadcn/components/ui/button'
 import { Icon } from '@/shadcn/components/ui/icon'
@@ -26,18 +26,21 @@ function formatarPeriodo(dataInicio: string, dataFim?: string): string {
   return `${formatarData(dataInicio)} à ${formatarData(dataFim)}`
 }
 
-export function Desktop({ isOpen, onClose, projeto }: ProjetoModalProps) {
+export const Desktop = memo(({ isOpen, onClose, projeto }: ProjetoModalProps) => {
   const [imagemSelecionada, setImagemSelecionada] = useState(0)
   const [imagemExpandida, setImagemExpandida] = useState<string | null>(null)
 
   useEffect(() => {
     if (isOpen) {
       document.body.style.overflow = 'hidden'
+      document.body.style.paddingRight = 'var(--scrollbar-width, 0px)'
     } else {
       document.body.style.overflow = ''
+      document.body.style.paddingRight = ''
     }
     return () => {
       document.body.style.overflow = ''
+      document.body.style.paddingRight = ''
     }
   }, [isOpen])
 
@@ -46,34 +49,44 @@ export function Desktop({ isOpen, onClose, projeto }: ProjetoModalProps) {
     setImagemSelecionada(0)
   }, [projeto.id])
 
-  if (!isOpen) return null
+  const handleImageClick = useCallback((imagem: string) => {
+    setImagemExpandida(imagem)
+  }, [])
+
+  const handleThumbnailClick = useCallback((index: number) => {
+    setImagemSelecionada(index)
+  }, [])
 
   return (
-    <AnimatePresence>
+    <AnimatePresence mode="wait">
       {isOpen && (
         <>
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            transition={{ duration: 0.2 }}
-            className="fixed inset-0 z-[100] bg-black/80"
+            transition={{ duration: 0.15 }}
+            className="fixed inset-0 z-[9998] bg-black/80 backdrop-blur-sm"
             onClick={onClose}
+            style={{ isolation: 'isolate' }}
           />
 
-          <Box className="fixed inset-0 z-[101] flex items-center justify-center p-4 md:p-6 pointer-events-none">
+          <Box
+            className="fixed inset-0 z-[9999] flex items-center justify-center p-4 md:p-6 pointer-events-none"
+            style={{ isolation: 'isolate' }}
+          >
             <motion.div
-              initial={{ opacity: 0, scale: 0.95, y: 20 }}
+              initial={{ opacity: 0, scale: 0.97, y: 10 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
-              exit={{ opacity: 0, scale: 0.95, y: 20 }}
-              transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
+              exit={{ opacity: 0, scale: 0.97, y: 10 }}
+              transition={{ duration: 0.2, ease: [0.16, 1, 0.3, 1] }}
               className="relative w-full max-w-[90vw] md:max-w-4xl lg:max-w-5xl max-h-[88vh] pointer-events-auto"
             >
               <Box className="relative bg-zinc-950 border border-zinc-800 rounded-2xl shadow-2xl shadow-brand-500/10 max-h-[88vh] flex flex-col overflow-hidden">
-                <Box className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,_var(--tw-gradient-stops))] from-brand-500/5 via-transparent to-transparent pointer-events-none z-0" />
-                <Box className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-brand-500/50 to-transparent z-0" />
+                <Box className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,_var(--tw-gradient-stops))] from-brand-500/5 via-transparent to-transparent pointer-events-none" />
+                <Box className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-brand-500/50 to-transparent" />
 
-                <Box className="relative z-10 bg-gradient-to-br from-zinc-900/95 to-zinc-950/95 border-b border-zinc-800 p-4 md:p-5 flex-shrink-0">
+                <Box className="relative bg-gradient-to-br from-zinc-900/95 to-zinc-950/95 border-b border-zinc-800 p-4 md:p-5 flex-shrink-0">
                   <HStack className="justify-between items-start gap-3">
                     <VStack className="gap-2 flex-1 min-w-0">
                       <HStack className="items-center gap-2 flex-wrap">
@@ -110,28 +123,29 @@ export function Desktop({ isOpen, onClose, projeto }: ProjetoModalProps) {
                   </HStack>
                 </Box>
 
-                <Box className="relative z-10 overflow-y-auto overflow-x-hidden custom-scrollbar flex-1 overscroll-behavior-contain">
+                <Box className="relative overflow-y-auto overflow-x-hidden custom-scrollbar flex-1 overscroll-contain">
                   <VStack className="p-4 md:p-6 gap-5 md:gap-6">
                     <Box className="relative w-full">
                       <Box className="relative w-full overflow-hidden rounded-lg border border-zinc-800 bg-gradient-to-br from-zinc-900 to-zinc-950 shadow-lg group">
-                        <Box className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent pointer-events-none z-[1]" />
+                        <Box className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent pointer-events-none" />
 
                         <Box className="relative w-full min-h-[220px] md:min-h-[280px] lg:min-h-[350px] flex items-center justify-center p-3">
                           <img
                             src={projeto.imagens[imagemSelecionada]}
                             alt={`${projeto.titulo} - ${imagemSelecionada + 1}`}
-                            className="max-w-full max-h-[220px] md:max-h-[280px] lg:max-h-[400px] object-contain rounded relative z-[2]"
+                            className="max-w-full max-h-[220px] md:max-h-[280px] lg:max-h-[400px] object-contain rounded"
+                            loading="lazy"
                           />
 
                           <Button
-                            onClick={() => setImagemExpandida(projeto.imagens[imagemSelecionada])}
-                            className="absolute top-2 right-2 z-[3] bg-zinc-900/90 border border-brand-500/30 text-brand-400 hover:bg-brand-500 hover:text-black hover:border-brand-500 transition-all duration-300 rounded-lg w-10 h-10 p-0 flex items-center justify-center backdrop-blur-md shadow-lg shadow-brand-500/10 hover:shadow-brand-500/40"
+                            onClick={() => handleImageClick(projeto.imagens[imagemSelecionada])}
+                            className="absolute top-2 right-2 bg-zinc-900/90 border border-brand-500/30 text-brand-400 hover:bg-brand-500 hover:text-black hover:border-brand-500 transition-all duration-300 rounded-lg w-10 h-10 p-0 flex items-center justify-center backdrop-blur-md shadow-lg shadow-brand-500/10 hover:shadow-brand-500/40"
                           >
                             <Icon icon={ImageIcon} className="w-5 h-5" />
                           </Button>
                         </Box>
 
-                        <Box className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-brand-500/50 via-brand-400/50 to-transparent z-[2]" />
+                        <Box className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-brand-500/50 via-brand-400/50 to-transparent" />
                       </Box>
 
                       {projeto.imagens.length > 1 && (
@@ -140,7 +154,7 @@ export function Desktop({ isOpen, onClose, projeto }: ProjetoModalProps) {
                             <button
                               type="button"
                               key={index}
-                              onClick={() => setImagemSelecionada(index)}
+                              onClick={() => handleThumbnailClick(index)}
                               className={`relative flex-shrink-0 w-20 h-14 rounded-lg overflow-hidden border-2 transition-all duration-300 cursor-pointer bg-zinc-900 flex items-center justify-center ${
                                 imagemSelecionada === index
                                   ? 'border-brand-500 shadow-lg shadow-brand-500/30'
@@ -244,8 +258,9 @@ export function Desktop({ isOpen, onClose, projeto }: ProjetoModalProps) {
       <AnimatePresence>
         {imagemExpandida && (
           <Box
-            className="fixed inset-0 z-[200] flex items-center justify-center p-4"
+            className="fixed inset-0 z-[10000] flex items-center justify-center p-4"
             onClick={() => setImagemExpandida(null)}
+            style={{ isolation: 'isolate' }}
           >
             <motion.div
               initial={{ opacity: 0 }}
@@ -281,4 +296,6 @@ export function Desktop({ isOpen, onClose, projeto }: ProjetoModalProps) {
       </AnimatePresence>
     </AnimatePresence>
   )
-}
+})
+
+Desktop.displayName = 'ProjetoModalDesktop'

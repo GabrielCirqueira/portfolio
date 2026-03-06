@@ -1,5 +1,5 @@
 import type React from 'react'
-import { createContext, useContext, useEffect, useState } from 'react'
+import { createContext, useCallback, useContext, useEffect, useMemo, useState } from 'react'
 
 interface WelcomeContextType {
   isWelcomeModalOpen: boolean
@@ -8,9 +8,7 @@ interface WelcomeContextType {
 
 const WelcomeContext = createContext<WelcomeContextType>({
   isWelcomeModalOpen: false,
-  closeWelcomeModal: () => {
-    // Intencionalmente vazio
-  },
+  closeWelcomeModal: () => undefined,
 })
 
 export function WelcomeProvider({ children }: { children: React.ReactNode }) {
@@ -42,16 +40,17 @@ export function WelcomeProvider({ children }: { children: React.ReactNode }) {
     }
   }, [])
 
-  const closeWelcomeModal = () => {
+  const closeWelcomeModal = useCallback(() => {
     setIsWelcomeModalOpen(false)
     document.body.style.overflow = ''
-  }
+  }, [])
 
-  return (
-    <WelcomeContext.Provider value={{ isWelcomeModalOpen, closeWelcomeModal }}>
-      {children}
-    </WelcomeContext.Provider>
+  const value = useMemo(
+    () => ({ isWelcomeModalOpen, closeWelcomeModal }),
+    [isWelcomeModalOpen, closeWelcomeModal]
   )
+
+  return <WelcomeContext.Provider value={value}>{children}</WelcomeContext.Provider>
 }
 
 export const useWelcome = () => useContext(WelcomeContext)

@@ -1,4 +1,30 @@
+# Robots.txt para cirqueira.com
 User-agent: *
 Allow: /
 
+# Permissões específicas para bots de busca
+User-agent: Googlebot
+Allow: /
+
+User-agent: Googlebot-Image
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+# Bloquear crawlers indesejados
+User-agent: AhrefsBot
+Disallow: /
+
+User-agent: SemrushBot
+Disallow: /
+
+User-agent: DotBot
+Disallow: /
+
+# Sitemap
 Sitemap: https://cirqueira.com/sitemap.xml
+
+# Configurações adicionais
+Crawl-delay: 1
+

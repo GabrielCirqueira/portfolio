@@ -14,7 +14,13 @@ export default defineConfig({
         plugins: [['@babel/plugin-transform-react-jsx', { runtime: 'automatic' }]],
       },
     }),
-    Sitemap({ hostname: 'https://cirqueira.com' }),
+    Sitemap({
+      hostname: 'https://cirqueira.com',
+      dynamicRoutes: ['/', '/projetos'],
+      changefreq: 'weekly',
+      priority: 0.8,
+      lastmod: new Date().toISOString().split('T')[0],
+    }),
   ],
   build: {
     rollupOptions: {
@@ -31,6 +37,16 @@ export default defineConfig({
           ],
           icons: ['react-icons/si', 'react-icons/fa'],
         },
+        assetFileNames: (assetInfo) => {
+          const info = assetInfo.name.split('.')
+          const extType = info[info.length - 1]
+          if (/png|jpe?g|svg|gif|tiff|bmp|ico/i.test(extType)) {
+            return `assets/images/[name]-[hash][extname]`
+          }
+          return `assets/[name]-[hash][extname]`
+        },
+        chunkFileNames: 'assets/js/[name]-[hash].js',
+        entryFileNames: 'assets/js/[name]-[hash].js',
       },
     },
     chunkSizeWarningLimit: 1000,
@@ -39,15 +55,25 @@ export default defineConfig({
       compress: {
         drop_console: true,
         drop_debugger: true,
-        pure_funcs: ['console.log', 'console.info'],
+        pure_funcs: ['console.log', 'console.info', 'console.debug'],
         passes: 2,
+        ecma: 2020,
       },
       mangle: {
         safari10: true,
       },
+      format: {
+        comments: false,
+      },
     },
     reportCompressedSize: false,
     sourcemap: false,
+    cssCodeSplit: true,
+    assetsInlineLimit: 4096,
+  },
+  optimizeDeps: {
+    include: ['react', 'react-dom', 'react-router-dom'],
+    exclude: ['react-parallax-tilt'],
   },
   resolve: {
     alias: [

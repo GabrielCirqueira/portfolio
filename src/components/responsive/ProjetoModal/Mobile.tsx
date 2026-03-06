@@ -13,7 +13,6 @@ import {
 import { useCallback, useEffect, useRef, useState } from 'react'
 import { Badge } from '@/shadcn/components/ui/badge'
 import { Button } from '@/shadcn/components/ui/button'
-import { Icon } from '@/shadcn/components/ui/icon'
 import { Box, HStack, VStack } from '@/shadcn/components/ui/layout'
 import { Span, Text, Title } from '@/shadcn/components/ui/typography'
 import { cn } from '@/shadcn/lib/utils'
@@ -171,7 +170,7 @@ export function Mobile({ isOpen, onClose, projeto }: ProjetoModalProps) {
                   >
                     {projeto.tipo === 'jogo' ? '🎮 Game Project' : '💻 Software System'}
                   </Badge>
-                  <Icon icon={Sparkles} className="w-3 h-3 text-brand-500 animate-pulse" />
+                  <Sparkles size={12} strokeWidth={2} className="text-brand-500 flex-shrink-0" />
                 </HStack>
                 <Title
                   as="h2"
@@ -185,7 +184,7 @@ export function Mobile({ isOpen, onClose, projeto }: ProjetoModalProps) {
                 onClick={onClose}
                 className="w-10 h-10 rounded-full bg-zinc-900/50 border border-zinc-800 text-zinc-400 active:scale-90 active:bg-brand-500 active:text-black active:border-brand-500 transition-all duration-200"
               >
-                <Icon icon={X} className="w-5 h-5" />
+                <X size={20} strokeWidth={2} />
               </Button>
             </div>
 
@@ -223,7 +222,7 @@ export function Mobile({ isOpen, onClose, projeto }: ProjetoModalProps) {
                             onClick={handlePrevImage}
                             className="absolute left-3 top-1/2 -translate-y-1/2 z-30 w-10 h-10 rounded-full bg-black/80 border border-white/20 text-white backdrop-blur-sm active:scale-90 active:bg-brand-500 active:border-brand-500 transition-all duration-200 shadow-xl"
                           >
-                            <Icon icon={ChevronLeft} className="w-5 h-5" />
+                            <ChevronLeft size={20} strokeWidth={2} />
                           </Button>
                         )}
 
@@ -232,7 +231,7 @@ export function Mobile({ isOpen, onClose, projeto }: ProjetoModalProps) {
                             onClick={handleNextImage}
                             className="absolute right-3 top-1/2 -translate-y-1/2 z-30 w-10 h-10 rounded-full bg-black/80 border border-white/20 text-white backdrop-blur-sm active:scale-90 active:bg-brand-500 active:border-brand-500 transition-all duration-200 shadow-xl"
                           >
-                            <Icon icon={ChevronRight} className="w-5 h-5" />
+                            <ChevronRight size={20} strokeWidth={2} />
                           </Button>
                         )}
                       </>
@@ -293,7 +292,7 @@ export function Mobile({ isOpen, onClose, projeto }: ProjetoModalProps) {
                 <HStack className="gap-3 w-full">
                   <Box className="flex-1 p-3 rounded-2xl bg-zinc-900/60 border border-zinc-800/60 text-center">
                     <VStack className="gap-1.5 items-center">
-                      <Icon icon={Calendar} className="w-3.5 h-3.5 text-brand-500" />
+                      <Calendar size={14} strokeWidth={2} className="text-brand-500" />
                       <Text className="text-[9px] text-zinc-500 uppercase font-black tracking-widest leading-none">
                         Período
                       </Text>
@@ -304,7 +303,7 @@ export function Mobile({ isOpen, onClose, projeto }: ProjetoModalProps) {
                   </Box>
                   <Box className="flex-1 p-3 rounded-2xl bg-zinc-900/60 border border-zinc-800/60 text-center">
                     <VStack className="gap-1.5 items-center">
-                      <Icon icon={Layers} className="w-3.5 h-3.5 text-brand-500" />
+                      <Layers size={14} strokeWidth={2} className="text-brand-500" />
                       <Text className="text-[9px] text-zinc-500 uppercase font-black tracking-widest leading-none">
                         Categoria
                       </Text>
@@ -318,7 +317,7 @@ export function Mobile({ isOpen, onClose, projeto }: ProjetoModalProps) {
                 <VStack className="gap-4">
                   <HStack className="items-center gap-3">
                     <Box className="p-2 rounded-lg bg-brand-500/5 border border-brand-500/10 flex items-center justify-center">
-                      <Icon icon={Code2} className="w-4 h-4 text-brand-400" />
+                      <Code2 size={16} strokeWidth={2} className="text-brand-400" />
                     </Box>
                     <Title
                       as="h3"
@@ -344,7 +343,7 @@ export function Mobile({ isOpen, onClose, projeto }: ProjetoModalProps) {
                 <VStack className="gap-4">
                   <HStack className="items-center gap-3">
                     <Box className="p-2 rounded-lg bg-zinc-900 border border-zinc-800 flex items-center justify-center">
-                      <Icon icon={Globe} className="w-4 h-4 text-brand-400" />
+                      <Globe size={16} strokeWidth={2} className="text-brand-400" />
                     </Box>
                     <Title
                       as="h3"
@@ -378,11 +377,11 @@ export function Mobile({ isOpen, onClose, projeto }: ProjetoModalProps) {
                     className="w-full mt-4 flex items-center justify-between group no-underline active:scale-[0.98] transition-transform"
                   >
                     <Box className="w-full h-14 bg-brand-500 rounded-2xl flex items-center justify-center gap-3 shadow-xl shadow-brand-500/20 active:bg-brand-400 transition-colors">
-                      <Icon icon={ExternalLink} className="w-5 h-5 text-black" />
+                      <ExternalLink size={20} strokeWidth={2} className="text-black" />
                       <Span className="text-black font-black uppercase tracking-widest text-sm">
                         {projeto.tipo === 'jogo' ? 'Jogar Agora' : 'Visitar Website'}
                       </Span>
-                      <Icon icon={ChevronRight} className="w-4 h-4 text-black/40" />
+                      <ChevronRight size={16} strokeWidth={2} className="text-black/40" />
                     </Box>
                   </a>
                 )}
@@ -414,7 +413,7 @@ export function Mobile({ isOpen, onClose, projeto }: ProjetoModalProps) {
                     onClick={() => setImagemExpandida(null)}
                     className="absolute -top-16 right-0 bg-zinc-900/90 border border-white/10 text-white rounded-full w-12 h-12 p-0 shadow-xl active:scale-90 transition-transform"
                   >
-                    <Icon icon={X} className="w-6 h-6" />
+                    <X size={24} strokeWidth={2} />
                   </Button>
 
                   <Box className="relative w-full h-full overflow-hidden rounded-2xl">

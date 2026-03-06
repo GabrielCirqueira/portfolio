@@ -346,3 +346,45 @@
 .custom-scrollbar::-webkit-scrollbar-thumb:hover {
   @apply bg-brand-400;
 }
+
+img,
+video,
+iframe {
+  content-visibility: auto;
+  contain: layout style paint;
+}
+
+.will-change-auto {
+  will-change: auto;
+}
+
+[class*="animate-"],
+[class*="motion-"],
+.group:hover > * {
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  perspective: 1000px;
+}
+
+@media (max-width: 768px) {
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    ::before,
+    ::after {
+      animation-delay: -1ms !important;
+      animation-duration: 1ms !important;
+      animation-iteration-count: 1 !important;
+      background-attachment: initial !important;
+      scroll-behavior: auto !important;
+      transition-duration: 0s !important;
+      transition-delay: 0s !important;
+    }
+  }
+}
+
+section,
+main,
+header,
+footer {
+  contain: style;
+}

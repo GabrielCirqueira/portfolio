@@ -276,7 +276,6 @@ export const EasterEgg = memo(() => {
             clip-path: polygon(0 55%, 100% 55%, 100% 100%, 0 100%);
           }
 
-
         `}
       </style>
 

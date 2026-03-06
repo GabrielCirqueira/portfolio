@@ -92,6 +92,56 @@ export const Component = memo(() => {
 
   useEffect(() => {
     window.scrollTo(0, 0)
+
+    document.title = 'Projetos | Gabriel Cirqueira - Desenvolvedor Fullstack'
+
+    const metaDescription = document.querySelector('meta[name="description"]')
+    if (metaDescription) {
+      metaDescription.setAttribute(
+        'content',
+        'Explore todos os projetos de Gabriel Cirqueira: sistemas web modernos em React e Symfony, jogos desenvolvidos e soluções completas de software.'
+      )
+    }
+
+    const ogTitle = document.querySelector('meta[property="og:title"]')
+    if (ogTitle) {
+      ogTitle.setAttribute('content', 'Projetos | Gabriel Cirqueira - Desenvolvedor Fullstack')
+    }
+
+    const ogDescription = document.querySelector('meta[property="og:description"]')
+    if (ogDescription) {
+      ogDescription.setAttribute(
+        'content',
+        'Explore todos os projetos de Gabriel Cirqueira: sistemas web modernos e jogos desenvolvidos.'
+      )
+    }
+
+    const canonical = document.querySelector('link[rel="canonical"]')
+    if (canonical) {
+      canonical.setAttribute('href', 'https://cirqueira.com/projetos')
+    }
+
+    return () => {
+      document.title = 'Gabriel Cirqueira | Desenvolvedor Fullstack React & Symfony'
+      if (metaDescription) {
+        metaDescription.setAttribute(
+          'content',
+          'Gabriel Cirqueira é Desenvolvedor Fullstack especializado em React, TypeScript e Symfony. Conheça projetos, habilidades técnicas e soluções modernas para web.'
+        )
+      }
+      if (ogTitle) {
+        ogTitle.setAttribute('content', 'Gabriel Cirqueira | Desenvolvedor Fullstack')
+      }
+      if (ogDescription) {
+        ogDescription.setAttribute(
+          'content',
+          'Desenvolvedor Fullstack especializado em React, TypeScript e Symfony. Projetos modernos e arquitetura escalável.'
+        )
+      }
+      if (canonical) {
+        canonical.setAttribute('href', 'https://cirqueira.com/')
+      }
+    }
   }, [])
 
   const voltarParaProjetos = () => {
@@ -255,7 +305,6 @@ export const Component = memo(() => {
         </Box>
 
         <Box className="py-8 sm:py-16 relative">
-          {/* Background Effects */}
           <Box className="absolute inset-0 bg-gradient-to-b from-zinc-950 via-black to-zinc-950" />
           <Box className="absolute inset-0 bg-[radial-gradient(currentColor_1px,transparent_1px)] bg-[size:20px_20px] text-brand-500/10" />
           <Box className="absolute top-0 left-1/4 w-96 h-96 bg-brand-500/5 rounded-full blur-3xl pointer-events-none" />

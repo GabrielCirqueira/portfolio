@@ -1,5 +1,6 @@
 import { EasterEgg } from '@app/components/ui/EasterEgg'
-import { ThemeProvider } from '@app/contexts'
+import { PreloadCriticalResources } from '@app/components/ui/PreloadCriticalResources'
+import { AnimationProvider, ThemeProvider } from '@app/contexts'
 import { EasterEggProvider } from '@app/contexts/EasterEggContext'
 import { WelcomeProvider } from '@app/contexts/WelcomeContext'
 import { MainLayout, RootLayout } from '@app/layouts'
@@ -27,12 +28,15 @@ const router = createBrowserRouter(
 export default function App() {
   return (
     <ThemeProvider>
-      <EasterEggProvider>
-        <WelcomeProvider>
-          <EasterEgg />
-          <RouterProvider router={router} />
-        </WelcomeProvider>
-      </EasterEggProvider>
+      <AnimationProvider>
+        <EasterEggProvider>
+          <WelcomeProvider>
+            <PreloadCriticalResources />
+            <EasterEgg />
+            <RouterProvider router={router} />
+          </WelcomeProvider>
+        </EasterEggProvider>
+      </AnimationProvider>
     </ThemeProvider>
   )
 }

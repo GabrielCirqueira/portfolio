@@ -1,4 +1,4 @@
-import { memo, useState } from 'react'
+import { memo, useEffect, useRef, useState } from 'react'
 
 interface ImagemOtimizadaProps {
   src: string
@@ -8,6 +8,7 @@ interface ImagemOtimizadaProps {
   height?: number
   loading?: 'lazy' | 'eager'
   priority?: boolean
+  objectFit?: 'cover' | 'contain' | 'fill'
 }
 
 export const ImagemOtimizada = memo(
@@ -20,9 +21,41 @@ export const ImagemOtimizada = memo(
     loading = 'lazy',
     priority = false,
     objectFit = 'cover',
-  }: ImagemOtimizadaProps & { objectFit?: 'cover' | 'contain' | 'fill' }) => {
+  }: ImagemOtimizadaProps) => {
     const [carregada, setCarregada] = useState(false)
     const [erro, setErro] = useState(false)
+    const [deveCarregar, setDeveCarregar] = useState(priority)
+    const imgRef = useRef<HTMLImageElement>(null)
+
+    useEffect(() => {
+      if (priority || loading === 'eager') {
+        setDeveCarregar(true)
+        return
+      }
+
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              setDeveCarregar(true)
+              observer.disconnect()
+            }
+          })
+        },
+        {
+          rootMargin: '50px',
+          threshold: 0.01,
+        }
+      )
+
+      if (imgRef.current) {
+        observer.observe(imgRef.current)
+      }
+
+      return () => {
+        observer.disconnect()
+      }
+    }, [priority, loading])
 
     return (
       <div className={`relative overflow-hidden ${className}`} style={{ width, height }}>
@@ -33,11 +66,12 @@ export const ImagemOtimizada = memo(
           </div>
         ) : (
           <img
-            src={src}
+            ref={imgRef}
+            src={deveCarregar ? src : undefined}
             alt={alt}
             width={width}
             height={height}
-            loading={priority ? 'eager' : loading}
+            loading={priority ? 'eager' : 'lazy'}
             decoding="async"
             onLoad={() => setCarregada(true)}
             onError={() => setErro(true)}

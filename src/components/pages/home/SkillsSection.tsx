@@ -1,7 +1,8 @@
 import { useIsMobile } from '@app/hooks/useMediaQuery'
 import { motion } from 'framer-motion'
-import { lazy, memo, Suspense, useEffect, useState } from 'react'
+import { lazy, memo, Suspense, useCallback, useEffect, useMemo, useState } from 'react'
 import { SkillsGrid } from '@/components/responsive/SkillsGrid'
+import { useAnimation } from '@/contexts'
 import { skills, techIcons } from '@/data/habilidades'
 import { Badge } from '@/shadcn/components/ui/badge'
 import { Box, Center, Container, VStack } from '@/shadcn/components/ui/layout'
@@ -17,6 +18,7 @@ const Marquee = lazy(() => import('react-fast-marquee'))
 
 export const SkillsSection = memo(() => {
   const isMobile = useIsMobile()
+  const { viewport, duration, getDelay, ehDispositivoLento } = useAnimation()
   const [openTooltipIndex, setOpenTooltipIndex] = useState<number | null>(null)
 
   useEffect(() => {
@@ -30,11 +32,16 @@ export const SkillsSection = memo(() => {
     return () => document.removeEventListener('click', handleClickOutside)
   }, [isMobile])
 
-  const handleTooltipClick = (index: number, e: React.MouseEvent) => {
-    if (!isMobile) return
-    e.stopPropagation()
-    setOpenTooltipIndex((prev) => (prev === index ? null : index))
-  }
+  const handleTooltipClick = useCallback(
+    (index: number, e: React.MouseEvent) => {
+      if (!isMobile) return
+      e.stopPropagation()
+      setOpenTooltipIndex((prev) => (prev === index ? null : index))
+    },
+    [isMobile]
+  )
+
+  const marqueeSpeed = useMemo(() => (ehDispositivoLento ? 30 : 50), [ehDispositivoLento])
 
   return (
     <Box
@@ -45,10 +52,10 @@ export const SkillsSection = memo(() => {
       <Container size="xl" className="relative z-10 px-4 sm:px-6">
         <VStack className="items-center text-center gap-4 sm:gap-5 mb-12 sm:mb-14 md:mb-16 lg:mb-20">
           <motion.div
-            initial={{ opacity: 0, scale: 0.5 }}
+            initial={{ opacity: 0, scale: ehDispositivoLento ? 0.9 : 0.8 }}
             whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5 }}
+            viewport={viewport}
+            transition={{ duration }}
           >
             <Badge
               variant="outline"
@@ -64,10 +71,10 @@ export const SkillsSection = memo(() => {
           </motion.div>
 
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: ehDispositivoLento ? 10 : 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: 0.2 }}
+            viewport={viewport}
+            transition={{ duration, delay: getDelay(0.1) }}
             className="space-y-4"
           >
             <Title
@@ -89,7 +96,13 @@ export const SkillsSection = memo(() => {
         <Box className="mt-16 sm:mt-20 md:mt-24 lg:mt-28 relative">
           <TooltipProvider delayDuration={200}>
             <Suspense fallback={<Box className="h-16" />}>
-              <Marquee speed={50} gradient gradientColor="#000000" gradientWidth={100} pauseOnHover>
+              <Marquee
+                speed={marqueeSpeed}
+                gradient
+                gradientColor="#000000"
+                gradientWidth={100}
+                pauseOnHover={!ehDispositivoLento}
+              >
                 {techIcons.map((tech, index) => (
                   <Tooltip
                     key={index}

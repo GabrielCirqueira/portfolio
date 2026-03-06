@@ -1,23 +1,14 @@
 import { motion } from 'framer-motion'
 import { Calendar, Info } from 'lucide-react'
 import { memo } from 'react'
-import Tilt from 'react-parallax-tilt'
 import { ImagemOtimizada } from '@/components/ui/ImagemOtimizada'
+import { useAnimation } from '@/contexts'
 import { Badge } from '@/shadcn/components/ui/badge'
 import { Button } from '@/shadcn/components/ui/button'
 import { Icon } from '@/shadcn/components/ui/icon'
 import { Box, HStack, VStack } from '@/shadcn/components/ui/layout'
 import { Text, Title } from '@/shadcn/components/ui/typography'
 import type { Projeto } from '@/types/projeto'
-
-const itemVariants = {
-  hidden: { opacity: 0, y: 50 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.6, ease: 'easeOut' as const },
-  },
-}
 
 function formatarData(data: string): string {
   const [ano, mes, dia] = data.split('-')
@@ -34,25 +25,29 @@ interface CardProjetoProps {
   onAbrirModal: (id: string) => void
 }
 
-export const Desktop = memo(({ projeto, onAbrirModal }: CardProjetoProps) => (
-  <motion.div variants={itemVariants} className="h-full">
-    <Tilt
-      tiltMaxAngleX={4}
-      tiltMaxAngleY={4}
-      glareEnable
-      glareMaxOpacity={0.08}
-      glareColor="#a855f7"
-      glarePosition="all"
-      glareBorderRadius="12px"
-      scale={1.005}
-      transitionSpeed={400}
-      className="h-full"
-    >
+export const Desktop = memo(({ projeto, onAbrirModal }: CardProjetoProps) => {
+  const { usarAnimacoes, ehDispositivoLento, duration } = useAnimation()
+
+  const itemVariants = usarAnimacoes
+    ? {
+        hidden: { opacity: 0, y: ehDispositivoLento ? 10 : 20 },
+        visible: {
+          opacity: 1,
+          y: 0,
+          transition: { duration, ease: 'easeOut' as const },
+        },
+      }
+    : { hidden: { opacity: 1 }, visible: { opacity: 1 } }
+
+  return (
+    <motion.div variants={itemVariants} className="h-full">
       <Box
         className="
           card-project bg-zinc-950 border
           border-zinc-800 rounded-xl overflow-hidden
           group flex flex-col h-full relative
+          hover:border-brand-500/40 transition-all duration-300
+          hover:shadow-lg hover:shadow-brand-500/20
         "
         data-cursor-text="Ver"
       >
@@ -70,8 +65,8 @@ export const Desktop = memo(({ projeto, onAbrirModal }: CardProjetoProps) => (
             alt={projeto.titulo}
             className="
             object-cover w-full h-full transform
-            group-hover:scale-110 transition-transform
-            duration-700 ease-in-out
+            group-hover:scale-105 transition-transform
+            duration-500 ease-in-out
             opacity-90 group-hover:opacity-100
           "
           />
@@ -137,10 +132,9 @@ export const Desktop = memo(({ projeto, onAbrirModal }: CardProjetoProps) => (
               )}
             </HStack>
 
-            <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }} className="w-full">
-              <Button
-                onClick={() => onAbrirModal(projeto.id)}
-                className="
+            <Button
+              onClick={() => onAbrirModal(projeto.id)}
+              className="
                 w-full px-5 md:px-6 py-5 md:py-6 border border-brand-500/30
                 bg-brand-500/5 text-brand-400 font-bold
                 uppercase tracking-widest hover:bg-brand-500
@@ -152,14 +146,13 @@ export const Desktop = memo(({ projeto, onAbrirModal }: CardProjetoProps) => (
                 hover:shadow-brand-500/40
                 flex items-center justify-center gap-2
               "
-              >
-                <Icon icon={Info} className="w-4 h-4" />
-                Ver Detalhes
-              </Button>
-            </motion.div>
+            >
+              <Icon icon={Info} className="w-4 h-4" />
+              Ver Detalhes
+            </Button>
           </VStack>
         </VStack>
       </Box>
-    </Tilt>
-  </motion.div>
-))
+    </motion.div>
+  )
+})

@@ -8,10 +8,22 @@ export function useMediaQuery(query: string): boolean {
 
   useEffect(() => {
     const mql = window.matchMedia(query)
-    const handler = (e: MediaQueryListEvent) => setMatches(e.matches)
-    mql.addEventListener('change', handler)
+
     setMatches(mql.matches)
-    return () => mql.removeEventListener('change', handler)
+
+    let timeoutId: number
+    const handler = (e: MediaQueryListEvent) => {
+      clearTimeout(timeoutId)
+      timeoutId = window.setTimeout(() => {
+        setMatches(e.matches)
+      }, 150)
+    }
+
+    mql.addEventListener('change', handler)
+    return () => {
+      clearTimeout(timeoutId)
+      mql.removeEventListener('change', handler)
+    }
   }, [query])
 
   return matches
@@ -19,4 +31,12 @@ export function useMediaQuery(query: string): boolean {
 
 export function useIsMobile(): boolean {
   return useMediaQuery('(max-width: 767px)')
+}
+
+export function useIsTablet(): boolean {
+  return useMediaQuery('(min-width: 768px) and (max-width: 1023px)')
+}
+
+export function useIsDesktop(): boolean {
+  return useMediaQuery('(min-width: 1024px)')
 }

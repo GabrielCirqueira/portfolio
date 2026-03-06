@@ -21,49 +21,44 @@ export function MascoteVisual({ isActive = false, className = '' }: MascoteVisua
         xmlns="http://www.w3.org/2000/svg"
         aria-hidden="true"
       >
-        <motion.line
-          x1="24"
-          y1="2"
-          x2="24"
-          y2="9"
-          stroke={isActive ? '#a855f7' : 'rgba(34,197,94,0.5)'}
-          strokeWidth="1.5"
-          strokeLinecap="round"
-          animate={
-            isActive
-              ? { y1: [-2, 2, -2], y2: [-2, 2, -2] }
-              : { y1: [-0.5, 0.5, -0.5], y2: [-0.5, 0.5, -0.5] }
-          }
+        <motion.g
+          animate={isActive ? { y: [-2, 2, -2] } : { y: [-0.5, 0.5, -0.5] }}
           transition={
             isActive
               ? { duration: 0.4, repeat: Number.POSITIVE_INFINITY }
               : { duration: 2, repeat: Number.POSITIVE_INFINITY, ease: 'easeInOut' }
           }
-        />
-        <motion.circle
-          cx="24"
-          cy="2"
-          r="2.5"
-          fill={isActive ? '#a855f7' : '#22c55e'}
-          animate={
-            isActive
-              ? {
-                  fill: ['#a855f7', '#ef4444', '#f59e0b', '#22c55e', '#3b82f6', '#a855f7'],
-                  r: [2.5, 3.2, 2.5],
-                }
-              : { r: [2.5, 3, 2.5] }
-          }
-          style={{
-            filter: isActive
-              ? 'drop-shadow(0 0 5px #a855f7)'
-              : 'drop-shadow(0 0 4px rgba(34,197,94,0.8))',
-          }}
+        >
+          <line
+            x1="24"
+            y1="2"
+            x2="24"
+            y2="9"
+            stroke={isActive ? '#a855f7' : 'rgba(34,197,94,0.5)'}
+            strokeWidth="1.5"
+            strokeLinecap="round"
+          />
+        </motion.g>
+        <motion.g
+          animate={isActive ? { y: [-2, 2, -2] } : { y: [-0.5, 0.5, -0.5] }}
           transition={
             isActive
-              ? { duration: 1, repeat: Number.POSITIVE_INFINITY }
+              ? { duration: 0.4, repeat: Number.POSITIVE_INFINITY }
               : { duration: 2, repeat: Number.POSITIVE_INFINITY, ease: 'easeInOut' }
           }
-        />
+        >
+          <circle
+            cx="24"
+            cy="2"
+            r="2.5"
+            fill={isActive ? '#a855f7' : '#22c55e'}
+            style={{
+              filter: isActive
+                ? 'drop-shadow(0 0 5px #a855f7)'
+                : 'drop-shadow(0 0 4px rgba(34,197,94,0.8))',
+            }}
+          />
+        </motion.g>
 
         <rect
           x="8"
