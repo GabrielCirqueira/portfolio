@@ -1,3 +1,5 @@
+import { shouldReduceMotion } from './performance'
+
 export const isMobileDevice = (): boolean => {
   const userAgent = navigator.userAgent.toLowerCase()
   const isMobileUA = /android|webos|iphone|ipad|ipod|blackberry|iemobile|opera mini/i.test(
@@ -12,11 +14,10 @@ export const isMobileDevice = (): boolean => {
 }
 
 export const isLowPerformanceDevice = (): boolean => {
-  const cores = navigator.hardwareConcurrency || 2
+  const cores = navigator.hardwareConcurrency || 4
+  const memory = (navigator as any).deviceMemory || 4
 
-  const memory = (navigator as any).deviceMemory
-
-  return isMobileDevice() || (memory && memory < 4) || cores < 4
+  return (isMobileDevice() && (memory < 4 || cores < 4)) || shouldReduceMotion()
 }
 
 export const useIsMobile = (): boolean => {

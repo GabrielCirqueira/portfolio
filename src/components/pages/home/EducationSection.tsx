@@ -1,8 +1,8 @@
 import { motion } from 'framer-motion'
 import { memo, Suspense } from 'react'
 import { EducationGrid } from '@/components/responsive/EducationGrid'
+import { useAnimation } from '@/contexts'
 import { conquistas, experiencias, formacao, palavrasChaveCarreira } from '@/data/educacao'
-import { useDispositivoMovel } from '@/hooks/useDispositivoMovel'
 import { Badge } from '@/shadcn/components/ui/badge'
 import { Box, Container } from '@/shadcn/components/ui/layout'
 import { Span, Text, Title } from '@/shadcn/components/ui/typography'
@@ -11,7 +11,7 @@ import { lazyWithRetry } from '@/utils/importRetry'
 const Marquee = lazyWithRetry(() => import('react-fast-marquee'))
 
 export const EducationSection = memo(() => {
-  const ehMovel = useDispositivoMovel()
+  const { ehDispositivoLento } = useAnimation()
 
   return (
     <Box
@@ -85,7 +85,7 @@ export const EducationSection = memo(() => {
           transition={{ duration: 0.8, delay: 0.3 }}
           className="mt-16 sm:mt-20 relative"
         >
-          {!ehMovel && (
+          {!ehDispositivoLento && (
             <>
               <Box className="absolute inset-y-0 left-0 w-20 sm:w-32 bg-gradient-to-r from-black to-transparent z-10 pointer-events-none" />
               <Box className="absolute inset-y-0 right-0 w-20 sm:w-32 bg-gradient-to-l from-black to-transparent z-10 pointer-events-none" />

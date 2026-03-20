@@ -5,6 +5,7 @@ interface OpcoesAnimacao {
   usarAnimacoes: boolean
   usarAnimacoesReduzidas: boolean
   ehDispositivoLento: boolean
+  usarEfeitosPesados: boolean
 }
 
 export function useAnimacaoOtimizada(): OpcoesAnimacao {
@@ -12,27 +13,31 @@ export function useAnimacaoOtimizada(): OpcoesAnimacao {
     usarAnimacoes: true,
     usarAnimacoesReduzidas: false,
     ehDispositivoLento: false,
+    usarEfeitosPesados: true,
   })
 
   useEffect(() => {
     const verificarDispositivo = () => {
       const prefereMovimentoReduzido = window.matchMedia('(prefers-reduced-motion: reduce)').matches
 
+      const userAgent = navigator.userAgent.toLowerCase()
       const ehMobile =
-        /android|webos|iphone|ipad|ipod|blackberry|iemobile|opera mini/i.test(
-          navigator.userAgent.toLowerCase()
-        ) || window.innerWidth < 768
+        /android|webos|iphone|ipad|ipod|blackberry|iemobile|opera mini/i.test(userAgent) ||
+        window.innerWidth < 768
 
-      const cores = navigator.hardwareConcurrency || 2
-      const memoria = (navigator as any).deviceMemory
-      const ehBaixaPerformance = (memoria && memoria < 4) || cores < 4
+      const cores = navigator.hardwareConcurrency || 4
+      const memoria = (navigator as any).deviceMemory || 4
 
-      const ehLento = ehMobile && ehBaixaPerformance
+      const ehBaixaPerformance = memoria < 4 || cores < 4
+      const ehLento = (ehMobile && ehBaixaPerformance) || prefereMovimentoReduzido
+
+      const usarEfeitosPesados = !ehMobile && !ehBaixaPerformance
 
       setOpcoes({
         usarAnimacoes: !prefereMovimentoReduzido,
-        usarAnimacoesReduzidas: ehMobile || prefereMovimentoReduzido,
+        usarAnimacoesReduzidas: prefereMovimentoReduzido || (ehMobile && ehBaixaPerformance),
         ehDispositivoLento: ehLento,
+        usarEfeitosPesados: usarEfeitosPesados,
       })
     }
 

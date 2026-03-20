@@ -1,4 +1,5 @@
 import { motion } from 'framer-motion'
+import { useAnimation } from '@/contexts'
 
 interface MascoteVisualProps {
   isActive?: boolean
@@ -6,13 +7,17 @@ interface MascoteVisualProps {
 }
 
 export function MascoteVisual({ isActive = false, className = '' }: MascoteVisualProps) {
+  const { usarEfeitosPesados, ehDispositivoLento } = useAnimation()
+
   return (
     <div className={`relative w-full h-full ${className}`}>
-      <motion.div
-        className={`absolute inset-0 ${isActive ? 'bg-purple-500/40' : 'bg-brand-500/20'} rounded-xl blur-lg`}
-        animate={{ opacity: [0.3, 0.6, 0.3], scale: [0.9, 1.1, 0.9] }}
-        transition={{ duration: 3, repeat: Number.POSITIVE_INFINITY, ease: 'easeInOut' }}
-      />
+      {usarEfeitosPesados && (
+        <motion.div
+          className={`absolute inset-0 ${isActive ? 'bg-purple-500/40' : 'bg-brand-500/20'} rounded-xl blur-lg`}
+          animate={{ opacity: [0.3, 0.6, 0.3], scale: [0.9, 1.1, 0.9] }}
+          transition={{ duration: 3, repeat: Number.POSITIVE_INFINITY, ease: 'easeInOut' }}
+        />
+      )}
 
       <svg
         viewBox="0 0 48 58"
@@ -21,44 +26,62 @@ export function MascoteVisual({ isActive = false, className = '' }: MascoteVisua
         xmlns="http://www.w3.org/2000/svg"
         aria-hidden="true"
       >
-        <motion.g
-          animate={isActive ? { y: [-2, 2, -2] } : { y: [-0.5, 0.5, -0.5] }}
-          transition={
-            isActive
-              ? { duration: 0.4, repeat: Number.POSITIVE_INFINITY }
-              : { duration: 2, repeat: Number.POSITIVE_INFINITY, ease: 'easeInOut' }
-          }
-        >
-          <line
-            x1="24"
-            y1="2"
-            x2="24"
-            y2="9"
-            stroke={isActive ? '#a855f7' : 'rgba(34,197,94,0.5)'}
-            strokeWidth="1.5"
-            strokeLinecap="round"
-          />
-        </motion.g>
-        <motion.g
-          animate={isActive ? { y: [-2, 2, -2] } : { y: [-0.5, 0.5, -0.5] }}
-          transition={
-            isActive
-              ? { duration: 0.4, repeat: Number.POSITIVE_INFINITY }
-              : { duration: 2, repeat: Number.POSITIVE_INFINITY, ease: 'easeInOut' }
-          }
-        >
-          <circle
-            cx="24"
-            cy="2"
-            r="2.5"
-            fill={isActive ? '#a855f7' : '#22c55e'}
-            style={{
-              filter: isActive
-                ? 'drop-shadow(0 0 5px #a855f7)'
-                : 'drop-shadow(0 0 4px rgba(34,197,94,0.8))',
-            }}
-          />
-        </motion.g>
+        {!ehDispositivoLento && (
+          <>
+            <motion.g
+              animate={isActive ? { y: [-2, 2, -2] } : { y: [-0.5, 0.5, -0.5] }}
+              transition={
+                isActive
+                  ? { duration: 0.4, repeat: Number.POSITIVE_INFINITY }
+                  : { duration: 2, repeat: Number.POSITIVE_INFINITY, ease: 'easeInOut' }
+              }
+            >
+              <line
+                x1="24"
+                y1="2"
+                x2="24"
+                y2="9"
+                stroke={isActive ? '#a855f7' : 'rgba(34,197,94,0.5)'}
+                strokeWidth="1.5"
+                strokeLinecap="round"
+              />
+            </motion.g>
+            <motion.g
+              animate={isActive ? { y: [-2, 2, -2] } : { y: [-0.5, 0.5, -0.5] }}
+              transition={
+                isActive
+                  ? { duration: 0.4, repeat: Number.POSITIVE_INFINITY }
+                  : { duration: 2, repeat: Number.POSITIVE_INFINITY, ease: 'easeInOut' }
+              }
+            >
+              <circle
+                cx="24"
+                cy="2"
+                r="2.5"
+                fill={isActive ? '#a855f7' : '#22c55e'}
+                style={{
+                  filter: isActive
+                    ? 'drop-shadow(0 0 5px #a855f7)'
+                    : 'drop-shadow(0 0 4px rgba(34,197,94,0.8))',
+                }}
+              />
+            </motion.g>
+          </>
+        )}
+        {ehDispositivoLento && (
+          <g>
+            <line
+              x1="24"
+              y1="2"
+              x2="24"
+              y2="9"
+              stroke={isActive ? '#a855f7' : '#22c55e'}
+              strokeWidth="1.5"
+              strokeLinecap="round"
+            />
+            <circle cx="24" cy="2" r="2.5" fill={isActive ? '#a855f7' : '#22c55e'} />
+          </g>
+        )}
 
         <rect
           x="8"
@@ -79,18 +102,24 @@ export function MascoteVisual({ isActive = false, className = '' }: MascoteVisua
           height="9"
           rx="2"
           fill={isActive ? '#a855f7' : '#22c55e'}
-          style={{
-            filter: isActive
-              ? 'drop-shadow(0 0 4px #a855f7)'
-              : 'drop-shadow(0 0 3px rgba(34,197,94,0.7))',
-          }}
+          style={
+            usarEfeitosPesados
+              ? {
+                  filter: isActive
+                    ? 'drop-shadow(0 0 4px #a855f7)'
+                    : 'drop-shadow(0 0 3px rgba(34,197,94,0.7))',
+                }
+              : {}
+          }
           animate={
-            isActive
+            isActive && !ehDispositivoLento
               ? {
                   scaleY: [1, 0.07, 1, 1, 0.07, 1],
                   fill: ['#a855f7', '#ef4444', '#f59e0b', '#22c55e', '#a855f7'],
                 }
-              : { scaleY: [1, 0.07, 1] }
+              : !ehDispositivoLento
+                ? { scaleY: [1, 0.07, 1] }
+                : {}
           }
           transition={
             isActive
@@ -105,18 +134,24 @@ export function MascoteVisual({ isActive = false, className = '' }: MascoteVisua
           height="9"
           rx="2"
           fill={isActive ? '#a855f7' : '#22c55e'}
-          style={{
-            filter: isActive
-              ? 'drop-shadow(0 0 4px #a855f7)'
-              : 'drop-shadow(0 0 3px rgba(34,197,94,0.7))',
-          }}
+          style={
+            usarEfeitosPesados
+              ? {
+                  filter: isActive
+                    ? 'drop-shadow(0 0 4px #a855f7)'
+                    : 'drop-shadow(0 0 3px rgba(34,197,94,0.7))',
+                }
+              : {}
+          }
           animate={
-            isActive
+            isActive && !ehDispositivoLento
               ? {
                   scaleY: [1, 0.07, 1, 1, 0.07, 1],
                   fill: ['#a855f7', '#ef4444', '#f59e0b', '#22c55e', '#a855f7'],
                 }
-              : { scaleY: [1, 0.07, 1] }
+              : !ehDispositivoLento
+                ? { scaleY: [1, 0.07, 1] }
+                : {}
           }
           transition={
             isActive
@@ -189,19 +224,25 @@ export function MascoteVisual({ isActive = false, className = '' }: MascoteVisua
           height="3.5"
           rx="1.75"
           fill={isActive ? '#a855f7' : 'rgba(34,197,94,0.8)'}
-          style={{
-            filter: isActive
-              ? 'drop-shadow(0 0 3px #a855f7)'
-              : 'drop-shadow(0 0 2px rgba(34,197,94,0.5))',
-          }}
+          style={
+            usarEfeitosPesados
+              ? {
+                  filter: isActive
+                    ? 'drop-shadow(0 0 3px #a855f7)'
+                    : 'drop-shadow(0 0 2px rgba(34,197,94,0.5))',
+                }
+              : {}
+          }
           animate={
-            isActive
+            isActive && !ehDispositivoLento
               ? {
                   opacity: [1, 0.2, 1],
                   scaleX: [1, 0.4, 1.4, 1],
                   fill: ['#a855f7', '#ef4444', '#f59e0b', '#22c55e', '#a855f7'],
                 }
-              : { opacity: [0.6, 1, 0.6] }
+              : !ehDispositivoLento
+                ? { opacity: [0.6, 1, 0.6] }
+                : {}
           }
           transition={
             isActive
@@ -212,30 +253,36 @@ export function MascoteVisual({ isActive = false, className = '' }: MascoteVisua
       </svg>
 
       <motion.div
-        className={`absolute -top-1 -right-1 w-2.5 h-2.5 md:w-3 md:h-3 ${isActive ? 'bg-purple-500' : 'bg-brand-500'} rounded-full border-2 border-black ${isActive ? 'shadow-[0_0_12px_rgba(168,85,247,0.9)]' : 'shadow-[0_0_8px_rgba(34,197,94,0.8)]'}`}
+        className={`absolute -top-1 -right-1 w-2.5 h-2.5 md:w-3 md:h-3 ${isActive ? 'bg-purple-500' : 'bg-brand-500'} rounded-full border-2 border-black ${isActive && usarEfeitosPesados ? 'shadow-[0_0_12px_rgba(168,85,247,0.9)]' : usarEfeitosPesados ? 'shadow-[0_0_8px_rgba(34,197,94,0.8)]' : ''}`}
         animate={
-          isActive
+          isActive && !ehDispositivoLento
             ? {
                 scale: [1, 1.8, 1],
                 rotate: [0, 180, 360],
                 backgroundColor: ['#a855f7', '#ef4444', '#f59e0b', '#22c55e', '#3b82f6', '#a855f7'],
-                boxShadow: [
-                  '0 0 12px rgba(168,85,247,0.9)',
-                  '0 0 20px rgba(239,68,68,0.9)',
-                  '0 0 20px rgba(245,158,11,0.9)',
-                  '0 0 20px rgba(34,197,94,0.9)',
-                  '0 0 20px rgba(59,130,246,0.9)',
-                  '0 0 12px rgba(168,85,247,0.9)',
-                ],
+                boxShadow: usarEfeitosPesados
+                  ? [
+                      '0 0 12px rgba(168,85,247,0.9)',
+                      '0 0 20px rgba(239,68,68,0.9)',
+                      '0 0 20px rgba(245,158,11,0.9)',
+                      '0 0 20px rgba(34,197,94,0.9)',
+                      '0 0 20px rgba(59,130,246,0.9)',
+                      '0 0 12px rgba(168,85,247,0.9)',
+                    ]
+                  : undefined,
               }
-            : {
-                scale: [1, 1.3, 1],
-                boxShadow: [
-                  '0 0 8px rgba(34,197,94,0.8)',
-                  '0 0 16px rgba(34,197,94,1)',
-                  '0 0 8px rgba(34,197,94,0.8)',
-                ],
-              }
+            : !ehDispositivoLento
+              ? {
+                  scale: [1, 1.3, 1],
+                  boxShadow: usarEfeitosPesados
+                    ? [
+                        '0 0 8px rgba(34,197,94,0.8)',
+                        '0 0 16px rgba(34,197,94,1)',
+                        '0 0 8px rgba(34,197,94,0.8)',
+                      ]
+                    : undefined,
+                }
+              : {}
         }
         transition={
           isActive

@@ -12,7 +12,7 @@ import { Text } from '@/shadcn/components/ui/typography'
 
 export const Mobile = memo(() => {
   const [loaded, setLoaded] = useState(false)
-  const { usarAnimacoes, ehDispositivoLento } = useAnimacaoOtimizada()
+  const { usarAnimacoes, ehDispositivoLento, usarEfeitosPesados } = useAnimacaoOtimizada()
 
   useEffect(() => {
     setLoaded(true)
@@ -22,20 +22,25 @@ export const Mobile = memo(() => {
     <Box className="relative min-h-[100svh] flex items-center justify-center overflow-hidden px-4 font-sans selection:bg-brand-500/30">
       <Box className="absolute inset-0 bg-gradient-to-b from-black via-zinc-950 to-black" />
 
-      <Box className="absolute top-[10%] right-[-20%] w-[250px] h-[250px] pointer-events-none z-0">
-        <Box className="w-full h-full bg-brand-500/20 rounded-full blur-[70px]" />
-      </Box>
-      <Box className="absolute bottom-[20%] left-[-15%] w-[200px] h-[200px] pointer-events-none z-0">
-        <Box className="w-full h-full bg-brand-700/15 rounded-full blur-[60px]" />
-      </Box>
+      {usarEfeitosPesados && (
+        <>
+          <Box className="absolute top-[10%] right-[-20%] w-[250px] h-[250px] pointer-events-none z-0">
+            <Box className="w-full h-full bg-brand-500/20 rounded-full blur-[70px]" />
+          </Box>
+          <Box className="absolute bottom-[20%] left-[-15%] w-[200px] h-[200px] pointer-events-none z-0">
+            <Box className="w-full h-full bg-brand-700/15 rounded-full blur-[60px]" />
+          </Box>
+        </>
+      )}
 
       <Box
-        className="
+        className={`
           absolute inset-0
           bg-[linear-gradient(to_right,#ffffff03_1px,transparent_1px),linear-gradient(to_bottom,#ffffff03_1px,transparent_1px)]
-          bg-[size:2rem_2rem] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_50%,#000_60%,transparent_100%)]
+          bg-[size:2rem_2rem]
+          ${usarEfeitosPesados ? '[mask-image:radial-gradient(ellipse_60%_50%_at_50%_50%,#000_60%,transparent_100%)]' : 'opacity-[0.02]'}
           pointer-events-none
-        "
+        `}
       />
 
       <Box className="relative z-10 w-full max-w-md mx-auto py-20">

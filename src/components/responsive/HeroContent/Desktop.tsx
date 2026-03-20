@@ -3,6 +3,7 @@ import { ArrowDownCircle, Code, Terminal } from 'lucide-react'
 import { memo, useEffect, useRef, useState } from 'react'
 import { SiDocker, SiPhp, SiReact, SiSymfony, SiTailwindcss, SiTypescript } from 'react-icons/si'
 import { TypeAnimation } from 'react-type-animation'
+import { useAnimation } from '@/contexts'
 import { Badge } from '@/shadcn/components/ui/badge'
 import { Button } from '@/shadcn/components/ui/button'
 import { Icon } from '@/shadcn/components/ui/icon'
@@ -25,6 +26,7 @@ export const Desktop = memo(() => {
   const containerRef = useRef<HTMLDivElement>(null)
   const isLowPerf = useIsLowPerformance()
   const { scrollY } = useScroll()
+  const { usarEfeitosPesados } = useAnimation()
 
   const y1 = useTransform(scrollY, [0, 500], isLowPerf ? [0, 0] : [0, 200])
   const y2 = useTransform(scrollY, [0, 500], isLowPerf ? [0, 0] : [0, -150])
@@ -58,7 +60,7 @@ export const Desktop = memo(() => {
           className="absolute top-[-10%] right-[-5%] w-[600px] h-[600px]"
         >
           <Box
-            className={`w-full h-full bg-brand-500/20 rounded-full ${isLowPerf ? 'blur-[60px]' : 'blur-[120px]'}`}
+            className={`w-full h-full bg-brand-500/20 rounded-full ${usarEfeitosPesados ? (isLowPerf ? 'blur-[60px]' : 'blur-[120px]') : ''}`}
           />
         </motion.div>
       </motion.div>
@@ -81,18 +83,19 @@ export const Desktop = memo(() => {
           className="absolute bottom-[-10%] left-[-10%] w-[500px] h-[500px]"
         >
           <Box
-            className={`w-full h-full bg-brand-800/20 rounded-full ${isLowPerf ? 'blur-[50px]' : 'blur-[100px]'}`}
+            className={`w-full h-full bg-brand-800/20 rounded-full ${usarEfeitosPesados ? (isLowPerf ? 'blur-[50px]' : 'blur-[100px]') : ''}`}
           />
         </motion.div>
       </motion.div>
 
       <Box
-        className="
+        className={`
           absolute inset-0
           bg-[linear-gradient(to_right,#ffffff08_1px,transparent_1px),linear-gradient(to_bottom,#ffffff08_1px,transparent_1px)]
-          bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_50%,#000_70%,transparent_100%)]
+          bg-[size:4rem_4rem]
+          ${usarEfeitosPesados ? '[mask-image:radial-gradient(ellipse_60%_50%_at_50%_50%,#000_70%,transparent_100%)]' : 'opacity-[0.05]'}
           pointer-events-none
-        "
+        `}
       />
 
       {!isLowPerf &&
@@ -129,8 +132,8 @@ export const Desktop = memo(() => {
               className="
                 inline-flex items-center px-4 py-1.5
                 rounded-full border border-brand-500/30
-                bg-brand-500/10 text-brand-300 text-xs
-                md:text-sm uppercase tracking-widest
+                bg-brand-500/10 text-brand-300
+                uppercase tracking-widest
                 font-bold shadow-[0_0_20px_var(--tw-shadow-color)]
                 shadow-brand-500/15 hover:bg-brand-500/20
                 transition-colors cursor-default text-[10px] sm:text-xs md:text-sm
