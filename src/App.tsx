@@ -4,6 +4,7 @@ import { AnimationProvider, ThemeProvider } from '@app/contexts'
 import { EasterEggProvider } from '@app/contexts/EasterEggContext'
 import { WelcomeProvider } from '@app/contexts/WelcomeContext'
 import { MainLayout, RootLayout } from '@app/layouts'
+import { importWithRetry } from '@app/utils/importRetry'
 import {
   createBrowserRouter,
   createRoutesFromElements,
@@ -16,9 +17,15 @@ const router = createBrowserRouter(
     <Route path="/">
       <Route element={<RootLayout />}>
         <Route element={<MainLayout />}>
-          <Route index lazy={() => import('@app/pages/Home/Home')} />
-          <Route path="projetos" lazy={() => import('@app/pages/Projetos/Projetos')} />
-          <Route path="*" lazy={() => import('@app/pages/NotFound/NotFound')} />
+          <Route index lazy={() => importWithRetry(() => import('@app/pages/Home/Home'))} />
+          <Route
+            path="projetos"
+            lazy={() => importWithRetry(() => import('@app/pages/Projetos/Projetos'))}
+          />
+          <Route
+            path="*"
+            lazy={() => importWithRetry(() => import('@app/pages/NotFound/NotFound'))}
+          />
         </Route>
       </Route>
     </Route>

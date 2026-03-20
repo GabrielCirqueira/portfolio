@@ -1,6 +1,6 @@
 import { useIsMobile } from '@app/hooks/useMediaQuery'
 import { motion } from 'framer-motion'
-import { lazy, memo, Suspense, useCallback, useEffect, useMemo, useState } from 'react'
+import { memo, Suspense, useCallback, useEffect, useMemo, useState } from 'react'
 import { SkillsGrid } from '@/components/responsive/SkillsGrid'
 import { useAnimation } from '@/contexts'
 import { skills, techIcons } from '@/data/habilidades'
@@ -13,8 +13,9 @@ import {
   TooltipTrigger,
 } from '@/shadcn/components/ui/tooltip'
 import { Text, Title } from '@/shadcn/components/ui/typography'
+import { lazyWithRetry } from '@/utils/importRetry'
 
-const Marquee = lazy(() => import('react-fast-marquee'))
+const Marquee = lazyWithRetry(() => import('react-fast-marquee'))
 
 export const SkillsSection = memo(() => {
   const isMobile = useIsMobile()
@@ -93,48 +94,50 @@ export const SkillsSection = memo(() => {
 
         <SkillsGrid skills={skills} />
 
-        <Box className="mt-16 sm:mt-20 md:mt-24 lg:mt-28 relative">
-          <TooltipProvider delayDuration={200}>
-            <Suspense fallback={<Box className="h-16" />}>
-              <Marquee
-                speed={marqueeSpeed}
-                gradient
-                gradientColor="#000000"
-                gradientWidth={100}
-                pauseOnHover={!ehDispositivoLento}
-              >
-                {techIcons.map((tech, index) => (
-                  <Tooltip
-                    key={index}
-                    open={isMobile ? openTooltipIndex === index : undefined}
-                    onOpenChange={isMobile ? undefined : undefined}
-                  >
-                    <TooltipTrigger asChild>
-                      <Center
-                        onClick={(e) => handleTooltipClick(index, e)}
-                        className="
-                            flex-shrink-0 px-4 sm:px-6 lg:px-8 py-4 sm:py-5
-                            transition-all duration-300
-                            group cursor-pointer
-                          "
-                      >
-                        <tech.Icon
-                          size={isMobile ? 32 : 42}
-                          color={tech.color}
-                          className="group-hover:scale-125 transition-transform duration-300"
-                        />
-                      </Center>
-                    </TooltipTrigger>
-                    <TooltipContent className="bg-zinc-900 border-zinc-800 max-w-sm">
-                      <Text className="text-sm font-bold text-brand-400 mb-1">{tech.name}</Text>
-                      <Text className="text-xs text-zinc-400">{tech.description}</Text>
-                    </TooltipContent>
-                  </Tooltip>
-                ))}
-              </Marquee>
-            </Suspense>
-          </TooltipProvider>
-        </Box>
+        {!ehDispositivoLento && (
+          <Box className="mt-16 sm:mt-20 md:mt-24 lg:mt-28 relative">
+            <TooltipProvider delayDuration={200}>
+              <Suspense fallback={<Box className="h-16" />}>
+                <Marquee
+                  speed={marqueeSpeed}
+                  gradient
+                  gradientColor="#000000"
+                  gradientWidth={100}
+                  pauseOnHover={!ehDispositivoLento}
+                >
+                  {techIcons.map((tech, index) => (
+                    <Tooltip
+                      key={index}
+                      open={isMobile ? openTooltipIndex === index : undefined}
+                      onOpenChange={isMobile ? undefined : undefined}
+                    >
+                      <TooltipTrigger asChild>
+                        <Center
+                          onClick={(e) => handleTooltipClick(index, e)}
+                          className="
+                              flex-shrink-0 px-4 sm:px-6 lg:px-8 py-4 sm:py-5
+                              transition-all duration-300
+                              group cursor-pointer
+                            "
+                        >
+                          <tech.Icon
+                            size={isMobile ? 32 : 42}
+                            color={tech.color}
+                            className="group-hover:scale-125 transition-transform duration-300"
+                          />
+                        </Center>
+                      </TooltipTrigger>
+                      <TooltipContent className="bg-zinc-900 border-zinc-800 max-w-sm">
+                        <Text className="text-sm font-bold text-brand-400 mb-1">{tech.name}</Text>
+                        <Text className="text-xs text-zinc-400">{tech.description}</Text>
+                      </TooltipContent>
+                    </Tooltip>
+                  ))}
+                </Marquee>
+              </Suspense>
+            </TooltipProvider>
+          </Box>
+        )}
       </Container>
     </Box>
   )

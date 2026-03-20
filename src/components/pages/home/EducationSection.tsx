@@ -1,13 +1,14 @@
 import { motion } from 'framer-motion'
-import { lazy, memo, Suspense } from 'react'
+import { memo, Suspense } from 'react'
 import { EducationGrid } from '@/components/responsive/EducationGrid'
 import { conquistas, experiencias, formacao, palavrasChaveCarreira } from '@/data/educacao'
 import { useDispositivoMovel } from '@/hooks/useDispositivoMovel'
 import { Badge } from '@/shadcn/components/ui/badge'
 import { Box, Container } from '@/shadcn/components/ui/layout'
 import { Span, Text, Title } from '@/shadcn/components/ui/typography'
+import { lazyWithRetry } from '@/utils/importRetry'
 
-const Marquee = lazy(() => import('react-fast-marquee'))
+const Marquee = lazyWithRetry(() => import('react-fast-marquee'))
 
 export const EducationSection = memo(() => {
   const ehMovel = useDispositivoMovel()

@@ -10,22 +10,25 @@ import {
   Sparkles,
   TrendingUp,
 } from 'lucide-react'
-import { lazy, memo, Suspense, useEffect, useMemo, useState } from 'react'
+import { memo, Suspense, useEffect, useMemo, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { CardProjeto } from '@/components/responsive/CardProjeto'
 import { ProjetoModal } from '@/components/responsive/ProjetoModal'
+import { JSONLD } from '@/components/ui/JSONLD'
 import { jogos, sistemas } from '@/data/projetos'
+import { useSEO } from '@/hooks/useSEO'
 import { AppContainer, Footer, Header } from '@/layouts'
 import { Badge } from '@/shadcn/components/ui/badge'
 import { Button } from '@/shadcn/components/ui/button'
 import { Icon } from '@/shadcn/components/ui/icon'
 import { Box, Container, Grid, HStack, VStack } from '@/shadcn/components/ui/layout'
 import { Span, Text, Title } from '@/shadcn/components/ui/typography'
+import { lazyWithRetry } from '@/utils/importRetry'
 
-const Mascote = lazy(() =>
+const Mascote = lazyWithRetry(() =>
   import('@/components/ui/Mascote').then((module) => ({ default: module.Mascote }))
 )
-const WhatsAppButton = lazy(() =>
+const WhatsAppButton = lazyWithRetry(() =>
   import('@/components/ui/WhatsAppButton').then((module) => ({
     default: module.WhatsAppButton,
   }))
@@ -90,58 +93,18 @@ export const Component = memo(() => {
   const [filtroAtivo, setFiltroAtivo] = useState<FiltroTipo>('todos')
   const navigate = useNavigate()
 
+  useSEO({
+    title: 'Projetos | Gabriel Cirqueira - Desenvolvedor Fullstack',
+    description:
+      'Explore todos os projetos de Gabriel Cirqueira: sistemas web modernos em React e Symfony, jogos desenvolvidos e soluções completas de software.',
+    ogTitle: 'Projetos | Gabriel Cirqueira - Desenvolvedor Fullstack',
+    ogDescription:
+      'Explore todos os projetos de Gabriel Cirqueira: sistemas web modernos e jogos desenvolvidos.',
+    canonical: 'https://cirqueira.com/projetos',
+  })
+
   useEffect(() => {
     window.scrollTo(0, 0)
-
-    document.title = 'Projetos | Gabriel Cirqueira - Desenvolvedor Fullstack'
-
-    const metaDescription = document.querySelector('meta[name="description"]')
-    if (metaDescription) {
-      metaDescription.setAttribute(
-        'content',
-        'Explore todos os projetos de Gabriel Cirqueira: sistemas web modernos em React e Symfony, jogos desenvolvidos e soluções completas de software.'
-      )
-    }
-
-    const ogTitle = document.querySelector('meta[property="og:title"]')
-    if (ogTitle) {
-      ogTitle.setAttribute('content', 'Projetos | Gabriel Cirqueira - Desenvolvedor Fullstack')
-    }
-
-    const ogDescription = document.querySelector('meta[property="og:description"]')
-    if (ogDescription) {
-      ogDescription.setAttribute(
-        'content',
-        'Explore todos os projetos de Gabriel Cirqueira: sistemas web modernos e jogos desenvolvidos.'
-      )
-    }
-
-    const canonical = document.querySelector('link[rel="canonical"]')
-    if (canonical) {
-      canonical.setAttribute('href', 'https://cirqueira.com/projetos')
-    }
-
-    return () => {
-      document.title = 'Gabriel Cirqueira | Desenvolvedor Fullstack React & Symfony'
-      if (metaDescription) {
-        metaDescription.setAttribute(
-          'content',
-          'Gabriel Cirqueira é Desenvolvedor Fullstack especializado em React, TypeScript e Symfony. Conheça projetos, habilidades técnicas e soluções modernas para web.'
-        )
-      }
-      if (ogTitle) {
-        ogTitle.setAttribute('content', 'Gabriel Cirqueira | Desenvolvedor Fullstack')
-      }
-      if (ogDescription) {
-        ogDescription.setAttribute(
-          'content',
-          'Desenvolvedor Fullstack especializado em React, TypeScript e Symfony. Projetos modernos e arquitetura escalável.'
-        )
-      }
-      if (canonical) {
-        canonical.setAttribute('href', 'https://cirqueira.com/')
-      }
-    }
   }, [])
 
   const voltarParaProjetos = () => {
@@ -184,11 +147,45 @@ export const Component = memo(() => {
     return Object.entries(grupos).sort(([a], [b]) => Number(b) - Number(a))
   }, [projetosFiltrados])
 
+  const breadcrumbsData = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      {
+        '@type': 'ListItem',
+        position: 1,
+        name: 'Home',
+        item: 'https://cirqueira.com/',
+      },
+      {
+        '@type': 'ListItem',
+        position: 2,
+        name: 'Projetos',
+        item: 'https://cirqueira.com/projetos',
+      },
+    ],
+  }
+
+  const projectsPageData = {
+    '@context': 'https://schema.org',
+    '@type': 'WebPage',
+    '@id': 'https://cirqueira.com/projetos/#webpage',
+    url: 'https://cirqueira.com/projetos',
+    name: 'Projetos | Gabriel Cirqueira - Desenvolvedor Fullstack',
+    description:
+      'Explore todos os projetos de Gabriel Cirqueira: sistemas web modernos e jogos desenvolvidos.',
+    breadcrumb: {
+      '@id': 'https://cirqueira.com/projetos/#breadcrumb',
+    },
+  }
+
   return (
     <AppContainer
       paddingX="0"
       className="min-h-screen bg-gradient-to-b from-black via-zinc-950 to-black w-full overflow-x-hidden"
     >
+      <JSONLD data={breadcrumbsData} />
+      <JSONLD data={projectsPageData} />
       <Suspense fallback={null}>
         <Mascote />
         <WhatsAppButton />
