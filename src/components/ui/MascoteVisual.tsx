@@ -6,8 +6,25 @@ interface MascoteVisualProps {
   className?: string
 }
 
+function getCSSVar(name: string): string {
+  if (typeof window === 'undefined') return ''
+  return getComputedStyle(document.documentElement).getPropertyValue(name).trim()
+}
+
 export function MascoteVisual({ isActive = false, className = '' }: MascoteVisualProps) {
   const { usarEfeitosPesados, ehDispositivoLento } = useAnimation()
+
+  const c = {
+    brand: getCSSVar('--color-brand-500'),
+    purple: getCSSVar('--color-purple-500'),
+    red: getCSSVar('--color-red-500'),
+    amber: getCSSVar('--color-amber-500'),
+    blue: getCSSVar('--color-blue-500'),
+    mascoteIdle: getCSSVar('--color-mascote-idle'),
+    mascoteIdleArm: getCSSVar('--color-mascote-idle-arm'),
+    mascoteActive: getCSSVar('--color-mascote-active'),
+    mascoteActiveBody: getCSSVar('--color-mascote-active-body'),
+  }
 
   return (
     <div className={`relative w-full h-full ${className}`}>
@@ -41,7 +58,11 @@ export function MascoteVisual({ isActive = false, className = '' }: MascoteVisua
                 y1="2"
                 x2="24"
                 y2="9"
-                stroke={isActive ? '#a855f7' : 'rgba(34,197,94,0.5)'}
+                stroke={
+                  isActive
+                    ? 'var(--color-purple-500)'
+                    : 'color-mix(in srgb, var(--color-brand-500) 50%, transparent)'
+                }
                 strokeWidth="1.5"
                 strokeLinecap="round"
               />
@@ -58,11 +79,11 @@ export function MascoteVisual({ isActive = false, className = '' }: MascoteVisua
                 cx="24"
                 cy="2"
                 r="2.5"
-                fill={isActive ? '#a855f7' : '#22c55e'}
+                fill={isActive ? 'var(--color-purple-500)' : 'var(--color-brand-500)'}
                 style={{
                   filter: isActive
-                    ? 'drop-shadow(0 0 5px #a855f7)'
-                    : 'drop-shadow(0 0 4px rgba(34,197,94,0.8))',
+                    ? `drop-shadow(0 0 5px ${c.purple})`
+                    : `drop-shadow(0 0 4px ${c.brand}cc)`,
                 }}
               />
             </motion.g>
@@ -75,11 +96,16 @@ export function MascoteVisual({ isActive = false, className = '' }: MascoteVisua
               y1="2"
               x2="24"
               y2="9"
-              stroke={isActive ? '#a855f7' : '#22c55e'}
+              stroke={isActive ? 'var(--color-purple-500)' : 'var(--color-brand-500)'}
               strokeWidth="1.5"
               strokeLinecap="round"
             />
-            <circle cx="24" cy="2" r="2.5" fill={isActive ? '#a855f7' : '#22c55e'} />
+            <circle
+              cx="24"
+              cy="2"
+              r="2.5"
+              fill={isActive ? 'var(--color-purple-500)' : 'var(--color-brand-500)'}
+            />
           </g>
         )}
 
@@ -89,8 +115,12 @@ export function MascoteVisual({ isActive = false, className = '' }: MascoteVisua
           width="32"
           height="20"
           rx="5"
-          fill={isActive ? '#2d1b4e' : '#18181b'}
-          stroke={isActive ? '#a855f7' : 'rgba(34,197,94,0.6)'}
+          fill={isActive ? c.mascoteActiveBody : c.mascoteIdle}
+          stroke={
+            isActive
+              ? 'var(--color-purple-500)'
+              : 'color-mix(in srgb, var(--color-brand-500) 60%, transparent)'
+          }
           strokeWidth="1.5"
         />
         <rect x="10" y="9.5" width="28" height="5" rx="3" fill="white" fillOpacity="0.07" />
@@ -101,13 +131,13 @@ export function MascoteVisual({ isActive = false, className = '' }: MascoteVisua
           width="8"
           height="9"
           rx="2"
-          fill={isActive ? '#a855f7' : '#22c55e'}
+          fill={isActive ? 'var(--color-purple-500)' : 'var(--color-brand-500)'}
           style={
             usarEfeitosPesados
               ? {
                   filter: isActive
-                    ? 'drop-shadow(0 0 4px #a855f7)'
-                    : 'drop-shadow(0 0 3px rgba(34,197,94,0.7))',
+                    ? `drop-shadow(0 0 4px ${c.purple})`
+                    : `drop-shadow(0 0 3px ${c.brand}b3)`,
                 }
               : {}
           }
@@ -115,7 +145,7 @@ export function MascoteVisual({ isActive = false, className = '' }: MascoteVisua
             isActive && !ehDispositivoLento
               ? {
                   scaleY: [1, 0.07, 1, 1, 0.07, 1],
-                  fill: ['#a855f7', '#ef4444', '#f59e0b', '#22c55e', '#a855f7'],
+                  fill: [c.purple, c.red, c.amber, c.brand, c.purple],
                 }
               : !ehDispositivoLento
                 ? { scaleY: [1, 0.07, 1] }
@@ -133,13 +163,13 @@ export function MascoteVisual({ isActive = false, className = '' }: MascoteVisua
           width="8"
           height="9"
           rx="2"
-          fill={isActive ? '#a855f7' : '#22c55e'}
+          fill={isActive ? 'var(--color-purple-500)' : 'var(--color-brand-500)'}
           style={
             usarEfeitosPesados
               ? {
                   filter: isActive
-                    ? 'drop-shadow(0 0 4px #a855f7)'
-                    : 'drop-shadow(0 0 3px rgba(34,197,94,0.7))',
+                    ? `drop-shadow(0 0 4px ${c.purple})`
+                    : `drop-shadow(0 0 3px ${c.brand}b3)`,
                 }
               : {}
           }
@@ -147,7 +177,7 @@ export function MascoteVisual({ isActive = false, className = '' }: MascoteVisua
             isActive && !ehDispositivoLento
               ? {
                   scaleY: [1, 0.07, 1, 1, 0.07, 1],
-                  fill: ['#a855f7', '#ef4444', '#f59e0b', '#22c55e', '#a855f7'],
+                  fill: [c.purple, c.red, c.amber, c.brand, c.purple],
                 }
               : !ehDispositivoLento
                 ? { scaleY: [1, 0.07, 1] }
@@ -165,7 +195,11 @@ export function MascoteVisual({ isActive = false, className = '' }: MascoteVisua
           y="28"
           width="8"
           height="4"
-          fill={isActive ? 'rgba(168,85,247,0.4)' : 'rgba(34,197,94,0.25)'}
+          fill={
+            isActive
+              ? 'color-mix(in srgb, var(--color-purple-500) 40%, transparent)'
+              : 'color-mix(in srgb, var(--color-brand-500) 25%, transparent)'
+          }
         />
 
         <rect
@@ -174,8 +208,12 @@ export function MascoteVisual({ isActive = false, className = '' }: MascoteVisua
           width="42"
           height="24"
           rx="6"
-          fill={isActive ? '#1e0a3c' : '#18181b'}
-          stroke={isActive ? '#a855f7' : 'rgba(34,197,94,0.5)'}
+          fill={isActive ? c.mascoteActive : c.mascoteIdle}
+          stroke={
+            isActive
+              ? 'var(--color-purple-500)'
+              : 'color-mix(in srgb, var(--color-brand-500) 50%, transparent)'
+          }
           strokeWidth="1.5"
         />
         <rect x="5" y="33.5" width="38" height="5" rx="4" fill="white" fillOpacity="0.05" />
@@ -186,8 +224,12 @@ export function MascoteVisual({ isActive = false, className = '' }: MascoteVisua
           width="3"
           height="13"
           rx="1.5"
-          fill={isActive ? '#2d1b4e' : '#27272a'}
-          stroke={isActive ? 'rgba(168,85,247,0.5)' : 'rgba(34,197,94,0.3)'}
+          fill={isActive ? c.mascoteActiveBody : c.mascoteIdleArm}
+          stroke={
+            isActive
+              ? 'color-mix(in srgb, var(--color-purple-500) 50%, transparent)'
+              : 'color-mix(in srgb, var(--color-brand-500) 30%, transparent)'
+          }
           strokeWidth="1"
           animate={isActive ? { rotate: [0, -15, 15, -15, 0] } : {}}
           style={{ transformOrigin: '1.5px 35px' }}
@@ -199,8 +241,12 @@ export function MascoteVisual({ isActive = false, className = '' }: MascoteVisua
           width="3"
           height="13"
           rx="1.5"
-          fill={isActive ? '#2d1b4e' : '#27272a'}
-          stroke={isActive ? 'rgba(168,85,247,0.5)' : 'rgba(34,197,94,0.3)'}
+          fill={isActive ? c.mascoteActiveBody : c.mascoteIdleArm}
+          stroke={
+            isActive
+              ? 'color-mix(in srgb, var(--color-purple-500) 50%, transparent)'
+              : 'color-mix(in srgb, var(--color-brand-500) 30%, transparent)'
+          }
           strokeWidth="1"
           animate={isActive ? { rotate: [0, 15, -15, 15, 0] } : {}}
           style={{ transformOrigin: '46.5px 35px' }}
@@ -213,8 +259,16 @@ export function MascoteVisual({ isActive = false, className = '' }: MascoteVisua
           width="28"
           height="12"
           rx="3"
-          fill={isActive ? 'rgba(168,85,247,0.12)' : 'rgba(34,197,94,0.08)'}
-          stroke={isActive ? 'rgba(168,85,247,0.25)' : 'rgba(34,197,94,0.2)'}
+          fill={
+            isActive
+              ? 'color-mix(in srgb, var(--color-purple-500) 12%, transparent)'
+              : 'color-mix(in srgb, var(--color-brand-500) 8%, transparent)'
+          }
+          stroke={
+            isActive
+              ? 'color-mix(in srgb, var(--color-purple-500) 25%, transparent)'
+              : 'color-mix(in srgb, var(--color-brand-500) 20%, transparent)'
+          }
           strokeWidth="1"
         />
         <motion.rect
@@ -223,13 +277,17 @@ export function MascoteVisual({ isActive = false, className = '' }: MascoteVisua
           width="20"
           height="3.5"
           rx="1.75"
-          fill={isActive ? '#a855f7' : 'rgba(34,197,94,0.8)'}
+          fill={
+            isActive
+              ? 'var(--color-purple-500)'
+              : 'color-mix(in srgb, var(--color-brand-500) 80%, transparent)'
+          }
           style={
             usarEfeitosPesados
               ? {
                   filter: isActive
-                    ? 'drop-shadow(0 0 3px #a855f7)'
-                    : 'drop-shadow(0 0 2px rgba(34,197,94,0.5))',
+                    ? `drop-shadow(0 0 3px ${c.purple})`
+                    : `drop-shadow(0 0 2px ${c.brand}80)`,
                 }
               : {}
           }
@@ -238,7 +296,7 @@ export function MascoteVisual({ isActive = false, className = '' }: MascoteVisua
               ? {
                   opacity: [1, 0.2, 1],
                   scaleX: [1, 0.4, 1.4, 1],
-                  fill: ['#a855f7', '#ef4444', '#f59e0b', '#22c55e', '#a855f7'],
+                  fill: [c.purple, c.red, c.amber, c.brand, c.purple],
                 }
               : !ehDispositivoLento
                 ? { opacity: [0.6, 1, 0.6] }
@@ -253,21 +311,21 @@ export function MascoteVisual({ isActive = false, className = '' }: MascoteVisua
       </svg>
 
       <motion.div
-        className={`absolute -top-1 -right-1 w-2.5 h-2.5 md:w-3 md:h-3 ${isActive ? 'bg-purple-500' : 'bg-brand-500'} rounded-full border-2 border-black ${isActive && usarEfeitosPesados ? 'shadow-[0_0_12px_rgba(168,85,247,0.9)]' : usarEfeitosPesados ? 'shadow-[0_0_8px_rgba(34,197,94,0.8)]' : ''}`}
+        className={`absolute -top-1 -right-1 w-2.5 h-2.5 md:w-3 md:h-3 ${isActive ? 'bg-purple-500' : 'bg-brand-500'} rounded-full border-2 border-black ${isActive && usarEfeitosPesados ? 'mascote-dot-shadow-active' : usarEfeitosPesados ? 'mascote-dot-shadow' : ''}`}
         animate={
           isActive && !ehDispositivoLento
             ? {
                 scale: [1, 1.8, 1],
                 rotate: [0, 180, 360],
-                backgroundColor: ['#a855f7', '#ef4444', '#f59e0b', '#22c55e', '#3b82f6', '#a855f7'],
+                backgroundColor: [c.purple, c.red, c.amber, c.brand, c.blue, c.purple],
                 boxShadow: usarEfeitosPesados
                   ? [
-                      '0 0 12px rgba(168,85,247,0.9)',
-                      '0 0 20px rgba(239,68,68,0.9)',
-                      '0 0 20px rgba(245,158,11,0.9)',
-                      '0 0 20px rgba(34,197,94,0.9)',
-                      '0 0 20px rgba(59,130,246,0.9)',
-                      '0 0 12px rgba(168,85,247,0.9)',
+                      `0 0 12px ${c.purple}e6`,
+                      `0 0 20px ${c.red}e6`,
+                      `0 0 20px ${c.amber}e6`,
+                      `0 0 20px ${c.brand}e6`,
+                      `0 0 20px ${c.blue}e6`,
+                      `0 0 12px ${c.purple}e6`,
                     ]
                   : undefined,
               }
@@ -275,11 +333,7 @@ export function MascoteVisual({ isActive = false, className = '' }: MascoteVisua
               ? {
                   scale: [1, 1.3, 1],
                   boxShadow: usarEfeitosPesados
-                    ? [
-                        '0 0 8px rgba(34,197,94,0.8)',
-                        '0 0 16px rgba(34,197,94,1)',
-                        '0 0 8px rgba(34,197,94,0.8)',
-                      ]
+                    ? [`0 0 8px ${c.brand}cc`, `0 0 16px ${c.brand}ff`, `0 0 8px ${c.brand}cc`]
                     : undefined,
                 }
               : {}

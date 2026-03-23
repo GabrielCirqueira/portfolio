@@ -1,4 +1,4 @@
-.PHONY: help install dev build preview clean lint format validate test commit-check hooks-install
+.PHONY: help install dev build preview clean lint format validate test commit-check hooks-install favicon
 
 GREEN  := \033[0;32m
 YELLOW := \033[0;33m
@@ -37,6 +37,7 @@ help:
 	@echo "  make reinstall        - Reinstala todas as dependências"
 	@echo "  make update           - Atualiza dependências"
 	@echo "  make audit            - Verifica vulnerabilidades"
+	@echo "  make favicon          - Regenera o favicon a partir da cor brand do tailwind.config.cjs"
 	@echo ""
 	@echo "$(YELLOW)🎨 CLI Tools (Criação):$(RESET)"
 	@echo "  make component NAME=<name> [PATH=path]  - Cria novo componente"
@@ -274,5 +275,9 @@ endif
 
 health-check:
 	@./cli/health-check.sh
+
+favicon:
+	@echo "$(GREEN)🎨 Regenerando favicon a partir da cor brand...$(RESET)"
+	@node scripts/generate-favicon.cjs
 
 .DEFAULT_GOAL := help

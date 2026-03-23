@@ -14,17 +14,17 @@ function getBrandColor(config) {
     const colors = config.theme?.extend?.colors
     const brand = colors?.brand
 
-    if (!brand) return '#22c55e'
+    if (!brand) return '#00c9b1'
 
     if (typeof brand === 'string') return brand
 
     if (typeof brand === 'object') {
-      return brand[500] || brand.DEFAULT || brand.main || Object.values(brand)[0] || '#22c55e'
+      return brand[500] || brand.DEFAULT || brand.main || Object.values(brand)[0] || '#00c9b1'
     }
   } catch (_e) {
-    return '#22c55e'
+    return '#00c9b1'
   }
-  return '#22c55e'
+  return '#00c9b1'
 }
 
 const brandColor = getBrandColor(config)

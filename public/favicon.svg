@@ -10,10 +10,10 @@
   <rect width="512" height="512" rx="120" fill="#020617"/>
   
   <!-- Code Symbols: < /> -->
-  <g transform="translate(0, 0)" style="filter: drop-shadow(0 0 8px #22c55e40);">
+  <g transform="translate(0, 0)" style="filter: drop-shadow(0 0 8px #00c9b140);">
     <!-- Less Than < -->
     <path d="M150 160 L70 256 L150 352" 
-          stroke="#22c55e" 
+          stroke="#00c9b1" 
           stroke-width="56" 
           stroke-linecap="round" 
           stroke-linejoin="round" 
@@ -21,7 +21,7 @@
           
     <!-- Greater Than > -->
     <path d="M362 160 L442 256 L362 352" 
-          stroke="#22c55e" 
+          stroke="#00c9b1" 
           stroke-width="56" 
           stroke-linecap="round" 
           stroke-linejoin="round" 
@@ -30,7 +30,7 @@
     <!-- Slash / -->
     <!-- Adjusted to look balanced -->
     <path d="M200 400 L312 112" 
-          stroke="#22c55e" 
+          stroke="#00c9b1" 
           stroke-width="56" 
           stroke-linecap="round" 
           fill="none"/>

@@ -360,7 +360,7 @@ export function Mobile({ isOpen, onClose, projeto }: ProjetoModalProps) {
                         key={tech}
                         className="px-3 py-1.5 bg-zinc-900/60 border border-white/5 rounded-full items-center gap-2"
                       >
-                        <Box className="w-1 h-1 rounded-full bg-brand-500 shadow-[0_0_8px_rgba(34,197,94,0.4)]" />
+                        <Box className="w-1 h-1 rounded-full bg-brand-500 shadow-brand-glow-sm" />
                         <Text className="text-[10px] font-mono text-zinc-300 font-bold uppercase tracking-wider">
                           {tech}
                         </Text>

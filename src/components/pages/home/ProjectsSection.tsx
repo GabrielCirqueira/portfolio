@@ -217,7 +217,7 @@ export const ProjectsSection = memo(() => {
                             text-black font-black
                             px-8 py-8 text-base sm:text-lg uppercase tracking-widest
                             rounded-xl
-                            shadow-[0_0_32px_rgba(34,197,94,0.35)] hover:shadow-[0_0_48px_rgba(34,197,94,0.6)]
+                            shadow-brand-glow-lg hover:shadow-brand-glow-xl
                             transition-shadow duration-300
                             group relative overflow-hidden
                           "

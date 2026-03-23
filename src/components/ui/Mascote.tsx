@@ -178,7 +178,7 @@ export const Mascote = memo(() => {
             className={`relative mb-1`}
           >
             <div
-              className={`relative bg-gradient-to-br ${isActive ? 'from-purple-900 to-red-950 border-purple-500' : 'from-zinc-900 to-zinc-950 border-brand-500/40'} border-2 px-3 py-2 md:px-4 md:py-2 rounded-xl shadow-[0_0_20px_rgba(34,197,94,0.2)] backdrop-blur-sm`}
+              className={`relative bg-gradient-to-br ${isActive ? 'from-purple-900 to-red-950 border-purple-500' : 'from-zinc-900 to-zinc-950 border-brand-500/40'} border-2 px-3 py-2 md:px-4 md:py-2 rounded-xl shadow-brand-glow-md backdrop-blur-sm`}
             >
               <div
                 className={`absolute top-0 left-0 right-0 h-1 bg-gradient-to-b ${isActive ? 'from-purple-500/40' : 'from-brand-500/20'} to-transparent rounded-t-xl`}
@@ -215,12 +215,12 @@ export const Mascote = memo(() => {
               height="69"
               rx="12"
               ry="12"
-              stroke="#22c55e"
+              stroke="var(--color-brand-500)"
               strokeWidth="3"
               strokeDasharray={`${(61 + 69) * 2}`}
               strokeDashoffset={`${(61 + 69) * 2 * (1 - longPressProgress)}`}
               strokeLinecap="round"
-              style={{ filter: 'drop-shadow(0 0 6px rgba(34,197,94,1))' }}
+              style={{ filter: 'drop-shadow(0 0 6px var(--color-brand-500))' }}
             />
           </svg>
         )}

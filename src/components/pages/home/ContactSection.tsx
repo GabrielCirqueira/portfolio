@@ -4,7 +4,7 @@ import { memo } from 'react'
 import { ContactGrid } from '@/components/responsive/ContactGrid'
 import { contactItems } from '@/data/contato'
 import { Box, Container, VStack } from '@/shadcn/components/ui/layout'
-import { Span, Text, Title } from '@/shadcn/components/ui/typography'
+import { Span, Title } from '@/shadcn/components/ui/typography'
 
 export const ContactSection = memo(() => {
   return (
@@ -33,22 +33,6 @@ export const ContactSection = memo(() => {
               </Span>{' '}
               juntos?
             </Title>
-          </motion.div>
-
-          <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: 0.4 }}
-            className="flex items-center gap-3 mt-10 px-5 py-2.5 rounded-full border border-green-500/40 bg-green-500/10 backdrop-blur-sm shadow-lg"
-          >
-            <Span className="relative flex h-2.5 w-2.5">
-              <Span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75" />
-              <Span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-green-500" />
-            </Span>
-            <Text className="text-xs sm:text-sm text-green-400 font-bold uppercase tracking-wider">
-              Disponível para projetos
-            </Text>
           </motion.div>
         </VStack>
         <ContactGrid contactItems={contactItems} />

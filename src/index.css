@@ -5,6 +5,18 @@
 @layer base {
   :root {
     --radius: 0.3rem;
+    --color-brand-500: theme("colors.brand.500");
+    --color-brand-400: theme("colors.brand.400");
+    --color-purple-500: theme("colors.purple.500");
+    --color-red-500: theme("colors.red.500");
+    --color-amber-500: theme("colors.amber.500");
+    --color-blue-500: theme("colors.blue.500");
+    --color-zinc-900: theme("colors.zinc.900");
+    --color-zinc-800: theme("colors.zinc.800");
+    --color-mascote-idle: theme("colors.mascote.idle");
+    --color-mascote-idle-arm: theme("colors.mascote.idle-arm");
+    --color-mascote-active: theme("colors.mascote.active");
+    --color-mascote-active-body: theme("colors.mascote.active-body");
   }
 
   * {
@@ -14,7 +26,7 @@
   body {
     @apply bg-black text-white;
     scrollbar-width: thin;
-    scrollbar-color: theme("colors.brand.500") #000;
+    scrollbar-color: theme("colors.brand.500") theme("colors.black");
     overflow-x: hidden;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
@@ -76,7 +88,7 @@
     }
 
     * {
-      -webkit-tap-highlight-color: rgba(var(--brand-500), 0.1);
+      -webkit-tap-highlight-color: theme("colors.brand.500 / 10%");
     }
 
     @media (prefers-reduced-motion: reduce) {
@@ -133,6 +145,52 @@
 }
 
 @layer utilities {
+  .mascote-dot-shadow {
+    box-shadow: 0 0 8px var(--color-brand-500);
+  }
+
+  .mascote-dot-shadow-active {
+    box-shadow: 0 0 12px var(--color-purple-500);
+  }
+
+  .shadow-brand-glow-sm {
+    box-shadow: 0 0 8px color-mix(in srgb, var(--color-brand-500) 40%, transparent);
+  }
+
+  .shadow-brand-glow-md {
+    box-shadow: 0 0 20px color-mix(in srgb, var(--color-brand-500) 20%, transparent);
+  }
+
+  .shadow-brand-glow-md-strong {
+    box-shadow: 0 0 30px color-mix(in srgb, var(--color-brand-500) 40%, transparent);
+  }
+
+  .shadow-brand-glow-lg {
+    box-shadow: 0 0 32px color-mix(in srgb, var(--color-brand-500) 35%, transparent);
+  }
+
+  .shadow-brand-glow-xl {
+    box-shadow: 0 0 48px color-mix(in srgb, var(--color-brand-500) 60%, transparent);
+  }
+
+  .bg-brand-radial-top {
+    background: radial-gradient(
+      ellipse at top,
+      color-mix(in srgb, var(--color-brand-500) 10%, transparent) 0%,
+      transparent 50%
+    );
+  }
+
+  .bg-brand-diagonal-subtle {
+    background-image: repeating-linear-gradient(
+      45deg,
+      transparent,
+      transparent 35px,
+      color-mix(in srgb, var(--color-brand-500) 3%, transparent) 35px,
+      color-mix(in srgb, var(--color-brand-500) 3%, transparent) 70px
+    );
+  }
+
   .text-outline {
     -webkit-text-stroke: 1px theme("colors.white / 10%");
     color: transparent;
@@ -184,7 +242,7 @@
     position: relative;
     border-radius: 1rem;
     background:
-      linear-gradient(#09090b, #09090b) padding-box,
+      linear-gradient(theme("colors.zinc.950"), theme("colors.zinc.950")) padding-box,
       conic-gradient(
         from 0deg,
         transparent 0deg,
@@ -208,7 +266,7 @@
   @keyframes tw-shine-rotate {
     to {
       background:
-        linear-gradient(#09090b, #09090b) padding-box,
+        linear-gradient(theme("colors.zinc.950"), theme("colors.zinc.950")) padding-box,
         conic-gradient(
           from 360deg,
           transparent 0deg,
@@ -225,11 +283,11 @@
 .text-gradient {
   background: linear-gradient(
     to right,
-    #ffffff 0%,
+    theme("colors.white") 0%,
     theme("colors.brand.400") 25%,
     theme("colors.brand.200") 50%,
     theme("colors.brand.400") 75%,
-    #ffffff 100%
+    theme("colors.white") 100%
   );
   background-size: 200% auto;
   background-clip: text;

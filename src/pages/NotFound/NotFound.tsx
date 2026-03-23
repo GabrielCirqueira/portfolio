@@ -154,7 +154,7 @@ export function Component() {
               <Link to="/" className="w-full sm:w-auto">
                 <Button
                   size="lg"
-                  className="w-full sm:w-auto min-w-[180px] bg-brand-500 hover:bg-brand-600 text-black font-bold rounded-xl shadow-[0_0_20px_rgba(34,197,94,0.2)] hover:shadow-[0_0_30px_rgba(34,197,94,0.4)] transition-all duration-300"
+                  className="w-full sm:w-auto min-w-[180px] bg-brand-500 hover:bg-brand-600 text-black font-bold rounded-xl shadow-brand-glow-md hover:shadow-brand-glow-md-strong transition-all duration-300"
                 >
                   <Icon icon={Home} className="mr-2 h-4 w-4" />
                   Ir para Início

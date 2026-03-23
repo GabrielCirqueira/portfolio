@@ -15,14 +15,8 @@ export const WorkflowSection = memo(() => {
       className="py-16 sm:py-20 md:py-24 lg:py-28 relative bg-black font-sans overflow-hidden"
     >
       <Box className="absolute inset-0 bg-gradient-to-br from-zinc-950 via-black to-black" />
-      <Box
-        className="absolute inset-0 opacity-30"
-        style={{
-          backgroundImage:
-            'repeating-linear-gradient(45deg, transparent, transparent 35px, rgba(var(--brand-500), 0.03) 35px, rgba(var(--brand-500), 0.03) 70px)',
-        }}
-      />
-      <Box className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,rgba(var(--brand-500),0.1)_0%,transparent_50%)]" />
+      <Box className="absolute inset-0 opacity-30 bg-brand-diagonal-subtle" />
+      <Box className="absolute inset-0 bg-brand-radial-top" />
 
       <Container size="xl" className="relative z-10 px-4 sm:px-6">
         <VStack className="items-center text-center gap-4 sm:gap-5 mb-12 sm:mb-14 md:mb-16">
