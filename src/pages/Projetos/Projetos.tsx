@@ -11,7 +11,7 @@ import {
   TrendingUp,
 } from 'lucide-react'
 import { memo, Suspense, useEffect, useMemo, useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useSearchParams } from 'react-router-dom'
 import { CardProjeto } from '@/components/responsive/CardProjeto'
 import { ProjetoModal } from '@/components/responsive/ProjetoModal'
 import { JSONLD } from '@/components/ui/JSONLD'
@@ -89,9 +89,11 @@ const filtros: { tipo: FiltroTipo; label: string; icone: typeof Layers }[] = [
 ]
 
 export const Component = memo(() => {
-  const [modalAberto, setModalAberto] = useState<string | null>(null)
+  const [searchParams, setSearchParams] = useSearchParams()
   const [filtroAtivo, setFiltroAtivo] = useState<FiltroTipo>('todos')
   const navigate = useNavigate()
+
+  const modalAberto = searchParams.get('projeto')
 
   useSEO({
     title: 'Projetos | Gabriel Cirqueira - Desenvolvedor Fullstack',
@@ -111,8 +113,18 @@ export const Component = memo(() => {
     navigate('/#projetos')
   }
 
-  const abrirModal = (id: string) => setModalAberto(id)
-  const fecharModal = () => setModalAberto(null)
+  const abrirModal = (id: string) => {
+    setSearchParams((prev) => {
+      prev.set('projeto', id)
+      return prev
+    })
+  }
+  const fecharModal = () => {
+    setSearchParams((prev) => {
+      prev.delete('projeto')
+      return prev
+    })
+  }
 
   const todosProjetos = useMemo(() => [...sistemas, ...jogos], [])
   const projetoAtual = todosProjetos.find((p) => p.id === modalAberto)

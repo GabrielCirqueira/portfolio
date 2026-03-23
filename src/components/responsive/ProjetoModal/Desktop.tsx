@@ -105,7 +105,8 @@ export const Desktop = memo(({ isOpen, onClose, projeto }: ProjetoModalProps) =>
                         <HStack className="items-center gap-2 text-xs text-zinc-300 font-mono bg-zinc-900/80 border border-zinc-800 px-2.5 py-1.5 rounded-lg backdrop-blur-sm">
                           <Icon icon={Calendar} className="w-3.5 h-3.5 text-brand-400" />
                           <Text className="text-zinc-200 font-medium">
-                            {formatarPeriodo(projeto.dataInicio, projeto.dataFim)}
+                            {projeto.periodoExibicao ??
+                              formatarPeriodo(projeto.dataInicio, projeto.dataFim)}
                           </Text>
                         </HStack>
                         <Badge className="bg-brand-500/10 text-brand-300 border border-brand-500/30 px-2.5 py-1 text-xs font-mono uppercase tracking-wider rounded-lg">

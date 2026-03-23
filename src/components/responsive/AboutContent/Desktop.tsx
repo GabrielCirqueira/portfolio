@@ -158,7 +158,7 @@ export const Desktop = memo(({ aboutCards }: DesktopProps) => {
             whileInView={{ opacity: 1, scale: 1, rotate: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8, ease: 'backOut' }}
-            className="relative z-10 perspective-1000 group"
+            className="relative z-10 perspective-1000 group max-w-sm mx-auto"
           >
             <motion.div
               animate={{ y: [0, -10, 0] }}

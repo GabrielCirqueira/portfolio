@@ -11,6 +11,7 @@ export interface Projeto {
   dataInicio: string
   dataFim?: string
   anoExibicao?: string
+  periodoExibicao?: string
   tipo: 'sistema' | 'jogo'
 }
 

@@ -6,6 +6,7 @@ import { Mobile } from './Mobile'
 interface CardProjetoProps {
   projeto: Projeto
   onAbrirModal: (id: string) => void
+  isFeatured?: boolean
 }
 
 export function CardProjeto(props: CardProjetoProps) {

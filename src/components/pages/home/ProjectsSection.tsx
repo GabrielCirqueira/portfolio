@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion'
 import { ArrowRight, Code2, Gamepad2, Layers, Sparkles } from 'lucide-react'
-import { memo, useMemo, useState } from 'react'
-import { Link } from 'react-router-dom'
+import { memo, useMemo } from 'react'
+import { Link, useSearchParams } from 'react-router-dom'
 import { CardProjeto } from '@/components/responsive/CardProjeto'
 import { ProjetoModal } from '@/components/responsive/ProjetoModal'
 import { useAnimation } from '@/contexts'
@@ -11,19 +11,33 @@ import { Button } from '@/shadcn/components/ui/button'
 import { Box, Container, HStack, VStack } from '@/shadcn/components/ui/layout'
 import { Text, Title } from '@/shadcn/components/ui/typography'
 
-const PROJETOS_DESTAQUE = ['spacenow', 'monitoramento', 'estoque-pdv', 'organizabus']
+const PROJETOS_DESTAQUE = ['unytools', 'spacenow', 'monitoramento', 'estoque-pdv', 'organizabus']
 
 export const ProjectsSection = memo(() => {
-  const [modalAberto, setModalAberto] = useState<string | null>(null)
+  const [searchParams, setSearchParams] = useSearchParams()
   const { usarAnimacoes, viewport, duration, getDelay, ehDispositivoLento } = useAnimation()
 
-  const abrirModal = (id: string) => setModalAberto(id)
-  const fecharModal = () => setModalAberto(null)
+  const modalAberto = searchParams.get('projeto')
 
-  const projetosDestaque = useMemo(
-    () => sistemas.filter((p) => PROJETOS_DESTAQUE.includes(p.id)),
-    []
-  )
+  const abrirModal = (id: string) => {
+    setSearchParams((prev) => {
+      prev.set('projeto', id)
+      return prev
+    })
+  }
+  const fecharModal = () => {
+    setSearchParams((prev) => {
+      prev.delete('projeto')
+      return prev
+    })
+  }
+
+  const projetosDestaque = useMemo(() => {
+    const all = [...sistemas, ...jogos]
+    return PROJETOS_DESTAQUE.map((id) => all.find((p) => p.id === id)).filter(
+      Boolean
+    ) as (typeof all)[0][]
+  }, [])
   const projetoAtual = useMemo(
     () => [...sistemas, ...jogos].find((p) => p.id === modalAberto),
     [modalAberto]
@@ -102,10 +116,16 @@ export const ProjectsSection = memo(() => {
           initial="hidden"
           whileInView="visible"
           viewport={viewport}
-          className="grid grid-cols-1 sm:grid-cols-2 gap-6 sm:gap-8 md:gap-10 lg:gap-12 max-w-6xl mx-auto"
+          className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 md:gap-10 lg:gap-12 max-w-6xl mx-auto"
         >
           {projetosDestaque.map((projeto) => (
-            <CardProjeto key={projeto.id} projeto={projeto} onAbrirModal={abrirModal} />
+            <Box key={projeto.id} className={`${projeto.id === 'unytools' ? 'md:col-span-2' : ''}`}>
+              <CardProjeto
+                projeto={projeto}
+                onAbrirModal={abrirModal}
+                isFeatured={projeto.id === 'unytools'}
+              />
+            </Box>
           ))}
         </motion.div>
 

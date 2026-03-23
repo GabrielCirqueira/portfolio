@@ -297,7 +297,8 @@ export function Mobile({ isOpen, onClose, projeto }: ProjetoModalProps) {
                         Período
                       </Text>
                       <Text className="text-[10px] sm:text-[11px] text-zinc-200 font-bold font-mono">
-                        {formatarPeriodo(projeto.dataInicio, projeto.dataFim)}
+                        {projeto.periodoExibicao ??
+                          formatarPeriodo(projeto.dataInicio, projeto.dataFim)}
                       </Text>
                     </VStack>
                   </Box>
