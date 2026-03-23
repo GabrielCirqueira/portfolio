@@ -1,10 +1,13 @@
 import { ClarityProvider } from '@app/contexts/ClarityContext'
 import { Outlet } from 'react-router-dom'
+import { ErrorBoundary } from '@/components/ui/ErrorBoundary'
 
 export function RootLayout() {
   return (
-    <ClarityProvider>
-      <Outlet />
-    </ClarityProvider>
+    <ErrorBoundary>
+      <ClarityProvider>
+        <Outlet />
+      </ClarityProvider>
+    </ErrorBoundary>
   )
 }

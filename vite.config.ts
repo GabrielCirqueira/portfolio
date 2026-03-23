@@ -19,7 +19,7 @@ export default defineConfig({
       dynamicRoutes: ['/', '/projetos'],
       changefreq: 'weekly',
       priority: 0.8,
-      lastmod: new Date().toISOString().split('T')[0],
+      lastmod: new Date(),
     }),
   ],
   build: {
@@ -28,22 +28,36 @@ export default defineConfig({
         manualChunks: {
           'react-vendor': ['react', 'react-dom', 'react-router-dom'],
           'framer-motion': ['framer-motion'],
-          'ui-vendor': ['lucide-react', 'clsx', 'tailwind-merge'],
+          'ui-vendor': [
+            'lucide-react',
+            'clsx',
+            'tailwind-merge',
+            'class-variance-authority',
+            'tailwindcss-animate',
+          ],
           'radix-ui': [
             '@radix-ui/react-dialog',
             '@radix-ui/react-progress',
             '@radix-ui/react-slot',
             '@radix-ui/react-tooltip',
+            '@radix-ui/react-popover',
+            '@radix-ui/react-separator',
+            '@radix-ui/react-tabs',
+            '@radix-ui/react-label',
+            '@radix-ui/react-dropdown-menu',
           ],
+          'utils-vendor': ['date-fns', 'zod', 'react-hook-form', '@hookform/resolvers'],
+          'visual-libs': ['recharts', 'embla-carousel-react', 'react-fast-marquee', 'vaul'],
           icons: ['react-icons/si', 'react-icons/fa'],
         },
         assetFileNames: (assetInfo) => {
-          const info = assetInfo.name.split('.')
+          const name = assetInfo.name || 'unknown'
+          const info = name.split('.')
           const extType = info[info.length - 1]
           if (/png|jpe?g|svg|gif|tiff|bmp|ico/i.test(extType)) {
-            return `assets/images/[name]-[hash][extname]`
+            return 'assets/images/[name]-[hash][extname]'
           }
-          return `assets/[name]-[hash][extname]`
+          return 'assets/[name]-[hash][extname]'
         },
         chunkFileNames: 'assets/js/[name]-[hash].js',
         entryFileNames: 'assets/js/[name]-[hash].js',
