@@ -59,9 +59,7 @@ export const Desktop = memo(() => {
           transition={{ duration: 15, repeat: Infinity, ease: 'easeInOut' }}
           className="absolute top-[-10%] right-[-5%] w-[600px] h-[600px]"
         >
-          <Box
-            className={`w-full h-full bg-brand-500/20 rounded-full ${usarEfeitosPesados ? (isLowPerf ? 'blur-[60px]' : 'blur-[120px]') : ''}`}
-          />
+          <Box className="w-full h-full bg-brand-500/10 rounded-full border border-brand-500/20" />
         </motion.div>
       </motion.div>
 
@@ -82,9 +80,7 @@ export const Desktop = memo(() => {
           transition={{ duration: 18, repeat: Infinity, ease: 'easeInOut', delay: 2 }}
           className="absolute bottom-[-10%] left-[-10%] w-[500px] h-[500px]"
         >
-          <Box
-            className={`w-full h-full bg-brand-800/20 rounded-full ${usarEfeitosPesados ? (isLowPerf ? 'blur-[50px]' : 'blur-[100px]') : ''}`}
-          />
+          <Box className="w-full h-full bg-brand-800/10 rounded-full border border-brand-800/20" />
         </motion.div>
       </motion.div>
 
@@ -132,10 +128,9 @@ export const Desktop = memo(() => {
               className="
                 inline-flex items-center px-4 py-1.5
                 rounded-full border border-brand-500/30
-                bg-brand-500/10 text-brand-300
+                bg-brand-500/5 text-brand-300
                 uppercase tracking-widest
-                font-bold shadow-[0_0_20px_var(--tw-shadow-color)]
-                shadow-brand-500/15 hover:bg-brand-500/20
+                font-bold hover:bg-brand-500/10
                 transition-colors cursor-default text-[10px] sm:text-xs md:text-sm
               "
             >
@@ -206,10 +201,9 @@ export const Desktop = memo(() => {
                   w-full sm:w-auto rounded px-6 sm:px-7 md:px-8 py-4 sm:py-5 md:py-6
                   bg-brand-600 hover:bg-brand-500 text-black text-xs sm:text-sm md:text-base
                   font-bold uppercase tracking-widest
-                  shadow-[0_0_20px_var(--tw-shadow-color)]
-                  shadow-brand-500/30
-                  hover:shadow-[0_0_40px_var(--tw-shadow-color)]
-                  hover:shadow-brand-500/50 transition-all
+                  border border-brand-500/50
+                  hover:shadow-[0_0_20px_rgba(14,165,233,0.3)]
+                  transition-all
                   duration-300 relative overflow-hidden
                   transform hover:-translate-y-1
                 "

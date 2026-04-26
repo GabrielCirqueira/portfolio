@@ -104,7 +104,7 @@ function SpotlightCard({
             background: useMotionTemplate`
               radial-gradient(
                 650px circle at ${mouseX}px ${mouseY}px,
-                rgba(14, 165, 233, 0.15),
+                rgba(14, 165, 233, 0.1),
                 transparent 80%
               )
             `,
@@ -135,10 +135,9 @@ export const Desktop = memo(({ aboutCards }: DesktopProps) => {
         <Badge
           variant="outline"
           className="
-            px-4 py-1.5 rounded-full border-brand-500/30
+            px-4 py-1.5 rounded-full
             text-brand-500 uppercase tracking-widest text-xs font-bold
-            bg-brand-500/5 backdrop-blur-md
-            shadow-[0_0_20px_-5px_var(--tw-shadow-color)] shadow-brand-500/30
+            bg-zinc-900 border border-brand-500/30
           "
         >
           Sobre Mim
@@ -165,8 +164,8 @@ export const Desktop = memo(({ aboutCards }: DesktopProps) => {
               transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
             >
               {isLowPerf ? (
-                <Box className="relative rounded-3xl overflow-hidden border border-zinc-700/50 bg-zinc-900 shadow-2xl aspect-[4/5] transform transition-transform duration-500 group-hover:shadow-brand-500/20">
-                  <Box className="absolute inset-0 bg-gradient-to-tr from-brand-500/20 to-transparent mix-blend-overlay z-20 pointer-events-none" />
+                <Box className="relative rounded-3xl overflow-hidden border border-zinc-700/50 bg-zinc-900 shadow-lg aspect-[4/5] transform transition-transform duration-500 group-hover:shadow-brand-500/10">
+                  <Box className="absolute inset-0 bg-gradient-to-tr from-brand-500/10 to-transparent mix-blend-overlay z-20 pointer-events-none" />
                   <img
                     src="/images/gabriel1.webp"
                     alt="Gabriel Cirqueira"
@@ -176,7 +175,7 @@ export const Desktop = memo(({ aboutCards }: DesktopProps) => {
                     initial={{ y: 20, opacity: 0 }}
                     whileInView={{ y: 0, opacity: 1 }}
                     transition={{ delay: 0.5, duration: 0.5 }}
-                    className="absolute bottom-6 left-6 right-6 p-4 rounded-2xl bg-black/70 backdrop-blur-lg border border-white/10 z-30 flex items-center justify-between shadow-xl"
+                    className="absolute bottom-6 left-6 right-6 p-4 rounded-2xl bg-zinc-950 border border-white/10 z-30 flex items-center justify-between"
                   >
                     <VStack className="gap-1">
                       <Text className="text-[10px] text-brand-400 font-mono uppercase tracking-wider font-bold">
@@ -186,15 +185,15 @@ export const Desktop = memo(({ aboutCards }: DesktopProps) => {
                         Fullstack Developer
                       </Text>
                     </VStack>
-                    <Box className="w-10 h-10 rounded-full bg-brand-500 flex items-center justify-center text-zinc-950 shadow-[0_0_15px_rgba(14,165,233,0.5)]">
+                    <Box className="w-10 h-10 rounded-full bg-brand-500 flex items-center justify-center text-zinc-950">
                       <Icon icon={FileCode} className="w-5 h-5" />
                     </Box>
                   </motion.div>
                 </Box>
               ) : (
                 <TiltCard>
-                  <Box className="relative rounded-3xl overflow-hidden border border-zinc-700/50 bg-zinc-900 shadow-2xl aspect-[4/5] transform transition-transform duration-500 group-hover:shadow-brand-500/20">
-                    <Box className="absolute inset-0 bg-gradient-to-tr from-brand-500/20 to-transparent mix-blend-overlay z-20 pointer-events-none" />
+                  <Box className="relative rounded-3xl overflow-hidden border border-zinc-700/50 bg-zinc-900 shadow-lg aspect-[4/5] transform transition-transform duration-500 group-hover:shadow-brand-500/10">
+                    <Box className="absolute inset-0 bg-gradient-to-tr from-brand-500/10 to-transparent mix-blend-overlay z-20 pointer-events-none" />
                     <img
                       src="/images/gabriel1.webp"
                       alt="Gabriel Cirqueira"
@@ -205,7 +204,7 @@ export const Desktop = memo(({ aboutCards }: DesktopProps) => {
                       initial={{ y: 20, opacity: 0 }}
                       whileInView={{ y: 0, opacity: 1 }}
                       transition={{ delay: 0.5, duration: 0.5 }}
-                      className="absolute bottom-6 left-6 right-6 p-4 rounded-2xl bg-black/70 backdrop-blur-lg border border-white/10 z-30 flex items-center justify-between shadow-xl"
+                      className="absolute bottom-6 left-6 right-6 p-4 rounded-2xl bg-zinc-950 border border-white/10 z-30 flex items-center justify-between"
                     >
                       <VStack className="gap-1">
                         <Text className="text-[10px] text-brand-400 font-mono uppercase tracking-wider font-bold">
@@ -215,7 +214,7 @@ export const Desktop = memo(({ aboutCards }: DesktopProps) => {
                           Fullstack Developer
                         </Text>
                       </VStack>
-                      <Box className="w-10 h-10 rounded-full bg-brand-500 flex items-center justify-center text-zinc-950 shadow-[0_0_15px_rgba(14,165,233,0.5)]">
+                      <Box className="w-10 h-10 rounded-full bg-brand-500 flex items-center justify-center text-zinc-950">
                         <Icon icon={FileCode} className="w-5 h-5" />
                       </Box>
                     </motion.div>
@@ -255,7 +254,7 @@ export const Desktop = memo(({ aboutCards }: DesktopProps) => {
               <motion.div
                 key={stat.rotulo}
                 whileHover={!isLowPerf ? { y: -5, backgroundColor: 'rgba(24, 24, 27, 0.8)' } : {}}
-                className="flex flex-col items-center justify-center p-5 rounded-2xl bg-zinc-900/40 border border-zinc-800/50 backdrop-blur-sm transition-all duration-300 group cursor-default relative overflow-hidden"
+                className="flex flex-col items-center justify-center p-5 rounded-2xl bg-zinc-900 border border-zinc-800/50 transition-all duration-300 group cursor-default relative overflow-hidden"
               >
                 <Box className="absolute inset-0 bg-brand-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                 <Box className="mb-3 p-2 rounded-lg bg-zinc-900 text-zinc-500 group-hover:text-brand-400 group-hover:bg-brand-500/10 transition-colors relative z-10 w-fit mx-auto">
@@ -276,7 +275,7 @@ export const Desktop = memo(({ aboutCards }: DesktopProps) => {
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
             transition={{ delay: 0.5, duration: 0.8 }}
-            className="py-4 border-y border-zinc-800/30 bg-black/10 backdrop-blur-sm -mx-4 px-4 sm:mx-0 sm:px-0 sm:rounded-xl overflow-hidden"
+            className="py-4 border-y border-zinc-800/30 bg-zinc-950 -mx-4 px-4 sm:mx-0 sm:px-0 sm:rounded-xl overflow-hidden"
           >
             <Marquee
               gradient={true}
@@ -327,10 +326,7 @@ export const Desktop = memo(({ aboutCards }: DesktopProps) => {
                         />
                       </motion.div>
                     </Box>
-                    <Box className="relative">
-                      <Box className="w-2 h-2 rounded-full bg-zinc-800 group-hover:bg-brand-500 transition-colors duration-500 z-10 relative" />
-                      <Box className="absolute inset-0 bg-brand-500 rounded-full blur-sm opacity-0 group-hover:opacity-100 transition-opacity duration-500 animate-pulse" />
-                    </Box>
+                    <Box className="w-2 h-2 rounded-full bg-zinc-800 group-hover:bg-brand-500 transition-colors duration-500 z-10 relative" />
                   </HStack>
 
                   <Title

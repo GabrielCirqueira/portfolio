@@ -43,7 +43,7 @@ export const Mobile = memo(({ projeto, onAbrirModal, isFeatured }: CardProjetoPr
           className="
             relative w-full bg-zinc-950 rounded-[1.5rem] 
             border border-brand-500/30 overflow-hidden
-            flex flex-col shadow-xl shadow-brand-500/10
+            flex flex-col
           "
         >
           <Box className="relative w-full aspect-video overflow-hidden">
@@ -55,7 +55,7 @@ export const Mobile = memo(({ projeto, onAbrirModal, isFeatured }: CardProjetoPr
             <Box className="absolute inset-0 bg-gradient-to-t from-zinc-950 via-zinc-950/40 to-transparent" />
 
             <Box className="absolute top-4 left-4 z-20">
-              <Badge className="bg-brand-500 text-black font-black uppercase tracking-widest px-3 py-1 rounded-md text-[10px] shadow-lg flex items-center gap-1.5">
+              <Badge className="bg-brand-500 text-black font-black uppercase tracking-widest px-3 py-1 rounded-md text-[10px] flex items-center gap-1.5">
                 <Sparkles className="w-3 h-3" />
                 Destaque
               </Badge>
@@ -110,10 +110,10 @@ export const Mobile = memo(({ projeto, onAbrirModal, isFeatured }: CardProjetoPr
       <Box
         onClick={() => onAbrirModal(projeto.id)}
         className="
-        w-full bg-zinc-950/80 backdrop-blur-sm border border-zinc-800 rounded-2xl
+        w-full bg-zinc-900 border border-zinc-800 rounded-2xl
         overflow-hidden flex flex-col cursor-pointer
-        active:border-brand-500/50 active:bg-zinc-900/70
-        transition-all duration-200 shadow-lg
+        active:border-brand-500/50 active:bg-zinc-800
+        transition-all duration-200
         active:scale-[0.98]
       "
       >
@@ -125,14 +125,14 @@ export const Mobile = memo(({ projeto, onAbrirModal, isFeatured }: CardProjetoPr
           />
           <Box className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
 
-          <HStack className="absolute bottom-3 right-3 items-center gap-1.5 text-xs text-white font-mono bg-black/80 backdrop-blur-sm px-3 py-1.5 rounded-lg shadow-lg">
+          <HStack className="absolute bottom-3 right-3 items-center gap-1.5 text-xs text-white font-mono bg-black/90 px-3 py-1.5 rounded-lg border border-zinc-700/30">
             <Icon icon={Calendar} className="w-3 h-3 text-brand-400" />
             <Span className="text-[10px]">
               {projeto.periodoExibicao ?? formatarPeriodo(projeto.dataInicio, projeto.dataFim)}
             </Span>
           </HStack>
 
-          <Badge className="absolute top-3 left-3 bg-black/80 backdrop-blur-sm text-xs font-semibold uppercase px-3 py-1.5 rounded-lg text-brand-300 border border-brand-500/20 shadow-lg">
+          <Badge className="absolute top-3 left-3 bg-black/90 text-xs font-semibold uppercase px-3 py-1.5 rounded-lg text-brand-300 border border-brand-500/20">
             {projeto.tipo === 'jogo' ? '🎮 Jogo' : '💻 Sistema'}
           </Badge>
         </Box>

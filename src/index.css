@@ -17,6 +17,15 @@
     --color-mascote-idle-arm: theme("colors.mascote.idle-arm");
     --color-mascote-active: theme("colors.mascote.active");
     --color-mascote-active-body: theme("colors.mascote.active-body");
+
+    /* Performance & Style Tokens */
+    --glow-intensity: 0;
+    --blur-heavy: 0px;
+    --blur-light: 0px;
+    --transition-smooth: 0.25s ease-out;
+    --border-emerald: 1px solid hsl(173, 100%, 39%, 0.25);
+    --border-emerald-hover: 1px solid hsl(173, 100%, 39%, 0.8);
+    --border-surface: 1px solid hsl(240, 5%, 15%);
   }
 
   * {
@@ -201,14 +210,6 @@
     color: transparent;
   }
 
-  .glass {
-    @apply bg-white/5 backdrop-blur-md border border-white/10;
-  }
-
-  .glass-dark {
-    @apply bg-black/40 backdrop-blur-md border border-white/5;
-  }
-
   .gpu-accelerate {
     transform: translateZ(0);
     backface-visibility: hidden;
@@ -280,29 +281,6 @@
   }
 }
 
-.text-gradient {
-  background: linear-gradient(
-    to right,
-    theme("colors.white") 0%,
-    theme("colors.brand.400") 25%,
-    theme("colors.brand.200") 50%,
-    theme("colors.brand.400") 75%,
-    theme("colors.white") 100%
-  );
-  background-size: 200% auto;
-  background-clip: text;
-  -webkit-background-clip: text;
-  text-fill-color: transparent;
-  -webkit-text-fill-color: transparent;
-  animation: shimmer 8s linear infinite;
-}
-
-@media (max-width: 768px) {
-  .text-gradient {
-    animation: shimmer 12s linear infinite;
-  }
-}
-
 @keyframes shimmer {
   to {
     background-position: 200% center;
@@ -351,32 +329,12 @@
   }
 }
 
-.animate-glow {
-  animation: glow 4s ease-in-out infinite alternate;
-}
-
-@media (max-width: 768px) {
-  .animate-glow {
-    animation: glow 6s ease-in-out infinite alternate;
-  }
-}
-
-@keyframes glow {
-  from {
-    box-shadow: 0 0 10px -10px theme("colors.brand.500");
-  }
-  to {
-    box-shadow: 0 0 25px 0px theme("colors.brand.500");
-  }
-}
-
 .card-project {
-  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  @apply transition-colors duration-200 border border-zinc-800;
 }
 
 .card-project:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 10px 30px -10px theme("colors.brand.500" / 30%);
+  @apply border-brand-500/50;
 }
 
 .skill-bar {

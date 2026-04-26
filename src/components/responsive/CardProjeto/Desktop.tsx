@@ -48,7 +48,6 @@ export const Desktop = memo(({ projeto, onAbrirModal, isFeatured }: CardProjetoP
             relative group rounded-[1.5rem] lg:rounded-[2rem] overflow-hidden 
             bg-zinc-950 border border-zinc-800
             min-h-[450px] lg:min-h-[550px] flex flex-col lg:flex-row
-            shadow-2xl shadow-brand-500/5
             hover:border-brand-500/30 transition-all duration-500
           "
           data-cursor-text="Explorar"
@@ -68,7 +67,7 @@ export const Desktop = memo(({ projeto, onAbrirModal, isFeatured }: CardProjetoP
             <Box className="absolute inset-0 bg-gradient-to-t lg:bg-gradient-to-r from-transparent via-transparent to-zinc-950 z-10" />
 
             <Box className="absolute top-6 left-6 z-20">
-              <Badge className="bg-brand-500/90 backdrop-blur-md text-black font-black uppercase tracking-widest px-4 py-2 flex items-center gap-2 shadow-lg rounded-lg border border-white/20">
+              <Badge className="bg-brand-500 text-black font-black uppercase tracking-widest px-4 py-2 flex items-center gap-2 rounded-lg border border-white/20">
                 <Sparkles className="w-4 h-4" />
                 Destaque
               </Badge>
@@ -138,7 +137,6 @@ export const Desktop = memo(({ projeto, onAbrirModal, isFeatured }: CardProjetoP
                     bg-brand-500/10 text-brand-400 font-black
                     uppercase tracking-widest hover:bg-brand-500 hover:text-black
                     transition-all duration-300 rounded-xl text-xs
-                    shadow-md hover:shadow-brand-glow-lg
                     flex items-center justify-center gap-3 group/btn
                   "
                 >
@@ -161,7 +159,6 @@ export const Desktop = memo(({ projeto, onAbrirModal, isFeatured }: CardProjetoP
           border-zinc-800 rounded-xl overflow-hidden
           group flex flex-col h-full relative
           hover:border-brand-500/40 transition-all duration-300
-          hover:shadow-lg hover:shadow-brand-500/20
         "
         data-cursor-text="Ver"
       >
@@ -184,7 +181,7 @@ export const Desktop = memo(({ projeto, onAbrirModal, isFeatured }: CardProjetoP
             opacity-90 group-hover:opacity-100
           "
           />
-          <HStack className="absolute bottom-3 right-3 items-center gap-2 text-xs text-white font-mono bg-black/80 backdrop-blur-md px-3 py-1.5 rounded-lg border border-zinc-700/50 shadow-lg">
+          <HStack className="absolute bottom-3 right-3 items-center gap-2 text-xs text-white font-mono bg-zinc-950 border border-zinc-700/50 px-3 py-1.5 rounded-lg">
             <Icon icon={Calendar} className="w-3.5 h-3.5 text-brand-400" />
             <Text className="text-zinc-100 font-medium">
               {projeto.periodoExibicao ?? formatarPeriodo(projeto.dataInicio, projeto.dataFim)}
@@ -198,7 +195,7 @@ export const Desktop = memo(({ projeto, onAbrirModal, isFeatured }: CardProjetoP
           relative overflow-hidden bg-zinc-950
         "
         >
-          <Box className="absolute top-0 right-0 w-48 h-48 bg-brand-500/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2 pointer-events-none" />
+          <Box className="absolute top-0 right-0 w-48 h-48 bg-brand-500/5 rounded-full -translate-y-1/2 translate-x-1/2 pointer-events-none border border-brand-500/10" />
 
           <VStack className="gap-3 relative z-10">
             <Title
@@ -254,10 +251,6 @@ export const Desktop = memo(({ projeto, onAbrirModal, isFeatured }: CardProjetoP
                 uppercase tracking-widest hover:bg-brand-500
                 hover:text-black hover:border-brand-500
                 transition-all duration-300 rounded text-[11px] md:text-xs
-                shadow-[0_0_15px_var(--tw-shadow-color)]
-                shadow-brand-500/10
-                hover:shadow-[0_0_25px_var(--tw-shadow-color)]
-                hover:shadow-brand-500/40
                 flex items-center justify-center gap-2
               "
             >

@@ -38,11 +38,10 @@ export const Desktop = memo(({ skills }: SkillsGridProps) => (
       <motion.div key={skill.category} variants={itemVariants} className="h-full">
         <Box
           className="
-            group relative h-full bg-zinc-900/40 border border-zinc-800/60 
+            group relative h-full bg-zinc-900 border border-zinc-800 
             rounded-2xl p-4 md:p-5 lg:p-6 overflow-hidden hover:border-brand-500/30
             transition-all duration-300 hover:-translate-y-1
-            hover:shadow-[0_10px_40px_-10px_rgba(0,0,0,0.5)]
-            hover:shadow-brand-500/5 tw-shine-border
+            tw-shine-border
           "
         >
           <Box
@@ -65,7 +64,7 @@ export const Desktop = memo(({ skills }: SkillsGridProps) => (
               </Box>
               <Box
                 className="
-                  w-12 h-12 bg-brand-500/10 rounded-full blur-2xl
+                  w-12 h-12 bg-brand-500/5 rounded-full
                   absolute -top-2 -right-2 opacity-0 group-hover:opacity-100
                   transition-opacity duration-500
                 "

@@ -29,7 +29,7 @@ export function ModalWhatsApp({ estaAberto, aoFechar }: ModalWhatsAppProps) {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.3 }}
-            className="fixed inset-0 z-[100] bg-black/80 backdrop-blur-sm"
+            className="fixed inset-0 z-[100] bg-black/80"
             onClick={aoFechar}
           />
 
@@ -44,15 +44,14 @@ export function ModalWhatsApp({ estaAberto, aoFechar }: ModalWhatsAppProps) {
               }}
               className="relative w-full max-w-md pointer-events-auto"
             >
-              <Box className="relative overflow-hidden rounded-2xl bg-zinc-950 border border-zinc-800 shadow-2xl shadow-brand-500/20">
+              <Box className="relative overflow-hidden rounded-2xl bg-zinc-950 border border-zinc-800">
                 <Box className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,_var(--tw-gradient-stops))] from-brand-500/10 via-transparent to-transparent pointer-events-none" />
                 <Box className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-brand-500/50 to-transparent" />
                 <Box className="absolute bottom-0 left-0 right-0 h-[100px] bg-gradient-to-t from-brand-500/5 to-transparent pointer-events-none" />
 
                 <VStack className="relative z-10 p-6 sm:p-8 gap-6 text-center items-center">
                   <Box className="relative">
-                    <Box className="absolute inset-0 bg-brand-500/20 blur-xl rounded-full" />
-                    <Box className="relative p-4 bg-zinc-900/50 border border-brand-500/30 rounded-2xl shadow-inner shadow-white/5">
+                    <Box className="relative p-4 bg-zinc-900/50 border border-brand-500/30 rounded-2xl">
                       <SiWhatsapp className="w-8 h-8 sm:w-10 sm:h-10 text-brand-400" />
                     </Box>
                   </Box>
@@ -82,7 +81,7 @@ export function ModalWhatsApp({ estaAberto, aoFechar }: ModalWhatsAppProps) {
                     </Button>
                     <Button
                       onClick={handleConfirmar}
-                      className="flex-1 bg-brand-500 hover:bg-brand-400 text-black font-bold tracking-wide uppercase py-6 shadow-lg shadow-brand-500/25 hover:shadow-brand-500/40"
+                      className="flex-1 bg-brand-500 hover:bg-brand-400 text-black font-bold tracking-wide uppercase py-6"
                     >
                       Continuar
                     </Button>

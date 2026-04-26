@@ -19,7 +19,7 @@ export function ModalBoasVindas() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.3 }}
-            className="fixed inset-0 z-[100] bg-black/80 backdrop-blur-sm"
+            className="fixed inset-0 z-[100] bg-black/80"
             onClick={closeWelcomeModal}
           />
 
@@ -34,14 +34,13 @@ export function ModalBoasVindas() {
               }}
               className="relative w-full max-w-lg pointer-events-auto"
             >
-              <Box className="relative overflow-hidden rounded-2xl bg-zinc-950 border border-zinc-800 shadow-2xl shadow-brand-500/20">
+              <Box className="relative overflow-hidden rounded-2xl bg-zinc-950 border border-zinc-800">
                 <Box className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,_var(--tw-gradient-stops))] from-brand-500/10 via-transparent to-transparent pointer-events-none" />
                 <Box className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-brand-500/50 to-transparent" />
                 <Box className="absolute bottom-0 left-0 right-0 h-[100px] bg-gradient-to-t from-brand-900/10 to-transparent pointer-events-none" />
 
                 <VStack className="relative z-10 p-6 sm:p-8 gap-6 text-center items-center">
                   <Box className="relative">
-                    <Box className="absolute inset-0 bg-brand-500/20 blur-xl rounded-full" />
                     <Box className="relative w-24 h-28 mx-auto">
                       <motion.div layoutId="mascote-hero" className="w-full h-full">
                         <MascoteVisual isActive={false} />
@@ -72,7 +71,7 @@ export function ModalBoasVindas() {
 
                   <Button
                     onClick={closeWelcomeModal}
-                    className="w-full sm:w-auto min-w-[200px] bg-brand-500 hover:bg-brand-600 text-black font-bold tracking-wide uppercase py-6 text-sm transition-all duration-300 shadow-lg shadow-brand-500/25 hover:shadow-brand-500/40"
+                    className="w-full sm:w-auto min-w-[200px] bg-brand-500 hover:bg-brand-600 text-black font-bold tracking-wide uppercase py-6 text-sm transition-all duration-300"
                   >
                     Começar a Explorar
                   </Button>

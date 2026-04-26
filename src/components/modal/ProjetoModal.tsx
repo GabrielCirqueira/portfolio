@@ -69,7 +69,7 @@ export function ProjetoModal({ isOpen, onClose, projeto }: ProjetoModalProps) {
               transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
               className="relative w-full h-full sm:h-auto sm:max-w-[90vw] md:max-w-4xl lg:max-w-5xl sm:max-h-[85vh] md:max-h-[88vh] pointer-events-auto"
             >
-              <Box className="relative bg-zinc-950 border-0 sm:border sm:border-zinc-800 sm:rounded-xl md:rounded-2xl shadow-2xl shadow-brand-500/10 h-full sm:h-auto sm:max-h-[85vh] md:max-h-[88vh] flex flex-col overflow-hidden">
+              <Box className="relative bg-zinc-950 border-0 sm:border sm:border-zinc-800 sm:rounded-xl md:rounded-2xl h-full sm:h-auto sm:max-h-[85vh] md:max-h-[88vh] flex flex-col overflow-hidden">
                 <Box className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,_var(--tw-gradient-stops))] from-brand-500/5 via-transparent to-transparent pointer-events-none z-0" />
                 <Box className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-brand-500/50 to-transparent z-0" />
 
@@ -86,7 +86,7 @@ export function ProjetoModal({ isOpen, onClose, projeto }: ProjetoModalProps) {
                       </HStack>
 
                       <HStack className="items-center gap-2 flex-wrap hidden md:flex">
-                        <HStack className="items-center gap-2 text-xs text-zinc-300 font-mono bg-zinc-900/80 border border-zinc-800 px-2.5 py-1.5 rounded-lg backdrop-blur-sm">
+                        <HStack className="items-center gap-2 text-xs text-zinc-300 font-mono bg-zinc-900 border border-zinc-800 px-2.5 py-1.5 rounded-lg">
                           <Icon icon={Calendar} className="w-3.5 h-3.5 text-brand-400" />
                           <Text className="text-zinc-200 font-medium">
                             {projeto.periodoExibicao ??
@@ -123,7 +123,7 @@ export function ProjetoModal({ isOpen, onClose, projeto }: ProjetoModalProps) {
 
                           <Button
                             onClick={() => setImagemExpandida(projeto.imagens[imagemSelecionada])}
-                            className="absolute top-2 right-2 z-[3] bg-zinc-900/90 border border-brand-500/30 text-brand-400 hover:bg-brand-500 hover:text-black hover:border-brand-500 transition-all duration-300 rounded-lg w-10 h-10 p-0 flex items-center justify-center backdrop-blur-md shadow-lg shadow-brand-500/10 hover:shadow-brand-500/40"
+                            className="absolute top-2 right-2 z-[3] bg-zinc-900 border border-brand-500/30 text-brand-400 hover:bg-brand-500 hover:text-black hover:border-brand-500 transition-all duration-300 rounded-lg w-10 h-10 p-0 flex items-center justify-center shadow-lg hover:shadow-brand-500/40"
                           >
                             <Icon icon={ImageIcon} className="w-5 h-5" />
                           </Button>
@@ -141,7 +141,7 @@ export function ProjetoModal({ isOpen, onClose, projeto }: ProjetoModalProps) {
                               onClick={() => setImagemSelecionada(index)}
                               className={`relative flex-shrink-0 w-16 h-12 md:w-20 md:h-14 rounded-lg overflow-hidden border-2 transition-all duration-300 cursor-pointer bg-zinc-900 flex items-center justify-center ${
                                 imagemSelecionada === index
-                                  ? 'border-brand-500 shadow-lg shadow-brand-500/30'
+                                  ? 'border-brand-500 shadow-brand-500/30'
                                   : 'border-zinc-700 hover:border-zinc-600 opacity-60 hover:opacity-100'
                               }`}
                             >
@@ -160,7 +160,7 @@ export function ProjetoModal({ isOpen, onClose, projeto }: ProjetoModalProps) {
                     </Box>
 
                     <HStack className="items-center gap-2 flex-wrap md:hidden">
-                      <HStack className="items-center gap-2 text-xs text-zinc-300 font-mono bg-zinc-900/80 border border-zinc-800 px-2.5 py-1.5 rounded-lg backdrop-blur-sm">
+                      <HStack className="items-center gap-2 text-xs text-zinc-300 font-mono bg-zinc-900 border border-zinc-800 px-2.5 py-1.5 rounded-lg">
                         <Icon icon={Calendar} className="w-3.5 h-3.5 text-brand-400" />
                         <Text className="text-zinc-200 font-medium">
                           {projeto.periodoExibicao ??
@@ -229,10 +229,6 @@ export function ProjetoModal({ isOpen, onClose, projeto }: ProjetoModalProps) {
                             uppercase tracking-widest hover:bg-brand-500
                             hover:text-black hover:border-brand-500
                             transition-all duration-300 rounded text-xs sm:text-sm
-                            shadow-[0_0_15px_var(--tw-shadow-color)]
-                            shadow-brand-500/10
-                            hover:shadow-[0_0_25px_var(--tw-shadow-color)]
-                            hover:shadow-brand-500/40
                             flex items-center justify-center gap-2
                           "
                         >
@@ -260,7 +256,7 @@ export function ProjetoModal({ isOpen, onClose, projeto }: ProjetoModalProps) {
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               transition={{ duration: 0.2 }}
-              className="absolute inset-0 bg-black/98 backdrop-blur-lg"
+              className="absolute inset-0 bg-black/98"
             />
 
             <motion.div
@@ -273,7 +269,7 @@ export function ProjetoModal({ isOpen, onClose, projeto }: ProjetoModalProps) {
             >
               <Button
                 onClick={() => setImagemExpandida(null)}
-                className="absolute top-2 right-2 z-10 bg-black/80 border border-zinc-700 hover:border-brand-500 hover:bg-brand-600 hover:text-black text-white transition-all duration-300 rounded-lg w-10 h-10 p-0 flex items-center justify-center backdrop-blur-md shadow-lg"
+                className="absolute top-2 right-2 z-10 bg-black/80 border border-zinc-700 hover:border-brand-500 hover:bg-brand-600 hover:text-black text-white transition-all duration-300 rounded-lg w-10 h-10 p-0 flex items-center justify-center"
               >
                 <Icon icon={X} className="w-5 h-5" />
               </Button>
@@ -281,7 +277,7 @@ export function ProjetoModal({ isOpen, onClose, projeto }: ProjetoModalProps) {
               <img
                 src={imagemExpandida}
                 alt="Visualização expandida"
-                className="max-w-full max-h-[95vh] object-contain rounded-lg shadow-2xl border border-zinc-800"
+                className="max-w-full max-h-[95vh] object-contain rounded-lg border border-zinc-800"
               />
             </motion.div>
           </Box>

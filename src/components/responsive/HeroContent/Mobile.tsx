@@ -25,10 +25,10 @@ export const Mobile = memo(() => {
       {usarEfeitosPesados && (
         <>
           <Box className="absolute top-[10%] right-[-20%] w-[250px] h-[250px] pointer-events-none z-0">
-            <Box className="w-full h-full bg-brand-500/20 rounded-full blur-[70px]" />
+            <Box className="w-full h-full bg-brand-500/10 rounded-full border border-brand-500/20" />
           </Box>
           <Box className="absolute bottom-[20%] left-[-15%] w-[200px] h-[200px] pointer-events-none z-0">
-            <Box className="w-full h-full bg-brand-700/15 rounded-full blur-[60px]" />
+            <Box className="w-full h-full bg-brand-700/10 rounded-full border border-brand-700/20" />
           </Box>
         </>
       )}
@@ -55,9 +55,8 @@ export const Mobile = memo(() => {
               className="
                 inline-flex items-center px-4 py-2
                 rounded-full border border-brand-500/40
-                bg-brand-500/10 backdrop-blur-sm text-brand-300 text-xs
+                bg-zinc-900 text-brand-300 text-xs
                 uppercase tracking-wider font-semibold
-                shadow-lg shadow-brand-500/10
               "
             >
               <Icon icon={Sparkles} className="w-3.5 h-3.5 mr-2 text-brand-400" />
@@ -161,12 +160,10 @@ export const Mobile = memo(() => {
                 <Button
                   className="
                     w-full h-14 rounded-2xl
-                    bg-gradient-to-r from-brand-600 to-brand-500
-                    active:from-brand-500 active:to-brand-400
+                    bg-brand-600 active:bg-brand-500
                     text-black text-sm font-bold uppercase tracking-wide
                     transition-all duration-200
-                    shadow-lg shadow-brand-500/20
-                    active:shadow-brand-500/30 active:scale-[0.98]
+                    active:scale-[0.98]
                   "
                 >
                   <HStack className="gap-2">
@@ -185,7 +182,7 @@ export const Mobile = memo(() => {
                   variant="outline"
                   className="
                     w-full h-14 rounded-2xl
-                    bg-zinc-900/50 backdrop-blur-sm
+                    bg-zinc-950
                     border-2 border-zinc-700/50
                     text-zinc-200 active:text-white text-sm
                     active:border-brand-500/50 active:bg-brand-500/5

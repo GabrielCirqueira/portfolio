@@ -47,7 +47,7 @@ export const Mobile = memo(({ aboutCards }: MobileProps) => {
       >
         <Badge
           variant="outline"
-          className="mx-auto w-fit px-3 py-1 border-brand-500/30 text-brand-400 uppercase tracking-wider text-[10px] font-bold bg-brand-500/5 backdrop-blur-sm rounded-full"
+          className="mx-auto w-fit px-3 py-1 text-brand-400 uppercase tracking-wider text-[10px] font-bold bg-zinc-900 border border-brand-500/30 rounded-full"
         >
           Sobre Mim
         </Badge>
@@ -70,7 +70,7 @@ export const Mobile = memo(({ aboutCards }: MobileProps) => {
           animate={ehDispositivoLento ? {} : { y: [0, -8, 0] }}
           transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
         >
-          <Box className="relative w-64 h-80 rounded-2xl overflow-hidden border border-zinc-700/50 bg-zinc-900 shadow-2xl mb-6 group">
+          <Box className="relative w-64 h-80 rounded-2xl overflow-hidden border border-zinc-700/50 bg-zinc-900 shadow-lg mb-6 group">
             <Box className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent z-10" />
             <img
               src="/images/gabriel1.webp"
@@ -87,7 +87,7 @@ export const Mobile = memo(({ aboutCards }: MobileProps) => {
                   Gabriel C.
                 </Span>
               </VStack>
-              <Box className="p-2 bg-brand-500 text-black rounded-lg shadow-lg shadow-brand-500/20">
+              <Box className="p-2 bg-brand-500 text-black rounded-lg">
                 <Icon icon={FileCode} className="h-4 w-4" />
               </Box>
             </HStack>
@@ -111,7 +111,7 @@ export const Mobile = memo(({ aboutCards }: MobileProps) => {
               duration: ehDispositivoLento ? 0.2 : 0.4,
               delay: index * 0.05,
             }}
-            className="p-4 rounded-xl bg-zinc-900/40 border border-zinc-800/50 backdrop-blur-sm text-center relative overflow-hidden"
+            className="p-4 rounded-xl bg-zinc-900 border border-zinc-800/50 text-center relative overflow-hidden"
           >
             <motion.div
               animate={{ opacity: [0, 0.1, 0] }}
@@ -130,7 +130,7 @@ export const Mobile = memo(({ aboutCards }: MobileProps) => {
         ))}
       </Grid>
 
-      <Box className="mb-10 -mx-4 py-3 bg-zinc-900/30 border-y border-zinc-800/30">
+      <Box className="mb-10 -mx-4 py-3 bg-zinc-950 border-y border-zinc-800/30">
         <Marquee gradient gradientColor="#000000" gradientWidth={100} speed={25}>
           {technologies.map((tech) => (
             <span
@@ -155,7 +155,7 @@ export const Mobile = memo(({ aboutCards }: MobileProps) => {
               delay: index * 0.1,
             }}
           >
-            <HStack className="items-start gap-4 bg-zinc-900/30 border border-zinc-800 p-5 rounded-2xl active:bg-zinc-800/50 transition-colors relative overflow-hidden">
+            <HStack className="items-start gap-4 bg-zinc-900 border border-zinc-800 p-5 rounded-2xl active:bg-zinc-800/50 transition-colors relative overflow-hidden">
               <Box className="p-2.5 rounded-lg bg-zinc-950 text-brand-400 border border-zinc-800 shrink-0 relative z-10">
                 <Icon icon={card.icon} className="h-5 w-5" />
               </Box>

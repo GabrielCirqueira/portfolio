@@ -44,12 +44,12 @@ export const Mobile = memo(({ skills }: SkillsGridProps) => {
               onClick={() => toggle(index)}
               className={`
                 w-full h-auto flex items-center gap-4 px-5 py-4
-                bg-zinc-900/60 backdrop-blur-sm border rounded-2xl
-                transition-all duration-200 shadow-lg
+                bg-zinc-900 border rounded-2xl
+                transition-all duration-200
                 active:scale-[0.98]
                 ${
                   isOpen
-                    ? 'border-brand-500/40 bg-zinc-900/90 rounded-b-none shadow-brand-500/10'
+                    ? 'border-brand-500/40 bg-zinc-950 rounded-b-none'
                     : 'border-zinc-800 active:bg-zinc-800/60'
                 }
               `}
@@ -57,11 +57,11 @@ export const Mobile = memo(({ skills }: SkillsGridProps) => {
               <Box
                 className={`
                 p-3 rounded-xl border transition-all duration-200
-                ${
-                  isOpen
-                    ? 'bg-gradient-to-br from-brand-500 to-brand-600 border-brand-500 text-black shadow-lg shadow-brand-500/20'
-                    : 'bg-zinc-950 border-zinc-800 text-zinc-400'
-                }
+                 ${
+                   isOpen
+                     ? 'bg-gradient-to-br from-brand-500 to-brand-600 border-brand-500 text-black'
+                     : 'bg-zinc-950 border-zinc-800 text-zinc-400'
+                 }
               `}
               >
                 <Icon icon={skill.icon} className="w-5 h-5" />
@@ -104,7 +104,7 @@ export const Mobile = memo(({ skills }: SkillsGridProps) => {
                   }}
                   className="overflow-hidden"
                 >
-                  <VStack className="px-5 pb-5 pt-4 bg-zinc-900/60 backdrop-blur-sm border border-t-0 border-zinc-800 rounded-b-2xl gap-4 shadow-lg">
+                  <VStack className="px-5 pb-5 pt-4 bg-zinc-950 border border-t-0 border-zinc-800 rounded-b-2xl gap-4">
                     <Text className="text-zinc-400 text-xs leading-relaxed">
                       {skill.description}
                     </Text>
