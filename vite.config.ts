@@ -55,7 +55,7 @@ export default defineConfig({
       staticDir: path.join(__dirname, 'dist'),
       routes: ['/', '/projetos', ...projectIds.map((id) => `/projetos/${id}`)],
       renderer: new Prerender.PuppeteerRenderer({
-        renderAfterTime: 2000,
+        renderAfterTime: 5000,
         headless: true,
         args: ['--no-sandbox', '--disable-setuid-sandbox'],
       }),

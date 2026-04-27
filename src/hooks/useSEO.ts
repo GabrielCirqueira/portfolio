@@ -24,35 +24,49 @@ export const useSEO = ({
   twitterDescription,
 }: useSEOProps) => {
   useEffect(() => {
-    if (title) {
+    if (title && document.title !== title) {
       document.title = title
     }
-    const updateMeta = (selector: string, content?: string) => {
-      if (!content) return
-      const element = document.querySelector(selector)
-      if (element) {
-        element.setAttribute('content', content)
+
+    const setMetaTag = (attrName: string, attrValue: string, content?: string) => {
+      if (content === undefined) return
+
+      let element = document.querySelector(`meta[${attrName}="${attrValue}"]`)
+
+      if (!element) {
+        element = document.createElement('meta')
+        element.setAttribute(attrName, attrValue)
+        document.head.appendChild(element)
       }
+
+      element.setAttribute('content', content)
     }
 
-    updateMeta('meta[name="description"]', description)
+    setMetaTag('name', 'description', description)
 
-    updateMeta('meta[property="og:title"]', ogTitle || title)
-    updateMeta('meta[property="og:description"]', ogDescription || description)
-    updateMeta('meta[property="og:type"]', ogType)
-    updateMeta('meta[property="og:image"]', ogImage)
-
-    updateMeta('meta[name="twitter:title"]', twitterTitle || ogTitle || title)
-    updateMeta(
-      'meta[name="twitter:description"]',
-      twitterDescription || ogDescription || description
+    setMetaTag('property', 'og:title', ogTitle || title)
+    setMetaTag('property', 'og:description', ogDescription || description)
+    setMetaTag('property', 'og:type', ogType)
+    setMetaTag('property', 'og:image', ogImage)
+    setMetaTag(
+      'property',
+      'og:url',
+      canonical || `https://cirqueira.com${window.location.pathname}`
     )
-    updateMeta('meta[name="twitter:image"]', ogImage)
+
+    setMetaTag('name', 'twitter:title', twitterTitle || ogTitle || title)
+    setMetaTag('name', 'twitter:description', twitterDescription || ogDescription || description)
+    setMetaTag('name', 'twitter:image', ogImage)
+    setMetaTag('name', 'twitter:card', 'summary_large_image')
+
     if (canonical) {
-      const canonicalTag = document.querySelector('link[rel="canonical"]')
-      if (canonicalTag) {
-        canonicalTag.setAttribute('href', canonical)
+      let canonicalTag = document.querySelector('link[rel="canonical"]')
+      if (!canonicalTag) {
+        canonicalTag = document.createElement('link')
+        canonicalTag.setAttribute('rel', 'canonical')
+        document.head.appendChild(canonicalTag)
       }
+      canonicalTag.setAttribute('href', canonical)
     }
   }, [
     title,
