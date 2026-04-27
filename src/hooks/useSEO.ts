@@ -68,6 +68,9 @@ export const useSEO = ({
       }
       canonicalTag.setAttribute('href', canonical)
     }
+
+    // Dispara evento para o prerenderizador
+    window.dispatchEvent(new Event('seo-ready'))
   }, [
     title,
     description,

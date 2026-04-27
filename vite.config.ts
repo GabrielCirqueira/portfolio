@@ -1,36 +1,13 @@
-import { createRequire } from 'node:module'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 import react from '@vitejs/plugin-react'
 import { visualizer } from 'rollup-plugin-visualizer'
 import { defineConfig } from 'vite'
 
-const require = createRequire(import.meta.url)
-const Prerender = require('vite-plugin-prerender')
-
 import Sitemap from 'vite-plugin-sitemap'
 
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
-
-const projectIds = [
-  'unytools',
-  'spacenow',
-  'boi-na-conta',
-  'organizabus',
-  'pip-chart',
-  'eletiva-tutoria-v3',
-  'vidflux',
-  'estoque-pdv',
-  'eletiva-tutoria-v2',
-  'monitoramento',
-  'eletiva-tutoria-v1',
-  'mini-formulario',
-  'tutoria-cmd',
-  'missao-verde',
-  'pixel-world',
-  'car-master',
-]
 
 export default defineConfig({
   plugins: [
@@ -50,32 +27,6 @@ export default defineConfig({
       open: false,
       gzipSize: true,
       filename: 'dist/bundle-analysis.html',
-    }),
-    Prerender({
-      staticDir: path.join(__dirname, 'dist'),
-      routes: ['/', '/projetos', ...projectIds.map((id) => `/projetos/${id}`)],
-      renderer: new Prerender.PuppeteerRenderer({
-        renderAfterTime: 5000,
-        headless: true,
-        args: ['--no-sandbox', '--disable-setuid-sandbox'],
-      }),
-      postProcess(renderedRoute: { html: string; route: string; outputPath?: string }) {
-        // Otimização básica de SEO no HTML gerado
-        renderedRoute.html = renderedRoute.html
-          .replace(
-            /<script (.*?) src="\/assets\/js\/(.*?)"><\/script>/g,
-            '<script $1 src="/assets/js/$2" defer></script>'
-          )
-          .replace('<html>', '<html lang="pt-BR">')
-        return renderedRoute
-      },
-      minify: {
-        collapseBooleanAttributes: true,
-        collapseWhitespace: true,
-        decodeEntities: true,
-        keepClosingSlash: true,
-        sortAttributes: true,
-      },
     }),
   ],
   build: {
