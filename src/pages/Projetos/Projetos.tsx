@@ -1,28 +1,16 @@
 import { motion } from 'framer-motion'
-import {
-  ArrowLeft,
-  Calendar,
-  Code2,
-  Filter,
-  Gamepad2,
-  Layers,
-  Monitor,
-  Sparkles,
-  TrendingUp,
-} from 'lucide-react'
+import { ArrowLeft, Gamepad2, Layers, Monitor, TrendingUp } from 'lucide-react'
 import { memo, Suspense, useEffect, useMemo, useState } from 'react'
-import { useNavigate, useSearchParams } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import { CardProjeto } from '@/components/responsive/CardProjeto'
-import { ProjetoModal } from '@/components/responsive/ProjetoModal'
-import { JSONLD } from '@/components/ui/JSONLD'
+import { SectionHeader } from '@/components/ui/SectionHeader'
+import { useAnimation } from '@/contexts'
 import { jogos, sistemas } from '@/data/projetos'
 import { useSEO } from '@/hooks/useSEO'
 import { AppContainer, Footer, Header } from '@/layouts'
-import { Badge } from '@/shadcn/components/ui/badge'
 import { Button } from '@/shadcn/components/ui/button'
-import { Icon } from '@/shadcn/components/ui/icon'
-import { Box, Container, Grid, HStack, VStack } from '@/shadcn/components/ui/layout'
-import { Span, Text, Title } from '@/shadcn/components/ui/typography'
+import { Box, Container, HStack, VStack } from '@/shadcn/components/ui/layout'
+import { Text } from '@/shadcn/components/ui/typography'
 import { lazyWithRetry } from '@/utils/importRetry'
 
 const Mascote = lazyWithRetry(() =>
@@ -41,67 +29,19 @@ const containerVariants = {
   visible: {
     opacity: 1,
     transition: {
-      staggerChildren: 0.08,
+      staggerChildren: 0.1,
     },
   },
 }
 
-const itemVariants = {
-  hidden: { opacity: 0, y: 30 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.5, ease: 'easeOut' as const },
-  },
-}
-
-const estatisticas = [
-  {
-    icone: Layers,
-    valor: sistemas.length + jogos.length,
-    rotulo: 'Projetos',
-    cor: 'text-brand-400',
-  },
-  {
-    icone: Monitor,
-    valor: sistemas.length,
-    rotulo: 'Sistemas Web',
-    cor: 'text-blue-400',
-  },
-  {
-    icone: Gamepad2,
-    valor: jogos.length,
-    rotulo: 'Jogos',
-    cor: 'text-purple-400',
-  },
-  {
-    icone: Code2,
-    valor: [...new Set([...sistemas, ...jogos].flatMap((p) => p.tecnologias))].length,
-    rotulo: 'Tecnologias',
-    cor: 'text-emerald-400',
-  },
-]
-
-const filtros: { tipo: FiltroTipo; label: string; icone: typeof Layers }[] = [
-  { tipo: 'todos', label: 'Todos', icone: Layers },
-  { tipo: 'sistemas', label: 'Sistemas', icone: Monitor },
-  { tipo: 'jogos', label: 'Jogos', icone: Gamepad2 },
-]
-
 export const Component = memo(() => {
-  const [searchParams, setSearchParams] = useSearchParams()
   const [filtroAtivo, setFiltroAtivo] = useState<FiltroTipo>('todos')
   const navigate = useNavigate()
-
-  const modalAberto = searchParams.get('projeto')
+  const { fadeUp, reducedMotion, fadeIn } = useAnimation()
 
   useSEO({
-    title: 'Projetos | Gabriel Cirqueira - Desenvolvedor Fullstack',
-    description:
-      'Explore todos os projetos de Gabriel Cirqueira: sistemas web modernos em React e Symfony, jogos desenvolvidos e soluções completas de software.',
-    ogTitle: 'Projetos | Gabriel Cirqueira - Desenvolvedor Fullstack',
-    ogDescription:
-      'Explore todos os projetos de Gabriel Cirqueira: sistemas web modernos e jogos desenvolvidos.',
+    title: 'Projetos | Gabriel Cirqueira',
+    description: 'Repositório completo de projetos desenvolvidos por Gabriel Cirqueira.',
     canonical: 'https://cirqueira.com/projetos',
   })
 
@@ -109,25 +49,7 @@ export const Component = memo(() => {
     window.scrollTo(0, 0)
   }, [])
 
-  const voltarParaProjetos = () => {
-    navigate('/#projetos')
-  }
-
-  const abrirModal = (id: string) => {
-    setSearchParams((prev) => {
-      prev.set('projeto', id)
-      return prev
-    })
-  }
-  const fecharModal = () => {
-    setSearchParams((prev) => {
-      prev.delete('projeto')
-      return prev
-    })
-  }
-
   const todosProjetos = useMemo(() => [...sistemas, ...jogos], [])
-  const projetoAtual = todosProjetos.find((p) => p.id === modalAberto)
 
   const projetosFiltrados = useMemo(() => {
     let projetos = todosProjetos
@@ -159,296 +81,198 @@ export const Component = memo(() => {
     return Object.entries(grupos).sort(([a], [b]) => Number(b) - Number(a))
   }, [projetosFiltrados])
 
-  const breadcrumbsData = {
-    '@context': 'https://schema.org',
-    '@type': 'BreadcrumbList',
-    itemListElement: [
-      {
-        '@type': 'ListItem',
-        position: 1,
-        name: 'Home',
-        item: 'https://cirqueira.com/',
-      },
-      {
-        '@type': 'ListItem',
-        position: 2,
-        name: 'Projetos',
-        item: 'https://cirqueira.com/projetos',
-      },
-    ],
-  }
-
-  const projectsPageData = {
-    '@context': 'https://schema.org',
-    '@type': 'WebPage',
-    '@id': 'https://cirqueira.com/projetos/#webpage',
-    url: 'https://cirqueira.com/projetos',
-    name: 'Projetos | Gabriel Cirqueira - Desenvolvedor Fullstack',
-    description:
-      'Explore todos os projetos de Gabriel Cirqueira: sistemas web modernos e jogos desenvolvidos.',
-    breadcrumb: {
-      '@id': 'https://cirqueira.com/projetos/#breadcrumb',
-    },
-  }
-
   return (
     <AppContainer
       paddingX="0"
-      className="min-h-screen bg-gradient-to-b from-black via-zinc-950 to-black w-full overflow-x-hidden"
+      paddingY="0"
+      className="min-h-screen bg-black w-full overflow-x-hidden"
     >
-      <JSONLD data={breadcrumbsData} />
-      <JSONLD data={projectsPageData} />
       <Suspense fallback={null}>
         <Mascote />
         <WhatsAppButton />
       </Suspense>
       <Header />
 
-      {projetoAtual && (
-        <ProjetoModal isOpen={!!modalAberto} onClose={fecharModal} projeto={projetoAtual} />
-      )}
-
-      <main>
-        <Box className="relative pt-20 pb-10 sm:pt-32 sm:pb-20 overflow-hidden">
-          <Box className="absolute inset-0 bg-gradient-to-b from-brand-500/5 via-transparent to-transparent" />
-          <Box className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-brand-500/10 via-transparent to-transparent" />
-          <Box className="absolute inset-0 bg-[radial-gradient(currentColor_1px,transparent_1px)] bg-[size:24px_24px] text-brand-500/20 opacity-50" />
-
-          <Container size="xl" className="relative z-10 px-5 sm:px-6">
-            <motion.div
-              initial={{ opacity: 0, x: -20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.5 }}
-              className="mb-6 sm:mb-8"
-            >
-              <Button
-                variant="ghost"
-                onClick={voltarParaProjetos}
-                className="text-zinc-400 hover:text-white hover:bg-zinc-800/50 gap-2 text-sm"
-              >
-                <Icon icon={ArrowLeft} className="w-4 h-4" />
-                <span className="hidden sm:inline">Voltar para Home</span>
-                <span className="sm:hidden">Voltar</span>
-              </Button>
-            </motion.div>
-
-            <VStack className="items-center text-center gap-4 sm:gap-6 mb-8 sm:mb-12">
-              <motion.div
-                initial={{ opacity: 0, scale: 0.5 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 0.5 }}
-              >
-                <Badge
-                  variant="outline"
-                  className="
-                    border-brand-500/40 text-brand-400
-                    uppercase tracking-wider text-xs font-semibold
-                    px-5 py-2 bg-brand-500/10 backdrop-blur-md
-                    shadow-lg shadow-brand-500/10 rounded-full
-                    flex items-center gap-2
-                  "
-                >
-                  <Icon icon={Sparkles} className="w-3.5 h-3.5" />
-                  Portfólio Completo
-                </Badge>
-              </motion.div>
-
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: 0.1 }}
-              >
-                <Title
-                  as="h1"
-                  className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-bold uppercase tracking-tight font-heading"
-                >
-                  Todos os <Span className="text-gradient">Projetos</Span>
-                </Title>
-              </motion.div>
-
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: 0.2 }}
-                className="max-w-2xl px-2"
-              >
-                <Text className="text-zinc-400 text-xs sm:text-base md:text-lg leading-relaxed">
-                  Uma jornada através dos projetos que desenvolvi ao longo dos anos.
-                </Text>
-              </motion.div>
-            </VStack>
-
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.3 }}
-            >
-              <Grid className="grid-cols-2 sm:grid-cols-4 gap-2 sm:gap-4 max-w-3xl mx-auto px-1">
-                {estatisticas.map((stat, index) => (
-                  <motion.div
-                    key={stat.rotulo}
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.5, delay: 0.4 + index * 0.1 }}
-                    className="
-                      bg-zinc-900/50 backdrop-blur-sm border border-zinc-800/50
-                      rounded-lg sm:rounded-2xl p-2.5 sm:p-5 text-center
-                      hover:border-zinc-700/50 transition-colors
-                    "
-                  >
-                    <Icon
-                      icon={stat.icone}
-                      className={`w-4 h-4 sm:w-6 sm:h-6 mx-auto mb-1 sm:mb-2 ${stat.cor}`}
-                    />
-                    <Text className="text-lg sm:text-3xl font-bold text-white font-heading">
-                      {stat.valor}
-                    </Text>
-                    <Text className="text-[8px] sm:text-xs text-zinc-500 uppercase tracking-wider font-semibold whitespace-nowrap">
-                      {stat.rotulo}
-                    </Text>
-                  </motion.div>
-                ))}
-              </Grid>
-            </motion.div>
-          </Container>
+      <main className="relative pt-32 pb-32">
+        <Box className="fixed inset-0 pointer-events-none">
+          <Box className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(27,200,69,0.05),transparent_50%)]" />
+          <Box className="absolute bottom-0 left-0 right-0 h-[50vh] bg-[gradient-to-t(from_black,to_transparent)]" />
         </Box>
 
-        <Box className="py-8 sm:py-16 relative">
-          <Box className="absolute inset-0 bg-gradient-to-b from-zinc-950 via-black to-zinc-950" />
-          <Box className="absolute inset-0 bg-[radial-gradient(currentColor_1px,transparent_1px)] bg-[size:20px_20px] text-brand-500/10" />
-          <Box className="absolute top-0 left-1/4 w-96 h-96 bg-brand-500/5 rounded-full blur-3xl pointer-events-none" />
-          <Box className="absolute bottom-0 right-1/4 w-96 h-96 bg-purple-500/5 rounded-full blur-3xl pointer-events-none" />
-
-          <Container size="xl" className="relative z-10 px-5 sm:px-6">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5 }}
-              className="mb-8 sm:mb-14"
+        <Container size="xl" className="relative z-10 px-6">
+          <motion.div
+            variants={reducedMotion ? {} : fadeIn}
+            initial="hidden"
+            animate="visible"
+            className="mb-10"
+          >
+            <Button
+              variant="ghost"
+              onClick={() => navigate('/')}
+              className="group text-zinc-500 hover:text-brand-400 hover:bg-transparent p-0 gap-2 text-[10px] font-black uppercase tracking-[0.2em] transition-all"
             >
-              <HStack className="items-center gap-3 mb-4 sm:mb-6">
-                <Icon icon={Filter} className="w-4 h-4 text-zinc-500" />
-                <Text className="text-sm text-zinc-500 uppercase tracking-wider font-semibold">
-                  Filtrar por tipo
+              <ArrowLeft size={14} className="group-hover:-translate-x-1 transition-transform" />
+              Início <span className="text-zinc-800">/</span> Projetos
+            </Button>
+          </motion.div>
+
+          <SectionHeader
+            number="04"
+            title="Repositório"
+            subtitle="Uma visão detalhada de toda a minha produção técnica, organizada cronologicamente e categorizada por tipo de solução."
+          />
+
+          <motion.div
+            variants={reducedMotion ? {} : fadeUp}
+            initial="hidden"
+            animate="visible"
+            transition={{ delay: 0.2 }}
+            className="mt-12 flex flex-wrap items-center gap-x-10 gap-y-6 border-b border-zinc-900 pb-12"
+          >
+            <VStack className="items-start gap-1">
+              <Text className="text-[10px] text-zinc-600 font-black uppercase tracking-widest">
+                Total
+              </Text>
+              <HStack className="gap-2">
+                <Layers size={14} className="text-brand-500" />
+                <Text className="text-white text-xl font-black font-heading">
+                  {todosProjetos.length}
                 </Text>
               </HStack>
+            </VStack>
 
-              <HStack className="flex-wrap gap-2 sm:gap-3">
-                {filtros.map((filtro) => (
-                  <Button
-                    key={filtro.tipo}
-                    variant={filtroAtivo === filtro.tipo ? 'default' : 'outline'}
-                    onClick={() => setFiltroAtivo(filtro.tipo)}
-                    className={`
-                      gap-1.5 sm:gap-2 rounded-full px-3 sm:px-5 py-1.5 sm:py-2 transition-all text-xs sm:text-sm
-                      ${
-                        filtroAtivo === filtro.tipo
-                          ? 'bg-brand-500 text-black hover:bg-brand-600 shadow-lg shadow-brand-500/30'
-                          : 'border-zinc-700 text-zinc-400 hover:border-zinc-600 hover:text-white bg-transparent'
-                      }
-                    `}
-                  >
-                    <Icon icon={filtro.icone} className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
-                    {filtro.label}
-                    <Badge
-                      className={`
-                        ml-0.5 sm:ml-1 px-1.5 sm:px-2 py-0.5 text-[9px] sm:text-[10px] rounded-full
-                        ${
-                          filtroAtivo === filtro.tipo
-                            ? 'bg-black/20 text-black'
-                            : 'bg-zinc-800 text-zinc-400'
-                        }
-                      `}
-                    >
-                      {filtro.tipo === 'todos'
-                        ? todosProjetos.length
-                        : filtro.tipo === 'sistemas'
-                          ? sistemas.length
-                          : jogos.length}
-                    </Badge>
-                  </Button>
-                ))}
+            <VStack className="items-start gap-1">
+              <Text className="text-[10px] text-zinc-600 font-black uppercase tracking-widest">
+                Sistemas
+              </Text>
+              <HStack className="gap-2">
+                <Monitor size={14} className="text-brand-500" />
+                <Text className="text-white text-xl font-black font-heading">
+                  {sistemas.length}
+                </Text>
               </HStack>
-            </motion.div>
+            </VStack>
 
-            <VStack className="gap-10 sm:gap-16">
-              {projetosPorAno.map(([ano, projetos], anoIndex) => (
-                <motion.div
-                  key={ano}
-                  initial={{ opacity: 0 }}
-                  whileInView={{ opacity: 1 }}
-                  viewport={{ once: true, margin: '-50px' }}
-                  transition={{ duration: 0.5, delay: anoIndex * 0.1 }}
-                  className="w-full"
+            <VStack className="items-start gap-1">
+              <Text className="text-[10px] text-zinc-600 font-black uppercase tracking-widest">
+                Jogos
+              </Text>
+              <HStack className="gap-2">
+                <Gamepad2 size={14} className="text-brand-500" />
+                <Text className="text-white text-xl font-black font-heading">{jogos.length}</Text>
+              </HStack>
+            </VStack>
+          </motion.div>
+
+          <motion.div
+            variants={reducedMotion ? {} : fadeUp}
+            initial="hidden"
+            animate="visible"
+            transition={{ delay: 0.3 }}
+            className="mt-12 mb-20"
+          >
+            <HStack className="gap-2 bg-zinc-900/30 p-1.5 rounded-2xl border border-zinc-800/50 w-fit">
+              {(['todos', 'sistemas', 'jogos'] as FiltroTipo[]).map((tipo) => (
+                <button
+                  type="button"
+                  key={tipo}
+                  onClick={() => setFiltroAtivo(tipo)}
+                  className={`
+                    px-6 py-2.5 text-[10px] font-black uppercase tracking-[0.15em] rounded-xl transition-all duration-500
+                    ${
+                      filtroAtivo === tipo
+                        ? 'bg-brand-500 text-black shadow-lg shadow-brand-500/20'
+                        : 'text-zinc-500 hover:text-zinc-300 hover:bg-zinc-800/50'
+                    }
+                  `}
                 >
-                  <HStack className="items-center gap-2 sm:gap-4 mb-6 sm:mb-8 flex-wrap">
-                    <HStack className="items-center gap-2 sm:gap-3 bg-zinc-900/80 border border-zinc-800 rounded-lg sm:rounded-xl px-3 sm:px-4 py-2 sm:py-2.5 shadow-lg">
-                      <Icon icon={Calendar} className="w-4 h-4 sm:w-5 sm:h-5 text-brand-400" />
-                      <Text className="text-lg sm:text-2xl font-bold text-white font-heading">
-                        {ano}
-                      </Text>
-                    </HStack>
-                    <Box className="h-px bg-gradient-to-r from-brand-500/50 via-brand-500/20 to-transparent flex-1 hidden sm:block" />
-                    <Badge className="bg-zinc-900 text-zinc-400 border border-zinc-800 px-2 sm:px-3 py-0.5 sm:py-1 text-xs sm:text-sm">
-                      {projetos.length} {projetos.length === 1 ? 'projeto' : 'projetos'}
-                    </Badge>
-                  </HStack>
-
-                  <motion.div
-                    variants={containerVariants}
-                    initial="hidden"
-                    whileInView="visible"
-                    viewport={{ once: true, margin: '-50px' }}
-                    className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 md:gap-8"
-                  >
-                    {projetos.map((projeto) => (
-                      <motion.div key={projeto.id} variants={itemVariants}>
-                        <CardProjeto projeto={projeto} onAbrirModal={abrirModal} />
-                      </motion.div>
-                    ))}
-                  </motion.div>
-                </motion.div>
+                  {tipo}
+                </button>
               ))}
-            </VStack>
+            </HStack>
+          </motion.div>
 
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6 }}
-              className="mt-12 sm:mt-20 text-center"
-            >
-              <Box className="inline-flex items-center gap-2 sm:gap-3 bg-gradient-to-r from-brand-500/10 via-brand-500/5 to-transparent border border-brand-500/20 rounded-xl sm:rounded-2xl px-4 sm:px-6 py-3 sm:py-4 backdrop-blur-sm">
-                <Icon icon={TrendingUp} className="w-5 h-5 sm:w-6 sm:h-6 text-brand-400" />
-                <Text className="text-zinc-300 text-xs sm:text-base">
-                  <Span className="text-brand-400 font-semibold">{projetosPorAno.length} anos</Span>{' '}
-                  de evolução contínua
-                </Text>
-              </Box>
-            </motion.div>
+          <VStack className="gap-24 sm:gap-32">
+            {projetosPorAno.map(([ano, projetos], _anoIndex) => (
+              <motion.div
+                key={ano}
+                initial={{ opacity: 0 }}
+                whileInView={{ opacity: 1 }}
+                viewport={{ once: true, margin: '-100px' }}
+                transition={{ duration: 0.8 }}
+                className="w-full group/year"
+              >
+                <HStack className="items-end gap-6 mb-12">
+                  <div className="relative">
+                    <Text className="font-chakra text-6xl sm:text-8xl font-black text-zinc-900/50 leading-none tracking-tighter group-hover/year:text-brand-500/10 transition-colors duration-700">
+                      {ano}
+                    </Text>
+                    <Box className="absolute bottom-2 left-0 w-full h-1 bg-brand-500/20 rounded-full overflow-hidden">
+                      <motion.div
+                        className="h-full bg-brand-500"
+                        initial={{ x: '-100%' }}
+                        whileInView={{ x: '0%' }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 1, delay: 0.2 }}
+                      />
+                    </Box>
+                  </div>
+                  <Text className="text-[10px] text-zinc-600 font-black uppercase tracking-[0.4em] mb-2 hidden sm:block">
+                    {projetos.length} {projetos.length === 1 ? 'PROJETO' : 'PROJETOS'}
+                  </Text>
+                </HStack>
 
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-              className="mt-8 sm:mt-12 text-center max-w-2xl mx-auto px-2"
-            >
-              <Box className="bg-zinc-900/50 border border-zinc-800 rounded-xl sm:rounded-2xl p-4 sm:p-8 backdrop-blur-sm">
-                <Text className="text-zinc-400 text-xs sm:text-base leading-relaxed italic">
-                  Estes são apenas os projetos que consegui reunir e documentar. Ao longo da minha
-                  jornada como desenvolvedor, criei{' '}
-                  <Span className="text-brand-400 font-semibold">muitos outros</Span>, alguns são
-                  privados de clientes e outros que acabaram se perdendo no tempo.
-                </Text>
-              </Box>
-            </motion.div>
-          </Container>
-        </Box>
+                <motion.div
+                  variants={reducedMotion ? {} : containerVariants}
+                  initial="hidden"
+                  whileInView="visible"
+                  viewport={{ once: true }}
+                  className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+                >
+                  {projetos.map((projeto) => (
+                    <motion.div
+                      key={projeto.id}
+                      variants={
+                        reducedMotion
+                          ? {}
+                          : {
+                              hidden: { opacity: 0, y: 20 },
+                              visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
+                            }
+                      }
+                    >
+                      <CardProjeto projeto={projeto} />
+                    </motion.div>
+                  ))}
+                </motion.div>
+              </motion.div>
+            ))}
+          </VStack>
+
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="mt-40 border-t border-zinc-900 pt-20 text-center"
+          >
+            <TrendingUp className="w-8 h-8 text-brand-500 mx-auto mb-8 opacity-50" />
+            <Text className="max-w-2xl mx-auto text-zinc-500 text-base md:text-lg leading-relaxed font-medium italic">
+              "A verdadeira evolução de um desenvolvedor não está no volume de código escrito, mas
+              na clareza dos problemas resolvidos."
+            </Text>
+            <HStack className="justify-center gap-4 mt-12">
+              <Box className="w-2 h-2 rounded-full bg-brand-500/20" />
+              <Box className="w-2 h-2 rounded-full bg-brand-500/40" />
+              <Box className="w-2 h-2 rounded-full bg-brand-500/20" />
+            </HStack>
+          </motion.div>
+        </Container>
       </main>
 
       <Footer />
     </AppContainer>
   )
 })
+
+Component.displayName = 'ProjetosPage'
+export default Component

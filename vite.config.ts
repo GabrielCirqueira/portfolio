@@ -1,11 +1,32 @@
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 import react from '@vitejs/plugin-react'
+import { visualizer } from 'rollup-plugin-visualizer'
 import { defineConfig } from 'vite'
+import Prerender from 'vite-plugin-prerender'
 import Sitemap from 'vite-plugin-sitemap'
 
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
+
+const projectIds = [
+  'unytools',
+  'spacenow',
+  'boi-na-conta',
+  'organizabus',
+  'pip-chart',
+  'eletiva-tutoria-v3',
+  'vidflux',
+  'estoque-pdv',
+  'eletiva-tutoria-v2',
+  'monitoramento',
+  'eletiva-tutoria-v1',
+  'mini-formulario',
+  'tutoria-cmd',
+  'missao-verde',
+  'pixel-world',
+  'car-master',
+]
 
 export default defineConfig({
   plugins: [
@@ -20,6 +41,32 @@ export default defineConfig({
       changefreq: 'weekly',
       priority: 0.8,
       lastmod: new Date(),
+    }),
+    visualizer({
+      open: false,
+      gzipSize: true,
+      filename: 'dist/bundle-analysis.html',
+    }),
+    Prerender({
+      staticDir: path.join(__dirname, 'dist'),
+      routes: ['/', '/projetos', ...projectIds.map((id) => `/projetos/${id}`)],
+      postProcess(renderedRoute) {
+        // Otimização básica de SEO no HTML gerado
+        renderedRoute.html = renderedRoute.html
+          .replace(
+            /<script (.*?) src="\/assets\/js\/(.*?)"><\/script>/g,
+            '<script $1 src="/assets/js/$2" defer></script>'
+          )
+          .replace('<html>', '<html lang="pt-BR">')
+        return renderedRoute
+      },
+      minify: {
+        collapseBooleanAttributes: true,
+        collapseWhitespace: true,
+        decodeEntities: true,
+        keepClosingSlash: true,
+        sortAttributes: true,
+      },
     }),
   ],
   build: {
@@ -64,22 +111,7 @@ export default defineConfig({
       },
     },
     chunkSizeWarningLimit: 1000,
-    minify: 'terser',
-    terserOptions: {
-      compress: {
-        drop_console: true,
-        drop_debugger: true,
-        pure_funcs: ['console.log', 'console.info', 'console.debug'],
-        passes: 2,
-        ecma: 2020,
-      },
-      mangle: {
-        safari10: true,
-      },
-      format: {
-        comments: false,
-      },
-    },
+    minify: 'esbuild',
     reportCompressedSize: false,
     sourcemap: false,
     cssCodeSplit: true,

@@ -1,281 +1,222 @@
 import { motion } from 'framer-motion'
-import { ArrowRight, Code2, Gamepad2, Layers, Sparkles } from 'lucide-react'
+import { ArrowRight, Code2, Eye, Github, Rocket } from 'lucide-react'
 import { memo, useMemo } from 'react'
-import { Link, useSearchParams } from 'react-router-dom'
-import { CardProjeto } from '@/components/responsive/CardProjeto'
-import { ProjetoModal } from '@/components/responsive/ProjetoModal'
+import { Link } from 'react-router-dom'
+import { SectionHeader } from '@/components/ui/SectionHeader'
 import { useAnimation } from '@/contexts'
-import { jogos, sistemas } from '@/data/projetos'
-import { Badge } from '@/shadcn/components/ui/badge'
+import { sistemas } from '@/data/projetos'
 import { Button } from '@/shadcn/components/ui/button'
-import { Box, Container, HStack, VStack } from '@/shadcn/components/ui/layout'
-import { Text, Title } from '@/shadcn/components/ui/typography'
-
-const PROJETOS_DESTAQUE = ['unytools', 'spacenow', 'monitoramento', 'estoque-pdv', 'organizabus']
+import { Box, Container, Grid, HStack, VStack } from '@/shadcn/components/ui/layout'
+import { Span, Text, Title } from '@/shadcn/components/ui/typography'
 
 export const ProjectsSection = memo(() => {
-  const [searchParams, setSearchParams] = useSearchParams()
-  const { usarAnimacoes, viewport, duration, getDelay, ehDispositivoLento } = useAnimation()
+  const { fadeUp, reducedMotion } = useAnimation()
 
-  const modalAberto = searchParams.get('projeto')
+  const projetoDestaque = useMemo(
+    () => sistemas.find((s) => s.id === 'unytools') || sistemas[0],
+    []
+  )
 
-  const abrirModal = (id: string) => {
-    setSearchParams((prev) => {
-      prev.set('projeto', id)
-      return prev
-    })
-  }
-  const fecharModal = () => {
-    setSearchParams((prev) => {
-      prev.delete('projeto')
-      return prev
-    })
-  }
-
-  const projetosDestaque = useMemo(() => {
-    const all = [...sistemas, ...jogos]
-    return PROJETOS_DESTAQUE.map((id) => all.find((p) => p.id === id)).filter(
-      Boolean
-    ) as (typeof all)[0][]
+  const projetosGrid = useMemo(() => {
+    const ids = ['spacenow', 'boi-na-conta', 'organizabus', 'monitoramento']
+    return ids.map((id) => sistemas.find((s) => s.id === id)).filter(Boolean) as typeof sistemas
   }, [])
-  const projetoAtual = useMemo(
-    () => [...sistemas, ...jogos].find((p) => p.id === modalAberto),
-    [modalAberto]
-  )
-  const totalProjetos = sistemas.length + jogos.length
-
-  const containerVariants = useMemo(
-    () =>
-      usarAnimacoes
-        ? {
-            hidden: { opacity: 0 },
-            visible: {
-              opacity: 1,
-              transition: {
-                staggerChildren: ehDispositivoLento ? 0.05 : 0.1,
-              },
-            },
-          }
-        : { hidden: { opacity: 1 }, visible: { opacity: 1 } },
-    [usarAnimacoes, ehDispositivoLento]
-  )
 
   return (
-    <Box
-      as="section"
-      id="projetos"
-      className="py-16 sm:py-20 md:py-24 lg:py-32 relative bg-black font-sans overflow-hidden"
-    >
-      <ProjetoModal isOpen={!!modalAberto} onClose={fecharModal} projeto={projetoAtual} />
-      <Box className="absolute inset-0 bg-game-black opacity-50" />
-      <Box className="absolute inset-0 bg-[radial-gradient(currentColor_1px,transparent_1px)] bg-[size:20px_20px] text-brand-500/40" />
-      <Container size="xl" className="relative z-10 px-4 sm:px-6">
-        <VStack className="items-center text-center gap-3 sm:gap-4 mb-12 sm:mb-16 md:mb-20 lg:mb-24">
+    <Box as="section" id="projetos" className="py-24 bg-black overflow-hidden">
+      <Container size="xl" className="px-6">
+        <SectionHeader
+          number="04"
+          title="Projetos"
+          subtitle="Uma vitrine técnica dos meus sistemas e jogos mais complexos, focando em arquitetura robusta e performance."
+        />
+
+        <VStack className="mt-16 gap-12">
           <motion.div
-            initial={{ opacity: 0, scale: ehDispositivoLento ? 0.9 : 0.8 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={viewport}
-            transition={{ duration }}
+            variants={reducedMotion ? {} : fadeUp}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: '-100px' }}
+            className="group relative"
           >
-            <Badge
-              variant="outline"
-              className="
-                border-brand-500/40 text-brand-400
-                uppercase tracking-wider text-xs font-semibold
-                px-5 py-2 bg-brand-500/10 backdrop-blur-md
-                shadow-lg shadow-brand-500/10 rounded-full
-              "
-            >
-              Portfolio
-            </Badge>
+            <div className="absolute -inset-1 bg-gradient-to-r from-brand-500/20 to-purple-500/20 rounded-2xl blur opacity-25 group-hover:opacity-50 transition duration-1000 group-hover:duration-200" />
+            <Box className="relative bg-zinc-900/40 border border-zinc-800/50 rounded-2xl p-6 sm:p-10 hover:border-brand-500/40 transition-all duration-500">
+              <Grid className="grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
+                <VStack className="gap-6">
+                  <HStack className="gap-3">
+                    <Box className="px-3 py-1 bg-brand-500/10 border border-brand-500/20 rounded-full">
+                      <Text className="text-[10px] font-black uppercase tracking-widest text-brand-400">
+                        Destaque Principal
+                      </Text>
+                    </Box>
+                    <Box className="px-3 py-1 bg-zinc-800/50 rounded-full">
+                      <Text className="text-[10px] font-black uppercase tracking-widest text-zinc-500">
+                        Sistema Fullstack
+                      </Text>
+                    </Box>
+                  </HStack>
+
+                  <VStack className="gap-4">
+                    <Title
+                      as="h3"
+                      className="text-3xl sm:text-4xl font-bold uppercase tracking-tight text-white font-heading"
+                    >
+                      {projetoDestaque.titulo}
+                    </Title>
+                    <Text className="text-zinc-400 text-sm sm:text-lg leading-relaxed">
+                      {projetoDestaque.descricao}
+                    </Text>
+                  </VStack>
+
+                  <div className="flex flex-wrap gap-2">
+                    {projetoDestaque.tecnologias.slice(0, 6).map((tech) => (
+                      <Span
+                        key={tech}
+                        className="px-3 py-1 bg-zinc-800/30 text-zinc-500 text-[10px] uppercase font-bold rounded-lg border border-zinc-800/50"
+                      >
+                        {tech}
+                      </Span>
+                    ))}
+                    <Span className="px-3 py-1 bg-zinc-800/30 text-zinc-600 text-[10px] uppercase font-bold rounded-lg">
+                      +{projetoDestaque.tecnologias.length - 6}
+                    </Span>
+                  </div>
+
+                  <HStack className="gap-4 pt-4">
+                    <Button
+                      asChild
+                      className="bg-brand-500 text-black hover:bg-brand-400 font-bold uppercase tracking-widest text-xs px-8"
+                    >
+                      <a href={projetoDestaque.link} target="_blank" rel="noreferrer">
+                        <Rocket className="w-4 h-4 mr-2" /> Acessar {projetoDestaque.titulo}
+                      </a>
+                    </Button>
+                    <Button
+                      variant="outline"
+                      asChild
+                      className="border-zinc-800 text-zinc-400 hover:text-white hover:bg-zinc-800 font-bold uppercase tracking-widest text-xs"
+                    >
+                      <Link to={`/projetos/${projetoDestaque.id}`}>Detalhes Técnicos</Link>
+                    </Button>
+                  </HStack>
+                </VStack>
+
+                <Link
+                  to={`/projetos/${projetoDestaque.id}`}
+                  className="relative aspect-video rounded-xl overflow-hidden border border-zinc-800/50 group-hover:border-brand-500/30 transition-colors block"
+                >
+                  <img
+                    src={projetoDestaque.imagem}
+                    alt={projetoDestaque.titulo}
+                    className="w-full h-full object-cover grayscale-[20%] group-hover:grayscale-0 transition-all duration-700 scale-100 group-hover:scale-105"
+                  />
+                  <Box className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                    <Eye className="text-white w-10 h-10 scale-0 group-hover:scale-100 transition-transform duration-500" />
+                  </Box>
+                </Link>
+              </Grid>
+            </Box>
           </motion.div>
 
-          <motion.div
-            initial={{ opacity: 0, y: ehDispositivoLento ? 10 : 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={viewport}
-            transition={{ duration, delay: getDelay(0.1) }}
-            className="space-y-4"
-          >
-            <Title
-              as="h2"
-              className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold uppercase tracking-tight font-heading"
-            >
-              Projetos <span className="text-gradient">Em Destaque</span>
-            </Title>
-            <Box className="w-20 sm:w-24 h-1 bg-brand-500 mx-auto rounded-full opacity-60" />
-            <Text className="text-zinc-400 max-w-2xl mx-auto text-sm sm:text-base md:text-lg px-4 leading-relaxed">
-              Uma seleção dos meus principais projetos. Explore mais de {totalProjetos} trabalhos na
-              página completa.
-            </Text>
-          </motion.div>
+          <Grid className="grid-cols-1 md:grid-cols-2 gap-8">
+            {projetosGrid.map((proj, i) => (
+              <motion.div
+                key={proj.id}
+                variants={reducedMotion ? {} : fadeUp}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.1 }}
+                className="group flex flex-col bg-zinc-900/30 border border-zinc-800/50 rounded-3xl overflow-hidden hover:border-brand-500/30 transition-all duration-500"
+              >
+                <Link
+                  to={`/projetos/${proj.id}`}
+                  className="aspect-video relative overflow-hidden block"
+                >
+                  <img
+                    src={proj.imagem}
+                    alt={proj.titulo}
+                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                  />
+                  <Box className="absolute inset-0 bg-black/40 group-hover:bg-black/20 transition-colors" />
+                  <Box className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center bg-black/40 backdrop-blur-[2px]">
+                    <span className="px-6 py-2 bg-brand-500 text-black text-[10px] font-black uppercase tracking-[0.2em] rounded-full">
+                      Ver Projeto
+                    </span>
+                  </Box>
+                </Link>
+
+                <VStack className="p-8 gap-6 flex-1">
+                  <VStack className="gap-3">
+                    <Title
+                      as="h4"
+                      className="text-xl font-black text-white uppercase tracking-tighter group-hover:text-brand-400 transition-colors"
+                    >
+                      {proj.titulo}
+                    </Title>
+                    <Text className="text-zinc-400 text-sm line-clamp-2 leading-relaxed font-medium">
+                      {proj.descricao}
+                    </Text>
+                  </VStack>
+
+                  <div className="flex flex-wrap gap-x-4 gap-y-2 mt-auto">
+                    {proj.tecnologias.slice(0, 3).map((tech) => (
+                      <Span
+                        key={tech}
+                        className="text-[10px] text-zinc-600 font-bold uppercase tracking-widest"
+                      >
+                        {tech}
+                      </Span>
+                    ))}
+                    <Link
+                      to={`/projetos/${proj.id}`}
+                      className="text-brand-500 hover:text-brand-400 transition-all flex items-center gap-2 ml-auto group/link"
+                    >
+                      <ArrowRight className="w-4 h-4 group-hover/link:translate-x-1 transition-transform" />
+                    </Link>
+                  </div>
+                </VStack>
+              </motion.div>
+            ))}
+          </Grid>
         </VStack>
 
-        <motion.div
-          variants={containerVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={viewport}
-          className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 md:gap-10 lg:gap-12 max-w-6xl mx-auto"
-        >
-          {projetosDestaque.map((projeto) => (
-            <Box key={projeto.id} className={`${projeto.id === 'unytools' ? 'md:col-span-2' : ''}`}>
-              <CardProjeto
-                projeto={projeto}
-                onAbrirModal={abrirModal}
-                isFeatured={projeto.id === 'unytools'}
-              />
-            </Box>
-          ))}
-        </motion.div>
+        <VStack className="mt-20 items-center gap-8">
+          <Button
+            asChild
+            variant="outline"
+            className="h-14 px-10 border-brand-500/20 text-brand-400 hover:bg-brand-500/5 rounded-full group transition-all duration-500 hover:border-brand-500/60 hover:shadow-[0_0_30px_rgba(32,197,110,0.1)]"
+          >
+            <Link to="/projetos" className="flex items-center gap-3">
+              <span className="text-xs font-black uppercase tracking-[0.3em]">
+                Explorar Portfólio Completo
+              </span>
+              <ArrowRight className="w-4 h-4 group-hover:translate-x-2 transition-transform duration-500" />
+            </Link>
+          </Button>
 
-        <motion.div
-          initial={{ opacity: 0, y: ehDispositivoLento ? 10 : 40 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={viewport}
-          transition={{ duration, delay: getDelay(0.2) }}
-          className="mt-20 sm:mt-24 md:mt-32"
-        >
-          <VStack className="items-center gap-0 mb-10">
-            <Box className="w-px h-12 sm:h-16 bg-gradient-to-b from-transparent via-brand-500/50 to-brand-500" />
-            <motion.div
-              className="w-8 h-8 rounded-full border border-brand-500/60 bg-brand-500/10 flex items-center justify-center"
-              animate={{ scale: [1, 1.15, 1] }}
-              transition={{ duration: 2, repeat: Number.POSITIVE_INFINITY, ease: 'easeInOut' }}
+          <HStack className="gap-8">
+            <a
+              href="https://github.com/GabrielCirqueira"
+              target="_blank"
+              rel="noreferrer"
+              className="flex items-center gap-2 text-zinc-600 hover:text-white transition-colors group"
             >
-              <Sparkles className="w-3.5 h-3.5 text-brand-400" />
-            </motion.div>
-          </VStack>
-
-          <Box className="relative max-w-3xl mx-auto">
-            <motion.div
-              className="absolute -inset-1 rounded-3xl bg-gradient-to-r from-brand-500/30 via-brand-400/10 to-brand-500/30 blur-xl"
-              animate={{ opacity: [0.5, 0.9, 0.5] }}
-              transition={{ duration: 3, repeat: Number.POSITIVE_INFINITY, ease: 'easeInOut' }}
-            />
-
-            <Box className="relative rounded-3xl border border-brand-500/30 bg-zinc-950 overflow-hidden">
-              <Box className="absolute inset-0 bg-[radial-gradient(currentColor_1px,transparent_1px)] bg-[size:18px_18px] text-brand-500/[0.04] pointer-events-none" />
-
-              <motion.div
-                className="absolute top-0 left-[10%] right-[10%] h-px bg-gradient-to-r from-transparent via-brand-400 to-transparent"
-                animate={{ opacity: [0.3, 1, 0.3], scaleX: [0.6, 1, 0.6] }}
-                transition={{ duration: 2.5, repeat: Number.POSITIVE_INFINITY, ease: 'easeInOut' }}
-              />
-
-              <Box className="px-6 py-10 sm:px-12 sm:py-20">
-                <Box className="flex flex-col lg:flex-row items-center gap-8 lg:gap-12">
-                  <Box className="grid grid-cols-3 lg:flex lg:flex-col gap-3 lg:gap-5 w-full lg:w-auto flex-shrink-0">
-                    {[
-                      {
-                        valor: sistemas.length,
-                        label: 'Sistemas Web',
-                        icon: Code2,
-                        cor: 'text-brand-400',
-                        bg: 'bg-brand-500/10 border-brand-500/20',
-                      },
-                      {
-                        valor: jogos.length,
-                        label: 'Games',
-                        icon: Gamepad2,
-                        cor: 'text-purple-400',
-                        bg: 'bg-purple-500/10 border-purple-500/20',
-                      },
-                      {
-                        valor: totalProjetos,
-                        label: 'Total',
-                        icon: Layers,
-                        cor: 'text-white',
-                        bg: 'bg-white/5 border-white/10',
-                      },
-                    ].map(({ valor, label, icon: StatIcon, cor, bg }) => (
-                      <VStack
-                        key={label}
-                        className={`items-center gap-1.5 px-3 py-3 lg:px-4 rounded-xl border ${bg}`}
-                      >
-                        <StatIcon className={`w-4 h-4 flex-shrink-0 ${cor}`} />
-                        <span
-                          className={`text-2xl lg:text-3xl font-black font-heading tabular-nums leading-none ${cor}`}
-                        >
-                          {valor}
-                        </span>
-                        <Text className="text-[9px] lg:text-[10px] text-zinc-500 uppercase tracking-widest font-bold text-center leading-tight">
-                          {label}
-                        </Text>
-                      </VStack>
-                    ))}
-                  </Box>
-
-                  <Box className="hidden lg:block w-px self-stretch bg-zinc-800/60 flex-shrink-0" />
-                  <Box className="lg:hidden w-full h-px bg-zinc-800/60" />
-
-                  <VStack className="items-center lg:items-start gap-5 text-center lg:text-left flex-1">
-                    <VStack className="gap-2">
-                      <Title
-                        as="h3"
-                        className="text-2xl sm:text-3xl font-black font-heading text-white uppercase tracking-tight leading-tight"
-                      >
-                        Muito mais <span className="text-brand-400">te espera</span> aqui
-                      </Title>
-                      <Text className="text-zinc-400 text-sm sm:text-base leading-relaxed max-w-sm">
-                        Estes são só os destaques. Veja cada projeto com stack completa, capturas e
-                        links.
-                      </Text>
-                    </VStack>
-
-                    <Link to="/projetos" className="w-full lg:w-auto">
-                      <motion.div
-                        whileHover={{ scale: 1.02 }}
-                        whileTap={{ scale: 0.97 }}
-                        transition={{ type: 'spring', stiffness: 400, damping: 20 }}
-                      >
-                        <Button
-                          size="lg"
-                          className="
-                            w-full lg:w-auto
-                            bg-brand-500 hover:bg-brand-400 active:bg-brand-600
-                            text-black font-black
-                            px-8 py-8 text-base sm:text-lg uppercase tracking-widest
-                            rounded-xl
-                            shadow-brand-glow-lg hover:shadow-brand-glow-xl
-                            transition-shadow duration-300
-                            group relative overflow-hidden
-                          "
-                        >
-                          <Box className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-600" />
-                          <HStack className="items-center justify-center gap-3 relative z-10">
-                            <Layers className="w-5 h-5 flex-shrink-0" />
-                            <span>Ver Todos os Projetos</span>
-                            <ArrowRight className="w-5 h-5 flex-shrink-0 group-hover:translate-x-2 transition-transform duration-200" />
-                          </HStack>
-                        </Button>
-                      </motion.div>
-                    </Link>
-
-                    <HStack className="gap-1.5 items-center">
-                      <Box className="w-1.5 h-1.5 rounded-full bg-brand-500 animate-pulse" />
-                      <Text className="text-[11px] text-zinc-600 uppercase tracking-widest font-bold">
-                        Acesso gratuito · sem cadastro
-                      </Text>
-                    </HStack>
-                  </VStack>
-                </Box>
-              </Box>
-
-              <motion.div
-                className="absolute bottom-0 left-[20%] right-[20%] h-px bg-gradient-to-r from-transparent via-brand-500/60 to-transparent"
-                animate={{ opacity: [0.2, 0.8, 0.2] }}
-                transition={{
-                  duration: 2.5,
-                  repeat: Number.POSITIVE_INFINITY,
-                  ease: 'easeInOut',
-                  delay: 1.25,
-                }}
-              />
-            </Box>
-          </Box>
-        </motion.div>
+              <Github className="w-4 h-4" />
+              <span className="text-[10px] font-bold uppercase tracking-widest">Open Source</span>
+            </a>
+            <Box className="w-px h-4 bg-zinc-800" />
+            <HStack className="gap-2 text-zinc-600">
+              <Code2 className="w-4 h-4" />
+              <span className="text-[10px] font-bold uppercase tracking-widest">
+                {sistemas.length} Projetos Ativos
+              </span>
+            </HStack>
+          </HStack>
+        </VStack>
       </Container>
     </Box>
   )
 })
+
+ProjectsSection.displayName = 'ProjectsSection'

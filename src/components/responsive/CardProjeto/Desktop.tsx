@@ -27,15 +27,15 @@ interface CardProjetoProps {
 }
 
 export const Desktop = memo(({ projeto, onAbrirModal, isFeatured }: CardProjetoProps) => {
-  const { usarAnimacoes, ehDispositivoLento, duration } = useAnimation()
+  const { reducedMotion } = useAnimation()
 
-  const itemVariants = usarAnimacoes
+  const itemVariants = !reducedMotion
     ? {
-        hidden: { opacity: 0, y: ehDispositivoLento ? 10 : 20 },
+        hidden: { opacity: 0, y: 20 },
         visible: {
           opacity: 1,
           y: 0,
-          transition: { duration, ease: 'easeOut' as const },
+          transition: { duration: 0.4, ease: 'easeOut' as const },
         },
       }
     : { hidden: { opacity: 1 }, visible: { opacity: 1 } }

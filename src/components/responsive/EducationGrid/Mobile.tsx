@@ -1,7 +1,7 @@
 import { AnimatePresence, motion } from 'framer-motion'
 import { Award, Briefcase, CheckCircle } from 'lucide-react'
 import { memo, useState } from 'react'
-import { useAnimacaoOtimizada } from '@/hooks/useAnimacaoOtimizada'
+import { useAnimation } from '@/contexts'
 import { Badge } from '@/shadcn/components/ui/badge'
 import { Icon } from '@/shadcn/components/ui/icon'
 import { Box, HStack, VStack } from '@/shadcn/components/ui/layout'
@@ -24,7 +24,7 @@ type TabKey = (typeof tabs)[number]['key']
 
 export const Mobile = memo(({ formacao, experiencias, conquistas }: EducationGridProps) => {
   const [activeTab, setActiveTab] = useState<TabKey>('formacao')
-  const { ehDispositivoLento } = useAnimacaoOtimizada()
+  const { reducedMotion } = useAnimation()
 
   return (
     <VStack className="gap-4 w-full">
@@ -68,7 +68,7 @@ export const Mobile = memo(({ formacao, experiencias, conquistas }: EducationGri
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
-          transition={{ duration: ehDispositivoLento ? 0.15 : 0.2 }}
+          transition={{ duration: reducedMotion ? 0.15 : 0.2 }}
           className="border border-zinc-800/60 rounded-xl bg-zinc-900/30 overflow-hidden"
         >
           {activeTab === 'formacao' && (

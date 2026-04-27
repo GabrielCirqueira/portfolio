@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion'
 import { ArrowRight, ExternalLink, Sparkles } from 'lucide-react'
 import { memo } from 'react'
-import { useAnimacaoOtimizada } from '@/hooks/useAnimacaoOtimizada'
+import { useAnimation } from '@/contexts'
 import { Badge } from '@/shadcn/components/ui/badge'
 import { Icon } from '@/shadcn/components/ui/icon'
 import { Box, HStack, VStack } from '@/shadcn/components/ui/layout'
@@ -14,7 +14,7 @@ interface ContactGridProps {
 }
 
 export const Mobile = memo(({ contactItems }: ContactGridProps) => {
-  const { ehDispositivoLento } = useAnimacaoOtimizada()
+  const { reducedMotion } = useAnimation()
 
   return (
     <VStack className="gap-3 w-full">
@@ -28,8 +28,8 @@ export const Mobile = memo(({ contactItems }: ContactGridProps) => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: '-20px', amount: 0.3 }}
             transition={{
-              duration: ehDispositivoLento ? 0.2 : 0.4,
-              delay: ehDispositivoLento ? 0 : index * 0.05,
+              duration: 0.4,
+              delay: reducedMotion ? 0 : index * 0.05,
               ease: [0.25, 0.1, 0.25, 1],
             }}
             className="w-full"
@@ -162,8 +162,8 @@ export const Mobile = memo(({ contactItems }: ContactGridProps) => {
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, margin: '-20px' }}
         transition={{
-          duration: ehDispositivoLento ? 0.2 : 0.4,
-          delay: ehDispositivoLento ? 0 : contactItems.length * 0.05,
+          duration: 0.4,
+          delay: reducedMotion ? 0 : contactItems.length * 0.05,
           ease: [0.25, 0.1, 0.25, 1],
         }}
         className="w-full"
@@ -211,3 +211,5 @@ export const Mobile = memo(({ contactItems }: ContactGridProps) => {
     </VStack>
   )
 })
+
+Mobile.displayName = 'Mobile'

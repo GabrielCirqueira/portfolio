@@ -1,7 +1,5 @@
-import { EasterEgg } from '@app/components/ui/EasterEgg'
 import { PreloadCriticalResources } from '@app/components/ui/PreloadCriticalResources'
 import { AnimationProvider, ThemeProvider } from '@app/contexts'
-import { EasterEggProvider } from '@app/contexts/EasterEggContext'
 import { WelcomeProvider } from '@app/contexts/WelcomeContext'
 import { MainLayout, RootLayout } from '@app/layouts'
 import { importWithRetry } from '@app/utils/importRetry'
@@ -23,6 +21,10 @@ const router = createBrowserRouter(
             lazy={() => importWithRetry(() => import('@app/pages/Projetos/Projetos'))}
           />
           <Route
+            path="projetos/:id"
+            lazy={() => importWithRetry(() => import('@app/pages/ProjetoDetalhes/ProjetoDetalhes'))}
+          />
+          <Route
             path="*"
             lazy={() => importWithRetry(() => import('@app/pages/NotFound/NotFound'))}
           />
@@ -36,13 +38,10 @@ export default function App() {
   return (
     <ThemeProvider>
       <AnimationProvider>
-        <EasterEggProvider>
-          <WelcomeProvider>
-            <PreloadCriticalResources />
-            <EasterEgg />
-            <RouterProvider router={router} />
-          </WelcomeProvider>
-        </EasterEggProvider>
+        <WelcomeProvider>
+          <PreloadCriticalResources />
+          <RouterProvider router={router} />
+        </WelcomeProvider>
       </AnimationProvider>
     </ThemeProvider>
   )

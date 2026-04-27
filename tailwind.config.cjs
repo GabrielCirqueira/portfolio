@@ -5,8 +5,8 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        sans: ['"Chakra Petch"', 'sans-serif'],
-        heading: ['"Chakra Petch"', 'sans-serif'],
+        chakra: ['"Chakra Petch"', 'sans-serif'],
+        sans: ['Inter', 'system-ui', 'sans-serif'],
         mono: ['"Chakra Petch"', 'monospace'],
       },
       fontWeight: {
@@ -21,8 +21,12 @@ module.exports = {
         border: 'hsl(var(--border))',
         input: 'hsl(var(--input))',
         ring: 'hsl(var(--ring))',
-        background: 'hsl(var(--background))',
-        foreground: 'hsl(var(--foreground))',
+        background: 'hsl(240, 10%, 3.9%)',
+        foreground: 'hsl(0, 0%, 95%)',
+        surface: {
+          DEFAULT: 'hsl(240, 5%, 10%)',
+          hover: 'hsl(240, 5%, 15%)',
+        },
         primary: {
           DEFAULT: 'hsl(var(--primary))',
           foreground: 'hsl(var(--primary-foreground))',
@@ -58,17 +62,17 @@ module.exports = {
           'active-body': '#2d1b4e',
         },
         brand: {
-          50: '#edfcf9',
-          100: '#d0f7f1',
-          200: '#a1efe3',
-          300: '#5ee3d0',
-          400: '#2acfb9',
-          500: '#00c9b1',
-          600: '#009f8d',
-          700: '#007d71',
-          800: '#006259',
-          900: '#004d47',
-          950: '#002a27',
+          50: '#E3F5E8',
+          100: '#CCF1D5',
+          200: '#A6E5B8',
+          300: '#7DD99B',
+          400: '#4ECF80',
+          500: '#20C56E',
+          600: '#009B4B',
+          700: '#00712D',
+          800: '#004914',
+          900: '#002403',
+          950: '#001201',
         },
         nebula: {
           100: '#E0FAFA',

@@ -1,78 +1,39 @@
 import { motion } from 'framer-motion'
 import { memo, Suspense } from 'react'
 import { EducationGrid } from '@/components/responsive/EducationGrid'
+import { SectionHeader } from '@/components/ui/SectionHeader'
 import { useAnimation } from '@/contexts'
 import { conquistas, experiencias, formacao, palavrasChaveCarreira } from '@/data/educacao'
-import { Badge } from '@/shadcn/components/ui/badge'
 import { Box, Container } from '@/shadcn/components/ui/layout'
-import { Span, Text, Title } from '@/shadcn/components/ui/typography'
+import { Text } from '@/shadcn/components/ui/typography'
 import { lazyWithRetry } from '@/utils/importRetry'
 
 const Marquee = lazyWithRetry(() => import('react-fast-marquee'))
 
 export const EducationSection = memo(() => {
-  const { ehDispositivoLento } = useAnimation()
+  const { reducedMotion } = useAnimation()
 
   return (
-    <Box
-      as="section"
-      id="formacao"
-      className="py-16 sm:py-20 md:py-24 lg:py-28 bg-black relative font-sans overflow-hidden"
-    >
-      <Container size="xl" className="relative z-10 px-4 sm:px-6">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5 }}
-          className="text-center mb-12 sm:mb-14 md:mb-16 lg:mb-20 space-y-4"
-        >
-          <Badge
-            variant="outline"
-            className="
-              px-5 py-2 border-brand-500/40
-              text-brand-400 uppercase tracking-wider
-              text-xs font-semibold bg-brand-500/10
-              backdrop-blur-sm shadow-lg shadow-brand-500/10
-              rounded-full
-            "
-          >
-            Formação
-          </Badge>
-          <Title
-            as="h2"
-            className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold font-heading uppercase tracking-tight"
-          >
-            Formação e <Span className="text-gradient">Experiência</Span>
-          </Title>
-          <Box className="w-20 sm:w-24 h-1 bg-brand-500 mx-auto rounded-full opacity-60" />
-          <Text className="text-zinc-400 max-w-2xl mx-auto text-sm sm:text-base md:text-lg px-4 leading-relaxed">
-            Meu percurso acadêmico e profissional na área de tecnologia.
-          </Text>
-        </motion.div>
+    <Box as="section" id="formacao" className="py-24 bg-black relative overflow-hidden">
+      <Container size="xl" className="relative z-10 px-6">
+        <SectionHeader
+          number="05"
+          title="Experiência & Formação"
+          subtitle="Meu percurso acadêmico e profissional na área de tecnologia, focando em desenvolvimento fullstack e inovação."
+        />
 
-        <EducationGrid formacao={formacao} experiencias={experiencias} conquistas={conquistas} />
+        <div className="mt-16">
+          <EducationGrid formacao={formacao} experiencias={experiencias} conquistas={conquistas} />
+        </div>
 
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
-          className="mt-16 sm:mt-20 max-w-3xl mx-auto text-center"
+          className="mt-20 max-w-3xl mx-auto text-center"
         >
-          <Badge
-            className="
-              mb-6 bg-transparent text-brand-400
-              border border-brand-500/40
-              uppercase tracking-wider font-semibold text-xs
-              px-5 py-2 active:bg-brand-500
-              active:text-black transition-all
-              backdrop-blur-sm rounded-full
-            "
-          >
-            Sempre em evolução
-          </Badge>
-          <Text className="text-zinc-400 text-sm sm:text-base md:text-lg px-4 leading-relaxed">
+          <Text className="text-zinc-400 text-sm sm:text-base md:text-lg leading-relaxed">
             Busco constantemente novas oportunidades de aprendizado para continuar evoluindo no
             campo da tecnologia.
           </Text>
@@ -83,9 +44,9 @@ export const EducationSection = memo(() => {
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8, delay: 0.3 }}
-          className="mt-16 sm:mt-20 relative"
+          className="mt-16 relative"
         >
-          {!ehDispositivoLento && (
+          {!reducedMotion && (
             <>
               <Box className="absolute inset-y-0 left-0 w-20 sm:w-32 bg-gradient-to-r from-black to-transparent z-10 pointer-events-none" />
               <Box className="absolute inset-y-0 right-0 w-20 sm:w-32 bg-gradient-to-l from-black to-transparent z-10 pointer-events-none" />
@@ -110,3 +71,5 @@ export const EducationSection = memo(() => {
     </Box>
   )
 })
+
+EducationSection.displayName = 'EducationSection'

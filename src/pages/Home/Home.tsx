@@ -1,18 +1,31 @@
-import {
-  AboutSection,
-  ContactSection,
-  EducationSection,
-  HeroSection,
-  ProjectsSection,
-  SkillsSection,
-  WorkflowSection,
-} from '@app/components/pages/home'
+import { HeroSection } from '@app/components/pages/home'
 import { JSONLD } from '@app/components/ui/JSONLD'
 import { useSEO } from '@app/hooks/useSEO'
 import { AppContainer, Footer, Header } from '@app/layouts'
 import { lazyWithRetry } from '@app/utils/importRetry'
 import { memo, Suspense, useEffect } from 'react'
 import { useLocation } from 'react-router-dom'
+
+const AboutSection = lazyWithRetry(() =>
+  import('@app/components/pages/home/AboutSection').then((m) => ({ default: m.AboutSection }))
+)
+const SkillsSection = lazyWithRetry(() =>
+  import('@app/components/pages/home/SkillsSection').then((m) => ({ default: m.SkillsSection }))
+)
+const ProjectsSection = lazyWithRetry(() =>
+  import('@app/components/pages/home/ProjectsSection').then((m) => ({ default: m.ProjectsSection }))
+)
+const EducationSection = lazyWithRetry(() =>
+  import('@app/components/pages/home/EducationSection').then((m) => ({
+    default: m.EducationSection,
+  }))
+)
+const WorkflowSection = lazyWithRetry(() =>
+  import('@app/components/pages/home/WorkflowSection').then((m) => ({ default: m.WorkflowSection }))
+)
+const ContactSection = lazyWithRetry(() =>
+  import('@app/components/pages/home/ContactSection').then((m) => ({ default: m.ContactSection }))
+)
 
 const Mascote = lazyWithRetry(() =>
   import('@app/components/ui/Mascote').then((module) => ({ default: module.Mascote }))
@@ -90,14 +103,18 @@ export const Component = memo(() => {
       <Header />
       <main>
         <HeroSection />
-        <AboutSection />
-        <SkillsSection />
-        <ProjectsSection />
-        <EducationSection />
-        <WorkflowSection />
-        <ContactSection />
+        <Suspense fallback={<div className="h-96" />}>
+          <AboutSection />
+          <SkillsSection />
+          <ProjectsSection />
+          <EducationSection />
+          <WorkflowSection />
+          <ContactSection />
+        </Suspense>
       </main>
       <Footer />
     </AppContainer>
   )
 })
+
+Component.displayName = 'Home'

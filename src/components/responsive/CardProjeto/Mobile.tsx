@@ -2,7 +2,7 @@ import { motion } from 'framer-motion'
 import { Calendar, ChevronRight, Sparkles } from 'lucide-react'
 import { memo } from 'react'
 import { ImagemOtimizada } from '@/components/ui/ImagemOtimizada'
-import { useAnimacaoOtimizada } from '@/hooks/useAnimacaoOtimizada'
+import { useAnimation } from '@/contexts'
 import { Badge } from '@/shadcn/components/ui/badge'
 import { Button } from '@/shadcn/components/ui/button'
 import { Icon } from '@/shadcn/components/ui/icon'
@@ -27,7 +27,7 @@ interface CardProjetoProps {
 }
 
 export const Mobile = memo(({ projeto, onAbrirModal, isFeatured }: CardProjetoProps) => {
-  const { ehDispositivoLento } = useAnimacaoOtimizada()
+  const { reducedMotion } = useAnimation()
 
   if (isFeatured) {
     return (
@@ -103,7 +103,7 @@ export const Mobile = memo(({ projeto, onAbrirModal, isFeatured }: CardProjetoPr
       initial={{ opacity: 0 }}
       whileInView={{ opacity: 1 }}
       viewport={{ once: true, margin: '0px', amount: 0.2 }}
-      transition={{ duration: ehDispositivoLento ? 0.15 : 0.25 }}
+      transition={{ duration: reducedMotion ? 0.15 : 0.25 }}
       className="w-full"
       style={{ willChange: 'opacity' }}
     >

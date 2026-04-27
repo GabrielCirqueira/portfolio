@@ -1,98 +1,62 @@
+import type { Variants } from 'framer-motion'
 import type React from 'react'
-import { createContext, useContext, useEffect, useMemo, useState } from 'react'
+import { createContext, useContext, useEffect, useState } from 'react'
 
-interface OpcoesAnimacao {
-  usarAnimacoes: boolean
-  usarAnimacoesReduzidas: boolean
-  ehDispositivoLento: boolean
-  usarEfeitosPesados: boolean
+interface AnimationContextValue {
+  reducedMotion: boolean
+  fadeUp: Variants
+  fadeIn: Variants
+  staggerContainer: Variants
 }
 
-interface AnimationContextType extends OpcoesAnimacao {
-  viewport: {
-    once: boolean
-    margin: string
-    amount: number
-  }
-  duration: number
-  getDelay: (baseDelay?: number) => number
-}
+const AnimationContext = createContext<AnimationContextValue | null>(null)
 
-const AnimationContext = createContext<AnimationContextType | undefined>(undefined)
+const variants: Omit<AnimationContextValue, 'reducedMotion'> = {
+  fadeUp: {
+    hidden: { opacity: 0, y: 16 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.4, ease: 'easeOut' },
+    },
+  },
+  fadeIn: {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: { duration: 0.35, ease: 'easeOut' },
+    },
+  },
+  staggerContainer: {
+    hidden: {},
+    visible: {
+      transition: { staggerChildren: 0.08 },
+    },
+  },
+}
 
 export function AnimationProvider({ children }: { children: React.ReactNode }) {
-  const [opcoes, setOpcoes] = useState<OpcoesAnimacao>({
-    usarAnimacoes: true,
-    usarAnimacoesReduzidas: false,
-    ehDispositivoLento: false,
-    usarEfeitosPesados: true,
-  })
+  const [reducedMotion, setReducedMotion] = useState(false)
 
   useEffect(() => {
-    const verificarDispositivo = () => {
-      const prefereMovimentoReduzido = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    const mq = window.matchMedia('(prefers-reduced-motion: reduce)')
+    setReducedMotion(mq.matches)
 
-      const userAgent = navigator.userAgent.toLowerCase()
-      const ehMobile =
-        /android|webos|iphone|ipad|ipod|blackberry|iemobile|opera mini/i.test(userAgent) ||
-        window.innerWidth < 768
+    const handler = (e: MediaQueryListEvent) => setReducedMotion(e.matches)
+    mq.addEventListener('change', handler)
 
-      const cores = navigator.hardwareConcurrency || 4
-      const memoria = (navigator as any).deviceMemory || 4
-
-      const ehBaixaPerformance = memoria < 4 || cores < 4
-      const ehLento = (ehMobile && ehBaixaPerformance) || prefereMovimentoReduzido
-
-      const usarEfeitosPesados = !ehMobile && !ehBaixaPerformance
-
-      setOpcoes({
-        usarAnimacoes: !prefereMovimentoReduzido,
-        usarAnimacoesReduzidas: prefereMovimentoReduzido || (ehMobile && ehBaixaPerformance),
-        ehDispositivoLento: ehLento,
-        usarEfeitosPesados: usarEfeitosPesados,
-      })
-    }
-
-    verificarDispositivo()
-
-    let timeoutId: number
-    const debouncedCheck = () => {
-      clearTimeout(timeoutId)
-      timeoutId = window.setTimeout(verificarDispositivo, 150)
-    }
-
-    const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)')
-    mediaQuery.addEventListener('change', verificarDispositivo)
-    window.addEventListener('resize', debouncedCheck)
-
-    return () => {
-      clearTimeout(timeoutId)
-      mediaQuery.removeEventListener('change', verificarDispositivo)
-      window.removeEventListener('resize', debouncedCheck)
-    }
+    return () => mq.removeEventListener('change', handler)
   }, [])
 
-  const value = useMemo<AnimationContextType>(
-    () => ({
-      ...opcoes,
-      viewport: {
-        once: true,
-        margin: opcoes.ehDispositivoLento ? '-20px' : '-50px',
-        amount: opcoes.ehDispositivoLento ? 0.1 : 0.3,
-      },
-      duration: opcoes.ehDispositivoLento ? 0.2 : opcoes.usarAnimacoesReduzidas ? 0.3 : 0.5,
-      getDelay: (baseDelay: number = 0) => (opcoes.ehDispositivoLento ? 0 : baseDelay),
-    }),
-    [opcoes]
+  return (
+    <AnimationContext.Provider value={{ reducedMotion, ...variants }}>
+      {children}
+    </AnimationContext.Provider>
   )
-
-  return <AnimationContext.Provider value={value}>{children}</AnimationContext.Provider>
 }
 
 export function useAnimation() {
-  const context = useContext(AnimationContext)
-  if (!context) {
-    throw new Error('useAnimation must be used within AnimationProvider')
-  }
-  return context
+  const ctx = useContext(AnimationContext)
+  if (!ctx) throw new Error('useAnimation deve ser usado dentro de AnimationProvider')
+  return ctx
 }

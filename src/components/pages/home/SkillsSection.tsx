@@ -1,143 +1,78 @@
-import { useIsMobile } from '@app/hooks/useMediaQuery'
 import { motion } from 'framer-motion'
-import { memo, Suspense, useCallback, useEffect, useMemo, useState } from 'react'
-import { SkillsGrid } from '@/components/responsive/SkillsGrid'
-import { useAnimation } from '@/contexts'
-import { skills, techIcons } from '@/data/habilidades'
-import { Badge } from '@/shadcn/components/ui/badge'
-import { Box, Center, Container, VStack } from '@/shadcn/components/ui/layout'
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipProvider,
-  TooltipTrigger,
-} from '@/shadcn/components/ui/tooltip'
-import { Text, Title } from '@/shadcn/components/ui/typography'
-import { lazyWithRetry } from '@/utils/importRetry'
+import { Monitor, Server, Wrench } from 'lucide-react'
+import { memo } from 'react'
+import { SectionHeader } from '@/components/ui/SectionHeader'
+import { TechTag } from '@/components/ui/TechTag'
+import { skillCategories } from '@/data/skills'
+import { Box, Container } from '@/shadcn/components/ui/layout'
 
-const Marquee = lazyWithRetry(() => import('react-fast-marquee'))
+const icons = { Monitor, Server, Wrench }
 
 export const SkillsSection = memo(() => {
-  const isMobile = useIsMobile()
-  const { viewport, duration, getDelay, ehDispositivoLento } = useAnimation()
-  const [openTooltipIndex, setOpenTooltipIndex] = useState<number | null>(null)
-
-  useEffect(() => {
-    if (!isMobile) return
-
-    const handleClickOutside = () => {
-      setOpenTooltipIndex(null)
-    }
-
-    document.addEventListener('click', handleClickOutside)
-    return () => document.removeEventListener('click', handleClickOutside)
-  }, [isMobile])
-
-  const handleTooltipClick = useCallback(
-    (index: number, e: React.MouseEvent) => {
-      if (!isMobile) return
-      e.stopPropagation()
-      setOpenTooltipIndex((prev) => (prev === index ? null : index))
-    },
-    [isMobile]
-  )
-
-  const marqueeSpeed = useMemo(() => (ehDispositivoLento ? 30 : 50), [ehDispositivoLento])
-
   return (
-    <Box
-      as="section"
-      id="habilidades"
-      className="py-16 sm:py-20 md:py-24 lg:py-28 relative bg-black font-sans overflow-hidden"
-    >
-      <Container size="xl" className="relative z-10 px-4 sm:px-6">
-        <VStack className="items-center text-center gap-4 sm:gap-5 mb-12 sm:mb-14 md:mb-16 lg:mb-20">
-          <motion.div
-            initial={{ opacity: 0, scale: ehDispositivoLento ? 0.9 : 0.8 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={viewport}
-            transition={{ duration }}
-          >
-            <Badge
-              variant="outline"
-              className="
-                border-brand-500/40 text-brand-400
-                uppercase tracking-wider text-xs font-semibold
-                px-5 py-2 bg-brand-500/10 backdrop-blur-md
-                shadow-lg shadow-brand-500/10 rounded-full
-              "
-            >
-              Habilidades
-            </Badge>
-          </motion.div>
+    <Box as="section" id="habilidades" className="py-24 relative bg-black overflow-hidden">
+      <Box className="absolute inset-0 bg-[radial-gradient(circle_at_bottom_left,_var(--tw-gradient-stops))] from-brand-500/5 via-transparent to-transparent pointer-events-none" />
 
-          <motion.div
-            initial={{ opacity: 0, y: ehDispositivoLento ? 10 : 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={viewport}
-            transition={{ duration, delay: getDelay(0.1) }}
-            className="space-y-4"
-          >
-            <Title
-              as="h2"
-              className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold uppercase tracking-tight font-heading"
-            >
-              Stack & <span className="text-gradient">Ferramentas</span>
-            </Title>
-            <Box className="w-20 sm:w-24 h-1 bg-brand-500 mx-auto rounded-full opacity-60" />
-            <Text className="text-zinc-400 max-w-2xl mx-auto text-sm sm:text-base md:text-lg px-4 leading-relaxed">
-              Trabalho com um conjunto de tecnologias modernas voltadas à criação de aplicações web
-              performáticas, escaláveis e bem estruturadas.
-            </Text>
-          </motion.div>
-        </VStack>
+      <Container size="xl" className="relative z-10 px-6">
+        <SectionHeader number="03" title="Habilidades" />
 
-        <SkillsGrid skills={skills} />
+        <div className="mt-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+          {skillCategories.map((category, i) => {
+            const Icon = icons[category.icon as keyof typeof icons]
+            const iconColor = {
+              emerald: 'text-brand-400',
+              purple: 'text-purple-400',
+              neutral: 'text-zinc-500',
+            }[category.variant]
 
-        <Box className="mt-16 sm:mt-20 md:mt-24 lg:mt-28 relative">
-          <TooltipProvider delayDuration={200}>
-            <Suspense fallback={<Box className="h-16" />}>
-              <Marquee
-                speed={marqueeSpeed}
-                gradient
-                gradientColor="#000000"
-                gradientWidth={100}
-                pauseOnHover={!ehDispositivoLento}
-                play={!ehDispositivoLento}
+            const borderColor = {
+              emerald: 'group-hover:border-brand-500/40',
+              purple: 'group-hover:border-purple-500/40',
+              neutral: 'group-hover:border-zinc-500/40',
+            }[category.variant]
+
+            return (
+              <motion.div
+                key={category.id}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: i * 0.1 }}
+                className={`group border border-zinc-800 bg-zinc-900/30 rounded-2xl p-6 sm:p-8 
+                           ${borderColor} transition-all duration-300 relative overflow-hidden`}
               >
-                {techIcons.map((tech, index) => (
-                  <Tooltip
-                    key={index}
-                    open={isMobile ? openTooltipIndex === index : undefined}
-                    onOpenChange={isMobile ? undefined : undefined}
-                  >
-                    <TooltipTrigger asChild>
-                      <Center
-                        onClick={(e) => handleTooltipClick(index, e)}
-                        className="
-                            flex-shrink-0 px-4 sm:px-6 lg:px-8 py-4 sm:py-5
-                            transition-all duration-300
-                            group cursor-pointer
-                          "
-                      >
-                        <tech.Icon
-                          size={isMobile ? 32 : 42}
-                          color={tech.color}
-                          className="group-hover:scale-125 transition-transform duration-300"
-                        />
-                      </Center>
-                    </TooltipTrigger>
-                    <TooltipContent className="bg-zinc-900 border-zinc-800 max-w-sm">
-                      <Text className="text-sm font-bold text-brand-400 mb-1">{tech.name}</Text>
-                      <Text className="text-xs text-zinc-400">{tech.description}</Text>
-                    </TooltipContent>
-                  </Tooltip>
-                ))}
-              </Marquee>
-            </Suspense>
-          </TooltipProvider>
-        </Box>
+                <div
+                  className={`absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-gradient-to-br ${category.variant === 'emerald' ? 'from-brand-500/5' : category.variant === 'purple' ? 'from-purple-500/5' : 'from-zinc-500/5'} to-transparent`}
+                />
+
+                <Box
+                  className={`mb-6 p-3 rounded-xl bg-zinc-950 border border-zinc-800 group-hover:border-current transition-colors w-fit ${iconColor}`}
+                >
+                  <Icon className="w-6 h-6" />
+                </Box>
+
+                <h3 className="text-white font-bold text-xl mb-2 font-heading uppercase tracking-wide">
+                  {category.title}
+                </h3>
+
+                <p className="text-zinc-400 text-sm md:text-base mb-8 leading-relaxed">
+                  {category.description}
+                </p>
+
+                <div className="flex flex-wrap gap-2.5">
+                  {category.skills.map((skill) => (
+                    <TechTag key={skill} variant={category.variant}>
+                      {skill}
+                    </TechTag>
+                  ))}
+                </div>
+              </motion.div>
+            )
+          })}
+        </div>
       </Container>
     </Box>
   )
 })
+
+SkillsSection.displayName = 'SkillsSection'
