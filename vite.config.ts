@@ -1,9 +1,13 @@
+import { createRequire } from 'node:module'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 import react from '@vitejs/plugin-react'
 import { visualizer } from 'rollup-plugin-visualizer'
 import { defineConfig } from 'vite'
-import Prerender from 'vite-plugin-prerender'
+
+const require = createRequire(import.meta.url)
+const Prerender = require('vite-plugin-prerender')
+
 import Sitemap from 'vite-plugin-sitemap'
 
 const __filename = fileURLToPath(import.meta.url)
@@ -50,7 +54,12 @@ export default defineConfig({
     Prerender({
       staticDir: path.join(__dirname, 'dist'),
       routes: ['/', '/projetos', ...projectIds.map((id) => `/projetos/${id}`)],
-      postProcess(renderedRoute) {
+      renderer: new Prerender.PuppeteerRenderer({
+        renderAfterTime: 2000,
+        headless: true,
+        args: ['--no-sandbox', '--disable-setuid-sandbox'],
+      }),
+      postProcess(renderedRoute: { html: string; route: string; outputPath?: string }) {
         // Otimização básica de SEO no HTML gerado
         renderedRoute.html = renderedRoute.html
           .replace(
